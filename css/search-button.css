@@ -148,14 +148,21 @@ button span:after {
   height: auto;
 }
 
+.radio form label {
+  display: inline-block;
+  margin: 0.5rem;
+  cursor: pointer;
+}
+
 .radioSvg {
+  display: block;
   fill: var(--color-dark);
   height: 2.1rem;
   width: 2.1rem;
-  margin: 0.5rem;
   filter: drop-shadow(1px 3px 2px var(--color-light));
   transition: all .2s ease-in-out;
 }
+
 .radioSvg:hover {
   fill: var(--color-light);
   transform: scale(1.08);
@@ -167,25 +174,22 @@ input[type="radio"] {
   opacity: 0;
 }
 
-input[type="radio"] + .radioSvg {
+input[type="radio"]+.radioSvg {
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
 }
-input[type="radio"]:checked + .radioSvg {
+
+input[type="radio"]:checked+.radioSvg {
   transform: scale(1.08);
 }
 
-input + .radioSvg {
-  cursor: pointer;
-}
-
-input[class="movies"]:checked + .radioSvg,
-input[class="movies"]:focus + .radioSvg,
-input[class="tvshows"]:checked + .radioSvg,
-input[class="tvshows"]:focus + .radioSvg,
-input[class="actors"]:checked + .radioSvg,
-input[class="actors"]:focus + .radioSvg,
-input[class="studios"]:checked + .radioSvg,
-input[class="studios"]:focus + .radioSvg {
+input[class="movies"]:checked+.radioSvg,
+input[class="movies"]:focus+.radioSvg,
+input[class="tvshows"]:checked+.radioSvg,
+input[class="tvshows"]:focus+.radioSvg,
+input[class="actors"]:checked+.radioSvg,
+input[class="actors"]:focus+.radioSvg,
+input[class="studios"]:checked+.radioSvg,
+input[class="studios"]:focus+.radioSvg {
   fill: var(--color-main);
 }
