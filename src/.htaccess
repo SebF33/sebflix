@@ -1,0 +1,7 @@
+ErrorDocument 404 /src/not-found.html
+ErrorDocument 403 /src/forbid.html
+RewriteEngine on
+
+<FILES index.html>
+Deny from all
+</FILES>

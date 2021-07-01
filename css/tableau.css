@@ -1,0 +1,340 @@
+/********************/
+/* CSS des tableaux */
+/********************/
+
+/* Reset User Agent */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Bloc d'en-tête global */
+#header {
+  /*border: 1px solid black;*/
+  margin: 0;
+  display: flex;
+  width: 100%;
+  height: 20vh;
+}
+
+/* Bloc d'en-tête de gauche */
+#header #headerLeft {
+  /*border: 1px solid red;*/
+  width: 33.33%;
+  height: 100%;
+}
+
+/* Bloc d'en-tête du milieu */
+#header #headerMain {
+  /*border: 1px solid goldenrod;*/
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 33.33%;
+  height: 100%;
+}
+
+/* Logo du header */
+#header #headerMain a {
+  text-decoration: none;
+  color: var(--color-light);
+  font-family: var(--font-title);
+  font-size: 1.4vw;
+  font-weight: 700;
+  text-align: center;
+}
+
+#header #headerMain img {
+  max-width: 100%;
+  height: auto;
+  filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
+}
+
+#header #headerMain .logoStudio {
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--color-light);
+  font-family: var(--font-title);
+  font-size: 1.3em;
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+#header #headerMain .logoStudio img {
+  display: block;
+  padding: 10px;
+  background-color: var(--color-dark);
+  border: 2px solid var(--color-light);
+}
+
+#header #headerMain .logoCasting {
+  font-size: 1.2em;
+  font-weight: 500;
+}
+
+#header #headerMain .logoCasting img {
+  display: block;
+  background-color: var(--color-dark);
+  border: 2px solid var(--color-light);
+}
+
+/* Bloc d'en-tête de droite */
+#header #headerRight {
+  /*border: 1px solid red;*/
+  width: 33.33%;
+  height: 100%;
+}
+
+/* Tableau */
+table {
+  table-layout: fixed;
+  width: 90%;
+  border-collapse: collapse;
+  margin: 0 auto;
+  margin-top: 3em;
+  margin-bottom: 4em;
+}
+
+table tr th:first-child {
+  width: 9%;
+}
+
+table tr th:nth-child(2) {
+  width: 14%;
+}
+
+table tr th:nth-child(3) {
+  max-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+table tr th:nth-child(4) {
+  width: 12%;
+}
+
+/* Cellules d'en-tête du tableau */
+th {
+  background-color: var(--color-main);
+  border: thin solid var(--color-light);
+  font-family: var(--font-title);
+  text-transform: uppercase;
+  font-size: 1.4vw;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* Cellules du tableau */
+td {
+  background-color: var(--color-dark);
+  color: var(--color-light);
+  border: thin solid var(--color-light);
+  font-family: var(--font-text);
+  text-align: left;
+}
+
+.tposter {
+  text-align: center;
+  font-size: 1.1vw;
+}
+
+.tposter a {
+  text-decoration: none;
+  color: var(--color-light);
+}
+
+.tposter img {
+  display: block;
+  text-align: center;
+  max-width: 100%;
+  height: auto;
+}
+
+.tname {
+  padding: 1%;
+  font-family: var(--font-title);
+  text-align: center;
+  font-size: 1.2vw;
+}
+
+.tsynopsis {
+  padding: 1%;
+  font-size: 0.9vw;
+  font-style: italic;
+  line-height: 1.6;
+  letter-spacing: 0.5px;
+}
+
+.tsynopsis::first-letter {
+  font-size: 1vw;
+  font-weight: 500;
+}
+
+.max-lines {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+}
+
+.tstudio {
+  padding: 1%;
+  font-family: var(--font-title);
+  text-align: center;
+  font-size: 1.1vw;
+}
+
+.tstudio a {
+  text-decoration: none;
+  color: var(--color-light);
+}
+
+.tstudio img {
+  display: block;
+  margin: 0 auto;
+  width: 161px;
+  height: auto;
+  max-width: 100%;
+  text-align: center;
+}
+
+/* Résultats de recherche */
+.results {
+  /*border: 1px solid white;*/
+  height: 20vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--color-light);
+  text-shadow: 2px 0 0 black, 0 2px 0 black, 0 -2px 0 black, -2px 0 0 black,
+    2px 2px 0 black, 2px -2px 0 black, -2px 2px 0 black, -2px -2px 0 black;
+}
+
+.results h1 {
+  font-size: 2.4em;
+}
+
+#gallery {
+  /*border: 1px solid white;*/
+  margin: 120px;
+  margin-top: -20px;
+}
+
+.gPoster {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 40px;
+  align-items: center;
+  justify-items: center;
+}
+
+.gPoster a {
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--color-light);
+  font-family: var(--font-title);
+  font-size: 1.3em;
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.gPoster a .gMedia {
+  display: block;
+  background-color: var(--color-dark);
+  border: 1px solid var(--color-light);
+  transition: 0.4s;
+}
+
+.gPoster .gMedia:hover {
+  box-shadow: 1px 1px 38px var(--color-light);
+  transform: scale(1.05);
+  transition: box-shadow 0.1s ease-in-out;
+}
+
+.gPoster .gCasting {
+  background-color: var(--color-dark);
+  border: 2px solid var(--color-light);
+  font-size: 1.2em;
+  font-weight: 500;
+  transition: 0.4s;
+}
+
+.gPoster .gCasting img {
+  display: block;
+  border-bottom: 1px solid var(--color-light);
+  transition: 0.4s;
+}
+
+.gPoster .gCasting:hover {
+  box-shadow: 1px 1px 38px var(--color-light);
+  transform: scale(1.05);
+  transition: box-shadow 0.1s ease-in-out;
+}
+
+.gPoster a .gStudio {
+  display: block;
+  padding: 10px;
+  background-color: var(--color-dark);
+  border: 2px solid var(--color-light);
+  transition: 0.4s;
+}
+
+.gPoster .gStudio:hover {
+  box-shadow: 1px 1px 38px var(--color-light);
+  transform: scale(1.05);
+  transition: box-shadow 0.1s ease-in-out;
+}
+
+/* Pagination */
+.pagination-container {
+  user-select: none;
+  text-align: center;
+  font-family: var(--font-title);
+  font-size: 1em;
+  font-weight: 500;
+}
+
+ul.pagination {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+  border: 1px solid var(--color-light);
+}
+
+ul.pagination li {
+  display: inline;
+}
+
+.page-item.disabled .page-link {
+  pointer-events: none;
+}
+
+ul.pagination li a {
+  background-color: var(--color-dark);
+  color: var(--color-light);
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+  border: 1px solid var(--color-light);
+}
+
+ul.pagination li a:hover:not(.active) {
+  background-color: var(--color-light);
+  color: var(--color-dark);
+}
+
+.page-item.active .page-link {
+  background-color: var(--color-main);
+  color: var(--color-dark);
+}

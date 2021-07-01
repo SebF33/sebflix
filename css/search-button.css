@@ -1,0 +1,191 @@
+/******************************/
+/* CSS du bouton de recherche */
+/******************************/
+
+/* Bloc du bouton de recherche */
+#cover {
+  width: 400px;
+  background-color: var(--color-main);
+  border-radius: 10px;
+  box-shadow: 0 10px 40px var(--color-main), 0 0 0 20px #fff;
+  transform: scale(0.6);
+}
+
+.tb {
+  display: table;
+  width: 100%;
+}
+
+.td {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+input,
+button {
+  color: var(--color-light);
+  font-family: var(--font-title);
+  padding: 0;
+  margin-left: 4%;
+  border: 0;
+  background-color: transparent;
+}
+
+form {
+  height: 96px;
+}
+
+input[type="text"] {
+  width: 100%;
+  height: 96px;
+  color: var(--color-light);
+  font-size: 50px;
+  line-height: 1;
+}
+
+input[type="text"]::placeholder {
+  color: var(--color-light);
+}
+
+#s-cover {
+  width: 1px;
+  padding-left: 35px;
+}
+
+button {
+  position: relative;
+  display: block;
+  width: 94px;
+  height: 86px;
+  cursor: pointer;
+}
+
+#s-circle {
+  position: relative;
+  top: -8px;
+  left: 0;
+  width: 43px;
+  height: 43px;
+  margin-top: 0;
+  border-width: 10px;
+  border: 10px solid var(--color-light);
+  background-color: transparent;
+  border-radius: 50%;
+  transition: 0.5s ease all;
+}
+
+button span {
+  position: absolute;
+  top: 58px;
+  left: 26px;
+  display: block;
+  width: 35px;
+  height: 10px;
+  background-color: transparent;
+  border-radius: 10px;
+  transform: rotateZ(52deg);
+  transition: 0.5s ease all;
+}
+
+/* Manche de la loupe */
+button span:before,
+button span:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 35px;
+  height: 10px;
+  background-color: var(--color-light);
+  border-radius: 10px;
+  transform: rotateZ(0);
+  transition: 0.5s ease all;
+}
+
+/* Trait de la flêche */
+#s-cover:hover #s-circle {
+  top: 2%;
+  width: 67px;
+  height: 10px;
+  border-width: 0;
+  background-color: var(--color-light);
+  border-radius: 20px;
+}
+
+/* Position de la pointe de la flêche */
+#s-cover:hover span {
+  top: 55%;
+  left: 51px;
+  width: 15px;
+  margin-top: -9px;
+  transform: rotateZ(0);
+}
+
+/* Pointe de la flêche trait du haut */
+#s-cover:hover button span:before {
+  right: -6px;
+  width: 36px;
+  background-color: var(--color-light);
+  bottom: 10.5px;
+  transform: rotateZ(52deg);
+}
+
+/* Pointe de la flêche trait du bas */
+#s-cover:hover button span:after {
+  right: -6px;
+  width: 36px;
+  background-color: var(--color-light);
+  bottom: -14px;
+  transform: rotateZ(-52deg);
+}
+
+/* Radios */
+.radio {
+  user-select: none;
+}
+
+.radio form {
+  height: auto;
+}
+
+.radioSvg {
+  fill: var(--color-dark);
+  height: 2.1rem;
+  width: 2.1rem;
+  margin: 0.5rem;
+  filter: drop-shadow(1px 3px 2px var(--color-light));
+  transition: all .2s ease-in-out;
+}
+.radioSvg:hover {
+  fill: var(--color-light);
+  transform: scale(1.08);
+  filter: drop-shadow(1px 3px 2px var(--color-dark));
+}
+
+input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+}
+
+input[type="radio"] + .radioSvg {
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+input[type="radio"]:checked + .radioSvg {
+  transform: scale(1.08);
+}
+
+input + .radioSvg {
+  cursor: pointer;
+}
+
+input[class="movies"]:checked + .radioSvg,
+input[class="movies"]:focus + .radioSvg,
+input[class="tvshows"]:checked + .radioSvg,
+input[class="tvshows"]:focus + .radioSvg,
+input[class="actors"]:checked + .radioSvg,
+input[class="actors"]:focus + .radioSvg,
+input[class="studios"]:checked + .radioSvg,
+input[class="studios"]:focus + .radioSvg {
+  fill: var(--color-main);
+}

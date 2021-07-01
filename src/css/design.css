@@ -1,0 +1,66 @@
+/*****************/
+/* CSS du design */
+/*****************/
+
+:root {
+  --color-dark: #383644;
+  --color-light: #fbf5d9;
+  --color-main: #ce3e3e;
+  --color-extra: #014ba4;
+  --font-title: "Truculenta", sans-serif;
+  --font-text: "Roboto", sans-serif;
+}
+
+/* Police */
+h1 {
+  font-family: var(--font-title);
+}
+
+/* Message d'erreur */
+.nfType {
+  margin: 20%;
+  user-select: none;
+  font-size: 3vw;
+  font-weight: 500;
+  text-align: left;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 2px 7px 5px var(--color-dark), 0px -4px 10px var(--color-light);
+}
+
+/* Image de fond sur toute la page */
+body {
+  /* Centrer l'image d'arrière-plan verticalement et horizontalement à tout moment */
+  background-position: center center;
+  /* Empêcher l'image d'arrière-plan d'être en mosaïque */
+  background-repeat: no-repeat;
+  /* Fixer l'image d'arrière-plan dans la fenêtre de sorte qu'elle ne bouge pas lorsque la hauteur du contenu est supérieure à la hauteur de l'image */
+  background-attachment: fixed;
+  /* Redimensionner l'image d'arrière-plan basée sur la taille du conteneur */
+  background-size: cover;
+  /* Définir une couleur d'arrière-plan qui sera affichée pendant le chargement de l'image d'arrière-plan */
+  background-color: #008fd9;
+}
+
+/* Scrollbar personnalisée pour Chrome, Edge, Safari et Opera */
+::-webkit-scrollbar {
+  width: 7px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-extra);
+  border-radius: 2px;
+}
+::-webkit-scrollbar-track {
+  background-color: var(--color-light);
+  border-radius: 2px;
+}
+/* Scrollbar personnalisée pour FireFox */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-extra) var(--color-light);
+}
+
+/* Surligner un texte sélectionné en couleur */
+::selection {
+  background-color: var(--color-extra);
+}

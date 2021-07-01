@@ -1,0 +1,4 @@
+ErrorDocument 404 /src/not-found.html
+ErrorDocument 403 /src/forbid.html
+Options +FollowSymlinks
+RewriteEngine On

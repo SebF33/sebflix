@@ -1,0 +1,119 @@
+/**************************/
+/* CSS des pages alphabet */
+/**************************/
+.mainAlphabet {
+  /*border: 2px solid white;*/
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100vh;
+}
+
+/* Bloc du corps du haut */
+.mainAlphabetTop {
+  /*border: 1px solid red;*/
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 80%;
+  height: 60%;
+}
+
+/* Bloc du corps du bas */
+.mainAlphabetBottom {
+  /*border: 1px solid green;*/
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 40%;
+}
+
+.hType {
+  margin-top: 100px;
+  user-select: none;
+  font-size: 2.8em;
+  font-weight: 500;
+  text-align: left;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 2px 7px 5px var(--color-dark), 0px -4px 10px var(--color-light);
+}
+
+/* Alphabet */
+.alphabet {
+  margin-top: 40px;
+  width: 100%;
+  list-style-type: none;
+  text-align: center;
+  user-select: none;
+  cursor: pointer;
+}
+.alphabet li {
+  margin: 0;
+  padding: 0;
+  border-right: 2px solid var(--color-light);
+  display: inline-block;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 90px;
+  text-align: center;
+}
+
+.alphabet li:last-child {
+  border-right: none;
+}
+/*.alphabet li:hover {
+  background-color: var(--color-light);
+  transition: background 0.7s;
+}*/
+
+/* Lettres */
+.letters {
+  margin-right: 6px;
+  font-family: var(--font-title);
+  font-size: 4em;
+  color: #000;
+  text-shadow: 3px 4px 7px var(--color-dark);
+  text-decoration: none;
+}
+.letters:hover {
+  color: var(--color-main);
+  text-decoration: none;
+  transition: background 0.4s;
+}
+
+/* Tableau */
+.tType {
+  border: none;
+  border-collapse: separate;
+}
+
+/* Cellules du tableau */
+.tType td {
+  border: none;
+  background-color: transparent;
+  text-align: center;
+  padding: 14px;
+  font-size: 1em;
+}
+
+/* Posters */
+.tType td a {
+  cursor: pointer;
+}
+.tType td img {
+  display: block;
+  border: 1px solid var(--color-light);
+  width: 160px;
+  height: 240px;
+}
+.tType td img:hover {
+  box-shadow: 1px 1px 20px var(--color-light);
+  transition: box-shadow 0.2s ease-in-out;
+}
