@@ -14,6 +14,8 @@
         <a href="https://www.linkedin.com/in/sébastien-flouriot-99aa75205" class="iconFooter" target="_blank"><img src="../img/LinkedIn.png" alt="LinkedIn" width="35" height="35" /></a>
         <!-- Lien vers mon Gmail -->
         <a href="mailto:sebastien.flouriot@gmail.com" class="iconFooter" target="_blank"><img src="../img/Gmail.png" alt="Gmail" width="35" height="35" /></a>
+        <!-- Lien vers mon GitHub -->
+        <a href="https://github.com/SebF33" class="iconFooter" target="_blank"><img src="../img/GitHub.png" alt="GitHub" width="35" height="35" /></a>
         <a href="../index.php" class="copyright">© Sebflix &mdash; Tous droits réservés.</a>
       </div>
       <div class="dev">

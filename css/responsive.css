@@ -100,6 +100,10 @@
   .welcome-text {
     font-size: 1em;
   }
+
+  .welcome-text p {
+    width: 100%;
+  }
 }
 
 @media all and (max-width: 900px) {
@@ -111,10 +115,6 @@
 @media all and (max-height: 750px) {
   .welcome-text {
     margin-top: 48px;
-  }
-
-  .welcome-text p {
-    width: 100%;
   }
 }
 
@@ -472,7 +472,7 @@
 }
 
 /* Footer */
-@media all and (max-width: 1024px) {
+@media all and (max-width: 1300px) {
   #logoSite {
     width: 143.1px;
     height: 50.1px;
