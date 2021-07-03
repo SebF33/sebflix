@@ -12,7 +12,7 @@ function connexion(&$conn)
 
   // Tentative de connexion
   try {
-    $conn = new PDO("mysql:host=$host;dbname=myvideos", $user, $pwd);
+    $conn = new PDO("mysql:host=$host;dbname=182x2_myvideos", $user, $pwd);
     // Charset = 'UTF-8'
     $conn->exec('SET NAMES utf8');
     // Mode d'erreur de PDO sur 'Exception'
