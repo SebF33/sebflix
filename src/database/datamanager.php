@@ -4,7 +4,7 @@
 ///////////////////////////////////////////
 
 // Appel du script de connexion à la base de données
-require __DIR__ . '/database.php';
+require __DIR__ . '/connect.php';
 
 // Requête de sélection d'un film par son identifiant
 function select_movie_by_id(int $id)
