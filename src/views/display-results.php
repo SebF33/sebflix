@@ -20,7 +20,7 @@ require dirname(__DIR__) . '/database/viewmanager.php';
 require dirname(__DIR__) . '/database/validation.php';
 
 // Définition des valeurs autorisées dans les GET
-$types = array('movies', 'tvshows', 'actors', 'studios', 'achievement', 'filmography', 'sets', 'collection');
+$types = array('movies', 'tvshows', 'actors', 'studios', 'achievement', 'direction', 'filmography', 'bestmovies', 'beststudios', 'sets', 'collection');
 
 // Vérification des GET ('type' obligatoire)
 if (isset($_GET['type']) && !empty($_GET['type']) && in_array($_GET['type'], $types)) {
@@ -49,6 +49,13 @@ if (isset($_GET['type']) && !empty($_GET['type']) && in_array($_GET['type'], $ty
     $title = $id;
     $h1 = 'Réalisation(s) de ' . $id . '';
   }
+  // Type "œuvre(s) de la/du directrice/directeur"
+  elseif ($type == 'direction') {
+    $director = select_actor_name($id);
+    $movies = select_movie_from_director($id);
+    $title = $director['name'];
+    $h1 = 'Œuvres réalisées par ' . $director['name'] . '';
+  }
   // Type "filmographie de l'actrice/acteur/doubleur"
   elseif ($type == 'filmography') {
     $actor = select_actor_name($id);
@@ -56,6 +63,16 @@ if (isset($_GET['type']) && !empty($_GET['type']) && in_array($_GET['type'], $ty
     $tvshows = select_tvshow_from_actor($id);
     $title = $actor['name'];
     $h1 = 'Filmographie pour ' . $actor['name'] . '';
+  }
+  // Type "films les plus populaires"
+  elseif ($type == 'bestmovies') {
+    $movies = select_best_movies();
+    $h1 = $title = "Films populaires";
+  }
+  // Type "studios les plus populaires"
+  elseif ($type == 'beststudios') {
+    $studios = select_best_studios();
+    $h1 = $title = "Studios populaires";
   }
   // Type "liste des collections"
   elseif ($type == 'sets') {
@@ -179,7 +196,7 @@ if (isset($_GET['type']) && !empty($_GET['type']) && in_array($_GET['type'], $ty
         <!-- Affichage des données -->
         <?php
         // Affichage des films
-        if ($type == 'movies') {
+        if ($type == 'movies' or $type == 'bestmovies') {
           foreach ($movies as $row) {
             $date = DateTime::createFromFormat("Y-m-d", $row['premiered']);
             echo '<a class="card_button" href="viewpage.php?type=movie&id=' . $row['idMovie'] . '"><div class="card">
@@ -249,7 +266,7 @@ if (isset($_GET['type']) && !empty($_GET['type']) && in_array($_GET['type'], $ty
           }
         }
         // Affichage des studios
-        elseif ($type == 'studios') {
+        elseif ($type == 'studios' or $type == 'beststudios') {
           foreach ($studios as $row) {
             echo '<a href="display-results.php?type=achievement&id=' . $row['name'] . '"><img class="gStudio" src="../thumbnails/studios/' . $row['name'] . '" title="' . $row['name'] . '" alt="' . $row['name'] . '" height="109" width="161"/></a>';
           }
@@ -296,17 +313,17 @@ if (isset($_GET['type']) && !empty($_GET['type']) && in_array($_GET['type'], $ty
           <ul class="pagination">
             <!-- Lien vers la page précédente (désactivé si on se trouve sur la 1ère page) -->
             <li class="page-item <?= ($currentPage == 1) ? "disabled" : "" ?>">
-              <a href="./display-search.php?type=<?= $type ?>&search=<?= $query ?>&page=<?= $currentPage - 1 ?>" class="page-link">«</a>
+              <a href="./display-results.php?type=<?= $type ?>&search=<?= $query ?>&page=<?= $currentPage - 1 ?>" class="page-link">«</a>
             </li>
             <?php for ($page = 1; $page <= $pages; $page++) : ?>
               <!-- Lien vers chacune des pages (activé si on se trouve sur la page correspondante) -->
               <li class="page-item <?= ($currentPage == $page) ? "active" : "" ?>">
-                <a href="./display-search.php?type=<?= $type ?>&search=<?= $query ?>&page=<?= $page ?>" class="page-link"><?= $page ?></a>
+                <a href="./display-results.php?type=<?= $type ?>&search=<?= $query ?>&page=<?= $page ?>" class="page-link"><?= $page ?></a>
               </li>
             <?php endfor ?>
             <!-- Lien vers la page suivante (désactivé si on se trouve sur la dernière page) -->
             <li class="page-item <?= ($currentPage == $pages) ? "disabled" : "" ?>">
-              <a href="./display-search.php?type=<?= $type ?>&search=<?= $query ?>&page=<?= $currentPage + 1 ?>" class="page-link">»</a>
+              <a href="./display-results.php?type=<?= $type ?>&search=<?= $query ?>&page=<?= $currentPage + 1 ?>" class="page-link">»</a>
             </li>
           </ul>
         </div>

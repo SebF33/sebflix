@@ -134,6 +134,7 @@ nav ul a.btn-icon {
   font-style: italic;
   line-height: 1.4;
   letter-spacing: 1px;
+  user-select: none;
 }
 
 .welcome-text p {

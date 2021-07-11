@@ -13,10 +13,11 @@
 //    1.07 Sélection de la note du média type film
 //    1.08 Sélection du discart du média type film
 //    1.09 Sélection du fanart du média type film
-//    1.10 Sélection jusqu'à 7 actrice(s)/acteur(s)/doubleur(s) du média type film
+//    1.10 Sélection jusqu'à 6 actrice(s)/acteur(s)/doubleur(s) du média type film
 //    1.11 Sélection des films selon le genre défini
 //    1.12 Sélection des films dont le titre commence par le caractère défini
 //    1.13 Sélection des films dont le titre commence par un chiffre
+//    1.14 Sélection des 200 films les plus populaires par leur poster
 
 //  2. Affichages des séries
 //    2.01 Sélection aléatoire de 1 média type série par son poster
@@ -65,11 +66,14 @@
 //  7. Affichages des studios
 //    7.01 Sélection des films d'un studio par son nom
 //    7.02 Sélection des séries d'un studio par son nom
+//    7.03 Sélection des studios les plus populaires
 
-//  8. Affichages des actrices/acteurs/doubleurs
+//  8. Affichages des actrices/acteurs/doubleurs/directrice(s)/directeur(s)
 //    8.01 Sélection du nom d'un(e) actrice/acteur/doubleur par son identifiant
 //    8.02 Sélection des films d'un(e) actrice/acteur/doubleur par son identifiant
 //    8.03 Sélection des séries d'un(e) actrice/acteur/doubleur par son identifiant
+//    8.04 Sélection jusqu'à 1 directrice/directeur du média type film
+//    8.05 Sélection des films d'un(e) directrice/directeur par son identifiant
 
 //  9. Comptages
 //    9.01 Comptage du nombre total de médias
@@ -270,7 +274,7 @@ function select_fanart_movie(int $id)
   }
 }
 
-// 1.10 Sélection jusqu'à 7 actrice(s)/acteur(s)/doubleur(s) du média type film
+// 1.10 Sélection jusqu'à 6 actrice(s)/acteur(s)/doubleur(s) du média type film
 function select_actors_movie(int $id)
 {
   connexion($dbco);
@@ -282,7 +286,7 @@ function select_actors_movie(int $id)
       WHERE media_id = :id
       AND media_type = 'movie'
       ORDER BY cast_order ASC
-      LIMIT 7"
+      LIMIT 6"
     );
     $query->bindValue(':id', $id, PDO::PARAM_INT);
     $query->execute();
@@ -374,6 +378,29 @@ function select_movie_by_numeric()
     $query->execute();
     $result = $query->fetchAll(PDO::FETCH_ASSOC);
     return $result;
+  } catch (PDOException $e) {
+    echo "Erreur : " . $e->getMessage();
+  }
+}
+
+// 1.14 Sélection des 200 films les plus populaires par leur poster
+function select_best_movies()
+{
+  connexion($dbco);
+  try {
+    $query = $dbco->prepare(
+      "SELECT idMovie, title, synopsis, classification, genre, premiered, cachedurl
+      FROM movie
+      INNER JOIN rating ON movie.idMovie = rating.media_id
+      INNER JOIN art ON movie.idMovie = art.media_id
+      AND rating.media_type = 'movie'
+      AND type = 'poster'
+      ORDER BY votes DESC
+      LIMIT 200"
+    );
+    $query->execute();
+    $movies = $query->fetchAll(PDO::FETCH_ASSOC);
+    return $movies;
   } catch (PDOException $e) {
     echo "Erreur : " . $e->getMessage();
   }
@@ -1228,6 +1255,40 @@ function select_tvshow_from_studio(string $id)
   }
 }
 
+// 7.03 Sélection des studios les plus populaires
+function select_best_studios()
+{
+  $sql = "(name LIKE '20th Century Fox' OR
+  name LIKE 'Aardman Animations' OR
+  name LIKE 'Amazon' OR
+  name LIKE 'Amblin Entertainment' OR
+  name LIKE 'Bad Robot' OR
+  name LIKE 'Blue Sky Studios' OR
+  name LIKE 'Columbia Pictures' OR
+  name LIKE 'DC Entertainment' OR
+  name LIKE 'DreamWorks Animation' OR
+  name LIKE 'Illumination Entertainment' OR
+  name LIKE 'Lucasfilm' OR
+  name LIKE 'Marvel Studios' OR
+  name LIKE 'Netflix' OR
+  name LIKE 'Pixar' OR
+  name LIKE 'Universal Pictures' OR
+  name LIKE 'Walt Disney Pictures')";
+  connexion($dbco);
+  try {
+    $query = $dbco->prepare(
+      "SELECT * FROM studio
+      WHERE $sql
+      ORDER BY name"
+    );
+    $query->execute();
+    $studios = $query->fetchAll(PDO::FETCH_ASSOC);
+    return $studios;
+  } catch (PDOException $e) {
+    echo "Erreur : " . $e->getMessage();
+  }
+}
+
 // 8.01 Sélection du nom d'un(e) actrice/acteur/doubleur par son identifiant
 function select_actor_name(int $id)
 {
@@ -1290,6 +1351,53 @@ function select_tvshow_from_actor(int $id)
     $query->execute();
     $result = $query->fetchAll(PDO::FETCH_ASSOC);
     return $result;
+  } catch (PDOException $e) {
+    echo "Erreur : " . $e->getMessage();
+  }
+}
+
+// 8.04 Sélection jusqu'à 1 directrice/directeur du média type film
+function select_director_movie(int $id)
+{
+  connexion($dbco);
+  try {
+    $query = $dbco->prepare(
+      "SELECT *
+      FROM director_link
+      INNER JOIN actor ON actor.actor_id = director_link.actor_id
+      WHERE media_id = :id
+      AND media_type = 'movie'
+      ORDER BY name
+      LIMIT 1"
+    );
+    $query->bindValue(':id', $id, PDO::PARAM_INT);
+    $query->execute();
+    $director = $query->fetchAll(PDO::FETCH_ASSOC);
+    return $director;
+  } catch (PDOException $e) {
+    echo "Erreur : " . $e->getMessage();
+  }
+}
+
+// 8.05 Sélection des films d'un(e) directrice/directeur par son identifiant
+function select_movie_from_director(int $id)
+{
+  connexion($dbco);
+  try {
+    $query = $dbco->prepare(
+      "SELECT idMovie, title, cachedurl
+      FROM movie
+      INNER JOIN art ON movie.idMovie = art.media_id
+      INNER JOIN director_link ON art.media_id = director_link.media_id
+      WHERE actor_id = :id
+      AND director_link.media_type = 'movie'
+      AND type = 'poster'
+      ORDER BY premiered DESC"
+    );
+    $query->bindValue(':id', $id, PDO::PARAM_INT);
+    $query->execute();
+    $movies = $query->fetchAll(PDO::FETCH_ASSOC);
+    return $movies;
   } catch (PDOException $e) {
     echo "Erreur : " . $e->getMessage();
   }
