@@ -1,18 +1,22 @@
+<!-------------->
+<!-- Page 403 -->
+<!-------------->
+
 <!DOCTYPE html>
 <html lang="fr">
 
 <!-- En-tête -->
 
 <head>
-  <title>Sebflix</title>
+  <title>Accès interdit</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="Description" content="Page introuvable">
+  <meta name="Description" content="Accès interdit">
 
   <!-- Appel des feuilles de styles -->
-  <link rel="stylesheet" href="../css/design.css" type="text/css" media="screen">
-  <link rel="stylesheet" href="../css/error.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="/css/design.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="/css/error.css" type="text/css" media="screen">
 
   <!-- Appel de la police "Truculenta" sur Google Fonts -->
   <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -24,19 +28,19 @@
 <body>
   <style>
     body {
-      background-image: url('../img/error404.png');
+      background-image: url('/img/error403.png');
     }
   </style>
   <!-- Header -->
   <header id="header" role="banner">
 
     <div id="headerLeft">
-      <h1 class="nfType">Page introuvable</h1>
+      <h1 class="nfType">Accès interdit</h1>
     </div>
 
     <div id="headerMain">
       <!-- Logo du site -->
-      <a href="../index.php"><img src="../img/logo_sebflix.png" alt="Sebflix" width="238.5" height="83.5" /></a>
+      <a href="/index.php"><img src="/img/logo_sebflix.png" alt="Sebflix" width="238.5" height="83.5" /></a>
     </div>
 
     <!-- Créer la rubrique contact -->
@@ -47,6 +51,8 @@
 
   <!-- Main content -->
   <main>
+    <!-- Bouton retour en arrière -->
+    <?php include "../templates/exit.html"; ?>
   </main>
 
   <!-- Footer -->

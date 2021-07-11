@@ -4,7 +4,7 @@
 
 <?php
 // Appel du script d'affichage des données
-require dirname(__DIR__) . '/src/database/viewmanager.php';
+require dirname(__DIR__) . '/database/viewmanager.php';
 ?>
 
 <!DOCTYPE html>
@@ -20,18 +20,18 @@ require dirname(__DIR__) . '/src/database/viewmanager.php';
   <meta name="Description" content="Galerie">
 
   <!-- Appel des feuilles de styles -->
-  <link rel="stylesheet" href="../css/design.css" type="text/css" media="screen">
-  <link rel="stylesheet" href="../css/gallery.css" type="text/css" media="screen">
-  <link rel="stylesheet" href="../css/responsive.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="/css/design.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="/css/gallery.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="/css/responsive.css" type="text/css" media="screen">
 
   <!-- Appel de l'icône -->
-  <link data-vue-tag="ssr" rel="icon" type="image/png" sizes="48x48" href="../img/favicon-48.png">
-  <link data-vue-tag="ssr" rel="icon" type="image/png" sizes="192x192" href="../img/favicon-192.png">
+  <link data-vue-tag="ssr" rel="icon" type="image/png" sizes="48x48" href="/img/favicon-48.png">
+  <link data-vue-tag="ssr" rel="icon" type="image/png" sizes="192x192" href="/img/favicon-192.png">
 
   <!-- Appel de FlexSlider -->
-  <link rel="stylesheet" href="../css/flexslider.css" type="text/css">
+  <link rel="stylesheet" href="/css/flexslider.css" type="text/css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-  <script src="../js/jquery.flexslider.js"></script>
+  <script src="/js/jquery.flexslider.js"></script>
   <script type="text/javascript" charset="utf-8">
     $(window).load(function() {
       $('.flexslider').flexslider();
@@ -57,7 +57,7 @@ require dirname(__DIR__) . '/src/database/viewmanager.php';
 
     <div id="headerMain">
       <!-- Logo du site -->
-      <a href="../index.php"><img src="../img/logo_sebflix.png" alt="Sebflix" width="190.8" height="66.8" /></a>
+      <a href="/index.php"><img src="/img/logo_sebflix.png" alt="Sebflix" width="190.8" height="66.8" /></a>
     </div>
 
     <div id="headerRight">
@@ -68,16 +68,20 @@ require dirname(__DIR__) . '/src/database/viewmanager.php';
   <main id="main">
 
     <!-- Bouton retour en arrière -->
-    <?php include "../src/exit.html"; ?>
+    <?php include "../templates/exit.html"; ?>
 
     <h1>Galerie <a onClick="window.location.reload()"><i class="fa fa-random"></i></a></h1>
     <div class="flexslider">
       <ul class="slides">
         <?php
-        // Appel de la fonction de sélection aléatoire de 12 films par leur fanart
-        $result = select_twelve_random_movie();
-        foreach ($result as $row) {
-          echo '<li><a href="viewpage.php?id=' . $row['idMovie'] . '"><img src="../src/thumbnails/' . $row['cachedurl'] . '" title="' . $row['c00'] . '" alt="' . $row['c00'] . '" width="1920" height="1080"/></a></li>';
+        // Appel des fonctions de sélection aléatoire de 12 médias
+        $randMovie = select_ten_random_movie();
+        $randTvshow = select_two_random_tvshow();
+        foreach ($randMovie as $row) {
+          echo '<li><a href="viewpage.php?type=movie&id=' . $row['idMovie'] . '"><img src="../thumbnails/' . $row['cachedurl'] . '" title="' . $row['title'] . '" alt="' . $row['title'] . '" width="1920" height="1080"/></a></li>';
+        }
+        foreach ($randTvshow as $row) {
+          echo '<li><a href="viewpage.php?type=tvshow&id=' . $row['idShow'] . '"><img src="../thumbnails/' . $row['cachedurl'] . '" title="' . $row['title'] . '" alt="' . $row['title'] . '" width="1920" height="1080"/></a></li>';
         }
         ?>
       </ul>

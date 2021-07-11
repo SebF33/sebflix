@@ -1,0 +1,6 @@
+RewriteEngine On
+RewriteCond %{REQUEST_URI}  !(\.png|\.jpg|\.gif|\.jpeg|\.zip|\.css|\.svg|\.js)$
+RewriteRule (.*) routes.php [QSA,L]
+
+ErrorDocument 403 /src/forbid.html
+Options +FollowSymlinks

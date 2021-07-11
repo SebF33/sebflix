@@ -408,7 +408,7 @@
     height: 20vh;
   }
 
-  iframe {
+  iframe, .embedPlaceholder {
     margin-top: 100px;
   }
 

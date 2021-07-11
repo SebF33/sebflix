@@ -1,13 +1,9 @@
-<!------------------------------------->
-<!-- Moteur de recherche PHP & MySQL -->
-<!------------------------------------->
-
-<!-- Appel du script de connexion -->
-<?php require 'connect.php'; ?>
+<!------------------------->
+<!-- Moteur de recherche -->
+<!------------------------->
 
 <?php
 // Déclaration et nettoyage des variables d'entrée
-$id = htmlspecialchars($_GET['id']);
 $query = htmlspecialchars($_GET['search']);
 $query = trim($query);
 
@@ -18,10 +14,11 @@ $result = "";
 if (isset($query) && !empty($query)) {
 
   // Traitement de l'option "films" choisie par l'utilisateur
-  if ($id == 'movies') {
+  if ($type == 'movies') {
     // Requête de comptage pour la table "movie"
-    $sql = 'SELECT COUNT(*) FROM movie WHERE c00 LIKE :query';
-    $queryPrepared = $db->prepare($sql);
+    $sql = 'SELECT COUNT(*) FROM movie WHERE title LIKE :query';
+    connexion($dbco);
+    $queryPrepared = $dbco->prepare($sql);
     $queryPrepared->bindValue(':query', ('%' . $query . '%'), PDO::PARAM_STR);
     $queryPrepared->execute();
 
@@ -48,9 +45,10 @@ if (isset($query) && !empty($query)) {
     // Requête de sélection dans la table "movie"
     $sql = "SELECT * FROM movie
             INNER JOIN art ON movie.idMovie = art.media_id
-            WHERE c00 LIKE :query AND media_type = 'movie' AND type = 'poster'
+            WHERE title LIKE :query AND media_type = 'movie' AND type = 'poster'
             ORDER BY premiered DESC LIMIT :first, :perpage;";
-    $queryPrepared = $db->prepare($sql);
+    connexion($dbco);
+    $queryPrepared = $dbco->prepare($sql);
     $queryPrepared->bindValue(':query', ('%' . $query . '%'), PDO::PARAM_STR);
     $queryPrepared->bindValue(':first', $first, PDO::PARAM_INT);
     $queryPrepared->bindValue(':perpage', $perPage, PDO::PARAM_INT);
@@ -59,10 +57,11 @@ if (isset($query) && !empty($query)) {
   }
 
   // Traitement de l'option "séries" choisie par l'utilisateur
-  else if ($id == 'tvshows') {
+  else if ($type == 'tvshows') {
     // Requête de comptage pour la table "tvshow"
-    $sql = 'SELECT COUNT(*) FROM tvshow WHERE c00 LIKE :query';
-    $queryPrepared = $db->prepare($sql);
+    $sql = 'SELECT COUNT(*) FROM tvshow WHERE title LIKE :query';
+    connexion($dbco);
+    $queryPrepared = $dbco->prepare($sql);
     $queryPrepared->bindValue(':query', ('%' . $query . '%'), PDO::PARAM_STR);
     $queryPrepared->execute();
 
@@ -89,9 +88,10 @@ if (isset($query) && !empty($query)) {
     // Requête de sélection dans la table "tvshow"
     $sql = "SELECT * FROM tvshow
     INNER JOIN art ON tvshow.idShow = art.media_id
-    WHERE c00 LIKE :query AND media_type = 'tvshow' AND type = 'poster'
-    ORDER BY c05 DESC LIMIT :first, :perpage;";
-    $queryPrepared = $db->prepare($sql);
+    WHERE title LIKE :query AND media_type = 'tvshow' AND type = 'poster'
+    ORDER BY premiered DESC LIMIT :first, :perpage;";
+    connexion($dbco);
+    $queryPrepared = $dbco->prepare($sql);
     $queryPrepared->bindValue(':query', ('%' . $query . '%'), PDO::PARAM_STR);
     $queryPrepared->bindValue(':first', $first, PDO::PARAM_INT);
     $queryPrepared->bindValue(':perpage', $perPage, PDO::PARAM_INT);
@@ -100,10 +100,11 @@ if (isset($query) && !empty($query)) {
   }
 
   // Traitement de l'option "acteurs" choisie par l'utilisateur
-  else if ($id == 'actors') {
+  else if ($type == 'actors') {
     // Requête de comptage pour la table "actor"
     $sql = 'SELECT COUNT(*) FROM actor WHERE name LIKE :query';
-    $queryPrepared = $db->prepare($sql);
+    connexion($dbco);
+    $queryPrepared = $dbco->prepare($sql);
     $queryPrepared->bindValue(':query', ('%' . $query . '%'), PDO::PARAM_STR);
     $queryPrepared->execute();
 
@@ -131,7 +132,8 @@ if (isset($query) && !empty($query)) {
     $sql = 'SELECT * FROM actor
             WHERE name LIKE :query
             ORDER BY name LIMIT :first, :perpage;';
-    $queryPrepared = $db->prepare($sql);
+    connexion($dbco);
+    $queryPrepared = $dbco->prepare($sql);
     $queryPrepared->bindValue(':query', ('%' . $query . '%'), PDO::PARAM_STR);
     $queryPrepared->bindValue(':first', $first, PDO::PARAM_INT);
     $queryPrepared->bindValue(':perpage', $perPage, PDO::PARAM_INT);
@@ -140,10 +142,11 @@ if (isset($query) && !empty($query)) {
   }
 
   // Traitement de l'option "studios" choisie par l'utilisateur
-  else if ($id == 'studios') {
+  else if ($type == 'studios') {
     // Requête de comptage des studios
     $sql = 'SELECT COUNT(*) FROM studio WHERE name LIKE :query';
-    $queryPrepared = $db->prepare($sql);
+    connexion($dbco);
+    $queryPrepared = $dbco->prepare($sql);
     $queryPrepared->bindValue(':query', ('%' . $query . '%'), PDO::PARAM_STR);
     $queryPrepared->execute();
 
@@ -171,7 +174,8 @@ if (isset($query) && !empty($query)) {
     $sql = 'SELECT * FROM studio
             WHERE name LIKE :query
             ORDER BY name LIMIT :first, :perpage;';
-    $queryPrepared = $db->prepare($sql);
+    connexion($dbco);
+    $queryPrepared = $dbco->prepare($sql);
     $queryPrepared->bindValue(':query', ('%' . $query . '%'), PDO::PARAM_STR);
     $queryPrepared->bindValue(':first', $first, PDO::PARAM_INT);
     $queryPrepared->bindValue(':perpage', $perPage, PDO::PARAM_INT);
