@@ -1,6 +1,6 @@
-/*****************/
-/* CSS du design */
-/*****************/
+/**********/
+/* Design */
+/**********/
 
 /* 🎨 Palette */
 :root {
@@ -69,28 +69,6 @@ html {
 /* Surligner un texte sélectionné en couleur */
 ::selection {
   background-color: var(--color-extra);
-}
-
-/* Icône retour en arrière */
-.exit {
-  position: fixed;
-  top: 50%;
-  left: 0.5em;
-  z-index: 99999;
-  cursor: pointer;
-}
-.exit svg {
-  height: 3.1rem;
-  width: 3.1rem;
-  fill: #222129;
-  filter: drop-shadow(1px 3px 2px var(--color-light));
-  transition: all .3s ease-in-out;
-}
-
-.exit svg:hover {
-  fill: var(--color-light);
-  transform: scale(1.06);
-  filter: drop-shadow(2px 6px 4px #222129);
 }
 
 /* Icône retour au début */

@@ -24,6 +24,7 @@ require __DIR__ . '/src/database/viewmanager.php';
   <link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
   <link rel="stylesheet" href="css/responsive.css" type="text/css" media="screen">
   <link rel="stylesheet" href="css/search-button.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="css/menu.css" type="text/css" media="screen">
 
   <!-- Appel de l'icône -->
   <link data-vue-tag="ssr" rel="icon" type="image/png" sizes="48x48" href="/img/favicon-48.png">
@@ -117,10 +118,14 @@ require __DIR__ . '/src/database/viewmanager.php';
       echo "</table>";
       ?>
     </div>
+
+    <!-- Menu circulaire -->
+    <?php include "./src/templates/menu.html"; ?>
+
   </main>
 
   <!-- Footer -->
-  <?php include "src/templates/footer.php" ?>
+  <?php include "./src/templates/footer.php" ?>
 
 </body>
 

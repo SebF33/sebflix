@@ -61,6 +61,7 @@ if (isset($_GET['category']) && !empty($_GET['category']) && in_array($_GET['cat
   <link rel="stylesheet" href="/css/style.css" type="text/css" media="screen">
   <link rel="stylesheet" href="/css/alphabet.css" type="text/css" media="screen">
   <link rel="stylesheet" href="/css/responsive.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="/css/menu.css" type="text/css" media="screen">
 
   <!-- Appel de l'icône -->
   <link data-vue-tag="ssr" rel="icon" type="image/png" sizes="48x48" href="../../img/favicon-48.png">
@@ -72,6 +73,9 @@ if (isset($_GET['category']) && !empty($_GET['category']) && in_array($_GET['cat
   <!-- Appel de la police "Truculenta" sur Google Fonts -->
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Truculenta:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Appel des icônes sur Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <!-- Corps de page -->
@@ -135,9 +139,6 @@ if (isset($_GET['category']) && !empty($_GET['category']) && in_array($_GET['cat
   <!-- Main content -->
   <main class="mainAlphabet">
 
-    <!-- Bouton retour en arrière -->
-    <?php include "../templates/exit.html"; ?>
-
     <div class="mainAlphabetTop">
       <h1 class="hType"><?= $title ?></h1>
       <ul class="alphabet">
@@ -175,6 +176,8 @@ if (isset($_GET['category']) && !empty($_GET['category']) && in_array($_GET['cat
       echo "</table>";
       ?>
     </div>
+    <!-- Menu circulaire -->
+    <?php include "../templates/menu.html"; ?>
   </main>
 
   <!-- Footer -->

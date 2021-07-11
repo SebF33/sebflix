@@ -1,6 +1,6 @@
-/*********************/
-/* CSS de la galerie */
-/*********************/
+/**********************/
+/* Page de la galerie */
+/**********************/
 
 /* Reset User Agent */
 * {
@@ -60,6 +60,7 @@
   justify-content: center;
   vertical-align: middle;
 }
+
 h1 {
   user-select: none;
   margin: 0;
@@ -72,12 +73,14 @@ h1 {
   color: #222129;
   text-shadow: 2px 7px 5px var(--color-dark), 0px -4px 10px var(--color-light);
 }
+
 h1 a {
   display: inline-block;
   margin-left: 6px;
   text-align: center;
   cursor: pointer;
 }
-.fa {
+
+.fa-random {
   transform: translate(0px, 1.5px);
 }

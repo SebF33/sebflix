@@ -157,6 +157,7 @@ if (empty($result) && empty($result2)) {
   <!-- Appel des feuilles de styles -->
   <link rel="stylesheet" href="/css/design.css" type="text/css" media="screen">
   <link rel="stylesheet" href="/css/tableau.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="/css/menu.css" type="text/css" media="screen">
 
   <!-- Appel de l'icône -->
   <link data-vue-tag="ssr" rel="icon" type="image/png" sizes="48x48" href="/img/favicon-48.png">
@@ -169,6 +170,9 @@ if (empty($result) && empty($result2)) {
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Truculenta:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+
+  <!-- Appel des icônes sur Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <!-- Corps de page -->
@@ -197,9 +201,6 @@ if (empty($result) && empty($result2)) {
 
   <!-- Main content -->
   <main class="main">
-
-    <!-- Bouton retour en arrière -->
-    <?php include "../templates/exit.html"; ?>
 
     <?php
     // Créer un tableau à X colonnes
@@ -263,6 +264,9 @@ if (empty($result) && empty($result2)) {
     echo "</tr>";
     echo "</table>";
     ?>
+
+    <!-- Menu circulaire -->
+    <?php include "../templates/menu.html"; ?>
 
     <!-- Flèche retour au début -->
     <button class="scrollToTopBtn">☝️</button>

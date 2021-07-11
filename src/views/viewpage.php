@@ -52,6 +52,7 @@ if (isset($_GET['id']) && !empty($_GET['id']) && ($_GET['type'] == 'movie' or $_
   <link rel="stylesheet" href="/css/design.css" type="text/css" media="screen">
   <link rel="stylesheet" href="/css/viewpage.css" type="text/css" media="screen">
   <link rel="stylesheet" href="/css/responsive.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="/css/menu.css" type="text/css" media="screen">
 
   <!-- Appel de l'icône -->
   <link data-vue-tag="ssr" rel="icon" type="image/png" sizes="48x48" href="/img/favicon-48.png">
@@ -67,6 +68,9 @@ if (isset($_GET['id']) && !empty($_GET['id']) && ($_GET['type'] == 'movie' or $_
 
   <!-- Appel des icônes sur Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
+
+  <!-- Appel des icônes sur Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <!-- Corps de page -->
@@ -161,9 +165,6 @@ if (isset($_GET['id']) && !empty($_GET['id']) && ($_GET['type'] == 'movie' or $_
   <!-- Main content -->
   <main>
 
-    <!-- Bouton retour en arrière -->
-    <?php include "../templates/exit.html"; ?>
-
     <section class="firstPage">
       <div class="mainTop">
         <!-- Bande-annonce -->
@@ -235,6 +236,9 @@ if (isset($_GET['id']) && !empty($_GET['id']) && ($_GET['type'] == 'movie' or $_
         ?>
       </div>
     </section>
+
+    <!-- Menu circulaire -->
+    <?php include "../templates/menu.html"; ?>
 
     <!-- Flèche retour au début -->
     <button class="scrollToTopBtn">☝️</button>

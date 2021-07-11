@@ -93,6 +93,7 @@ if (isset($_GET['type']) && !empty($_GET['type']) && in_array($_GET['type'], $ty
   <link rel="stylesheet" href="/css/tableau.css" type="text/css" media="screen">
   <link rel="stylesheet" href="/css/responsive.css" type="text/css" media="screen">
   <link rel="stylesheet" href="/css/card.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="/css/menu.css" type="text/css" media="screen">
 
   <!-- Appel de l'icône -->
   <link data-vue-tag="ssr" rel="icon" type="image/png" sizes="48x48" href="/img/favicon-48.png">
@@ -105,6 +106,9 @@ if (isset($_GET['type']) && !empty($_GET['type']) && in_array($_GET['type'], $ty
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Truculenta:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+
+  <!-- Appel des icônes sur Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <!-- Corps de page -->
@@ -165,9 +169,6 @@ if (isset($_GET['type']) && !empty($_GET['type']) && in_array($_GET['type'], $ty
 
   <!-- Main content -->
   <main class="main">
-
-    <!-- Bouton retour en arrière -->
-    <?php include "../templates/exit.html"; ?>
 
     <div class="results">
       <h1><?= $h1 ?></h1>
@@ -311,6 +312,9 @@ if (isset($_GET['type']) && !empty($_GET['type']) && in_array($_GET['type'], $ty
         </div>
     <?php }
     } ?>
+
+    <!-- Menu circulaire -->
+    <?php include "../templates/menu.html"; ?>
 
     <!-- Bouton retour au début -->
     <button class="scrollToTopBtn">☝️</button>

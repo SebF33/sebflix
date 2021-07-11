@@ -23,6 +23,7 @@ require dirname(__DIR__) . '/database/viewmanager.php';
   <link rel="stylesheet" href="/css/design.css" type="text/css" media="screen">
   <link rel="stylesheet" href="/css/gallery.css" type="text/css" media="screen">
   <link rel="stylesheet" href="/css/responsive.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="/css/menu.css" type="text/css" media="screen">
 
   <!-- Appel de l'icône -->
   <link data-vue-tag="ssr" rel="icon" type="image/png" sizes="48x48" href="/img/favicon-48.png">
@@ -67,9 +68,6 @@ require dirname(__DIR__) . '/database/viewmanager.php';
   <!-- Main content -->
   <main id="main">
 
-    <!-- Bouton retour en arrière -->
-    <?php include "../templates/exit.html"; ?>
-
     <h1>Galerie <a onClick="window.location.reload()"><i class="fa fa-random"></i></a></h1>
     <div class="flexslider">
       <ul class="slides">
@@ -86,6 +84,8 @@ require dirname(__DIR__) . '/database/viewmanager.php';
         ?>
       </ul>
     </div>
+    <!-- Menu circulaire -->
+    <?php include "../templates/menu.html"; ?>
   </main>
 
   <!-- Footer -->
