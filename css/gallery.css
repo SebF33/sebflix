@@ -9,6 +9,22 @@
   box-sizing: border-box;
 }
 
+/* Image de fond sur toute la page */
+body {
+  /* Appel de l'image de fond */
+  background-image: url(../img/bg_gallery.png);
+  /* Centrer l'image d'arrière-plan verticalement et horizontalement à tout moment */
+  background-position: center center;
+  /* Empêcher l'image d'arrière-plan d'être en mosaïque */
+  background-repeat: no-repeat;
+  /* Fixer l'image d'arrière-plan dans la fenêtre de sorte qu'elle ne bouge pas lorsque la hauteur du contenu est supérieure à la hauteur de l'image */
+  background-attachment: fixed;
+  /* Redimensionner l'image d'arrière-plan basée sur la taille du conteneur */
+  background-size: cover;
+  /* Définir une couleur d'arrière-plan qui sera affichée pendant le chargement de l'image d'arrière-plan */
+  background-color: #008fd9;
+}
+
 /* Bloc d'en-tête global */
 #header {
   /*border: 1px solid black;*/

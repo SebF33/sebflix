@@ -415,7 +415,7 @@ function select_genre_name(int $id)
   connexion($dbco);
   try {
     $query = $dbco->prepare(
-      "SELECT *
+      "SELECT name
       FROM genre
       WHERE genre_id = :id"
     );
@@ -1457,14 +1457,16 @@ function select_movie_from_director(int $id)
   connexion($dbco);
   try {
     $query = $dbco->prepare(
-      "SELECT idMovie, title, cachedurl
-      FROM movie
-      INNER JOIN art ON movie.idMovie = art.media_id
-      INNER JOIN director_link ON art.media_id = director_link.media_id
-      WHERE actor_id = :id
-      AND director_link.media_type = 'movie'
-      AND type = 'poster'
-      ORDER BY premiered DESC"
+      "SELECT m.idMovie, m.title, m.synopsis, m.classification, m.genre, m.premiered, a.cachedurl
+      FROM movie AS m
+      JOIN director_link AS d
+      ON m.idMovie = d.media_id
+      JOIN art AS a
+      ON d.media_id = a.media_id
+      WHERE d.actor_id = :id
+      AND a.media_type = 'movie'
+      AND a.type = 'poster'
+      ORDER BY m.premiered DESC"
     );
     $query->bindValue(':id', $id, PDO::PARAM_INT);
     $query->execute();

@@ -137,24 +137,9 @@ if (isset($_GET['type']) && !empty($_GET['type']) && in_array($_GET['type'], $ty
 <!-- Corps de page -->
 
 <body>
-  <?php if ($type == 'collection') {
-    // Fanart de la collection
-    echo '<style type="text/css">
-    body {
-      background-image: url(';
-    if (empty($fanart['cachedurl'])) {
-      echo "/img/bg.png";
-    } else {
-      echo '"../thumbnails/' . $fanart['cachedurl'] . '"';
-    }
-    echo ');
-      background-position: center center;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      background-size: cover;
-    }
-  </style>';
-  }
+  <?php
+  // Background selon le type défini
+  include "../templates/background.php";
   ?>
 
   <!-- Header -->
@@ -164,6 +149,7 @@ if (isset($_GET['type']) && !empty($_GET['type']) && in_array($_GET['type'], $ty
     </div>
 
     <div id="headerMain">
+      <!-- Logo -->
       <?php
       if ($type == 'achievement') {
         // Logo du studio
@@ -175,6 +161,9 @@ if (isset($_GET['type']) && !empty($_GET['type']) && in_array($_GET['type'], $ty
         } else {
           echo '<a class="logoCasting" href="/index.php"><img src="../thumbnails/' . $actor['cachedurl'] . '" title="' . $actor['name'] . '" alt="' . $actor['name'] . '" height="180" width="120"/></a>';
         }
+      } elseif ($type == 'genre') {
+        // Logo du genre
+        echo '<img src="../thumbnails/genres/' . $genre['name'] . '" title="' . $genre['name'] . '" alt="' . $genre['name'] . '" height="161" width="161"/>';
       } elseif ($type == 'collection') {
         // Logo de la collection
         echo '<img src="../thumbnails/' . $logo['cachedurl'] . '" title="' . $logo['strSet'] . '" alt="' . $logo['strSet'] . '" height="124" width="320"/>';
@@ -202,7 +191,7 @@ if (isset($_GET['type']) && !empty($_GET['type']) && in_array($_GET['type'], $ty
         <!-- Affichage des données -->
         <?php
         // Affichage des films
-        if ($type == 'movies' or $type == 'genre') {
+        if ($type == 'movies' or $type == 'genre' or $type == 'direction') {
           foreach ($movies as $row) {
             $date = DateTime::createFromFormat("Y-m-d", $row['premiered']);
             echo '<a class="card_button" href="viewpage.php?type=movie&id=' . $row['idMovie'] . '"><div class="card">
@@ -298,7 +287,7 @@ if (isset($_GET['type']) && !empty($_GET['type']) && in_array($_GET['type'], $ty
         // Affichage des genres
         elseif ($type == 'genres') {
           foreach ($genres as $row) {
-            echo '<a href="display-results.php?type=genre&id=' . $row['genre_id'] . '"><img class="gGenre" src="../thumbnails/genres/' . $row['name'] . '" title="' . $row['name'] . '" alt="' . $row['name'] . '" height="50%" width="50%"/></a>';
+            echo '<a href="display-results.php?type=genre&id=' . $row['genre_id'] . '"><img class="gGenre" src="../thumbnails/genres/' . $row['name'] . '" title="' . $row['name'] . '" alt="' . $row['name'] . '" height="125" width="125"/></a>';
           }
         }
         // Affichage des collections

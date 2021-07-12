@@ -81,6 +81,10 @@ if (isset($_GET['category']) && !empty($_GET['category']) && in_array($_GET['cat
 <!-- Corps de page -->
 
 <body>
+  <?php
+  // Background selon la catégorie définie
+  include "../templates/background.php";
+  ?>
 
   <!-- Header -->
   <?php
