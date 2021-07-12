@@ -20,7 +20,7 @@ require dirname(__DIR__) . '/database/viewmanager.php';
 require dirname(__DIR__) . '/database/validation.php';
 
 // Définition des valeurs autorisées dans les GET
-$types = array('movies', 'tvshows', 'actors', 'studios', 'achievement', 'direction', 'filmography', 'bestmovies', 'beststudios', 'sets', 'collection');
+$types = array('movies', 'tvshows', 'actors', 'studios', 'achievement', 'direction', 'filmography', 'genres', 'genre', 'beststudios', 'sets', 'collection');
 
 // Vérification des GET ('type' obligatoire)
 if (isset($_GET['type']) && !empty($_GET['type']) && in_array($_GET['type'], $types)) {
@@ -64,10 +64,16 @@ if (isset($_GET['type']) && !empty($_GET['type']) && in_array($_GET['type'], $ty
     $title = $actor['name'];
     $h1 = 'Filmographie pour ' . $actor['name'] . '';
   }
-  // Type "films les plus populaires"
-  elseif ($type == 'bestmovies') {
-    $movies = select_best_movies();
-    $h1 = $title = "Films populaires";
+  // Type "liste des genres pour les films"
+  elseif ($type == 'genres') {
+    $genres = select_movie_genres();
+    $h1 = $title = "Liste des genres pour les films";
+  }
+  // Type "films selon le genre défini"
+  elseif ($type == 'genre') {
+    $genre = select_genre_name($id);
+    $movies = select_genre_movie($id);
+    $h1 = $title = 'Genre "' . $genre['name'] . '"';
   }
   // Type "studios les plus populaires"
   elseif ($type == 'beststudios') {
@@ -107,7 +113,7 @@ if (isset($_GET['type']) && !empty($_GET['type']) && in_array($_GET['type'], $ty
 
   <!-- Appel des feuilles de styles -->
   <link rel="stylesheet" href="/css/design.css" type="text/css" media="screen">
-  <link rel="stylesheet" href="/css/tableau.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="/css/table.css" type="text/css" media="screen">
   <link rel="stylesheet" href="/css/responsive.css" type="text/css" media="screen">
   <link rel="stylesheet" href="/css/card.css" type="text/css" media="screen">
   <link rel="stylesheet" href="/css/menu.css" type="text/css" media="screen">
@@ -196,7 +202,7 @@ if (isset($_GET['type']) && !empty($_GET['type']) && in_array($_GET['type'], $ty
         <!-- Affichage des données -->
         <?php
         // Affichage des films
-        if ($type == 'movies' or $type == 'bestmovies') {
+        if ($type == 'movies' or $type == 'genre') {
           foreach ($movies as $row) {
             $date = DateTime::createFromFormat("Y-m-d", $row['premiered']);
             echo '<a class="card_button" href="viewpage.php?type=movie&id=' . $row['idMovie'] . '"><div class="card">
@@ -287,6 +293,12 @@ if (isset($_GET['type']) && !empty($_GET['type']) && in_array($_GET['type'], $ty
           }
           foreach ($tvshows as $row) {
             echo '<a href="viewpage.php?type=tvshow&id=' . $row['idShow'] . '"><img class="gMedia" src="../thumbnails/' . $row['cachedurl'] . '" alt="' . $row['title'] . '" height="360" width="240"/></a>';
+          }
+        }
+        // Affichage des genres
+        elseif ($type == 'genres') {
+          foreach ($genres as $row) {
+            echo '<a href="display-results.php?type=genre&id=' . $row['genre_id'] . '"><img class="gGenre" src="../thumbnails/genres/' . $row['name'] . '" title="' . $row['name'] . '" alt="' . $row['name'] . '" height="50%" width="50%"/></a>';
           }
         }
         // Affichage des collections

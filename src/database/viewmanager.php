@@ -17,7 +17,10 @@
 //    1.11 Sélection des films selon le genre défini
 //    1.12 Sélection des films dont le titre commence par le caractère défini
 //    1.13 Sélection des films dont le titre commence par un chiffre
-//    1.14 Sélection des 200 films les plus populaires par leur poster
+//    1.14 Sélection des genres pour les films
+//    1.15 Sélection du nom d'un genre par son identifiant
+//    1.16 Sélection des films selon le genre défini depuis la liste
+//    1.17 Sélection des 200 films les plus populaires par leur poster
 
 //  2. Affichages des séries
 //    2.01 Sélection aléatoire de 1 média type série par son poster
@@ -383,7 +386,76 @@ function select_movie_by_numeric()
   }
 }
 
-// 1.14 Sélection des 200 films les plus populaires par leur poster
+// 1.14 Sélection des genres pour les films
+function select_movie_genres()
+{
+  connexion($dbco);
+  try {
+    $query = $dbco->prepare(
+      "SELECT *
+      FROM genre
+      WHERE name NOT LIKE '%Adulte%'
+      AND name NOT LIKE '%Arts Martiaux%'
+      AND name NOT LIKE '%Erotique%'
+      AND name NOT LIKE '%Peplum%'
+      AND name NOT LIKE '%Suspense%'
+      ORDER BY name"
+    );
+    $query->execute();
+    $result = $query->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
+  } catch (PDOException $e) {
+    echo "Erreur : " . $e->getMessage();
+  }
+}
+
+// 1.15 Sélection du nom d'un genre par son identifiant
+function select_genre_name(int $id)
+{
+  connexion($dbco);
+  try {
+    $query = $dbco->prepare(
+      "SELECT *
+      FROM genre
+      WHERE genre_id = :id"
+    );
+    $query->bindValue(':id', $id, PDO::PARAM_INT);
+    $query->execute();
+    $genre = $query->fetch(PDO::FETCH_ASSOC);
+    return $genre;
+  } catch (PDOException $e) {
+    echo "Erreur : " . $e->getMessage();
+  }
+}
+
+// 1.16 Sélection des films selon le genre défini depuis la liste
+function select_genre_movie(int $id)
+{
+  connexion($dbco);
+  try {
+    $query = $dbco->prepare(
+      "SELECT idMovie, title, synopsis, classification, genre, premiered, cachedurl
+      FROM movie
+      INNER JOIN genre_link ON movie.idMovie = genre_link.media_id
+      INNER JOIN art ON genre_link.media_id = art.media_id
+      WHERE media_type = 'movie'
+      AND type = 'poster'
+      AND genre_id LIKE :id
+      AND genre NOT LIKE '%Anime%'
+      AND genre NOT LIKE '%Court-métrage%'
+      AND genre NOT LIKE '%Spectacle%'
+      ORDER BY premiered"
+    );
+    $query->bindValue(':id', $id, PDO::PARAM_INT);
+    $query->execute();
+    $result = $query->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
+  } catch (PDOException $e) {
+    echo "Erreur : " . $e->getMessage();
+  }
+}
+
+// 1.17 Sélection des 200 films les plus populaires par leur poster
 function select_best_movies()
 {
   connexion($dbco);
