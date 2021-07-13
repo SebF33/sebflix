@@ -1,4 +1,4 @@
-ErrorDocument 404 /src/not-found.html
-ErrorDocument 403 /src/forbid.html
+ErrorDocument 404 /src/views/404.php
+ErrorDocument 403 /src/views/403.php
 Options +FollowSymlinks
 RewriteEngine On

@@ -151,6 +151,8 @@ nav ul a.btn-icon {
   /*border: 1px solid green;*/
   display: flex;
   flex-direction: column;
+  align-content: flex-end;
+  justify-content: center;
   width: 85%;
   height: 50%;
 }
@@ -161,6 +163,10 @@ h1 {
   text-transform: uppercase;
   color: #222129;
   text-shadow: 1px 3px 2px var(--color-dark), 0px -2px 5px var(--color-light);
+}
+
+.hRandom {
+  font-size: 1.6em;
 }
 
 h1 a {
@@ -208,6 +214,11 @@ td img {
   width: 192px;
   height: 288px;
   transition: 0.4s;
+}
+
+.tRandom img {
+  width: 160px;
+  height: 240px;
 }
 
 td img:hover {

@@ -45,6 +45,15 @@ require __DIR__ . '/src/database/viewmanager.php';
 <!-- Corps de page -->
 
 <body>
+  <style type="text/css">
+    body {
+      background-image: url("/img/bg_index.png");
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
+    }
+  </style>';
 
   <!-- Header -->
   <?php

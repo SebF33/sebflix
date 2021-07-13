@@ -1,7 +1,6 @@
 <style type="text/css">
   body {
-    background-image: url(<?php
-                          if ($type == 'collection' && !empty($fanart['cachedurl'])) {
+    background-image: url(<?php if ($type == 'collection' && !empty($fanart['cachedurl'])) {
                             echo '"/src/thumbnails/' . $fanart['cachedurl'] . '"';
                           } elseif ($type == 'beststudios' or $type == 'direction' or $type == 'genres' or $type == 'movies' or $type == 'sets' or $type == 'studios' or $type == 'tvshows') {
                             echo '"/img/bg_' . $type . '.png"';
