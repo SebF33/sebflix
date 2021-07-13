@@ -261,7 +261,7 @@ if (isset($_GET['type']) && !empty($_GET['type']) && in_array($_GET['type'], $ty
           }
         }
         // Affichage des studios
-        elseif ($type == 'studios' or $type == 'beststudios') {
+        elseif ($type == 'beststudios' or $type == 'studios') {
           foreach ($studios as $row) {
             echo '<a href="display-results.php?type=achievement&id=' . $row['name'] . '"><img class="gStudio" src="../thumbnails/studios/' . $row['name'] . '" title="' . $row['name'] . '" alt="' . $row['name'] . '" height="109" width="161"/></a>';
           }
