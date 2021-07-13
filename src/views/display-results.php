@@ -51,10 +51,10 @@ if (isset($_GET['type']) && !empty($_GET['type']) && in_array($_GET['type'], $ty
   }
   // Type "œuvre(s) de la/du directrice/directeur"
   elseif ($type == 'direction') {
-    $director = select_actor_name($id);
+    $actor = select_actor_name($id);
     $movies = select_movie_from_director($id);
-    $title = $director['name'];
-    $h1 = 'Œuvres réalisées par ' . $director['name'] . '';
+    $title = $actor['name'];
+    $h1 = 'Œuvres réalisées par ' . $actor['name'] . '';
   }
   // Type "filmographie de l'actrice/acteur/doubleur"
   elseif ($type == 'filmography') {
@@ -154,8 +154,8 @@ if (isset($_GET['type']) && !empty($_GET['type']) && in_array($_GET['type'], $ty
       if ($type == 'achievement') {
         // Logo du studio
         echo '<a class="logoStudio" href="/index.php"><img src="../thumbnails/studios/' . $id . '" title="' . $id . '" alt="' . $id . '" height="109" width="161"/></a>';
-      } elseif ($type == 'filmography') {
-        // Photo actrice/acteur/doubleur
+      } elseif ($type == 'direction' or $type == 'filmography') {
+        // Photo directrice/directeur/actrice/acteur/doubleur
         if (empty($actor['cachedurl'])) {
           echo '<a class="logoCasting" href="/index.php"><img src="../thumbnails/placeholders/casting.png" title="' . $actor['name'] . '" alt="" height="180" width="120"/></a>';
         } else {

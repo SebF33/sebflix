@@ -275,13 +275,22 @@ td {
   transition: 0.4s;
 }
 
+.gPoster .gCasting figcaption {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 11rem;
+  margin: 0 auto;
+}
+
 .gPoster .gCasting:hover {
   box-shadow: 1px 1px 38px var(--color-light);
   transform: scale(1.05);
   transition: box-shadow 0.1s ease-in-out;
 }
 
-.gPoster a .gStudio, .gPoster a .gGenre {
+.gPoster a .gStudio,
+.gPoster a .gGenre {
   display: block;
   padding: 10px;
   background-color: var(--color-dark);
@@ -289,7 +298,8 @@ td {
   transition: 0.4s;
 }
 
-.gPoster .gStudio:hover, .gPoster .gGenre:hover {
+.gPoster .gStudio:hover,
+.gPoster .gGenre:hover {
   box-shadow: 1px 1px 38px var(--color-light);
   transform: scale(1.05);
   transition: box-shadow 0.1s ease-in-out;

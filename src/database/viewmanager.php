@@ -1336,16 +1336,27 @@ function select_best_studios()
   name LIKE 'Amblin Entertainment' OR
   name LIKE 'Bad Robot' OR
   name LIKE 'Blue Sky Studios' OR
+  name LIKE 'Blumhouse Productions' OR
   name LIKE 'Columbia Pictures' OR
   name LIKE 'DC Entertainment' OR
   name LIKE 'DreamWorks Animation' OR
+  name LIKE 'Dune Entertainment' OR
   name LIKE 'Illumination Entertainment' OR
+  name LIKE 'Legendary Entertainment' OR
+  name LIKE 'LionsGate' OR
   name LIKE 'Lucasfilm' OR
   name LIKE 'Marvel Studios' OR
+  name LIKE 'Metro-Goldwyn-Mayer' OR
   name LIKE 'Netflix' OR
+  name LIKE 'New Line Cinema' OR
+  name LIKE 'Paramount Pictures' OR
   name LIKE 'Pixar' OR
+  name LIKE 'Sony Pictures Animation' OR
+  name LIKE 'Summit Entertainment' OR
+  name LIKE 'Touchstone Pictures' OR
   name LIKE 'Universal Pictures' OR
-  name LIKE 'Walt Disney Pictures')";
+  name LIKE 'Walt Disney Pictures' OR
+  name LIKE 'Warner Bros.')";
   connexion($dbco);
   try {
     $query = $dbco->prepare(
