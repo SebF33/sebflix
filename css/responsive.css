@@ -246,10 +246,6 @@
     font-size: 1.6em;
   }
 
-  .random-btn-container {
-    font-size: 1.6em;
-  }
-
   .tRandom img {
     width: 120px;
     height: 180px;
@@ -266,7 +262,7 @@
   }
 
   .random-btn-container,
-  .tRandom,
+  .card-carousel,
   .mainBottom table {
     display: none;
   }

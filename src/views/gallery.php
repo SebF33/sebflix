@@ -22,8 +22,8 @@ require dirname(__DIR__) . '/database/viewmanager.php';
   <!-- Appel des feuilles de styles -->
   <link rel="stylesheet" href="/css/design.css" type="text/css" media="screen">
   <link rel="stylesheet" href="/css/gallery.css" type="text/css" media="screen">
-  <link rel="stylesheet" href="/css/responsive.css" type="text/css" media="screen">
   <link rel="stylesheet" href="/css/menu.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="/css/responsive.css" type="text/css" media="screen">
 
   <!-- Appel de l'icône -->
   <link data-vue-tag="ssr" rel="icon" type="image/png" sizes="48x48" href="/img/favicon-48.png">
