@@ -112,17 +112,17 @@ require __DIR__ . '/src/database/viewmanager.php';
       <div class="random-btn-container"><a onclick="window.location.reload()"><i class="fa fa-random"></i></a></div>
       <div class="card-carousel">
         <?php
-        // Appel des fonctions de sélection aléatoire de 6 médias
-        $randMovie = select_eight_random_movie();
+        // Appel des fonctions de sélection aléatoire de 21 médias
+        $randMovie = select_eighteen_random_movie();
         $randTvshow = select_three_random_tvshow();
 
         // Affichage dans le carrousel des données appelées
         foreach ($randMovie as $row) {
-          echo '<div class="my-card"><a class="my-btn-card" href="src/views/viewpage.php?type=movie&id=' . $row['idMovie'] . '"><img src="src/thumbnails/' . $row['cachedurl'] . '" title="' . $row['title'] . '" alt="' . $row['title'] . '" height="288" width="192"/></a></div>
-        ';
+          echo '<div class="my-card"><a class="my-btn-card" href="src/views/viewpage.php?type=movie&id=' . $row['idMovie'] . '"><img src="src/thumbnails/' . $row['cachedurl'] . '" title="' . $row['title'] . '" alt="' . $row['title'] . '" height="288" width="192"/></a></div>';
         }
-        echo '<div class="my-card"><a class="my-btn-card" href="src/views/viewpage.php?type=tvshow&id=' . $randTvshow['idShow'] . '"><img src="src/thumbnails/' . $randTvshow['cachedurl'] . '" title="' . $randTvshow['title'] . '" alt="' . $randTvshow['title'] . '" height="288" width="192"/></a></div>
-      ';
+        foreach ($randTvshow as $row) {
+          echo '<div class="my-card"><a class="my-btn-card" href="src/views/viewpage.php?type=tvshow&id=' . $row['idShow'] . '"><img src="src/thumbnails/' . $row['cachedurl'] . '" title="' . $row['title'] . '" alt="' . $row['title'] . '" height="288" width="192"/></a></div>';
+        }
         ?>
       </div>
 

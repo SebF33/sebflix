@@ -67,8 +67,8 @@ require dirname(__DIR__) . '/database/viewmanager.php';
 
   <!-- Main content -->
   <main id="main">
-
-    <h1>Galerie <a onClick="window.location.reload()"><i class="fa fa-random"></i></a></h1>
+    <!-- Bouton de rafraîchissement -->
+    <div class="random-btn-container"><a onclick="window.location.reload()"><i class="fa fa-random"></i></a></div>
     <div class="flexslider">
       <ul class="slides">
         <?php

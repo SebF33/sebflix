@@ -4,7 +4,7 @@
 //////////////////////////////////////
 
 //  1. Affichages des films
-//    1.01 Sélection aléatoire de 8 médias type film par leur poster
+//    1.01 Sélection aléatoire de 18 médias type film par leur poster
 //    1.02 Sélection des 7 films les plus récents par leur poster
 //    1.03 Sélection aléatoire de 10 médias type film par leur fanart
 //    1.04 Sélection d'un média type film par son identifiant
@@ -86,8 +86,8 @@
 // Appel du script de connexion à la base de données
 require __DIR__ . '/connect.php';
 
-// 1.01 Sélection aléatoire de 8 médias type film par leur poster
-function select_eight_random_movie()
+// 1.01 Sélection aléatoire de 18 médias type film par leur poster
+function select_eighteen_random_movie()
 {
   connexion($dbco);
   try {
@@ -98,7 +98,7 @@ function select_eight_random_movie()
       WHERE media_type = 'movie'
       AND type = 'poster'
       ORDER BY RAND()
-      LIMIT 8"
+      LIMIT 18"
     );
     $query->execute();
     $randMovie = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -493,7 +493,7 @@ function select_three_random_tvshow()
       LIMIT 3"
     );
     $query->execute();
-    $randTvshow = $query->fetch(PDO::FETCH_ASSOC);
+    $randTvshow = $query->fetchAll(PDO::FETCH_ASSOC);
     return $randTvshow;
   } catch (PDOException $e) {
     echo "Erreur : " . $e->getMessage();

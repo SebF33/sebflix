@@ -75,28 +75,5 @@ body {
   text-align: center;
   justify-content: center;
   vertical-align: middle;
-}
-
-h1 {
   user-select: none;
-  margin: 0;
-  margin-left: 20%;
-  margin-bottom: 16px;
-  font-size: 2em;
-  text-align: left;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: #222129;
-  text-shadow: 2px 7px 5px var(--color-dark), 0px -4px 10px var(--color-light);
-}
-
-h1 a {
-  display: inline-block;
-  margin-left: 6px;
-  text-align: center;
-  cursor: pointer;
-}
-
-.fa-random {
-  transform: translate(0px, 1.5px);
 }

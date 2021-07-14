@@ -71,7 +71,7 @@ html {
   background-color: var(--color-extra);
 }
 
-/* Icône retour au début */
+/* Bouton retour au début */
 .scrollToTopBtn {
   /* Placement dans le coin en bas à droite de l'écran */
   position: fixed;
@@ -99,4 +99,25 @@ html {
   /* Dévoiler */
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Bouton aléatoire */
+.random-btn-container {
+  margin: 10px;
+  font-size: 1.8em;
+  color: #222129;
+  text-shadow: 1px 3px 2px var(--color-dark), 0px -2px 5px var(--color-light);
+}
+
+.random-btn-container a {
+  display: inline-block;
+  text-align: center;
+  cursor: pointer;
+  transition: all .2s ease-in-out;
+}
+
+.random-btn-container a:hover {
+  fill: var(--color-light);
+  transform: scale(1.12);
+  filter: drop-shadow(1px 3px 2px var(--color-dark));
 }
