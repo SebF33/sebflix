@@ -32,7 +32,7 @@
 <body>
   <style>
     body {
-      background-image: url('/img/error403.png');
+      background-image: url('/img/bg_403.png');
     }
   </style>
 
