@@ -316,7 +316,8 @@ if (isset($_GET['type']) && !empty($_GET['type']) && in_array($_GET['type'], $ty
             <li class="page-item <?= ($currentPage == 1) ? "disabled" : "" ?>">
               <a href="./display-results.php?type=<?= $type ?>&search=<?= $query ?>&page=<?= $currentPage - 1 ?>" class="page-link">«</a>
             </li>
-            <?php for ($page = 1; $page <= $pages; $page++) : ?>
+            <?php
+            for ($page = 1; $page <= $pages; $page++) : ?>
               <!-- Lien vers chacune des pages (activé si on se trouve sur la page correspondante) -->
               <li class="page-item <?= ($currentPage == $page) ? "active" : "" ?>">
                 <a href="./display-results.php?type=<?= $type ?>&search=<?= $query ?>&page=<?= $page ?>" class="page-link"><?= $page ?></a>

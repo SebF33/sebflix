@@ -25,6 +25,7 @@ require __DIR__ . '/src/database/viewmanager.php';
   <link rel="stylesheet" href="css/responsive.css" type="text/css" media="screen">
   <link rel="stylesheet" href="css/search-button.css" type="text/css" media="screen">
   <link rel="stylesheet" href="css/menu.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="css/carousel.css" type="text/css" media="screen">
 
   <!-- Appel de l'icône -->
   <link data-vue-tag="ssr" rel="icon" type="image/png" sizes="48x48" href="/img/favicon-48.png">
@@ -108,24 +109,26 @@ require __DIR__ . '/src/database/viewmanager.php';
 
     <div class="mainBottom">
       <!-- Bouton de rafraîchissement -->
-      <h1 class="hRandom">Médias aléatoires <a onClick="window.location.reload()"><i class="fa fa-random"></i></a></h1>
-      <?php
-      // Appel des fonctions de sélection aléatoire de 6 médias
-      $randMovie = select_five_random_movie();
-      $randTvshow = select_one_random_tvshow();
-      // Création d'un tableau à 1 colonne
-      echo
-      "<table class='tRandom' border='1'>
-            <tr>
-            </tr>";
-      // Affichage dans le tableau des données appelées
-      foreach ($randMovie as $row) {
-        echo '<td><a href="src/views/viewpage.php?type=movie&id=' . $row['idMovie'] . '"><img src="src/thumbnails/' . $row['cachedurl'] . '" title="' . $row['title'] . '" alt="' . $row['title'] . '" height="288" width="192"/></a></td>';
-      }
-      echo '<td><a href="src/views/viewpage.php?type=tvshow&id=' . $randTvshow['idShow'] . '"><img src="src/thumbnails/' . $randTvshow['cachedurl'] . '" title="' . $randTvshow['title'] . '" alt="' . $randTvshow['title'] . '" height="288" width="192"/></a></td>';
-      echo "</tr>";
-      echo "</table>";
-      ?>
+      <div class="random-btn-container"><a onclick="window.location.reload()"><i class="fa fa-random"></i></a></div>
+      <div class="card-carousel">
+        <?php
+        // Appel des fonctions de sélection aléatoire de 6 médias
+        $randMovie = select_eight_random_movie();
+        $randTvshow = select_three_random_tvshow();
+
+        // Affichage dans le carrousel des données appelées
+        foreach ($randMovie as $row) {
+          echo '<div class="my-card"><a class="my-btn-card" href="src/views/viewpage.php?type=movie&id=' . $row['idMovie'] . '"><img src="src/thumbnails/' . $row['cachedurl'] . '" title="' . $row['title'] . '" alt="' . $row['title'] . '" height="288" width="192"/></a></div>
+        ';
+        }
+        echo '<div class="my-card"><a class="my-btn-card" href="src/views/viewpage.php?type=tvshow&id=' . $randTvshow['idShow'] . '"><img src="src/thumbnails/' . $randTvshow['cachedurl'] . '" title="' . $randTvshow['title'] . '" alt="' . $randTvshow['title'] . '" height="288" width="192"/></a></div>
+      ';
+        ?>
+      </div>
+
+      <!-- Carrousel -->
+      <script src="/js/carousel.js"></script>
+
     </div>
 
     <!-- Menu circulaire -->

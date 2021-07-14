@@ -1,0 +1,83 @@
+/*************/
+/* Carrousel */
+/*************/
+
+body {
+    overflow-x: hidden;
+}
+
+.card-carousel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+/* Cartess du carrousel */
+.card-carousel .my-card {
+    width: auto;
+    height: auto;
+    position: relative;
+    z-index: 1;
+    -webkit-transform: scale(0.6) translateY(-2rem);
+    transform: scale(0.6) translateY(-2rem);
+    opacity: 0;
+    cursor: pointer;
+    pointer-events: none;
+    background: var(--color-light);
+    background: linear-gradient(to top, #222129, var(--color-dark));
+    border: 1px solid var(--color-light);
+    transition: 0.4s;
+}
+
+.card-carousel .my-card:hover {
+    box-shadow: 1px 1px 20px var(--color-light);
+    transform: scale(1.05);
+    transition: box-shadow 0.1s ease-in-out;
+}
+
+.card-carousel .my-card a {
+    text-decoration: none;
+    color: var(--color-light);
+    font-family: var(--font-title);
+    font-size: 1.3em;
+    font-weight: 500;
+}
+
+.card-carousel .my-card a img {
+    display: block;
+    background-color: var(--color-dark);
+    width: 192px;
+    height: 288px;
+}
+
+.card-carousel .my-card:after {
+    content: '';
+    position: absolute;
+    height: 2px;
+    width: 100%;
+    border-radius: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    bottom: -5rem;
+    -webkit-filter: blur(4px);
+    filter: blur(4px);
+}
+
+.card-carousel .my-card.active {
+    z-index: 3;
+    -webkit-transform: scale(1) translateY(0) translateX(0);
+    transform: scale(1) translateY(0) translateX(0);
+    opacity: 1;
+    pointer-events: auto;
+    transition: 0.4s;
+}
+
+.card-carousel .my-card.prev,
+.card-carousel .my-card.next {
+    z-index: 2;
+    -webkit-transform: scale(0.8) translateY(-1rem) translateX(0);
+    transform: scale(0.8) translateY(-1rem) translateX(0);
+    opacity: 0.7;
+    pointer-events: auto;
+    transition: 0.4s;
+}

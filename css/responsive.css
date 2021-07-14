@@ -246,8 +246,8 @@
     font-size: 1.6em;
   }
 
-  .hRandom {
-    font-size: 1.4em;
+  .random-btn-container {
+    font-size: 1.6em;
   }
 
   .tRandom img {
@@ -265,7 +265,7 @@
     height: 0%;
   }
 
-  .hRandom,
+  .random-btn-container,
   .tRandom,
   .mainBottom table {
     display: none;

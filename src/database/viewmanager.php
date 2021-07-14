@@ -4,7 +4,7 @@
 //////////////////////////////////////
 
 //  1. Affichages des films
-//    1.01 Sélection aléatoire de 6 médias type film par leur poster
+//    1.01 Sélection aléatoire de 8 médias type film par leur poster
 //    1.02 Sélection des 7 films les plus récents par leur poster
 //    1.03 Sélection aléatoire de 10 médias type film par leur fanart
 //    1.04 Sélection d'un média type film par son identifiant
@@ -23,7 +23,7 @@
 //    1.17 Sélection des 200 films les plus populaires par leur poster
 
 //  2. Affichages des séries
-//    2.01 Sélection aléatoire de 1 média type série par son poster
+//    2.01 Sélection aléatoire de 3 médias type série par son poster
 //    2.02 Sélection des 7 séries les plus récentes par leur poster
 //    2.03 Sélection aléatoire de 2 médias type série par leur fanart
 //    2.04 Sélection d'un média type série par son identifiant
@@ -86,8 +86,8 @@
 // Appel du script de connexion à la base de données
 require __DIR__ . '/connect.php';
 
-// 1.01 Sélection aléatoire de 6 médias type film par leur poster
-function select_five_random_movie()
+// 1.01 Sélection aléatoire de 8 médias type film par leur poster
+function select_eight_random_movie()
 {
   connexion($dbco);
   try {
@@ -98,7 +98,7 @@ function select_five_random_movie()
       WHERE media_type = 'movie'
       AND type = 'poster'
       ORDER BY RAND()
-      LIMIT 6"
+      LIMIT 8"
     );
     $query->execute();
     $randMovie = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -478,8 +478,8 @@ function select_best_movies()
   }
 }
 
-// 2.01 Sélection aléatoire de 1 média type série par son poster
-function select_one_random_tvshow()
+// 2.01 Sélection aléatoire de 3 médias type série par son poster
+function select_three_random_tvshow()
 {
   connexion($dbco);
   try {
@@ -490,7 +490,7 @@ function select_one_random_tvshow()
       WHERE media_type = 'tvshow'
       AND type = 'poster'
       ORDER BY RAND()
-      LIMIT 1"
+      LIMIT 3"
     );
     $query->execute();
     $randTvshow = $query->fetch(PDO::FETCH_ASSOC);

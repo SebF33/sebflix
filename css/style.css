@@ -151,7 +151,7 @@ nav ul a.btn-icon {
   /*border: 1px solid green;*/
   display: flex;
   flex-direction: column;
-  align-content: flex-end;
+  align-items: center;
   justify-content: center;
   width: 85%;
   height: 50%;
@@ -165,19 +165,24 @@ h1 {
   text-shadow: 1px 3px 2px var(--color-dark), 0px -2px 5px var(--color-light);
 }
 
-.hRandom {
-  font-size: 1.6em;
+.random-btn-container {
+  margin: 10px;
+  font-size: 1.8em;
+  color: #222129;
+  text-shadow: 1px 3px 2px var(--color-dark), 0px -2px 5px var(--color-light);
 }
 
-h1 a {
+.random-btn-container a {
   display: inline-block;
-  margin-left: 8px;
   text-align: center;
   cursor: pointer;
+  transition: all .2s ease-in-out;
 }
 
-.fa-random {
-  transform: translate(0px, 1.5px);
+.random-btn-container a:hover {
+  fill: var(--color-light);
+  transform: scale(1.12);
+  filter: drop-shadow(1px 3px 2px var(--color-dark));
 }
 
 /* Tableau */

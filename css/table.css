@@ -326,11 +326,14 @@ td {
 
 /* Pagination */
 .pagination-container {
-  user-select: none;
+  display: flex;
+  justify-content: center;
+  margin: 60px;
   text-align: center;
   font-family: var(--font-title);
   font-size: 1em;
   font-weight: 500;
+  user-select: none;
 }
 
 ul.pagination {
