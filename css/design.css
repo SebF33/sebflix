@@ -5,9 +5,11 @@
 /* 🎨 Palette */
 :root {
   --color-dark: #383644;
+  --color-darker: #222129;
   --color-light: #fbf5d9;
   --color-main: #ce3e3e;
   --color-extra: #014ba4;
+  --color-extralighter: #008fd9;
   --font-title: "Truculenta", sans-serif;
   --font-text: "Roboto", sans-serif;
 }
@@ -42,7 +44,7 @@ body {
   /* Redimensionner l'image d'arrière-plan basée sur la taille du conteneur */
   background-size: cover;
   /* Définir une couleur d'arrière-plan qui sera affichée pendant le chargement de l'image d'arrière-plan */
-  background-color: #008fd9;
+  background-color: var(--color-extralighter);
 }
 
 /* Scrollbar personnalisée pour Chrome, Edge, Safari et Opera */
@@ -105,7 +107,7 @@ html {
 .random-btn-container {
   margin: 10px;
   font-size: 1.8em;
-  color: #222129;
+  color: var(--color-darker);
   text-shadow: 1px 3px 2px var(--color-dark), 0px -2px 5px var(--color-light);
 }
 

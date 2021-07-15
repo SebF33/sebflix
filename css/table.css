@@ -256,6 +256,7 @@ td {
 
 .gPoster a .gMedia {
   display: block;
+  object-fit: cover;
   background-color: var(--color-dark);
   border: 1px solid var(--color-light);
   transition: 0.4s;
@@ -277,6 +278,7 @@ td {
 
 .gPoster .gCasting img {
   display: block;
+  object-fit: cover;
   border-bottom: 1px solid var(--color-light);
   transition: 0.4s;
 }

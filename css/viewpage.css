@@ -303,7 +303,7 @@ td {
 
 .readandspeech {
   cursor: pointer;
-  color: #222129;
+  color: var(--color-darker);
   text-shadow: 1px 3px 2px var(--color-dark), 0px -2px 5px var(--color-light);
 }
 
@@ -338,4 +338,5 @@ td {
   width: 192px;
   height: 288px;
   text-align: center;
+  object-fit: cover;
 }

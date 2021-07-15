@@ -12,7 +12,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="Description" content="Page introuvable">
+  <meta name="Description" content="Page 404">
 
   <!-- Appel des feuilles de styles -->
   <link rel="stylesheet" href="/css/design.css" type="text/css" media="screen">

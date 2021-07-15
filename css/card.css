@@ -63,7 +63,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, #008fd9, var(--color-extra));
+  background: linear-gradient(135deg, var(--color-extralighter), var(--color-extra));
   opacity: 0;
   z-index: -1;
 }

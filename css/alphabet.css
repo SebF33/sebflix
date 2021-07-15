@@ -54,6 +54,7 @@
   user-select: none;
   cursor: pointer;
 }
+
 .alphabet li {
   margin: 0;
   padding: 0;
@@ -69,6 +70,7 @@
 .alphabet li:last-child {
   border-right: none;
 }
+
 /*.alphabet li:hover {
   background-color: var(--color-light);
   transition: background 0.7s;
@@ -83,6 +85,7 @@
   text-shadow: 3px 4px 7px var(--color-dark);
   text-decoration: none;
 }
+
 .letters:hover {
   color: var(--color-main);
   text-decoration: none;
@@ -108,12 +111,15 @@
 .tType td a {
   cursor: pointer;
 }
+
 .tType td img {
   display: block;
-  border: 1px solid var(--color-light);
   width: 160px;
   height: 240px;
+  object-fit: cover;
+  border: 1px solid var(--color-light);
 }
+
 .tType td img:hover {
   box-shadow: 1px 1px 20px var(--color-light);
   transition: box-shadow 0.2s ease-in-out;

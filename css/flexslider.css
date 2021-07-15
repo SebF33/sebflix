@@ -238,7 +238,7 @@ html[xmlns] .flexslider .slides {
   background: var(--color-dark);
 }
 .flex-control-paging li a.flex-active {
-  background: #222129;
+  background: var(--color-darker);
   cursor: default;
 }
 .flex-control-thumbs {

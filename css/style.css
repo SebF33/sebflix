@@ -25,7 +25,7 @@ header {
   width: 100%;
   background: var(--color-dark);
   z-index: 99999;
-  border-bottom: 6px solid #222129;
+  border-bottom: 6px solid var(--color-darker);
   box-shadow: 0px 0px 30px #000;
 }
 
@@ -162,7 +162,7 @@ h1 {
   user-select: none;
   font-size: 2em;
   text-transform: uppercase;
-  color: #222129;
+  color: var(--color-darker);
   text-shadow: 1px 3px 2px var(--color-dark), 0px -2px 5px var(--color-light);
 }
 

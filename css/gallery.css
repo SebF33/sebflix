@@ -22,7 +22,7 @@ body {
   /* Redimensionner l'image d'arrière-plan basée sur la taille du conteneur */
   background-size: cover;
   /* Définir une couleur d'arrière-plan qui sera affichée pendant le chargement de l'image d'arrière-plan */
-  background-color: #008fd9;
+  background-color: var(--color-extralighter);
 }
 
 /* Bloc d'en-tête global */
