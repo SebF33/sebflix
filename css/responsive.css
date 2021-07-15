@@ -240,7 +240,7 @@
   }
 }
 
-/* Tableaux */
+/* Tableaux et carrousel */
 @media all and (max-width: 1600px) {
   h1 {
     font-size: 1.6em;
@@ -252,7 +252,8 @@
   }
 }
 
-@media all and (max-width: 1300px) {
+@media all and (max-width: 1300px),
+all and (max-height: 800px) {
   .mainTop {
     height: 100%;
   }
