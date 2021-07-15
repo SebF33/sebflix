@@ -108,8 +108,21 @@ require __DIR__ . '/src/database/viewmanager.php';
     </div>
 
     <div class="mainBottom">
-      <!-- Bouton de rafraîchissement -->
-      <div class="random-btn-container"><a onclick="window.location.reload()"><i class="fa fa-random"></i></a></div>
+      <!-- Bouton de rafraîchissement du carrousel -->
+      <div class="random-btn-container"><a class="random-btn"><i class="fa fa-random"></i></a></div>
+      <script>
+        $(".random-btn").click(function() {
+          $.ajax({
+            type: 'GET',
+            url: "src/templates/carousel.php",
+            success: function(data) {
+              $(".card-carousel").html(data);
+            }
+          });
+        });
+      </script>
+
+      <!-- Carrousel -->
       <div class="card-carousel">
         <?php
         // Appel des fonctions de sélection aléatoire de 21 médias
@@ -124,11 +137,8 @@ require __DIR__ . '/src/database/viewmanager.php';
           echo '<div class="my-card"><a class="my-btn-card" href="src/views/viewpage.php?type=tvshow&id=' . $row['idShow'] . '"><img src="src/thumbnails/' . $row['cachedurl'] . '" title="' . $row['title'] . '" alt="' . $row['title'] . '" height="288" width="192"/></a></div>';
         }
         ?>
+        <script src="/js/carousel.js"></script>
       </div>
-
-      <!-- Carrousel -->
-      <script src="/js/carousel.js"></script>
-
     </div>
 
     <!-- Menu circulaire -->
