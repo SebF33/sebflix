@@ -1,3 +1,4 @@
+// Footer
 var logoElement = $("footer .logo");
 var logoSocial = $("footer .social");
 var logoDev = $("footer .dev");

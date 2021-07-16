@@ -1,3 +1,4 @@
+// Placeholder
 window.addEventListener("click", () => {
   if (document.formRadios.radio[0].checked == true) {
     document.getElementById("searchInput").placeholder = "Titre(s)";

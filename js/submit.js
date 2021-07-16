@@ -1,3 +1,4 @@
+// Submit
 function submitForm() {
   if (document.formRadios.radio[0].checked == true) {
     var type = "movies";

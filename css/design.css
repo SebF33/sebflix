@@ -123,3 +123,7 @@ html {
   transform: scale(1.12);
   filter: drop-shadow(1px 3px 2px var(--color-dark));
 }
+
+.random-btn-container .fa-random {
+  display: block;
+}

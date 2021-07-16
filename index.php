@@ -109,17 +109,24 @@ require __DIR__ . '/src/database/viewmanager.php';
 
     <div class="mainBottom">
       <!-- Bouton de rafraîchissement du carrousel -->
-      <div class="random-btn-container"><a class="random-btn"><i class="fa fa-random"></i></a></div>
+      <div class="random-btn-container"><a class="random-carousel-btn"><i class="fa fa-random"></i></a></div>
       <script>
-        $(".random-btn").click(function() {
+        $(".random-carousel-btn").click(function() {
           $.ajax({
-            type: 'GET',
+            type: "GET",
             url: "src/templates/carousel.php",
             success: function(data) {
-              $(".card-carousel").html(data);
+              setTimeout(function() {
+                delaySuccess(data);
+              }, 50);
             }
           });
         });
+
+        function delaySuccess(data) {
+          $(".card-carousel").css("left", "0px");
+          $(".card-carousel").html(data);
+        };
       </script>
 
       <!-- Carrousel -->
@@ -139,6 +146,22 @@ require __DIR__ . '/src/database/viewmanager.php';
         ?>
         <script src="/js/carousel.js"></script>
       </div>
+      <script>
+        // Navigation du carrousel au clavier
+        $("html body").keydown(function(e) {
+          // Touche "Entrée"
+          if (e.keyCode == 13) {
+            var href = $(".active").children("a").attr("href");
+            window.location.href = href;
+            // Touche "Flêche de gauche"
+          } else if (e.keyCode == 37) {
+            $(".active").prev().trigger("click");
+            // Touche "Flêche de droite"
+          } else if (e.keyCode == 39) {
+            $(".active").next().trigger("click");
+          }
+        });
+      </script>
     </div>
 
     <!-- Menu circulaire -->

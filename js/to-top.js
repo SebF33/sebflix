@@ -1,3 +1,4 @@
+// To top
 var scrollToTopBtn = document.querySelector(".scrollToTopBtn");
 var rootElement = document.documentElement;
 
