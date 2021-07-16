@@ -112,13 +112,14 @@ require __DIR__ . '/src/database/viewmanager.php';
       <div class="random-btn-container"><a class="random-carousel-btn"><i class="fa fa-random"></i></a></div>
       <script>
         $(".random-carousel-btn").click(function() {
+          $(".my-card").removeClass("prev active next");
           $.ajax({
             type: "GET",
             url: "src/templates/carousel.php",
             success: function(data) {
               setTimeout(function() {
                 delaySuccess(data);
-              }, 50);
+              }, 100);
             }
           });
         });
@@ -146,22 +147,7 @@ require __DIR__ . '/src/database/viewmanager.php';
         ?>
         <script src="/js/carousel.js"></script>
       </div>
-      <script>
-        // Navigation du carrousel au clavier
-        $("html body").keydown(function(e) {
-          // Touche "Entrée"
-          if (e.keyCode == 13) {
-            var href = $(".active").children("a").attr("href");
-            window.location.href = href;
-            // Touche "Flêche de gauche"
-          } else if (e.keyCode == 37) {
-            $(".active").prev().trigger("click");
-            // Touche "Flêche de droite"
-          } else if (e.keyCode == 39) {
-            $(".active").next().trigger("click");
-          }
-        });
-      </script>
+      <script src="/js/keyboard.js"></script>
     </div>
 
     <!-- Menu circulaire -->
