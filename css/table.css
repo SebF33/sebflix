@@ -96,7 +96,7 @@
 }
 
 /* Tableau */
-table {
+.infosTable {
   table-layout: fixed;
   width: 90%;
   border-collapse: collapse;
@@ -105,27 +105,27 @@ table {
   margin-bottom: 4em;
 }
 
-table tr th:first-child {
+.infosTable tr th:first-child {
   width: 9%;
 }
 
-table tr th:nth-child(2) {
+.infosTable tr th:nth-child(2) {
   width: 14%;
 }
 
-table tr th:nth-child(3) {
+.infosTable tr th:nth-child(3) {
   max-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-table tr th:nth-child(4) {
+.infosTable tr th:nth-child(4) {
   width: 12%;
 }
 
 /* Cellules d'en-tête du tableau */
-th {
+.infosTable th {
   background-color: var(--color-main);
   color: var(--color-light);
   border: thin solid var(--color-light);
@@ -139,7 +139,7 @@ th {
 }
 
 /* Cellules du tableau */
-td {
+.infosTable td {
   background-color: var(--color-dark);
   color: var(--color-light);
   border: thin solid var(--color-light);
@@ -147,32 +147,32 @@ td {
   text-align: left;
 }
 
-.tposter {
+.infosTable .tposter {
   font-family: var(--font-title);
   font-size: 0.8vw;
   text-align: center;
 }
 
-.tposter a {
+.infosTable .tposter a {
   text-decoration: none;
   color: var(--color-light);
 }
 
-.tposter img {
+.infosTable .tposter img {
   display: block;
   text-align: center;
   max-width: 100%;
   height: auto;
 }
 
-.tname {
+.infosTable .tname {
   padding: 1%;
   font-family: var(--font-title);
   text-align: center;
   font-size: 1vw;
 }
 
-.tsynopsis {
+.infosTable .tsynopsis {
   padding: 1%;
   font-size: 0.8vw;
   font-style: italic;
@@ -180,7 +180,7 @@ td {
   letter-spacing: 0.5px;
 }
 
-.max-lines {
+.infosTable .max-lines {
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -188,19 +188,19 @@ td {
   -webkit-box-orient: vertical;
 }
 
-.tstudio {
+.infosTable .tstudio {
   padding: 1%;
   font-family: var(--font-title);
   text-align: center;
   font-size: 0.9vw;
 }
 
-.tstudio a {
+.infosTable .tstudio a {
   text-decoration: none;
   color: var(--color-light);
 }
 
-.tstudio img {
+.infosTable .tstudio img {
   display: block;
   margin: 0 auto;
   width: 128.8px;

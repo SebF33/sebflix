@@ -205,9 +205,9 @@ if (isset($_GET['id']) && !empty($_GET['id']) && ($_GET['type'] == 'movie' or $_
           echo '<td class="tsynopsis">' . $result->synopsis . '</td>';
         }
         if (empty($result->studio)) {
-          echo '<td class="tstudio"><img src="../thumbnails/placeholders/studio_nr.png" title="Non renseigné" alt="" height="109" width="161"/></td>';
+          echo '<td class="tstudio"><img src="../thumbnails/placeholders/studio_nr.png" title="Non renseigné" alt="" width="128.8" height="87.2"/></td>';
         } else {
-          echo '<td class="tstudio"><a href="display-results.php?type=achievement&id=' . $result->studio . '"><img src="../thumbnails/studios/' . $result->studio . '" title="' . $result->studio . '" alt="' . $result->studio . '" height="109" width="161"/></a></td>';
+          echo '<td class="tstudio"><a href="display-results.php?type=achievement&id=' . $result->studio . '"><img src="../thumbnails/studios/' . $result->studio . '" title="' . $result->studio . '" alt="' . $result->studio . '" width="128.8" height="87.2"/></a></td>';
         }
         echo "</tr>";
         echo "</table>";
@@ -219,17 +219,18 @@ if (isset($_GET['id']) && !empty($_GET['id']) && ($_GET['type'] == 'movie' or $_
 
       <div class="mainBottom">
         <?php
-        // Directrice(s)/directeur(s)
+        // Directrice/directeur
         if (!empty($director)) {
           echo
           "<table class='table-casting' border='2'>
             <tr>
+            <th>Direction</th>
             </tr>";
           foreach ($director as $row) {
             if (empty($row['cachedurl'])) {
-              echo '<td class="tcasting"><figure><a href="display-results.php?type=direction&id=' . $row['actor_id'] . '"><img src="../thumbnails/placeholders/casting.png" title="' . $row['name'] . '" alt="" height="288" width="192"/></a><figcaption>' . $row['name'] . '</figcaption></figure></td>';
+              echo '<td class="tcasting"><figure><a href="display-results.php?type=direction&id=' . $row['actor_id'] . '"><img src="../thumbnails/placeholders/casting.png" title="' . $row['name'] . '" alt="" width="144" height="216"/></a><figcaption>' . $row['name'] . '</figcaption></figure></td>';
             } else {
-              echo '<td class="tcasting"><figure><a href="display-results.php?type=direction&id=' . $row['actor_id'] . '"><img src="../thumbnails/' . $row['cachedurl'] . '" title="' . $row['name'] . '" alt="' . $row['name'] . '" height="288" width="192"/></a><figcaption>' . $row['name'] . '</figcaption></figure></td>';
+              echo '<td class="tcasting"><figure><a href="display-results.php?type=direction&id=' . $row['actor_id'] . '"><img src="../thumbnails/' . $row['cachedurl'] . '" title="' . $row['name'] . '" alt="' . $row['name'] . '" width="144" height="216"/></a><figcaption>' . $row['name'] . '</figcaption></figure></td>';
             }
           }
         }
@@ -241,12 +242,13 @@ if (isset($_GET['id']) && !empty($_GET['id']) && ($_GET['type'] == 'movie' or $_
           echo
           "<table class='table-casting' border='2'>
             <tr>
+            <th colspan='7'>Casting</th>
             </tr>";
           foreach ($actors as $row) {
             if (empty($row['cachedurl'])) {
-              echo '<td class="tcasting"><figure><a href="display-results.php?type=filmography&id=' . $row['actor_id'] . '"><img src="../thumbnails/placeholders/casting.png" title="' . $row['name'] . '" alt="" height="288" width="192"/></a><figcaption>' . $row['name'] . '</figcaption></figure></td>';
+              echo '<td class="tcasting"><figure><a href="display-results.php?type=filmography&id=' . $row['actor_id'] . '"><img src="../thumbnails/placeholders/casting.png" title="' . $row['name'] . '" alt="" width="144" height="216"/></a><figcaption>' . $row['name'] . '</figcaption></figure></td>';
             } else {
-              echo '<td class="tcasting"><figure><a href="display-results.php?type=filmography&id=' . $row['actor_id'] . '"><img src="../thumbnails/' . $row['cachedurl'] . '" title="' . $row['name'] . '" alt="' . $row['name'] . '" height="288" width="192"/></a><figcaption>' . $row['name'] . '</figcaption></figure></td>';
+              echo '<td class="tcasting"><figure><a href="display-results.php?type=filmography&id=' . $row['actor_id'] . '"><img src="../thumbnails/' . $row['cachedurl'] . '" title="' . $row['name'] . '" alt="' . $row['name'] . '" width="144" height="216"/></a><figcaption>' . $row['name'] . '</figcaption></figure></td>';
             }
           }
         }

@@ -110,7 +110,7 @@ iframe, .embedPlaceholder {
   border-radius: 40px;
   font-family: var(--font-title);
   color: var(--color-light);
-  font-size: 2.2em;
+  font-size: 2em;
   font-weight: 600;
   font-style: italic;
   line-height: 1.2;
@@ -187,11 +187,19 @@ iframe, .embedPlaceholder {
 /* Cellules d'en-tête des tableaux */
 th {
   background-color: var(--color-main);
+  color: var(--color-light);
   border: thin solid var(--color-light);
   font-family: var(--font-title);
   text-transform: uppercase;
-  font-size: 1.6em;
+  font-size: 1.3em;
+  font-weight: 700;
   text-align: center;
+  text-shadow: black 0.1em 0.1em 0.2em;
+  user-select: none;
+}
+
+.table-casting th {
+  font-size: 1.1em;
 }
 
 /* Cellules des tableaux */
@@ -229,7 +237,7 @@ td {
 .tpremiered {
   padding: 20px;
   font-family: var(--font-title);
-  font-size: 2.2em;
+  font-size: 1.8em;
   text-align: center;
 }
 
@@ -290,15 +298,19 @@ td {
 
 .tsynopsis {
   padding: 1%;
-  font-size: 1.1em;
+  font-size: 0.9em;
   font-style: italic;
-  line-height: 1.6;
-  letter-spacing: 0.5px;
+  line-height: 1.8;
+  letter-spacing: 0.8px;
 }
 
 .tsynopsis::first-letter {
-  font-size: 1.2em;
+  font-size: 1.6em;
   font-weight: 500;
+}
+
+.tsynopsis::first-line {
+  line-height: 1;
 }
 
 .readandspeech {
@@ -321,7 +333,7 @@ td {
 .tstudio img {
   display: block;
   margin: 0 auto;
-  width: 161px;
+  width: 128.8px;
   height: auto;
   max-width: 100%;
   text-align: center;
@@ -330,13 +342,14 @@ td {
 .tcasting {
   padding: 0;
   text-align: center;
-  font-size: 1em;
+  font-size: 0.9em;
+  font-weight: 700;
 }
 
 .tcasting img {
   display: block;
-  width: 192px;
-  height: 288px;
+  width: 144px;
+  height: 216px;
   text-align: center;
   object-fit: cover;
 }

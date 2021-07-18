@@ -81,13 +81,6 @@
   }
 }
 
-/* Menu circulaire */
-@media all and (max-width: 1024px) {
-  .circular-menu {
-    bottom: 33%;
-  }
-}
-
 /* Alphabet */
 @media all and (max-width: 1800px) {
   .mainAlphabetTop {
@@ -131,7 +124,6 @@
 
   .alphabet-title {
     margin-top: 0px;
-    font-size: 1.8em;
   }
 
   .alphabet li {
@@ -154,11 +146,52 @@
 }
 
 @media all and (max-width: 600px) {
-  .alphabet-title {
-    font-size: 1.4em;
-  }
   .letters {
     font-size: 1.6em;
+  }
+}
+
+/* Table */
+@media all and (max-width: 1300px) {
+
+  .infosTable tr th:nth-child(4),
+  .infosTable tr td:nth-child(4) {
+    display: none;
+  }
+}
+
+@media all and (max-width: 1024px) {
+  .infosTable {
+    table-layout: unset;
+    width: 50%;
+  }
+
+  .infosTable tr th:first-child {
+    width: 20%;
+  }
+
+  .infosTable tr th:nth-child(2) {
+    width: 80%;
+  }
+
+  .infosTable tr th:nth-child(3),
+  .infosTable tr td:nth-child(3) {
+    display: none;
+  }
+
+  .infosTable th {
+    font-size: 1.4em;
+  }
+
+  .infosTable .tposter img {
+    max-width: unset;
+    width: 160px;
+    height: auto;
+  }
+
+  .infosTable .tposter,
+  .infosTable .tname {
+    font-size: 1.2em;
   }
 }
 
@@ -263,41 +296,14 @@ all and (max-height: 800px) {
 }
 
 /* Viewpages */
-@media all and (max-width: 1660px) {
-  .catch {
-    font-size: 2em;
-  }
-
-  .tcasting {
-    font-size: 0.9em;
-  }
-
-  .tcasting img {
-    width: 160px;
-    height: 240px;
-  }
-}
-
 @media all and (max-width: 1300px) {
   .table-rating {
     margin-top: 200px;
   }
 
-  th {
-    font-size: 1.4em;
-  }
-
-  .trating {
-    font-size: 3em;
-  }
-
   .trating .starsRating {
     width: 136.2px;
     height: 28.8px;
-  }
-
-  .tpremiered {
-    font-size: 2em;
   }
 
   .trating img,
@@ -327,14 +333,6 @@ all and (max-height: 800px) {
     font-size: 1.8em;
   }
 
-  .secondPage .tsynopsis {
-    font-size: 1em;
-  }
-
-  .secondPage .tsynopsis::first-letter {
-    font-size: 1.1em;
-  }
-
   .secondPage .tstudio {
     font-size: 0.8em;
   }
@@ -352,11 +350,7 @@ all and (max-height: 800px) {
   }
 
   th {
-    font-size: 1.2em;
-  }
-
-  .tpremiered {
-    font-size: 1.8em;
+    font-size: 1.1em;
   }
 
   .catch {
