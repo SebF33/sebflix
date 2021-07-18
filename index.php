@@ -31,7 +31,7 @@ require __DIR__ . '/src/database/viewmanager.php';
   <link data-vue-tag="ssr" rel="icon" type="image/png" sizes="48x48" href="/img/favicon-48.png">
   <link data-vue-tag="ssr" rel="icon" type="image/png" sizes="192x192" href="/img/favicon-192.png">
 
-  <!-- Appel des scripts JavaScript -->
+  <!-- Appel de jQuery -->
   <script src="js/jquery-3.6.0.min.js"></script>
 
   <!-- Appel des polices "Truculenta" et "Roboto" sur Google Fonts -->
@@ -139,10 +139,10 @@ require __DIR__ . '/src/database/viewmanager.php';
 
         // Affichage dans le carrousel des données appelées
         foreach ($randMovie as $row) {
-          echo '<div class="my-card"><a class="my-btn-card" href="src/views/viewpage.php?type=movie&id=' . $row['idMovie'] . '"><img src="src/thumbnails/' . $row['cachedurl'] . '" title="' . $row['title'] . '" alt="' . $row['title'] . '" height="288" width="192"/></a></div>';
+          echo '<div class="my-card"><a class="my-btn-card" href="src/views/viewpage.php?type=movie&id=' . $row['idMovie'] . '"><img src="src/thumbnails/' . $row['cachedurl'] . '" title="' . $row['title'] . '" alt="' . $row['title'] . '" width="160" height="240"/></a></div>';
         }
         foreach ($randTvshow as $row) {
-          echo '<div class="my-card"><a class="my-btn-card" href="src/views/viewpage.php?type=tvshow&id=' . $row['idShow'] . '"><img src="src/thumbnails/' . $row['cachedurl'] . '" title="' . $row['title'] . '" alt="' . $row['title'] . '" height="288" width="192"/></a></div>';
+          echo '<div class="my-card"><a class="my-btn-card" href="src/views/viewpage.php?type=tvshow&id=' . $row['idShow'] . '"><img src="src/thumbnails/' . $row['cachedurl'] . '" title="' . $row['title'] . '" alt="' . $row['title'] . '" width="160" height="240"/></a></div>';
         }
         ?>
         <script src="/js/carousel.js"></script>

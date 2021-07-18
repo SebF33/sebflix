@@ -6,7 +6,7 @@
       }
       ?>
       <li id="icon-trigger" class="icon icon-trigger"><a class="btn-icon" href="/index.php">
-          <svg version="1.1" id="iconSebflix" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 166.4 166" width="40" height="40" style="enable-background:new 0 0 166.4 166;" xml:space="preserve">
+          <svg version="1.1" id="iconSebflix" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 166.4 166" width="34" height="34" style="enable-background:new 0 0 166.4 166;" xml:space="preserve">
             <style type="text/css">
               .st0 {
                 fill: #CE3E3E;

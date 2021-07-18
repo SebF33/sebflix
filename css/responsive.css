@@ -19,37 +19,14 @@
 }
 
 /* Éléments de la liste */
-@media all and (max-width: 1800px) {
-  nav ul a.btn-type-movie {
-    font-size: 1.4em;
-    padding: 20px 30px;
-  }
-}
-
-@media all and (max-width: 1660px) {
-  nav ul a.btn-type-movie {
-    font-size: 1.2em;
-    padding: 24px 22px;
-  }
-}
-
-@media all and (max-width: 1300px) {
-  nav ul a.btn-type {
-    font-size: 1.4em;
-    padding: 20px 30px;
-  }
-
+@media all and (max-width: 1400px) {
   nav ul a.btn-type-movie {
     font-size: 0.8em;
-    padding: 28px 16px;
+    padding: 22px 16px;
   }
 }
 
 @media all and (max-width: 1023px) {
-  nav ul a.btn-type {
-    font-size: 1.4em;
-  }
-
   nav ul a.btn-type:hover {
     box-shadow: 0px 0px 0px 0px #d1cbb2;
   }
@@ -65,7 +42,7 @@
   }
 
   nav ul a {
-    padding: 20px;
+    padding: 16px;
   }
 }
 
@@ -88,31 +65,26 @@
 }
 
 /* Texte d'accueil */
-@media all and (max-width: 1300px) {
+@media all and (max-width: 900px) {
   .welcome-text {
-    font-size: 1.3em;
-  }
-}
-
-@media all and (max-width: 1024px) {
-  .welcome-text {
-    font-size: 1em;
+    font-size: 0.8em;
   }
 
   .welcome-text p {
-    width: 100%;
+    width: 400px;
   }
 }
 
-@media all and (max-width: 900px) {
-  .welcome-text {
-    display: none;
+@media all and (max-width: 767px) {
+  .welcome-text p {
+    width: 300px;
   }
 }
 
-@media all and (max-height: 750px) {
-  .welcome-text {
-    margin-top: 48px;
+/* Menu circulaire */
+@media all and (max-width: 1024px) {
+  .circular-menu {
+    bottom: 33%;
   }
 }
 
@@ -123,34 +95,7 @@
   }
 }
 
-@media all and (max-width: 1660px) {
-  .hType {
-    font-size: 2.6em;
-  }
-
-  .alphabet li {
-    width: 70px;
-  }
-
-  .letters {
-    margin-right: 6px;
-    font-size: 3.2em;
-  }
-}
-
 @media all and (max-width: 1450px) {
-  .hType {
-    font-size: 2.5em;
-  }
-
-  .alphabet li {
-    width: 60px;
-  }
-
-  .letters {
-    font-size: 3em;
-  }
-
   .tType td {
     padding: 10px;
   }
@@ -162,12 +107,8 @@
 }
 
 @media all and (max-width: 1300px) {
-  .hType {
-    font-size: 2.4em;
-  }
-
   .alphabet li {
-    width: 50px;
+    width: 60px;
   }
 
   .letters {
@@ -188,9 +129,9 @@
     display: none;
   }
 
-  .hType {
+  .alphabet-title {
     margin-top: 0px;
-    font-size: 2em;
+    font-size: 1.8em;
   }
 
   .alphabet li {
@@ -203,10 +144,6 @@
 }
 
 @media all and (max-width: 767px) {
-  .hType {
-    font-size: 1.6em;
-  }
-
   .alphabet li {
     width: 30px;
   }
@@ -217,26 +154,11 @@
 }
 
 @media all and (max-width: 600px) {
-  .hType {
-    font-size: 1.5em;
-  }
-
-  .alphabet li {
-    width: 20px;
-  }
-
-  .letters {
-    font-size: 1.6em;
-  }
-}
-
-@media all and (max-width: 400px) {
-  .hType {
+  .alphabet-title {
     font-size: 1.4em;
   }
-
   .letters {
-    font-size: 1.2em;
+    font-size: 1.6em;
   }
 }
 
@@ -262,6 +184,7 @@ all and (max-height: 800px) {
     height: 0%;
   }
 
+  .random-btn-container,
   .card-carousel,
   .mainBottom table {
     display: none;
@@ -461,6 +384,10 @@ all and (max-height: 800px) {
 
 /* Footer */
 @media all and (max-width: 1300px) {
+  footer {
+    height: 200px;
+  }
+
   #logoSite {
     width: 143.1px;
     height: 50.1px;
@@ -473,13 +400,12 @@ all and (max-height: 800px) {
 }
 
 @media all and (max-width: 767px) {
-  footer .footerInner {
-    padding: 30px 20px;
+  footer {
+    height: 180px;
   }
 
-  #logoSite {
-    width: 119.25px;
-    height: 41.75px;
+  footer .footerInner {
+    padding: 30px 20px;
   }
 
   footer .dev,
@@ -490,5 +416,11 @@ all and (max-height: 800px) {
   footer .dev a,
   footer .social a {
     padding: 3px;
+  }
+}
+
+@media all and (max-width: 600px) {
+  footer {
+    display: none;
   }
 }

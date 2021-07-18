@@ -163,7 +163,7 @@ if (empty($result) && empty($result2)) {
   <link data-vue-tag="ssr" rel="icon" type="image/png" sizes="48x48" href="/img/favicon-48.png">
   <link data-vue-tag="ssr" rel="icon" type="image/png" sizes="192x192" href="/img/favicon-192.png">
 
-  <!-- Appel des scripts JavaScript -->
+  <!-- Appel de jQuery -->
   <script src="/js/jquery-3.6.0.min.js"></script>
 
   <!-- Appel des polices "Truculenta" et "Roboto" sur Google Fonts -->
@@ -222,7 +222,7 @@ if (empty($result) && empty($result2)) {
         if (empty($row['studio'])) {
           echo '<td class="tstudio"><img src="../thumbnails/placeholders/studio_nr.png" title="Non renseigné" alt="" height="109" width="161"/></td>';
         } else {
-          echo '<td class="tstudio"><a href="display-results.php?type=achievement&id=' . $row['studio'] . '"><img src="../thumbnails/studios/' . $row['studio'] . '" title="' . $row['studio'] . '" alt="' . $row['studio'] . '" height="109" width="161"/></a></td>';
+          echo '<td class="tstudio"><a href="display-results.php?type=achievement&id=' . $row['studio'] . '"><img src="../thumbnails/studios/' . $row['studio'] . '" title="' . $row['studio'] . '" alt="' . $row['studio'] . '" height="87.2" width="128.8"/></a></td>';
         }
       }
     } elseif ($category == 'tvshows') {
@@ -232,7 +232,7 @@ if (empty($result) && empty($result2)) {
         echo '<td class="tname">' . $row['title'] . '</td>';
         echo '<td class="tsynopsis"><div class="max-lines">' . $row['synopsis'] . '</div></td>';
         if (empty($row['studio'])) {
-          echo '<td class="tstudio"><img src="../thumbnails/placeholders/studio_nr.png" title="Non renseigné" alt="" height="109" width="161"/></td>';
+          echo '<td class="tstudio"><img src="../thumbnails/placeholders/studio_nr.png" title="Non renseigné" alt="" height="87.2" width="128.8"/></td>';
         } else {
           echo '<td class="tstudio"><a href="display-results.php?type=achievement&id=' . $row['studio'] . '"><img src="../thumbnails/studios/' . $row['studio'] . '" title="' . $row['studio'] . '" alt="' . $row['studio'] . '" height="109" width="161"/></a></td>';
         }

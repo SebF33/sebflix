@@ -48,10 +48,10 @@ nav ul a.btn-type {
   text-transform: uppercase;
   letter-spacing: 3px;
   font-family: var(--font-title);
-  font-size: 1.8em;
+  font-size: 1.2em;
   color: var(--color-light);
   text-align: center;
-  padding: 20px 44px;
+  padding: 16px 28px;
   transition: background 0.24s, box-shadow 0.12s;
 }
 
@@ -62,26 +62,25 @@ nav ul a.btn-type:hover {
 }
 
 nav ul a.btn-type-movie {
-  font-size: 1.5em;
-  padding: 23.5px 34px;
+  font-size: 1.2em;
+  padding: 16px 28px
 }
 
 /* Icône Sebflix */
 .icon {
-  display: none;
+  display: block;
   margin: 0 auto;
-  padding: 8px 32px;
+  padding: 0px 28px
 }
 
 .icon-trigger {
   display: block;
   order: -1;
-  padding: 14px 32px;
+  padding: 12px 28px
 }
 
 .icon-visible {
   display: block;
-  transform: scale(1);
 }
 
 nav ul a.btn-icon {
@@ -91,11 +90,11 @@ nav ul a.btn-icon {
 
 .btn-icon svg {
   display: block;
-  transition: all .2s ease-in-out;
+  transition: all .15s ease-in-out;
 }
 
 .btn-icon svg:hover {
-  transform: scale(1.1);
+  transform: scale(1.16);
 }
 
 /****************/
@@ -130,7 +129,7 @@ nav ul a.btn-icon {
   margin-bottom: 24px;
   font-family: var(--font-title);
   color: var(--color-light);
-  font-size: 1.6em;
+  font-size: 1.2em;
   font-weight: 500;
   font-style: italic;
   line-height: 1.4;
@@ -139,7 +138,7 @@ nav ul a.btn-icon {
 }
 
 .welcome-text p {
-  width: 1000px;
+  width: 800px;
   text-align: center;
 }
 

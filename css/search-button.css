@@ -4,98 +4,94 @@
 
 /* Bloc du bouton de recherche */
 #cover {
-  width: 400px;
+  width: 360px;
   background-color: var(--color-main);
   border-radius: 10px;
   box-shadow: 0 10px 40px var(--color-main), 0 0 0 20px #fff;
   transform: scale(0.6);
 }
 
-.tb {
+#cover .tb {
   display: table;
   width: 100%;
 }
 
-.td {
+#cover .td {
   display: table-cell;
   vertical-align: middle;
 }
 
-input,
-button {
+#cover input,
+#cover button {
   color: var(--color-light);
   font-family: var(--font-title);
   padding: 0;
-  margin-left: 4%;
+  margin-left: 5%;
   border: 0;
   background-color: transparent;
 }
 
-form {
-  height: 96px;
+#cover form {
+  height: 80px;
 }
 
-input[type="text"] {
+#cover input[type="text"] {
   width: 100%;
-  height: 96px;
+  height: 40px;
   color: var(--color-light);
-  font-size: 50px;
-  line-height: 1;
+  font-size: 2.4em;
 }
 
-input[type="text"]::placeholder {
+#cover input[type="text"]::placeholder {
   color: var(--color-light);
 }
 
-#s-cover {
-  width: 1px;
-  padding-left: 35px;
-}
-
-button {
+/* Bouton du bloc de recherche */
+#s-cover button {
   position: relative;
   display: block;
-  width: 94px;
-  height: 86px;
+  width: 80px;
+  height: 80px;
   cursor: pointer;
 }
 
+/* Cercle de la loupe */
 #s-circle {
   position: relative;
   top: -8px;
-  left: 0;
-  width: 43px;
-  height: 43px;
+  left: 13px;
+  width: 32px;
+  height: 32px;
   margin-top: 0;
-  border-width: 10px;
-  border: 10px solid var(--color-light);
+  border-width: 8px;
+  border: 8px solid var(--color-light);
   background-color: transparent;
   border-radius: 50%;
   transition: 0.5s ease all;
 }
 
-button span {
+/* Manche de la loupe */
+#cover button span {
   position: absolute;
-  top: 58px;
-  left: 26px;
+  top: 53px;
+  left: 43px;
   display: block;
-  width: 35px;
-  height: 10px;
+  width: 10px;
+  height: 8px;
   background-color: transparent;
   border-radius: 10px;
   transform: rotateZ(52deg);
   transition: 0.5s ease all;
 }
 
-/* Manche de la loupe */
-button span:before,
-button span:after {
+#cover button span:before,
+#cover button span:after {
   content: "";
   position: absolute;
   bottom: 0;
   right: 0;
-  width: 35px;
-  height: 10px;
+  width: 22px;
+  height: 8px;
   background-color: var(--color-light);
   border-radius: 10px;
   transform: rotateZ(0);
@@ -105,37 +101,37 @@ button span:after {
 /* Trait de la flêche */
 #s-cover:hover #s-circle {
   top: 2%;
-  width: 67px;
-  height: 10px;
+  width: 36px;
+  height: 8px;
   border-width: 0;
   background-color: var(--color-light);
   border-radius: 20px;
 }
 
-/* Position de la pointe de la flêche */
+/* Pointe de la flêche */
 #s-cover:hover span {
   top: 55%;
-  left: 51px;
-  width: 15px;
+  left: 38px;
+  width: 14px;
   margin-top: -9px;
   transform: rotateZ(0);
 }
 
-/* Pointe de la flêche trait du haut */
+/* Pointe de la flêche (trait du haut) */
 #s-cover:hover button span:before {
-  right: -6px;
-  width: 36px;
+  right: -4px;
+  width: 22px;
   background-color: var(--color-light);
-  bottom: 10.5px;
+  bottom: 3px;
   transform: rotateZ(52deg);
 }
 
-/* Pointe de la flêche trait du bas */
+/* Pointe de la flêche (trait du bas) */
 #s-cover:hover button span:after {
-  right: -6px;
-  width: 36px;
+  right: -4px;
+  width: 22px;
   background-color: var(--color-light);
-  bottom: -14px;
+  bottom: -9px;
   transform: rotateZ(-52deg);
 }
 
@@ -157,8 +153,8 @@ button span:after {
 .radioSvg {
   display: block;
   fill: var(--color-dark);
-  height: 2rem;
-  width: 2rem;
+  height: 1.6rem;
+  width: 1.6rem;
   filter: drop-shadow(1px 3px 2px var(--color-light));
   transition: all .2s ease-in-out;
 }

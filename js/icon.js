@@ -1,9 +1,9 @@
-// Menu mobile
+// Icône Sebflix
 $("#icon-trigger").click(function () {
   $("li").toggleClass("icon-visible");
 });
 
-// Supprimer le lien de l'icône en responsive
+// Suppression du lien de l'icône en responsive
 var checkSize = function () {
   var minSize = $(window).width();
   if (minSize <= 1023) {

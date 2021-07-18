@@ -127,12 +127,15 @@ table tr th:nth-child(4) {
 /* Cellules d'en-tête du tableau */
 th {
   background-color: var(--color-main);
+  color: var(--color-light);
   border: thin solid var(--color-light);
   font-family: var(--font-title);
   text-transform: uppercase;
-  font-size: 1.4vw;
+  font-size: 1.2vw;
   font-weight: 700;
   text-align: center;
+  text-shadow: black 0.1em 0.1em 0.2em;
+  user-select: none;
 }
 
 /* Cellules du tableau */
@@ -145,8 +148,9 @@ td {
 }
 
 .tposter {
+  font-family: var(--font-title);
+  font-size: 0.8vw;
   text-align: center;
-  font-size: 1.1vw;
 }
 
 .tposter a {
@@ -165,27 +169,22 @@ td {
   padding: 1%;
   font-family: var(--font-title);
   text-align: center;
-  font-size: 1.2vw;
+  font-size: 1vw;
 }
 
 .tsynopsis {
   padding: 1%;
-  font-size: 0.9vw;
+  font-size: 0.8vw;
   font-style: italic;
   line-height: 1.6;
   letter-spacing: 0.5px;
-}
-
-.tsynopsis::first-letter {
-  font-size: 1vw;
-  font-weight: 500;
 }
 
 .max-lines {
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 5;
+  -webkit-line-clamp: 6;
   -webkit-box-orient: vertical;
 }
 
@@ -193,7 +192,7 @@ td {
   padding: 1%;
   font-family: var(--font-title);
   text-align: center;
-  font-size: 1.1vw;
+  font-size: 0.9vw;
 }
 
 .tstudio a {
@@ -204,7 +203,7 @@ td {
 .tstudio img {
   display: block;
   margin: 0 auto;
-  width: 161px;
+  width: 128.8px;
   height: auto;
   max-width: 100%;
   text-align: center;

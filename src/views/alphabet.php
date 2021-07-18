@@ -67,7 +67,7 @@ if (isset($_GET['category']) && !empty($_GET['category']) && in_array($_GET['cat
   <link data-vue-tag="ssr" rel="icon" type="image/png" sizes="48x48" href="../../img/favicon-48.png">
   <link data-vue-tag="ssr" rel="icon" type="image/png" sizes="192x192" href="../../img/favicon-192.png">
 
-  <!-- Appel des scripts JavaScript -->
+  <!-- Appel de jQuery -->
   <script src="/js/jquery-3.6.0.min.js"></script>
 
   <!-- Appel de la police "Truculenta" sur Google Fonts -->
@@ -144,7 +144,7 @@ if (isset($_GET['category']) && !empty($_GET['category']) && in_array($_GET['cat
   <main class="mainAlphabet">
 
     <div class="mainAlphabetTop">
-      <h1 class="hType"><?= $title ?></h1>
+      <h1 class="alphabet-title"><?= $title ?></h1>
       <ul class="alphabet">
         <?php
         echo '<li><a href="table.php?category=' . $category . '&letter=numeric" class="letters"><span class="&">&</span></a></li>';

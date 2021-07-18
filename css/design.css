@@ -106,7 +106,7 @@ html {
 /* Bouton aléatoire */
 .random-btn-container {
   margin: 10px;
-  font-size: 1.8em;
+  font-size: 1.4em;
   color: var(--color-darker);
   text-shadow: 1px 3px 2px var(--color-dark), 0px -2px 5px var(--color-light);
 }

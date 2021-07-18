@@ -32,16 +32,15 @@ require dirname(__DIR__) . '/database/viewmanager.php';
   <!-- Appel de FlexSlider -->
   <link rel="stylesheet" href="/css/flexslider.css" type="text/css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-  <script src="/js/jquery.flexslider.js"></script>
   <script type="text/javascript" charset="utf-8">
     $(window).load(function() {
-      $('.flexslider').flexslider();
+      $(".flexslider").flexslider();
     });
   </script>
 
   <!-- Appel de la police "Truculenta" sur Google Fonts -->
   <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Truculenta&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Truculenta:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- Appel des icônes sur Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -68,7 +67,9 @@ require dirname(__DIR__) . '/database/viewmanager.php';
   <!-- Main content -->
   <main id="main">
     <!-- Bouton de rafraîchissement -->
-    <div class="random-btn-container"><a onclick="window.location.reload()"><i class="fa fa-random"></i></a></div>
+    <div class="random-btn-container"><a class="random-slides-btn" onclick="window.location.reload()"><i class="fa fa-random"></i></a></div>
+
+    <!-- FlexSlider -->
     <div class="flexslider">
       <ul class="slides">
         <?php
@@ -76,14 +77,16 @@ require dirname(__DIR__) . '/database/viewmanager.php';
         $randMovie = select_ten_random_movie();
         $randTvshow = select_two_random_tvshow();
         foreach ($randMovie as $row) {
-          echo '<li><a href="viewpage.php?type=movie&id=' . $row['idMovie'] . '"><img src="../thumbnails/' . $row['cachedurl'] . '" title="' . $row['title'] . '" alt="' . $row['title'] . '" width="1920" height="1080"/></a></li>';
+          echo '<li><a href="viewpage.php?type=movie&id=' . $row['idMovie'] . '"><img src="/src/thumbnails/' . $row['cachedurl'] . '" title="' . $row['title'] . '" alt="' . $row['title'] . '" width="1920" height="1080"/></a></li>';
         }
         foreach ($randTvshow as $row) {
-          echo '<li><a href="viewpage.php?type=tvshow&id=' . $row['idShow'] . '"><img src="../thumbnails/' . $row['cachedurl'] . '" title="' . $row['title'] . '" alt="' . $row['title'] . '" width="1920" height="1080"/></a></li>';
+          echo '<li><a href="viewpage.php?type=tvshow&id=' . $row['idShow'] . '"><img src="/src/thumbnails/' . $row['cachedurl'] . '" title="' . $row['title'] . '" alt="' . $row['title'] . '" width="1920" height="1080"/></a></li>';
         }
         ?>
       </ul>
+      <script src="/js/flexslider.js"></script>
     </div>
+
     <!-- Menu circulaire -->
     <?php include "../templates/menu.html"; ?>
   </main>

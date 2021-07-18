@@ -59,7 +59,7 @@ if (isset($_GET['id']) && !empty($_GET['id']) && ($_GET['type'] == 'movie' or $_
   <link data-vue-tag="ssr" rel="icon" type="image/png" sizes="48x48" href="/img/favicon-48.png">
   <link data-vue-tag="ssr" rel="icon" type="image/png" sizes="192x192" href="/img/favicon-192.png">
 
-  <!-- Appel des scripts JavaScript -->
+  <!-- Appel de jQuery -->
   <script src="/js/jquery-3.6.0.min.js"></script>
 
   <!-- Appel des polices "Truculenta" et "Roboto" sur Google Fonts -->

@@ -3,11 +3,12 @@
 /*******************/
 
 /* Menu circulaire à gauche */
-.circular-menu-left {
+.circular-menu {
     position: fixed;
     bottom: 50%;
     right: auto;
     left: 1em;
+    z-index: 9999;
     border-radius: 50%;
     border: 2px solid var(--color-light);
     box-shadow: 0 4px 8px 0 hsla(0, 0%, 0%, .8);
@@ -97,15 +98,15 @@
     transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.circular-menu.circular-menu-left .floating-btn {
+.circular-menu .floating-btn {
     background-color: var(--color-dark);
 }
 
-.circular-menu.circular-menu-left:after {
+.circular-menu:after {
     background-color: var(--color-dark);
 }
 
-.circular-menu.circular-menu-left.active .floating-btn i {
+.circular-menu.active .floating-btn i {
     transform: rotate(90deg);
 }
 
