@@ -62,6 +62,9 @@ if (isset($_GET['id']) && !empty($_GET['id']) && ($_GET['type'] == 'movie' or $_
   <!-- Appel de jQuery -->
   <script src="/js/jquery-3.6.0.min.js"></script>
 
+  <!-- Appel de GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js"></script>
+
   <!-- Appel des polices "Truculenta" et "Roboto" sur Google Fonts -->
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Truculenta:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -69,9 +72,6 @@ if (isset($_GET['id']) && !empty($_GET['id']) && ($_GET['type'] == 'movie' or $_
 
   <!-- Appel des icônes sur Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
-
-  <!-- Appel des icônes sur Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <!-- Corps de page -->
@@ -156,13 +156,14 @@ if (isset($_GET['id']) && !empty($_GET['id']) && ($_GET['type'] == 'movie' or $_
       "<table class='table-discart' border='6'>";
       // Discart du média
       if (empty($discart['cachedurl'])) {
-        echo '<td class="tdiscart"><img src="../thumbnails/placeholders/disc.png" alt="" height="180" width="180" draggable="false" ondragstart="return false"/></td>';
+        echo '<td class="tdiscart"><div class="discart-container"><img id="discart-img" src="../thumbnails/placeholders/disc.png" alt="" height="180" width="180" draggable="false" ondragstart="return false"/></div></td>';
       } else {
-        echo '<td class="tdiscart"><img src="../thumbnails/' . $discart['cachedurl'] . '" height="180" width="180" draggable="false" ondragstart="return false"/></td>';
+        echo '<td class="tdiscart"><div class="discart-container"><img id="discart-img" src="../thumbnails/' . $discart['cachedurl'] . '" height="180" width="180" draggable="false" ondragstart="return false"/></div></td>';
       }
       echo "</table>";
       ?>
     </div>
+    <script src="/js/discart.js"></script>
   </header>
 
   <!-- Main content -->

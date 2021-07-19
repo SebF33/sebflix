@@ -96,7 +96,8 @@
 }
 
 /* Ombre de la bande-annonce */
-iframe, .embedPlaceholder {
+iframe,
+.embedPlaceholder {
   box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px,
     rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
     rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
@@ -254,46 +255,20 @@ td {
 
 .tdiscart {
   text-align: center;
-  padding: 16px;
+  padding: 8px;
+  filter: drop-shadow(7px 5px 2px #000000);
+}
+
+.discart-container {
+  filter: drop-shadow(6px 5px 2px #000000);
 }
 
 .tdiscart img {
   display: block;
-  width: 220px;
-  height: 220px;
-  height: auto;
+  width: 180px;
+  height: 180px;
   max-width: 100%;
-  /* border-radius: 50%; */
-  /*filter: drop-shadow(10px 5px 2px #000000);*/
-}
-
-.tdiscart img:hover {
-  -webkit-animation: rotate-center 2.6s linear 0.1s infinite;
-  animation: rotate-center 2.6s linear 0.1s infinite;
-}
-
-@-webkit-keyframes rotate-center {
-  0% {
-    -webkit-transform: rotate(0);
-    transform: rotate(0);
-  }
-
-  100% {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes rotate-center {
-  0% {
-    -webkit-transform: rotate(0);
-    transform: rotate(0);
-  }
-
-  100% {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
+  border-radius: 50%;
 }
 
 .tsynopsis {
@@ -352,4 +327,12 @@ td {
   height: 216px;
   text-align: center;
   object-fit: cover;
+}
+
+.tcasting figcaption {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 8rem;
+  margin: 0 auto;
 }
