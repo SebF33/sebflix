@@ -128,7 +128,7 @@ if (isset($_GET['type']) && !empty($_GET['type']) && in_array($_GET['type'], $ty
   <!-- Appel des polices "Truculenta" et "Roboto" sur Google Fonts -->
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Truculenta:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500&display=swap" rel="stylesheet">
 
   <!-- Appel des icônes sur Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -194,7 +194,8 @@ if (isset($_GET['type']) && !empty($_GET['type']) && in_array($_GET['type'], $ty
         if ($type == 'movies' or $type == 'genre' or $type == 'direction') {
           foreach ($movies as $row) {
             $date = DateTime::createFromFormat("Y-m-d", $row['premiered']);
-            echo '<a class="card_button" href="viewpage.php?type=movie&id=' . $row['idMovie'] . '"><div class="card">
+            echo '<a class="card_button" href="viewpage.php?type=movie&id=' . $row['idMovie'] . '" draggable="false" ondragstart="return false">
+            <div class="card">
             <div class="front_card" style="background-image: url(../thumbnails/' . $row['cachedurl'] . ');"></div>
             <div class="back_card">
               <div>
@@ -205,15 +206,13 @@ if (isset($_GET['type']) && !empty($_GET['type']) && in_array($_GET['type'], $ty
               echo '(' . $date->format("Y") . ')';
             }
             echo '</span></div>
-                <div class="media_genres"> ' . $row['genre'] . '</div>
-                <div>';
+                <div class="media_genres"> ' . $row['genre'] . '</div>';
             if (empty($row['classification'])) {
               echo '';
             } else {
               echo '<img src="../thumbnails/csa/' . $row['classification'] . '.png" title="' . $row['classification'] . '" alt="' . $row['classification'] . '" height="26" width="26"/>';
             }
-            echo '</div>
-            <p class="overview">' . $row['synopsis'] . '</p>
+            echo '<p class="overview">' . $row['synopsis'] . '</p>
             </div>
             </div>
           </div>
@@ -224,7 +223,8 @@ if (isset($_GET['type']) && !empty($_GET['type']) && in_array($_GET['type'], $ty
         elseif ($type == 'tvshows') {
           foreach ($tvshows as $row) {
             $date = DateTime::createFromFormat("Y-m-d", $row['premiered']);
-            echo '<a class="card_button" href="viewpage.php?type=tvshow&id=' . $row['idShow'] . '"><div class="card">
+            echo '<a class="card_button" href="viewpage.php?type=tvshow&id=' . $row['idShow'] . '" draggable="false" ondragstart="return false">
+            <div class="card">
             <div class="front_card" style="background-image: url(../thumbnails/' . $row['cachedurl'] . ');"></div>
             <div class="back_card">
               <div>
@@ -235,15 +235,13 @@ if (isset($_GET['type']) && !empty($_GET['type']) && in_array($_GET['type'], $ty
               echo '(' . $date->format("Y") . ')';
             }
             echo '</span></div>
-                <div class="media_genres"> ' . $row['genre'] . '</div>
-                <div>';
+                <div class="media_genres"> ' . $row['genre'] . '</div>';
             if (empty($row['classification'])) {
               echo '';
             } else {
               echo '<img src="../thumbnails/csa/' . $row['classification'] . '.png" title="' . $row['classification'] . '" alt="' . $row['classification'] . '" height="26" width="26"/>';
             }
-            echo '</div>
-            <p class="overview">' . $row['synopsis'] . '</p>
+            echo '<p class="overview">' . $row['synopsis'] . '</p>
             </div>
             </div>
           </div>
@@ -292,8 +290,26 @@ if (isset($_GET['type']) && !empty($_GET['type']) && in_array($_GET['type'], $ty
         }
         // Affichage des collections
         elseif ($type == 'sets') {
-          foreach ($result as $row) {
-            echo '<a href="display-results.php?type=collection&id=' . $row['idSet'] . '"><img class="gMedia" src="../thumbnails/' . $row['cachedurl'] . '" alt="' . $row['strSet'] . '" height="360" width="240"/></a>';
+          foreach ($result as $set => $movies) {
+            $logo = select_logo_collection($set);
+            echo '<a class="card_button" href="display-results.php?type=collection&id=' . $set . '" draggable="false" ondragstart="return false">
+            <div class="card">
+            <div class="front_card" style="background-image: url(../thumbnails/' . $movies[0]['cachedurl'] . ');"></div>
+            <div class="back_card back_collection">';
+            echo '<img class="back_collection_logo" src="../thumbnails/' . $logo['cachedurl'] . '" alt="' . $logo['cachedurl'] . '" width="120" height="46.5"/>';
+            foreach ($movies as $movie) {
+              $date = DateTime::createFromFormat("Y-m-d", $movie['premiered']);
+              echo '<div class="release_date">' . $movie['title'] . ' <span>';
+              if (empty($movie['premiered'])) {
+                echo '';
+              } else {
+                echo '(' . $date->format("Y") . ')';
+              }
+              echo '</span></div>';
+            }
+            echo '</div>
+          </div>
+          </a>';
           }
         }
         // Affichage du contenu d'une collection

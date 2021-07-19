@@ -147,13 +147,13 @@ if (isset($_GET['category']) && !empty($_GET['category']) && in_array($_GET['cat
       <h1 class="alphabet-title"><?= $title ?></h1>
       <ul class="alphabet">
         <?php
-        echo '<li><a href="table.php?category=' . $category . '&letter=numeric" class="letters"><span class="&">&</span></a></li>';
+        echo '<li><a href="table.php?category=' . $category . '&letter=numeric" class="letters" draggable="false" ondragstart="return false"><span class="&">&</span></a></li>';
         foreach (range('A', 'N') as $i) {
-          echo '<li><a href="table.php?category=' . $category . '&letter=' . strtolower($i) . '" class="letters"><span class="' . $i . '">' . $i . '</span></a></li>';
+          echo '<li><a href="table.php?category=' . $category . '&letter=' . strtolower($i) . '" class="letters" draggable="false" ondragstart="return false"><span class="' . $i . '">' . $i . '</span></a></li>';
         }
         echo "<br></br>";
         foreach (range('O', 'Z') as $i) {
-          echo '<li><a href="table.php?category=' . $category . '&letter=' . strtolower($i) . '" class="letters"><span class="' . $i . '">' . $i . '</span></a></li>';
+          echo '<li><a href="table.php?category=' . $category . '&letter=' . strtolower($i) . '" class="letters" draggable="false" ondragstart="return false"><span class="' . $i . '">' . $i . '</span></a></li>';
         }
         ?>
       </ul>
@@ -169,11 +169,11 @@ if (isset($_GET['category']) && !empty($_GET['category']) && in_array($_GET['cat
       // Afficher dans le tableau les données appelées
       if ($type == 'movie') {
         foreach ($result as $row) {
-          echo '<td><a href="viewpage.php?type=' . $type . '&id=' . $row['idMovie'] . '"><img src="../thumbnails/' . $row['cachedurl'] . '" alt="' . $row['title'] . '" height="240" width="160"/></a></td>';
+          echo '<td><a href="viewpage.php?type=' . $type . '&id=' . $row['idMovie'] . '" draggable="false" ondragstart="return false"><img src="../thumbnails/' . $row['cachedurl'] . '" alt="' . $row['title'] . '" height="240" width="160" draggable="false" ondragstart="return false"/></a></td>';
         }
       } elseif ($type == 'tvshow') {
         foreach ($result as $row) {
-          echo '<td><a href="viewpage.php?type=' . $type . '&id=' . $row['idShow'] . '"><img src="../thumbnails/' . $row['cachedurl'] . '" alt="' . $row['title'] . '" height="240" width="160"/></a></td>';
+          echo '<td><a href="viewpage.php?type=' . $type . '&id=' . $row['idShow'] . '" draggable="false" ondragstart="return false"><img src="../thumbnails/' . $row['cachedurl'] . '" alt="' . $row['title'] . '" height="240" width="160" draggable="false" ondragstart="return false"/></a></td>';
         }
       }
       echo "</tr>";

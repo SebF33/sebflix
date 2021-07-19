@@ -49,10 +49,12 @@ nav ul a.btn-type {
   letter-spacing: 3px;
   font-family: var(--font-title);
   font-size: 1.2em;
+  font-weight: 600;
   color: var(--color-light);
   text-align: center;
   padding: 16px 28px;
   transition: background 0.24s, box-shadow 0.12s;
+  user-select: none;
 }
 
 nav ul a.btn-type:hover {

@@ -2,10 +2,10 @@
   <nav role='navigation'>
     <ul>
       <?php foreach ($navLeft as $navTitle => $link) {
-        echo '<li><a class="btn-type' . $btnNavClass . '" href="' . $link . '">' . $navTitle . '</a></li>';
+        echo '<li><a class="btn-type' . $btnNavClass . '" href="' . $link . '" draggable="false" ondragstart="return false">' . $navTitle . '</a></li>';
       }
       ?>
-      <li id="icon-trigger" class="icon icon-trigger"><a class="btn-icon" href="/index.php">
+      <li id="icon-trigger" class="icon icon-trigger"><a class="btn-icon" href="/index.php" draggable="false" ondragstart="return false">
           <svg version="1.1" id="iconSebflix" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 166.4 166" width="34" height="34" style="enable-background:new 0 0 166.4 166;" xml:space="preserve">
             <style type="text/css">
               .st0 {
@@ -110,7 +110,7 @@
           </svg>
         </a></li>
       <?php foreach ($navRight as $navTitle => $link) {
-        echo '<li><a class="btn-type' . $btnNavClass . '" href="' . $link . '">' . $navTitle . '</a></li>';
+        echo '<li><a class="btn-type' . $btnNavClass . '" href="' . $link . '" draggable="false" ondragstart="return false">' . $navTitle . '</a></li>';
       }
       ?>
     </ul>

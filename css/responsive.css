@@ -295,6 +295,25 @@ all and (max-height: 800px) {
   }
 }
 
+/* Flip cards */
+@media screen and (max-width: 800px) {
+  .card:hover .front_card {
+    transform: rotateY(0deg);
+  }
+
+  .card:nth-child(even):hover .front_card {
+    transform: rotateY(0deg);
+  }
+
+  .card:hover .back_card {
+    transform: rotateY(-180deg);
+  }
+
+  .card:nth-child(even):hover .back_card {
+    transform: rotateY(180deg);
+  }
+}
+
 /* Viewpages */
 @media all and (max-width: 1300px) {
   .table-rating {

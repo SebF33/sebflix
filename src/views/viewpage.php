@@ -65,7 +65,7 @@ if (isset($_GET['id']) && !empty($_GET['id']) && ($_GET['type'] == 'movie' or $_
   <!-- Appel des polices "Truculenta" et "Roboto" sur Google Fonts -->
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Truculenta:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500&display=swap" rel="stylesheet">
 
   <!-- Appel des icônes sur Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
@@ -110,9 +110,9 @@ if (isset($_GET['id']) && !empty($_GET['id']) && ($_GET['type'] == 'movie' or $_
           </tr>";
       // Note du média
       if (empty($rating['rating'])) {
-        echo '<td class="trating"><img src="../thumbnails/placeholders/nr.png" title="Non renseignée" alt="Non renseignée"/></td>';
+        echo '<td class="trating"><img src="../thumbnails/placeholders/nr.png" title="Non renseignée" alt="Non renseignée" draggable="false" ondragstart="return false"/></td>';
       } else {
-        echo '<td class="trating"><img class="starsRating" src="../thumbnails/rating/' . $rating['rating'] . '.png" title="' . $rating['rating'] . '" alt=""/></td>';
+        echo '<td class="trating"><img class="starsRating" src="../thumbnails/rating/' . $rating['rating'] . '.png" title="' . $rating['rating'] . '" alt="" draggable="false" ondragstart="return false"/></td>';
       }
       // Classification
       if (empty($result->classification)) {
@@ -156,9 +156,9 @@ if (isset($_GET['id']) && !empty($_GET['id']) && ($_GET['type'] == 'movie' or $_
       "<table class='table-discart' border='6'>";
       // Discart du média
       if (empty($discart['cachedurl'])) {
-        echo '<td class="tdiscart"><img src="../thumbnails/placeholders/disc.png" alt="" height="180" width="180"/></td>';
+        echo '<td class="tdiscart"><img src="../thumbnails/placeholders/disc.png" alt="" height="180" width="180" draggable="false" ondragstart="return false"/></td>';
       } else {
-        echo '<td class="tdiscart"><img src="../thumbnails/' . $discart['cachedurl'] . '" height="180" width="180"/></td>';
+        echo '<td class="tdiscart"><img src="../thumbnails/' . $discart['cachedurl'] . '" height="180" width="180" draggable="false" ondragstart="return false"/></td>';
       }
       echo "</table>";
       ?>

@@ -1199,15 +1199,16 @@ function select_all_sets()
   connexion($dbco);
   try {
     $query = $dbco->prepare(
-      "SELECT idSet, strSet, cachedurl
-      FROM sets
-      INNER JOIN art ON sets.idSet = art.media_id
-      WHERE media_type = 'set'
-      AND type = 'poster'
-      ORDER BY strSet"
+      "SELECT s.idSet, m.title, m.premiered, a.cachedurl
+      FROM sets AS s
+      INNER JOIN art AS a ON s.idSet = a.media_id
+      INNER JOIN movie AS m ON s.idSet = m.idSet
+      WHERE a.media_type = 'set'
+      AND a.type = 'poster'
+      ORDER BY s.strSet, m.premiered DESC"
     );
     $query->execute();
-    $result = $query->fetchAll(PDO::FETCH_ASSOC);
+    $result = $query->fetchAll(PDO::FETCH_GROUP | PDO::FETCH_ASSOC);
     return $result;
   } catch (PDOException $e) {
     echo "Erreur : " . $e->getMessage();
