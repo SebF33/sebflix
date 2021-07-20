@@ -144,7 +144,7 @@ if (isset($_GET['id']) && !empty($_GET['id']) && ($_GET['type'] == 'movie' or $_
       if (!$logo or empty($logo['cachedurl'])) {
         echo $result->title;
       } else {
-        echo '<img src="../thumbnails/' . $logo['cachedurl'] . '" title="' . $result->title . '" alt="' . $result->title . '" height="124" width="320"/>';
+        echo '<img src="../thumbnails/' . $logo['cachedurl'] . '" title="' . $result->title . '" alt="' . $result->title . '" height="124" width="320" draggable="false" ondragstart="return false"/>';
       }
       ?>
     </div>
@@ -174,7 +174,7 @@ if (isset($_GET['id']) && !empty($_GET['id']) && ($_GET['type'] == 'movie' or $_
         <!-- Bande-annonce -->
         <?php
         if (empty($result->embed)) {
-          echo '<img class="embedPlaceholder" src="../thumbnails/placeholders/embed_nr.png" alt="" height="315" width="560"/>';
+          echo '<img class="embedPlaceholder" src="../thumbnails/placeholders/embed_nr.png" alt="" height="315" width="560" draggable="false" ondragstart="return false"/>';
         } else {
           echo '<iframe width="560" height="315" src="' . $result->embed . '" title="' . $result->title . '" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
         }
@@ -183,7 +183,14 @@ if (isset($_GET['id']) && !empty($_GET['id']) && ($_GET['type'] == 'movie' or $_
       <div class="mainBottom">
         <?php if ($type == 'movie') { ?>
           <!-- Phrase d'accroche -->
-        <?php echo '<div class="catch"><p>"' . $result->catch . '"</p></div>';
+          <div class="catch"><i class="fas fa-quote-left fa2"></i>
+            <div class="text"><i class="fas fa-quote-right fa1"></i>
+              <div>
+                <p><?= $result->catch ?></p>
+              </div>
+            </div>
+          </div>
+        <?php
         }
         ?>
       </div>

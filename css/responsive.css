@@ -316,21 +316,8 @@ all and (max-height: 800px) {
 
 /* Viewpages */
 @media all and (max-width: 1300px) {
-  .table-rating {
-    margin-top: 200px;
-  }
-
-  .trating .starsRating {
-    width: 136.2px;
-    height: 28.8px;
-  }
-
-  .trating img,
-  .tcsa img,
-  .tcountry img,
-  .tpremiered img {
-    width: 35px;
-    height: 35px;
+  .table-discart {
+    display: none;
   }
 
   .firstPage .mainTop,
@@ -348,50 +335,24 @@ all and (max-height: 800px) {
     margin-top: 100px;
   }
 
-  .catch {
-    font-size: 1.8em;
-  }
-
   .secondPage .tstudio {
     font-size: 0.8em;
   }
 }
 
 @media all and (max-width: 1024px) {
+  #headerViewpage #headerMain {
+    font-size: 2.4vw;
+  }
+
   #headerViewpage #headerMain img {
     margin-top: 20px;
     width: 256px;
     height: 99.2px;
   }
 
-  .table-discart {
-    display: none;
-  }
-
   th {
     font-size: 1.1em;
-  }
-
-  .catch {
-    font-size: 1.6em;
-  }
-}
-
-@media all and (max-width: 767px) {
-  .catch {
-    font-size: 1.4em;
-  }
-}
-
-@media all and (max-width: 600px) {
-  .catch {
-    font-size: 1.2em;
-  }
-}
-
-@media all and (max-width: 400px) {
-  .catch {
-    font-size: 1em;
   }
 }
 
