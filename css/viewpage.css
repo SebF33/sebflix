@@ -134,6 +134,7 @@ iframe,
   perspective: 2000px;
   -webkit-perspective: 2000px;
   -moz-perspective: 2000px;
+  will-change: transform;
   transition: 0.4s;
   text-align: center;
 }
@@ -186,6 +187,7 @@ iframe,
   height: calc(100% - 60px);
   background-color: var(--color-dark);
   border-radius: 3px;
+  will-change: transform;
   transition: 0.4s;
 }
 
