@@ -31,10 +31,24 @@ if (isset($_GET['type']) && !empty($_GET['type']) && in_array($_GET['type'], $ty
   if (isset($_GET['id']) && !empty($_GET['id'])) {
     // Traitement du GET 'id'
     $id = valid_get($_GET['id']);
+    // Requête de vérification de l'existence de l'ID selon le type défini
+    if ($type == 'achievement') {
+      $checkid = check_id_studio($id);
+    } elseif ($type == 'direction' or $type == 'filmography') {
+      $checkid = check_id_actor($id);
+    } elseif ($type == 'genre') {
+      $checkid = check_id_genre($id);
+    } elseif ($type == 'collection') {
+      $checkid = check_id_set($id);
+    }
+    if ($checkid === 0) {
+      // Redirection
+      header("location:/index.php");
+      exit;
+    }
   }
 
   // Requêtes et variables selon le type défini :
-
   // Type "moteur de recherche"
   if ($type == 'movies' or $type == 'tvshows' or $type == 'actors' or $type == 'studios') {
     // Appel du script du moteur de recherche

@@ -85,6 +85,10 @@
 //  10. Vérifications
 //    10.01 Vérification de l'existence de l'ID du média type film
 //    10.02 Vérification de l'existence de l'ID du média type série
+//    10.03 Vérification de l'existence de l'ID du studio
+//    10.04 Vérification de l'existence de l'ID d'un(e) actrice/acteur/doubleur/directrice/directeur
+//    10.05 Vérification de l'existence de l'ID d'un genre
+//    10.06 Vérification de l'existence de l'ID d'un set
 
 // Appel du script de connexion à la base de données
 require __DIR__ . '/connect.php';
@@ -1543,6 +1547,82 @@ function check_id_tvshow(int $id)
       "SELECT idShow
       FROM tvshow
       WHERE idShow = :id"
+    );
+    $query->bindValue(':id', $id, PDO::PARAM_INT);
+    $query->execute();
+    $checkid = $query->rowCount();
+    return $checkid;
+  } catch (PDOException $e) {
+    echo "Erreur : " . $e->getMessage();
+  }
+}
+
+// 10.03 Vérification de l'existence de l'ID du studio
+function check_id_studio(int $id)
+{
+  connexion($dbco);
+  try {
+    $query = $dbco->prepare(
+      "SELECT studio_id
+      FROM studio
+      WHERE studio_id = :id"
+    );
+    $query->bindValue(':id', $id, PDO::PARAM_INT);
+    $query->execute();
+    $checkid = $query->rowCount();
+    return $checkid;
+  } catch (PDOException $e) {
+    echo "Erreur : " . $e->getMessage();
+  }
+}
+
+// 10.04 Vérification de l'existence de l'ID d'un(e) actrice/acteur/doubleur/directrice/directeur
+function check_id_actor(int $id)
+{
+  connexion($dbco);
+  try {
+    $query = $dbco->prepare(
+      "SELECT actor_id
+      FROM actor
+      WHERE actor_id = :id"
+    );
+    $query->bindValue(':id', $id, PDO::PARAM_INT);
+    $query->execute();
+    $checkid = $query->rowCount();
+    return $checkid;
+  } catch (PDOException $e) {
+    echo "Erreur : " . $e->getMessage();
+  }
+}
+
+// 10.05 Vérification de l'existence de l'ID d'un genre
+function check_id_genre(int $id)
+{
+  connexion($dbco);
+  try {
+    $query = $dbco->prepare(
+      "SELECT genre_id
+      FROM genre
+      WHERE genre_id = :id"
+    );
+    $query->bindValue(':id', $id, PDO::PARAM_INT);
+    $query->execute();
+    $checkid = $query->rowCount();
+    return $checkid;
+  } catch (PDOException $e) {
+    echo "Erreur : " . $e->getMessage();
+  }
+}
+
+// 10.06 Vérification de l'existence de l'ID d'un set
+function check_id_set(int $id)
+{
+  connexion($dbco);
+  try {
+    $query = $dbco->prepare(
+      "SELECT idSet
+      FROM sets
+      WHERE idSet = :id"
     );
     $query->bindValue(':id', $id, PDO::PARAM_INT);
     $query->execute();
