@@ -65,8 +65,9 @@
 }
 
 #header #headerMain .logoStudio img {
-  display: block;
-  padding: 10px;
+  margin: 0 auto;
+  padding-left: 10px;
+  padding-right: 10px;
   max-width: 161px;
   max-height: 109px;
   overflow: hidden;
@@ -190,10 +191,9 @@
 }
 
 .infosTable .tstudio {
-  padding: 1%;
   font-family: var(--font-title);
   text-align: center;
-  font-size: 0.9vw;
+  font-size: 1.1em;
 }
 
 .infosTable .tstudio a {
@@ -306,10 +306,12 @@
 }
 
 .gPoster a .gStudio {
-  display: block;
-  padding: 10px;
+  margin: 0 auto;
+  padding-left: 10px;
+  padding-right: 10px;
   max-width: 161px;
   max-height: 109px;
+  height: auto;
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 3;

@@ -32,7 +32,7 @@
 //    2.07 Sélection de la note du média type série
 //    2.08 
 //    2.09 Sélection du fanart du média type série
-//    2.10 Sélection jusqu'à 7 actrice(s)/acteur(s)/doubleur(s) du média type série
+//    2.10 Sélection jusqu'à 8 actrice(s)/acteur(s)/doubleur(s) du média type série
 //    2.11 Sélection des séries selon le genre défini
 //    2.12 Sélection des séries dont le titre commence par le caractère défini
 //    2.13 Sélection des séries dont le titre commence par un chiffre
@@ -650,7 +650,7 @@ function select_fanart_tvshow(int $id)
   }
 }
 
-// 2.10 Sélection jusqu'à 7 actrice(s)/acteur(s)/doubleur(s) du média type série
+// 2.10 Sélection jusqu'à 8 actrice(s)/acteur(s)/doubleur(s) du média type série
 function select_actors_tvshow(int $id)
 {
   connexion($dbco);
@@ -662,7 +662,7 @@ function select_actors_tvshow(int $id)
       WHERE media_id = :id
       AND media_type = 'tvshow'
       ORDER BY cast_order ASC
-      LIMIT 7"
+      LIMIT 8"
     );
     $query->bindValue(':id', $id, PDO::PARAM_INT);
     $query->execute();

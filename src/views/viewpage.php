@@ -265,7 +265,7 @@ if (isset($_GET['id']) && !empty($_GET['id']) && ($_GET['type'] == 'movie' or $_
           echo
           "<table class='table-casting' border='2'>
             <tr>
-            <th colspan='7'>Casting</th>
+            <th colspan='8'>Casting</th>
             </tr>";
           foreach ($actors as $row) {
             if (empty($row['cachedurl'])) {
