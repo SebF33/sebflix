@@ -14,7 +14,20 @@ if (isset($_GET['id']) && !empty($_GET['id']) && ($_GET['type'] == 'movie' or $_
   $id = valid_get($_GET['id']);
   // Récupération et validation du type du média
   $type = valid_get($_GET['type']);
-  // Requêtes selon le type de média défini
+
+  // Requête de vérification de l'existence de l'ID selon le type de média défini
+  if ($type == 'movie') {
+    $checkid = check_id_movie($id);
+  } elseif ($type == 'tvshow') {
+    $checkid = check_id_tvshow($id);
+  }
+  if ($checkid === 0) {
+    // Redirection
+    header("location:/index.php");
+    exit;
+  }
+
+  // Requêtes pour l'affichage selon le type de média défini
   if ($type == 'movie') {
     $result = select_infos_movie($id);
     $logo = select_logo_movie($id);

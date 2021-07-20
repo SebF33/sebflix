@@ -3,7 +3,7 @@
 // Requêtes d'affichage des données //
 //////////////////////////////////////
 
-//  1. Affichages des films
+//  01. Affichages des films
 //    1.01 Sélection aléatoire de 18 médias type film par leur poster
 //    1.02 Sélection des 7 films les plus récents par leur poster
 //    1.03 Sélection aléatoire de 10 médias type film par leur fanart
@@ -22,7 +22,7 @@
 //    1.16 Sélection des films selon le genre défini depuis la liste
 //    1.17 Sélection des 200 films les plus populaires par leur poster
 
-//  2. Affichages des séries
+//  02. Affichages des séries
 //    2.01 Sélection aléatoire de 3 médias type série par son poster
 //    2.02 Sélection des 7 séries les plus récentes par leur poster
 //    2.03 Sélection aléatoire de 2 médias type série par leur fanart
@@ -37,7 +37,7 @@
 //    2.12 Sélection des séries dont le titre commence par le caractère défini
 //    2.13 Sélection des séries dont le titre commence par un chiffre
 
-//  3. Affichages des animes
+//  03. Affichages des animes
 //    3.01 Sélection des 7 animes les plus récents par leur poster
 //    3.02 Sélection des shōnen de type série
 //    3.03 Sélection des shōnen de type film
@@ -48,40 +48,43 @@
 //    3.08 Sélection des animes de type série dont le titre commence par un chiffre
 //    3.09 Sélection des animes de type film dont le titre commence par un chiffre
 
-//  4. Affichages des dessins animés
+//  04. Affichages des dessins animés
 //    4.01 Sélection des 7 dessins animés les plus récents par leur poster
 //    4.02 Sélection des dessins animés selon le genre défini
 //    4.03 Sélection des dessins animés dont le titre commence par le caractère défini
 //    4.04 Sélection des dessins animés dont le titre commence par un chiffre
 
-//  5. Affichages des spectacles
+//  05. Affichages des spectacles
 //    5.01 Sélection des 7 spectacles les plus récents par leur poster
 //    5.02 Sélection des spectacles selon le genre défini
 //    5.03 Sélection des spectacles dont le titre commence par le caractère défini
 //    5.04 Sélection des spectacles dont le titre commence par un chiffre
 
-//  6. Affichages des collections
+//  06. Affichages des collections
 //    6.01 Sélection de toutes les collections par leur poster
 //    6.02 Sélection de tous les médias de type film d'une collection par leur poster
 //    6.03 Sélection du logo d'une collection
 //    6.04 Sélection du fanart d'une collection
 
-//  7. Affichages des studios
+//  07. Affichages des studios
 //    7.01 Sélection des films d'un studio par son nom
 //    7.02 Sélection des séries d'un studio par son nom
 //    7.03 Sélection des studios les plus populaires
 
-//  8. Affichages des actrices/acteurs/doubleurs/directrice(s)/directeur(s)
+//  08. Affichages des actrices/acteurs/doubleurs/directrice(s)/directeur(s)
 //    8.01 Sélection du nom d'un(e) actrice/acteur/doubleur par son identifiant
 //    8.02 Sélection des films d'un(e) actrice/acteur/doubleur par son identifiant
 //    8.03 Sélection des séries d'un(e) actrice/acteur/doubleur par son identifiant
 //    8.04 Sélection jusqu'à 1 directrice/directeur du média type film
 //    8.05 Sélection des films d'un(e) directrice/directeur par son identifiant
 
-//  9. Comptages
+//  09. Comptages
 //    9.01 Comptage du nombre total de médias
 //    9.02 Comptage du nombre total de fichiers image sur le serveur
 
+//  10. Vérifications
+//    10.01 Vérification de l'existence de l'ID du média type film
+//    10.02 Vérification de l'existence de l'ID du média type série
 
 // Appel du script de connexion à la base de données
 require __DIR__ . '/connect.php';
@@ -1510,4 +1513,42 @@ function count_all_image()
   $images = glob("$img_folder{*.jpg,*.JPG,*.jpeg,*.JPEG,*.png,*.PNG}", GLOB_BRACE);
   $count = count($images);
   return $count;
+}
+
+// 10.01 Vérification de l'existence de l'ID du média type film
+function check_id_movie(int $id)
+{
+  connexion($dbco);
+  try {
+    $query = $dbco->prepare(
+      "SELECT idMovie
+      FROM movie
+      WHERE idMovie = :id"
+    );
+    $query->bindValue(':id', $id, PDO::PARAM_INT);
+    $query->execute();
+    $checkid = $query->rowCount();
+    return $checkid;
+  } catch (PDOException $e) {
+    echo "Erreur : " . $e->getMessage();
+  }
+}
+
+// 10.02 Vérification de l'existence de l'ID du média type série
+function check_id_tvshow(int $id)
+{
+  connexion($dbco);
+  try {
+    $query = $dbco->prepare(
+      "SELECT idShow
+      FROM tvshow
+      WHERE idShow = :id"
+    );
+    $query->bindValue(':id', $id, PDO::PARAM_INT);
+    $query->execute();
+    $checkid = $query->rowCount();
+    return $checkid;
+  } catch (PDOException $e) {
+    echo "Erreur : " . $e->getMessage();
+  }
 }

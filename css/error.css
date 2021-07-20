@@ -39,7 +39,7 @@
 #header #headerMain img {
   max-width: 100%;
   height: auto;
-  filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
+  filter: drop-shadow(2px 2px 2px black);
 }
 
 /* Bloc d'en-tête de droite */
