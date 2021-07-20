@@ -104,18 +104,20 @@ iframe,
 
 /* Phrase d'accroche */
 .catch {
-  background-color: transparent;
   border-radius: 3px;
   color: var(--color-light);
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
   width: 300px;
   height: 200px;
   transform-style: preserve-3d;
   perspective: 2000px;
-  transition: 0.4s;
+  -webkit-perspective: 2000px;
+  -moz-perspective: 2000px;
+  transition: 0.3s;
   text-align: center;
 }
 
@@ -126,7 +128,6 @@ iframe,
   left: 0;
   width: 100%;
   height: 100%;
-  background: transparent;
   border-top: 20px solid var(--color-light);
   border-left: 20px solid var(--color-light);
   box-sizing: border-box;
@@ -168,7 +169,7 @@ iframe,
   height: calc(100% - 60px);
   background-color: var(--color-dark);
   border-radius: 3px;
-  transition: 0.4s;
+  transition: 0.3s;
 }
 
 .catch .text .fa1 {
@@ -182,6 +183,7 @@ iframe,
   top: 50%;
   left: 0;
   transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
   text-align: center;
   width: 100%;
   padding: 30px 60px;
@@ -202,10 +204,12 @@ iframe,
 
 .catch:hover {
   transform: translate(-50%, -50%) rotateY(-20deg) skewY(3deg);
+  -webkit-transform: translate(-50%, -50%) rotateY(-20deg) skewY(3deg);
 }
 
 .catch:hover .text {
   transform: rotateY(20deg) skewY(-3deg);
+  -webkit-transform: rotateY(20deg) skewY(-3deg);
 }
 
 /* Bloc du corps du bas */

@@ -48,7 +48,7 @@
 #header #headerMain img {
   max-width: 100%;
   height: auto;
-  filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
+  filter: drop-shadow(2px 2px 2px black);
 }
 
 #header #headerMain .logoStudio {
@@ -103,6 +103,7 @@
   margin: 0 auto;
   margin-top: 3em;
   margin-bottom: 4em;
+  filter: drop-shadow(4px 4px 2px #000000);
 }
 
 .infosTable tr th:first-child {
