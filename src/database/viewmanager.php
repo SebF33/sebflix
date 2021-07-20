@@ -85,7 +85,7 @@
 //  10. Vérifications
 //    10.01 Vérification de l'existence de l'ID du média type film
 //    10.02 Vérification de l'existence de l'ID du média type série
-//    10.03 Vérification de l'existence de l'ID du studio
+//    10.03 Vérification de l'existence du studio
 //    10.04 Vérification de l'existence de l'ID d'un(e) actrice/acteur/doubleur/directrice/directeur
 //    10.05 Vérification de l'existence de l'ID d'un genre
 //    10.06 Vérification de l'existence de l'ID d'un set
@@ -1557,19 +1557,30 @@ function check_id_tvshow(int $id)
   }
 }
 
-// 10.03 Vérification de l'existence de l'ID du studio
-function check_id_studio(int $id)
+// 10.03 Vérification de l'existence du studio
+function check_id_studio(string $id)
 {
   connexion($dbco);
   try {
     $query = $dbco->prepare(
-      "SELECT studio_id
-      FROM studio
-      WHERE studio_id = :id"
+      "SELECT studio
+      FROM movie
+      WHERE studio LIKE :id"
     );
-    $query->bindValue(':id', $id, PDO::PARAM_INT);
+    $query->bindValue(':id', $id, PDO::PARAM_STR);
     $query->execute();
-    $checkid = $query->rowCount();
+    $checkidMovie = $query->rowCount();
+
+    $query = $dbco->prepare(
+      "SELECT studio
+      FROM tvshow
+      WHERE studio LIKE :id"
+    );
+    $query->bindValue(':id', $id, PDO::PARAM_STR);
+    $query->execute();
+    $checkidTvshow = $query->rowCount();
+
+    $checkid = $checkidMovie + $checkidTvshow;
     return $checkid;
   } catch (PDOException $e) {
     echo "Erreur : " . $e->getMessage();
