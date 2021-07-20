@@ -102,13 +102,30 @@ iframe,
   filter: drop-shadow(4px 4px 2px #000000);
 }
 
+/* Bloc du corps du bas */
+.mainBottom {
+  /*border: 1px solid green;*/
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: auto;
+}
+
 /* Phrase d'accroche */
+.catch-container {
+  margin: 0 auto;
+  width: 400px;
+  height: 260px;
+}
+
 .catch {
-  border-radius: 3px;
-  color: var(--color-light);
   position: absolute;
   top: 50%;
   left: 50%;
+  border-radius: 3px;
+  color: var(--color-light);
   transform: translate(-50%, -50%);
   -webkit-transform: translate(-50%, -50%);
   width: 300px;
@@ -117,7 +134,7 @@ iframe,
   perspective: 2000px;
   -webkit-perspective: 2000px;
   -moz-perspective: 2000px;
-  transition: 0.3s;
+  transition: 0.4s;
   text-align: center;
 }
 
@@ -169,7 +186,7 @@ iframe,
   height: calc(100% - 60px);
   background-color: var(--color-dark);
   border-radius: 3px;
-  transition: 0.3s;
+  transition: 0.4s;
 }
 
 .catch .text .fa1 {
@@ -202,25 +219,14 @@ iframe,
   -webkit-box-orient: vertical;
 }
 
-.catch:hover {
+.mainBottom:hover .catch {
   transform: translate(-50%, -50%) rotateY(-20deg) skewY(3deg);
   -webkit-transform: translate(-50%, -50%) rotateY(-20deg) skewY(3deg);
 }
 
-.catch:hover .text {
+.mainBottom:hover .text {
   transform: rotateY(20deg) skewY(-3deg);
   -webkit-transform: rotateY(20deg) skewY(-3deg);
-}
-
-/* Bloc du corps du bas */
-.mainBottom {
-  /*border: 1px solid green;*/
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: auto;
 }
 
 /* Tableaux */

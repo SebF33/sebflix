@@ -183,10 +183,12 @@ if (isset($_GET['id']) && !empty($_GET['id']) && ($_GET['type'] == 'movie' or $_
       <div class="mainBottom">
         <?php if ($type == 'movie') { ?>
           <!-- Phrase d'accroche -->
-          <div class="catch"><i class="fas fa-quote-left fa2"></i>
-            <div class="text"><i class="fas fa-quote-right fa1"></i>
-              <div>
-                <p><?= $result->catch ?></p>
+          <div class="catch-container">
+            <div class="catch"><i class="fas fa-quote-left fa2"></i>
+              <div class="text"><i class="fas fa-quote-right fa1"></i>
+                <div>
+                  <p><?= $result->catch ?></p>
+                </div>
               </div>
             </div>
           </div>
