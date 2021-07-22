@@ -67,7 +67,7 @@
 /* Texte d'accueil */
 @media all and (max-width: 900px) {
   .welcome-text {
-    font-size: 0.8em;
+    font-size: 1em;
   }
 
   .welcome-text p {
@@ -136,19 +136,14 @@ all and (max-height: 800px) {
   }
 }
 
-@media all and (max-width: 767px) {
-  .alphabet li {
-    width: 30px;
+/* Boîte de sélection */
+@media (max-width: 767px) {
+  .mainAlphabetTop ul {
+    display: none;
   }
 
-  .letters {
-    font-size: 2em;
-  }
-}
-
-@media all and (max-width: 600px) {
-  .letters {
-    font-size: 1.6em;
+  .mainAlphabetTop .select-box {
+    display: inline-block;
   }
 }
 

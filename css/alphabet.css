@@ -91,6 +91,66 @@
   transition: background 0.4s;
 }
 
+/* Boîte de sélection */
+.mainAlphabetTop .select-box {
+  display: none;
+}
+
+.select-box {
+  position: relative;
+  padding: 0;
+  margin: 0;
+  margin-top: 40px;
+  border: 2px solid var(--color-light);
+  width: 120px;
+  border-radius: 15px;
+  overflow: hidden;
+  background-color: var(--color-dark);
+  background: var(--color-dark);
+}
+
+.select-box select {
+  padding: 5px 8px;
+  width: 100%;
+  border: none;
+  box-shadow: none;
+  background-color: var(--color-dark);
+  background-image: none;
+  color: var(--color-light);
+  font-size: 40px;
+  font-weight: 500;
+  font-family: var(--font-title);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.select-box optgroup {
+  font-size: 40px;
+  font-weight: 500;
+  font-family: var(--font-title);
+}
+
+.select-box:after {
+  top: 50%;
+  left: 85%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-color: rgba(0, 0, 0, 0);
+  border-top-color: var(--color-dark);
+  border-width: 5px;
+  margin-top: -2px;
+  z-index: 100;
+}
+
+.select-box select:focus {
+  outline: none;
+}
+
 /* Tableau */
 .tType {
   border: none;
