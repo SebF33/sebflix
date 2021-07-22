@@ -156,7 +156,7 @@ if (empty($result) && empty($result2)) {
 
   <!-- Appel des feuilles de styles -->
   <link rel="stylesheet" href="/css/design.css" type="text/css" media="screen">
-  <link rel="stylesheet" href="/css/table.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="/css/results.css" type="text/css" media="screen">
   <link rel="stylesheet" href="/css/menu.css" type="text/css" media="screen">
   <link rel="stylesheet" href="/css/responsive.css" type="text/css" media="screen">
 

@@ -127,7 +127,7 @@ if (isset($_GET['type']) && !empty($_GET['type']) && in_array($_GET['type'], $ty
 
   <!-- Appel des feuilles de styles -->
   <link rel="stylesheet" href="/css/design.css" type="text/css" media="screen">
-  <link rel="stylesheet" href="/css/table.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="/css/results.css" type="text/css" media="screen">
   <link rel="stylesheet" href="/css/card.css" type="text/css" media="screen">
   <link rel="stylesheet" href="/css/menu.css" type="text/css" media="screen">
   <link rel="stylesheet" href="/css/responsive.css" type="text/css" media="screen">

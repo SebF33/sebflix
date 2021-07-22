@@ -16,7 +16,7 @@
 
   <!-- Appel des feuilles de styles -->
   <link rel="stylesheet" href="/css/design.css" type="text/css" media="screen">
-  <link rel="stylesheet" href="/css/table.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="/css/results.css" type="text/css" media="screen">
   <link rel="stylesheet" href="/css/menu.css" type="text/css" media="screen">
 
   <!-- Appel de la police "Truculenta" sur Google Fonts -->
