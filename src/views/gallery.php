@@ -56,8 +56,8 @@ require dirname(__DIR__) . '/database/viewmanager.php';
     <!-- Logo du site -->
     <div class="headerLogo">
       <a href="/index.php"><img src="/img/logo_sebflix.png" alt="Sebflix" width="190.8" height="66.8" /></a>
+      <h1 class="results">Galerie</h1>
     </div>
-    <h1 class="results">Galerie</h1>
   </header>
 
   <!-- Main content -->

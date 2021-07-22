@@ -294,25 +294,60 @@ all and (max-height: 800px) {
   }
 }
 
-/* Viewpages */
+/* Viewpage */
 @media all and (max-width: 1300px) {
+  #headerViewpage {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+  }
+
+  #headerViewpage #headerLeft,
+  #headerViewpage #headerMain {
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 40px;
+  }
+
+  #headerViewpage :nth-child(1) {
+    order: 2;
+  }
+
+  #headerViewpage :nth-child(2) {
+    order: 1;
+  }
+
+  .table-rating {
+    margin-left: 0;
+  }
+
   .table-discart {
     display: none;
   }
 
+  .firstPage {
+    height: auto;
+  }
+
   .firstPage .mainTop,
   .secondPage .mainTop {
-    height: 80vh;
+    height: auto;
+    align-items: flex-start
   }
 
   .firstPage .mainBottom,
   .secondPage .mainTop {
-    height: 20vh;
+    height: auto;
   }
 
   iframe,
   .embedPlaceholder {
     margin-top: 100px;
+  }
+
+  .catch {
+    margin-top: 40px;
   }
 
   .secondPage .tstudio {

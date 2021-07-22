@@ -22,6 +22,9 @@
 /* Bloc d'en-tête de gauche */
 #headerViewpage #headerLeft {
   /*border: 1px solid red;*/
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
   text-align: center;
   width: 33.33%;
   height: 100%;
