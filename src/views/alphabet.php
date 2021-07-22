@@ -161,9 +161,9 @@ if (isset($_GET['category']) && !empty($_GET['category']) && in_array($_GET['cat
         <select onchange="location = this.value">
           <optgroup>
             <?php
-            echo '<option value="table.php?category=' . $category . '&letter=numeric">&</option>';
+            echo '<option style="font-family: truculenta" value="table.php?category=' . $category . '&letter=numeric">&</option>';
             foreach (range('A', 'Z') as $i) {
-              echo '<option value="table.php?category=' . $category . '&letter=' . strtolower($i) . '">' . $i . '</option>';
+              echo '<option style="font-family: truculenta" value="table.php?category=' . $category . '&letter=' . strtolower($i) . '">' . $i . '</option>';
             }
             ?>
           </optgroup>

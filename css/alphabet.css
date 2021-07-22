@@ -117,15 +117,15 @@
   background-color: var(--color-dark);
   background-image: none;
   color: var(--color-light);
-  font-size: 40px;
-  font-weight: 500;
-  font-family: var(--font-title);
+  appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-  appearance: none;
+  cursor: pointer;
 }
 
-.select-box optgroup {
+.select-box select,
+.select-box optgroup,
+.select-box option {
   font-size: 40px;
   font-weight: 500;
   font-family: var(--font-title);
@@ -141,8 +141,11 @@
   position: absolute;
   pointer-events: none;
   border-color: rgba(0, 0, 0, 0);
-  border-top-color: var(--color-dark);
+  border-top-color: var(--color-light);
   border-width: 5px;
+  font-size: 40px;
+  font-weight: 500;
+  font-family: var(--font-title);
   margin-top: -2px;
   z-index: 100;
 }
