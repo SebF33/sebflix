@@ -109,7 +109,8 @@
   }
 }
 
-@media all and (max-width: 1024px) {
+@media all and (max-width: 1024px),
+all and (max-height: 800px) {
   .mainAlphabetTop {
     height: 100%;
   }
@@ -195,7 +196,7 @@
   }
 }
 
-/* Tableaux et carrousel */
+/* Affiches et carrousel */
 @media all and (max-width: 1600px) {
   h1 {
     font-size: 1.6em;
@@ -218,8 +219,7 @@ all and (max-height: 800px) {
   }
 
   .random-btn-container,
-  .card-carousel,
-  .mainBottom table {
+  .card-carousel {
     display: none;
   }
 }
@@ -303,6 +303,10 @@ all and (max-height: 800px) {
     height: auto;
   }
 
+  #headerViewpage #headerMain {
+    margin-top: 40px;
+  }
+
   #headerViewpage #headerLeft,
   #headerViewpage #headerMain {
     width: 100%;
@@ -326,19 +330,18 @@ all and (max-height: 800px) {
     display: none;
   }
 
-  .firstPage {
+  .secondPage {
+    margin-top: 80px;
+  }
+
+  .firstPage,
+  .secondPage {
     height: auto;
   }
 
   .firstPage .mainTop,
   .secondPage .mainTop {
-    height: auto;
     align-items: flex-start
-  }
-
-  .firstPage .mainBottom,
-  .secondPage .mainTop {
-    height: auto;
   }
 
   iframe,
@@ -353,15 +356,27 @@ all and (max-height: 800px) {
   .secondPage .tstudio {
     font-size: 0.8em;
   }
+
+  .secondPage .mainBottom {
+    margin-bottom: 40px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .table-casting,
+  .table-casting th,
+  .table-casting td {
+    display: block;
+  }
+
+  .table-casting thead {
+    display: none;
+  }
 }
 
 @media all and (max-width: 1024px) {
-  #headerViewpage #headerMain {
-    font-size: 2.4vw;
-  }
-
   #headerViewpage #headerMain img {
-    margin-top: 20px;
     width: 256px;
     height: 99.2px;
   }

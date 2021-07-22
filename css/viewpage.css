@@ -40,7 +40,7 @@
   height: 100%;
   color: var(--color-light);
   font-family: var(--font-title);
-  font-size: 2em;
+  font-size: calc(1.875rem + 0.6vw);
   font-weight: 700;
   text-align: center;
   text-transform: uppercase;
@@ -238,18 +238,16 @@ iframe,
 .table-rating {
   border-collapse: collapse;
   font-family: var(--font-text);
-  margin-top: 1.2em;
-  margin-left: 1.2em;
-  margin-bottom: 1em;
+  margin-top: 1.8em;
+  margin-left: 1.8em;
   filter: drop-shadow(7px 5px 2px #000000);
 }
 
 .table-discart {
   table-layout: fixed;
   border-collapse: collapse;
-  margin-top: 2em;
-  margin-right: 2em;
-  margin-bottom: 1em;
+  margin-top: 1.8em;
+  margin-right: 1.8em;
 }
 
 .table-rows {
