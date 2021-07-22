@@ -157,13 +157,9 @@ if (isset($_GET['type']) && !empty($_GET['type']) && in_array($_GET['type'], $ty
   ?>
 
   <!-- Header -->
-  <header id="header" role="banner">
-
-    <div id="headerLeft">
-    </div>
-
-    <div id="headerMain">
-      <!-- Logo -->
+  <header role="banner">
+    <!-- Logo -->
+    <div class="headerLogo">
       <?php
       if ($type == 'achievement') {
         // Logo du studio
@@ -186,19 +182,13 @@ if (isset($_GET['type']) && !empty($_GET['type']) && in_array($_GET['type'], $ty
         echo '<a href="/index.php"><img src="/img/logo_sebflix.png" alt="Sebflix" width="190.8" height="66.8" /></a>';
       }
       ?>
+      <!-- En-tête de résultats -->
+      <h1 class="results"><?= $h1 ?></h1>
     </div>
-
-    <div id="headerRight">
-    </div>
-
   </header>
 
   <!-- Main content -->
   <main class="main">
-
-    <div class="results">
-      <h1><?= $h1 ?></h1>
-    </div>
 
     <div id="gallery">
       <div class="gPoster">

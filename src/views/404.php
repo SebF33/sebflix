@@ -16,7 +16,7 @@
 
   <!-- Appel des feuilles de styles -->
   <link rel="stylesheet" href="/css/design.css" type="text/css" media="screen">
-  <link rel="stylesheet" href="/css/error.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="/css/table.css" type="text/css" media="screen">
   <link rel="stylesheet" href="/css/menu.css" type="text/css" media="screen">
 
   <!-- Appel de la police "Truculenta" sur Google Fonts -->
@@ -37,14 +37,12 @@
   </style>
 
   <!-- Header -->
-  <header id="header" role="banner">
-    <div id="headerLeft">
-      <h1 class="nfType">Page introuvable</h1>
-    </div>
-
-    <div id="headerMain">
+  <header role="banner">
+    <div class="headerLogo">
       <!-- Logo du site -->
-      <a href="/index.php"><img src="/img/logo_sebflix.png" alt="Sebflix" width="238.5" height="83.5" /></a>
+      <a href="/index.php"><img src="/img/logo_sebflix.png" alt="Sebflix" width="190.8" height="66.8" /></a>
+      <h1 class="errorTitle">Page introuvable</h1>
+      <p class="results">Oups, la page n'est pas (encore) disponible... vous pouvez retourner à <a href="/index.php"> l'entrée</a>.</p>
     </div>
   </header>
 
@@ -53,10 +51,6 @@
     <!-- Menu circulaire -->
     <?php include "../templates/menu.html"; ?>
   </main>
-
-  <!-- Footer -->
-  <footer>
-  </footer>
 
 </body>
 

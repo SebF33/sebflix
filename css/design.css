@@ -19,18 +19,6 @@ h1 {
   font-family: var(--font-title);
 }
 
-/* Message d'erreur */
-.nfType {
-  margin: 20%;
-  user-select: none;
-  font-size: 3vw;
-  font-weight: 500;
-  text-align: left;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  text-shadow: 2px 7px 5px var(--color-dark), 0px -4px 10px var(--color-light);
-}
-
 /* Image de fond sur toute la page */
 body {
   /* Appel de l'image de fond */

@@ -25,53 +25,13 @@ body {
   background-color: var(--color-extralighter);
 }
 
-/* Bloc d'en-tête global */
-#header {
-  /*border: 1px solid black;*/
-  margin: 0;
-  display: flex;
-  width: 100%;
-  height: 20vh;
-}
-
-/* Bloc d'en-tête de gauche */
-#header #headerLeft {
-  /*border: 1px solid red;*/
-  width: 33.33%;
-  height: 100%;
-}
-
-/* Bloc d'en-tête du milieu */
-#header #headerMain {
-  /*border: 1px solid goldenrod;*/
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 33.33%;
-  height: 100%;
-}
-
-/* Logo du site */
-#header #headerMain img {
-  max-width: 100%;
-  height: auto;
-  filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
-}
-
-/* Bloc d'en-tête de droite */
-#header #headerRight {
-  /*border: 1px solid red;*/
-  width: 33.33%;
-  height: 100%;
-}
-
 /* Bloc du corps global */
 #main {
   /*border: 2px solid white;*/
   margin: 0;
   padding: 0;
   width: 100%;
-  height: 80vh;
+  height: auto;
   text-align: center;
   justify-content: center;
   vertical-align: middle;

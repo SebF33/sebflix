@@ -21,6 +21,7 @@ require dirname(__DIR__) . '/database/viewmanager.php';
 
   <!-- Appel des feuilles de styles -->
   <link rel="stylesheet" href="/css/design.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="/css/table.css" type="text/css" media="screen">
   <link rel="stylesheet" href="/css/gallery.css" type="text/css" media="screen">
   <link rel="stylesheet" href="/css/menu.css" type="text/css" media="screen">
   <link rel="stylesheet" href="/css/responsive.css" type="text/css" media="screen">
@@ -51,17 +52,12 @@ require dirname(__DIR__) . '/database/viewmanager.php';
 <body>
 
   <!-- Header -->
-  <header id="header" role="banner">
-    <div id="headerLeft">
-    </div>
-
-    <div id="headerMain">
-      <!-- Logo du site -->
+  <header role="banner">
+    <!-- Logo du site -->
+    <div class="headerLogo">
       <a href="/index.php"><img src="/img/logo_sebflix.png" alt="Sebflix" width="190.8" height="66.8" /></a>
     </div>
-
-    <div id="headerRight">
-    </div>
+    <h1 class="results">Galerie</h1>
   </header>
 
   <!-- Main content -->

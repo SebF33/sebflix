@@ -181,23 +181,11 @@ if (empty($result) && empty($result2)) {
 <body>
 
   <!-- Header -->
-  <header id="header" role="banner">
-
-    <div id="headerLeft">
-      <h1>
-        <p></p>
-      </h1>
-    </div>
-
-    <div id="headerMain">
-      <!-- Logo du site -->
+  <header role="banner">
+    <!-- Logo du site -->
+    <div class="headerLogo">
       <a href="/index.php"><img src="/img/logo_sebflix.png" alt="Sebflix" width="190.8" height="66.8" /></a>
     </div>
-
-    <!-- Créer la rubrique contact -->
-    <div id="headerRight">
-    </div>
-
   </header>
 
   <!-- Main content -->

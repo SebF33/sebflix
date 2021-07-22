@@ -9,49 +9,36 @@
   box-sizing: border-box;
 }
 
-/* Bloc d'en-tête global */
-#header {
-  /*border: 1px solid black;*/
-  margin: 0;
-  display: flex;
-  width: 100%;
-  height: 20vh;
-}
-
-/* Bloc d'en-tête de gauche */
-#header #headerLeft {
-  /*border: 1px solid red;*/
-  width: 33.33%;
-  height: 100%;
-}
-
-/* Bloc d'en-tête du milieu */
-#header #headerMain {
+/* Bloc du logo en en-tête */
+.headerLogo {
   /*border: 1px solid goldenrod;*/
+  margin-top: 1.5rem;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 33.33%;
-  height: 100%;
+  width: 100%;
+  height: auto;
+  text-align: center
 }
 
 /* Logo du header */
-#header #headerMain a {
+.headerLogo a {
   text-decoration: none;
   color: var(--color-light);
   font-family: var(--font-title);
-  font-size: 1.4vw;
+  font-size: 1.3em;
   font-weight: 700;
   text-align: center;
 }
 
-#header #headerMain img {
+.headerLogo img {
   max-width: 100%;
   height: auto;
   filter: drop-shadow(2px 2px 2px black);
 }
 
-#header #headerMain .logoStudio {
+.headerLogo .logoStudio {
   cursor: pointer;
   text-decoration: none;
   color: var(--color-light);
@@ -64,7 +51,7 @@
   text-align: center;
 }
 
-#header #headerMain .logoStudio img {
+.headerLogo .logoStudio img {
   margin: 0 auto;
   padding-left: 10px;
   padding-right: 10px;
@@ -78,22 +65,47 @@
   border: 2px solid var(--color-light);
 }
 
-#header #headerMain .logoCasting {
+.headerLogo .logoCasting {
   font-size: 1.2em;
   font-weight: 500;
 }
 
-#header #headerMain .logoCasting img {
+.headerLogo .logoCasting img {
   display: block;
   background-color: var(--color-dark);
   border: 2px solid var(--color-light);
 }
 
-/* Bloc d'en-tête de droite */
-#header #headerRight {
-  /*border: 1px solid red;*/
-  width: 33.33%;
-  height: 100%;
+/* Intitulé de l'erreur */
+.headerLogo .errorTitle {
+  margin-top: 20px;
+  font-size: calc(1.875rem + 0.6vw);
+  font-weight: 500;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 2px 7px 5px var(--color-dark), 0px -4px 10px var(--color-light);
+  user-select: none;
+}
+
+/* Résultats de recherche */
+.headerLogo .results {
+  /*border: 1px solid white;*/
+  margin-top: 40px;
+  margin-bottom: 0.5rem;
+  margin-left: 20px;
+  margin-right: 20px;
+  color: var(--color-light);
+  font-family: var(--font-title);
+  font-size: calc(1.375rem + 0.6vw);
+  text-align: center;
+  text-shadow: 2px 0 0 black, 0 2px 0 black, 0 -2px 0 black, -2px 0 0 black,
+    2px 2px 0 black, 2px -2px 0 black, -2px 2px 0 black, -2px -2px 0 black;
+}
+
+.headerLogo .results a {
+  text-decoration: underline;
+  font-size: calc(1.375rem + 0.6vw);
 }
 
 /* Tableau */
@@ -210,27 +222,12 @@
   text-align: center;
 }
 
-/* Résultats de recherche */
-.results {
-  /*border: 1px solid white;*/
-  height: 20vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  color: var(--color-light);
-  text-shadow: 2px 0 0 black, 0 2px 0 black, 0 -2px 0 black, -2px 0 0 black,
-    2px 2px 0 black, 2px -2px 0 black, -2px 2px 0 black, -2px -2px 0 black;
-}
-
-.results h1 {
-  font-size: 2.4em;
-}
-
 #gallery {
   /*border: 1px solid white;*/
-  margin: 120px;
-  margin-top: -20px;
+  margin-top: 90px;
+  margin-bottom: 90px;
+  margin-left: 100px;
+  margin-right: 100px;
 }
 
 .gPoster {
