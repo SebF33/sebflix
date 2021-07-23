@@ -214,7 +214,7 @@ all and (max-height: 800px) {
   }
 }
 
-@media all and (max-width: 1300px),
+@media all and (max-width: 767px),
 all and (max-height: 800px) {
   .mainTop {
     height: 100%;
