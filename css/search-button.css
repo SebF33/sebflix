@@ -31,6 +31,10 @@
   background-color: transparent;
 }
 
+#cover #searchInput {
+  width: 280px;
+}
+
 #cover form {
   height: 80px;
 }
@@ -44,6 +48,35 @@
 
 #cover input[type="text"]::placeholder {
   color: var(--color-light);
+}
+
+/* Autocomplétion Chrome */
+#cover input:-webkit-autofill,
+#cover input:-webkit-autofill:hover,
+#cover input:-webkit-autofill:focus,
+#cover input:-webkit-autofill:active {
+  -webkit-text-fill-color: var(--color-light);
+  -webkit-box-shadow: 0 0 0px 1000px transparent;
+  transition: background-color 5000s ease-in-out 0s;
+  -webkit-animation: autofill 0s forwards;
+  animation: autofill 0s forwards;
+}
+
+#cover input:-webkit-autofill::first-line {
+  font-family: var(--font-title);
+  font-size: 2.4em;
+}
+
+@keyframes autofill {
+  100% {
+    font-size: inherit;
+  }
+}
+
+@-webkit-keyframes autofill {
+  100% {
+    font-size: inherit;
+  }
 }
 
 /* Bouton du bloc de recherche */
