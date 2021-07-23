@@ -68,6 +68,13 @@
   }
 }
 
+/* Menu circulaire */
+@media all and (max-width: 600px) {
+  .circular-menu {
+    display: none;
+  }
+}
+
 /* Texte d'accueil */
 @media all and (max-width: 900px) {
   .welcome-text {
