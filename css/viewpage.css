@@ -53,6 +53,7 @@
   margin-top: 40px;
   width: 320px;
   height: 124px;
+  filter: drop-shadow(2px 2px 2px black);
 }
 
 /* Bloc d'en-tête de droite */
@@ -379,7 +380,8 @@ td {
   line-height: 1;
 }
 
-.readandspeech {
+/* Icônes Font Awesome */
+.icon-viewpage {
   cursor: pointer;
   color: var(--color-darker);
   text-shadow: 1px 3px 2px var(--color-dark), 0px -2px 5px var(--color-light);

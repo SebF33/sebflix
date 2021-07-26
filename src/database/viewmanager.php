@@ -14,13 +14,14 @@
 //    1.08 Sélection du discart du média type film
 //    1.09 Sélection du fanart du média type film
 //    1.10 Sélection jusqu'à 6 actrice(s)/acteur(s)/doubleur(s) du média type film
-//    1.11 Sélection des films selon le genre défini
-//    1.12 Sélection des films dont le titre commence par le caractère défini
-//    1.13 Sélection des films dont le titre commence par un chiffre
-//    1.14 Sélection des genres pour les films
-//    1.15 Sélection du nom d'un genre par son identifiant
-//    1.16 Sélection des films selon le genre défini depuis la liste
-//    1.17 Sélection des 200 films les plus populaires par leur poster
+//    1.11 Sélection de tout(es) les actrice(s)/acteur(s)/doubleur(s) du média type film
+//    1.12 Sélection des films selon le genre défini
+//    1.13 Sélection des films dont le titre commence par le caractère défini
+//    1.14 Sélection des films dont le titre commence par un chiffre
+//    1.15 Sélection des genres pour les films
+//    1.16 Sélection du nom d'un genre par son identifiant
+//    1.17 Sélection des films selon le genre défini depuis la liste
+//    1.18 Sélection des 200 films les plus populaires par leur poster
 
 //  02. Affichages des séries
 //    2.01 Sélection aléatoire de 3 médias type série par son poster
@@ -30,9 +31,9 @@
 //    2.05 Sélection des titre, synopsis, date de sortie, classification, studio, bande-annonce et pays du média type série
 //    2.06 Sélection du logo du média type série
 //    2.07 Sélection de la note du média type série
-//    2.08 
-//    2.09 Sélection du fanart du média type série
-//    2.10 Sélection jusqu'à 8 actrice(s)/acteur(s)/doubleur(s) du média type série
+//    2.08 Sélection du fanart du média type série
+//    2.09 Sélection jusqu'à 8 actrice(s)/acteur(s)/doubleur(s) du média type série
+//    2.10 Sélection de tout(es) les actrice(s)/acteur(s)/doubleur(s) du média type série
 //    2.11 Sélection des séries selon le genre défini
 //    2.12 Sélection des séries dont le titre commence par le caractère défini
 //    2.13 Sélection des séries dont le titre commence par un chiffre
@@ -202,7 +203,7 @@ function select_logo_movie(int $id)
   connexion($dbco);
   try {
     $query = $dbco->prepare(
-      "SELECT cachedurl
+      "SELECT title, cachedurl
       FROM movie
       INNER JOIN art ON movie.idMovie = art.media_id
       WHERE idMovie = :id
@@ -307,7 +308,29 @@ function select_actors_movie(int $id)
   }
 }
 
-// 1.11 Sélection des films selon le genre défini
+// 1.11 Sélection de tout(es) les actrice(s)/acteur(s)/doubleur(s) du média type film
+function select_all_actors_movie(int $id)
+{
+  connexion($dbco);
+  try {
+    $query = $dbco->prepare(
+      "SELECT *
+      FROM actor_link
+      INNER JOIN actor ON actor.actor_id = actor_link.actor_id
+      WHERE media_id = :id
+      AND media_type = 'movie'
+      ORDER BY cast_order ASC"
+    );
+    $query->bindValue(':id', $id, PDO::PARAM_INT);
+    $query->execute();
+    $actors = $query->fetchAll(PDO::FETCH_ASSOC);
+    return $actors;
+  } catch (PDOException $e) {
+    echo "Erreur : " . $e->getMessage();
+  }
+}
+
+// 1.12 Sélection des films selon le genre défini
 function select_movie_by_genre(string $genre)
 {
   connexion($dbco);
@@ -333,7 +356,7 @@ function select_movie_by_genre(string $genre)
   }
 }
 
-// 1.12 Sélection des films dont le titre commence par le caractère défini
+// 1.13 Sélection des films dont le titre commence par le caractère défini
 function select_movie_by_letter(string $letter)
 {
   connexion($dbco);
@@ -359,7 +382,7 @@ function select_movie_by_letter(string $letter)
   }
 }
 
-// 1.13 Sélection des films dont le titre commence par un chiffre
+// 1.14 Sélection des films dont le titre commence par un chiffre
 function select_movie_by_numeric()
 {
   connexion($dbco);
@@ -393,7 +416,7 @@ function select_movie_by_numeric()
   }
 }
 
-// 1.14 Sélection des genres pour les films
+// 1.15 Sélection des genres pour les films
 function select_movie_genres()
 {
   connexion($dbco);
@@ -416,7 +439,7 @@ function select_movie_genres()
   }
 }
 
-// 1.15 Sélection du nom d'un genre par son identifiant
+// 1.16 Sélection du nom d'un genre par son identifiant
 function select_genre_name(int $id)
 {
   connexion($dbco);
@@ -435,7 +458,7 @@ function select_genre_name(int $id)
   }
 }
 
-// 1.16 Sélection des films selon le genre défini depuis la liste
+// 1.17 Sélection des films selon le genre défini depuis la liste
 function select_genre_movie(int $id)
 {
   connexion($dbco);
@@ -462,7 +485,7 @@ function select_genre_movie(int $id)
   }
 }
 
-// 1.17 Sélection des 200 films les plus populaires par leur poster
+// 1.18 Sélection des 200 films les plus populaires par leur poster
 function select_best_movies()
 {
   connexion($dbco);
@@ -592,7 +615,7 @@ function select_logo_tvshow(int $id)
   connexion($dbco);
   try {
     $query = $dbco->prepare(
-      "SELECT cachedurl
+      "SELECT title, cachedurl
       FROM tvshow
       INNER JOIN art ON tvshow.idShow = art.media_id
       WHERE idShow = :id
@@ -630,9 +653,7 @@ function select_rating_tvshow(int $id)
   }
 }
 
-// 2.08 
-
-// 2.09 Sélection du fanart du média type série
+// 2.08 Sélection du fanart du média type série
 function select_fanart_tvshow(int $id)
 {
   connexion($dbco);
@@ -654,7 +675,7 @@ function select_fanart_tvshow(int $id)
   }
 }
 
-// 2.10 Sélection jusqu'à 8 actrice(s)/acteur(s)/doubleur(s) du média type série
+// 2.09 Sélection jusqu'à 8 actrice(s)/acteur(s)/doubleur(s) du média type série
 function select_actors_tvshow(int $id)
 {
   connexion($dbco);
@@ -667,6 +688,28 @@ function select_actors_tvshow(int $id)
       AND media_type = 'tvshow'
       ORDER BY cast_order ASC
       LIMIT 8"
+    );
+    $query->bindValue(':id', $id, PDO::PARAM_INT);
+    $query->execute();
+    $actors = $query->fetchAll(PDO::FETCH_ASSOC);
+    return $actors;
+  } catch (PDOException $e) {
+    echo "Erreur : " . $e->getMessage();
+  }
+}
+
+// 2.10 Sélection de tout(es) les actrice(s)/acteur(s)/doubleur(s) du média type série
+function select_all_actors_tvshow(int $id)
+{
+  connexion($dbco);
+  try {
+    $query = $dbco->prepare(
+      "SELECT *
+      FROM actor_link
+      INNER JOIN actor ON actor.actor_id = actor_link.actor_id
+      WHERE media_id = :id
+      AND media_type = 'tvshow'
+      ORDER BY cast_order ASC"
     );
     $query->bindValue(':id', $id, PDO::PARAM_INT);
     $query->execute();

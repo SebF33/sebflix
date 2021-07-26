@@ -20,7 +20,7 @@ require dirname(__DIR__) . '/database/viewmanager.php';
 require dirname(__DIR__) . '/database/validation.php';
 
 // Définition des valeurs autorisées dans les GET
-$types = array('movies', 'tvshows', 'actors', 'studios', 'achievement', 'direction', 'filmography', 'genres', 'genre', 'beststudios', 'sets', 'collection');
+$types = array('movies', 'tvshows', 'actors', 'studios', 'achievement', 'direction', 'filmography', 'genres', 'genre', 'beststudios', 'sets', 'collection', 'moviecast', 'tvshowcast');
 
 // Vérification des GET ('type' obligatoire)
 if (isset($_GET['type']) && !empty($_GET['type']) && in_array($_GET['type'], $types)) {
@@ -40,6 +40,10 @@ if (isset($_GET['type']) && !empty($_GET['type']) && in_array($_GET['type'], $ty
       $checkid = check_id_genre($id);
     } elseif ($type == 'collection') {
       $checkid = check_id_set($id);
+    } elseif ($type == 'moviecast') {
+      $checkid = check_id_movie($id);
+    } elseif ($type == 'tvshowcast') {
+      $checkid = check_id_tvshow($id);
     }
     if ($checkid === 0) {
       // Redirection
@@ -105,6 +109,20 @@ if (isset($_GET['type']) && !empty($_GET['type']) && in_array($_GET['type'], $ty
     $fanart = select_fanart_collection($id);
     $result = select_movies_collection($id);
     $h1 = $title = 'Collection  ' . $logo['strSet'] . '';
+  }
+  // Type "casting d'un média type film"
+  elseif ($type == 'moviecast') {
+    $logo = select_logo_movie($id);
+    $fanart = select_fanart_movie($id);
+    $actors = select_all_actors_movie($id);
+    $h1 = $title = 'Casting pour "' . $logo['title'] . '"';
+  }
+  // Type "casting d'un média type série"
+  elseif ($type == 'tvshowcast') {
+    $logo = select_logo_tvshow($id);
+    $fanart = select_fanart_tvshow($id);
+    $actors = select_all_actors_tvshow($id);
+    $h1 = $title = 'Casting pour "' . $logo['title'] . '"';
   }
 } else {
   // Redirection
@@ -177,6 +195,9 @@ if (isset($_GET['type']) && !empty($_GET['type']) && in_array($_GET['type'], $ty
       } elseif ($type == 'collection') {
         // Logo de la collection
         echo '<img src="../thumbnails/' . $logo['cachedurl'] . '" title="' . $logo['strSet'] . '" alt="' . $logo['strSet'] . '" height="124" width="320"/>';
+      } elseif ($type == 'moviecast' or $type == 'tvshowcast') {
+        // Logo du média
+        echo '<img src="../thumbnails/' . $logo['cachedurl'] . '" title="' . $logo['title'] . '" alt="' . $logo['title'] . '" height="124" width="320" draggable="false" ondragstart="return false"/>';
       } else {
         // Logo du site
         echo '<a href="/index.php"><img src="/img/logo_sebflix.png" alt="Sebflix" width="190.8" height="66.8" /></a>';
@@ -253,7 +274,7 @@ if (isset($_GET['type']) && !empty($_GET['type']) && in_array($_GET['type'], $ty
           }
         }
         // Affichage des acteurs
-        elseif ($type == 'actors') {
+        elseif ($type == 'actors' or $type == 'moviecast' or $type == 'tvshowcast') {
           foreach ($actors as $row) {
             if (empty($row['cachedurl'])) {
               echo '<a class="gCasting" href="display-results.php?type=filmography&id=' . $row['actor_id'] . '"><figure><img src="../thumbnails/placeholders/casting.png" title="' . $row['name'] . '" alt="' . $row['name'] . '" height="288" width="192"/><figcaption>' . $row['name'] . '</figcaption></figure></a>';

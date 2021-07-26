@@ -214,11 +214,11 @@ if (isset($_GET['id']) && !empty($_GET['id']) && ($_GET['type'] == 'movie' or $_
     <section class="secondPage">
       <div class="mainTop">
         <?php
-        // Créer un tableau à 2 colonnes
+        // Tableau à 2 colonnes
         echo
         '<table class="table-rows" border="2">
             <tr>
-            <th>Synopsis' . str_repeat('&nbsp;', 3) . '<a class="readandspeech"><i class="fas fa-volume-up"></i></i></a></th>
+            <th>Synopsis' . str_repeat('&nbsp;', 3) . '<a class="icon-viewpage readandspeech"><i class="fas fa-volume-up"></i></a></th>
             <th>Studio</th>
             </tr>';
         // Synopsis et studio
@@ -263,10 +263,10 @@ if (isset($_GET['id']) && !empty($_GET['id']) && ($_GET['type'] == 'movie' or $_
         // Actrices/acteurs/doubleurs
         if (!empty($actors)) {
           echo
-          "<table class='table-casting' border='2'>
+          '<table class="table-casting" border="2">
             <tr>
-            <th colspan='8'>Casting</th>
-            </tr>";
+            <th colspan="8">Casting' . str_repeat('&nbsp;', 3) . '<a class="icon-viewpage" href="display-results.php?type=' . $type . 'cast&id=' . $id . '"><i class="fa fa-bars"></i></a></th>
+            </tr>';
           foreach ($actors as $row) {
             if (empty($row['cachedurl'])) {
               echo '<td class="tcasting"><figure><a href="display-results.php?type=filmography&id=' . $row['actor_id'] . '"><img src="../thumbnails/placeholders/casting.png" title="' . $row['name'] . '" alt="" width="144" height="216"/></a><figcaption>' . $row['name'] . '</figcaption></figure></td>';
@@ -289,10 +289,6 @@ if (isset($_GET['id']) && !empty($_GET['id']) && ($_GET['type'] == 'movie' or $_
     <script src="/js/to-top.js"></script>
 
   </main>
-
-  <!-- Footer -->
-  <footer>
-  </footer>
 
 </body>
 

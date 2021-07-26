@@ -1,6 +1,6 @@
 <style type="text/css">
   body {
-    background-image: url(<?php if ($type == 'collection' && !empty($fanart['cachedurl'])) {
+    background-image: url(<?php if (($type == 'collection' or $type == 'moviecast' or $type == 'tvshowcast') && !empty($fanart['cachedurl'])) {
                             echo '"/src/thumbnails/' . $fanart['cachedurl'] . '"';
                           } elseif ($type == 'filmography' and $id == '26276') {
                             echo '"/img/bg_chaplin.png"';
