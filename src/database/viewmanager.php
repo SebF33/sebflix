@@ -64,8 +64,9 @@
 //  06. Affichages des collections
 //    6.01 Sélection de toutes les collections par leur poster
 //    6.02 Sélection de tous les médias de type film d'une collection par leur poster
-//    6.03 Sélection du logo d'une collection
-//    6.04 Sélection du fanart d'une collection
+//    6.03 Sélection de tous les médias de type série d'une collection par leur poster
+//    6.04 Sélection du logo d'une collection
+//    6.05 Sélection du fanart d'une collection
 
 //  07. Affichages des studios
 //    7.01 Sélection des films d'un studio par son nom
@@ -1281,14 +1282,37 @@ function select_movies_collection(int $id)
     );
     $query->bindValue(':id', $id, PDO::PARAM_INT);
     $query->execute();
-    $result = $query->fetchAll(PDO::FETCH_ASSOC);
-    return $result;
+    $movies = $query->fetchAll(PDO::FETCH_ASSOC);
+    return $movies;
   } catch (PDOException $e) {
     echo "Erreur : " . $e->getMessage();
   }
 }
 
-// 6.03 Sélection du logo d'une collection
+// 6.03 Sélection de tous les médias de type série d'une collection par leur poster
+function select_tvshows_collection(int $id)
+{
+  connexion($dbco);
+  try {
+    $query = $dbco->prepare(
+      "SELECT idShow, title, cachedurl
+      FROM tvshow
+      INNER JOIN art ON tvshow.idShow = art.media_id
+      WHERE idSet = :id
+      AND media_type = 'tvshow'
+      AND type = 'poster'
+      ORDER BY premiered DESC"
+    );
+    $query->bindValue(':id', $id, PDO::PARAM_INT);
+    $query->execute();
+    $tvshows = $query->fetchAll(PDO::FETCH_ASSOC);
+    return $tvshows;
+  } catch (PDOException $e) {
+    echo "Erreur : " . $e->getMessage();
+  }
+}
+
+// 6.04 Sélection du logo d'une collection
 function select_logo_collection(int $id)
 {
   connexion($dbco);
@@ -1310,7 +1334,7 @@ function select_logo_collection(int $id)
   }
 }
 
-// 6.04 Sélection du fanart d'une collection
+// 6.05 Sélection du fanart d'une collection
 function select_fanart_collection(int $id)
 {
   connexion($dbco);

@@ -107,7 +107,8 @@ if (isset($_GET['type']) && !empty($_GET['type']) && in_array($_GET['type'], $ty
   elseif ($type == 'collection') {
     $logo = select_logo_collection($id);
     $fanart = select_fanart_collection($id);
-    $result = select_movies_collection($id);
+    $movies = select_movies_collection($id);
+    $tvshows = select_tvshows_collection($id);
     $h1 = $title = 'Collection  ' . $logo['strSet'] . '';
   }
   // Type "casting d'un média type film"
@@ -339,8 +340,11 @@ if (isset($_GET['type']) && !empty($_GET['type']) && in_array($_GET['type'], $ty
         }
         // Affichage du contenu d'une collection
         elseif ($type == 'collection') {
-          foreach ($result as $row) {
+          foreach ($movies as $row) {
             echo '<a href="viewpage.php?type=movie&id=' . $row['idMovie'] . '"><img class="gMedia" src="../thumbnails/' . $row['cachedurl'] . '" alt="' . $row['title'] . '" height="360" width="240"/></a>';
+          }
+          foreach ($tvshows as $row) {
+            echo '<a href="viewpage.php?type=tvshow&id=' . $row['idShow'] . '"><img class="gMedia" src="../thumbnails/' . $row['cachedurl'] . '" alt="' . $row['title'] . '" height="360" width="240"/></a>';
           }
         }
         ?>

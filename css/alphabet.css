@@ -68,6 +68,7 @@
   text-align: center;
 }
 
+.alphabet li:nth-child(15),
 .alphabet li:last-child {
   border-right: none;
 }
