@@ -113,17 +113,19 @@ if (isset($_GET['type']) && !empty($_GET['type']) && in_array($_GET['type'], $ty
   }
   // Type "casting d'un média type film"
   elseif ($type == 'moviecast') {
+    $result = select_infos_movie($id);
     $logo = select_logo_movie($id);
     $fanart = select_fanart_movie($id);
     $actors = select_all_actors_movie($id);
-    $h1 = $title = 'Casting pour "' . $logo['title'] . '"';
+    $h1 = $title = 'Casting pour "' . $result->title . '"';
   }
   // Type "casting d'un média type série"
   elseif ($type == 'tvshowcast') {
+    $result = select_infos_tvshow($id);
     $logo = select_logo_tvshow($id);
     $fanart = select_fanart_tvshow($id);
     $actors = select_all_actors_tvshow($id);
-    $h1 = $title = 'Casting pour "' . $logo['title'] . '"';
+    $h1 = $title = 'Casting pour "' . $result->title . '"';
   }
 } else {
   // Redirection
@@ -192,13 +194,17 @@ if (isset($_GET['type']) && !empty($_GET['type']) && in_array($_GET['type'], $ty
         }
       } elseif ($type == 'genre') {
         // Logo du genre
-        echo '<img src="../thumbnails/genres/' . $genre['name'] . '" title="' . $genre['name'] . '" alt="' . $genre['name'] . '" height="161" width="161"/>';
+        echo '<img src="../thumbnails/genres/' . $genre['name'] . '" title="' . $genre['name'] . '" alt="' . $genre['name'] . '" height="161" width="161" draggable="false" ondragstart="return false"/>';
       } elseif ($type == 'collection') {
         // Logo de la collection
-        echo '<img src="../thumbnails/' . $logo['cachedurl'] . '" title="' . $logo['strSet'] . '" alt="' . $logo['strSet'] . '" height="124" width="320"/>';
+        echo '<img src="../thumbnails/' . $logo['cachedurl'] . '" title="' . $logo['strSet'] . '" alt="' . $logo['strSet'] . '" height="124" width="320" draggable="false" ondragstart="return false"/>';
       } elseif ($type == 'moviecast' or $type == 'tvshowcast') {
         // Logo du média
-        echo '<img src="../thumbnails/' . $logo['cachedurl'] . '" title="' . $logo['title'] . '" alt="' . $logo['title'] . '" height="124" width="320" draggable="false" ondragstart="return false"/>';
+        if (!$logo or empty($logo['cachedurl'])) {
+          echo "";
+        } else {
+          echo '<img src="../thumbnails/' . $logo['cachedurl'] . '" title="' . $result->title . '" alt="' . $result->title . '" height="124" width="320" draggable="false" ondragstart="return false"/>';
+        }
       } else {
         // Logo du site
         echo '<a href="/index.php"><img src="/img/logo_sebflix.png" alt="Sebflix" width="190.8" height="66.8" /></a>';

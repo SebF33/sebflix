@@ -204,7 +204,7 @@ function select_logo_movie(int $id)
   connexion($dbco);
   try {
     $query = $dbco->prepare(
-      "SELECT title, cachedurl
+      "SELECT cachedurl
       FROM movie
       INNER JOIN art ON movie.idMovie = art.media_id
       WHERE idMovie = :id
@@ -616,7 +616,7 @@ function select_logo_tvshow(int $id)
   connexion($dbco);
   try {
     $query = $dbco->prepare(
-      "SELECT title, cachedurl
+      "SELECT cachedurl
       FROM tvshow
       INNER JOIN art ON tvshow.idShow = art.media_id
       WHERE idShow = :id
