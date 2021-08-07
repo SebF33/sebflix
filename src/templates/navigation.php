@@ -121,7 +121,9 @@ session_start();
     <?php
     // Vérification si l'utilisateur est bien connecté
     if (isset($_SESSION["logged"]) && !empty($_SESSION["logged"])) {
-      echo '<p class="profile-username">' . $_SESSION['username'] . '</p>';
+      echo '<p class="profile username">' . $_SESSION['username'] . '</p>';
+    } else {
+      echo '<p class="profile disconnected">Non connecté</p>';
     }
     ?>
     <a class="profile-btn" href="/src/views/profile.php">
