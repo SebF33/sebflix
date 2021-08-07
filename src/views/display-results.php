@@ -58,7 +58,7 @@ if (isset($_GET['type']) && !empty($_GET['type']) && in_array($_GET['type'], $ty
     // Appel du script du moteur de recherche
     require dirname(__DIR__) . '/database/search.php';
     $title = "Résultats de recherche";
-    $h1 = $result;
+    $h1 = $msg_result;
   }
   // Type "réalisations du studio"
   elseif ($type == 'achievement') {
@@ -156,9 +156,6 @@ if (isset($_GET['type']) && !empty($_GET['type']) && in_array($_GET['type'], $ty
   <!-- Appel de l'icône -->
   <link data-vue-tag="ssr" rel="icon" type="image/png" sizes="48x48" href="/img/favicon-48.png">
   <link data-vue-tag="ssr" rel="icon" type="image/png" sizes="192x192" href="/img/favicon-192.png">
-
-  <!-- Appel de jQuery -->
-  <script src="/js/jquery-3.6.0.min.js"></script>
 
   <!-- Appel des polices "Truculenta" et "Roboto" sur Google Fonts -->
   <link rel="preconnect" href="https://fonts.gstatic.com">

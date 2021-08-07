@@ -1,3 +1,7 @@
+<?php
+// Initialisation de la session
+session_start();
+?>
 <header>
   <nav role='navigation'>
     <ul>
@@ -114,6 +118,15 @@
       }
       ?>
     </ul>
+    <?php
+    // Vérification si l'utilisateur est bien connecté
+    if (isset($_SESSION["logged"]) && !empty($_SESSION["logged"])) {
+      echo '<p class="profile-username">' . $_SESSION['username'] . '</p>';
+    }
+    ?>
+    <a class="profile-btn" href="/src/views/profile.php">
+      <img src="/assets/img/profile.png" alt="Profil">
+    </a>
   </nav>
   <script src="/js/icon.js"></script>
 </header>

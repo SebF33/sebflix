@@ -3,7 +3,7 @@
 // Connexion à la base de données //
 ////////////////////////////////////
 
-function connexion(&$conn)
+function connexion(&$dbco)
 {
   // Informations de connexion à la base de données
   $host = "localhost";
@@ -12,11 +12,9 @@ function connexion(&$conn)
 
   // Tentative de connexion
   try {
-    $conn = new PDO("mysql:host=$host;dbname=182x2_myvideos", $user, $pwd);
-    // Charset = 'UTF-8'
-    $conn->exec('SET NAMES utf8');
+    $dbco = new PDO("mysql:host=$host;dbname=182x2_myvideos;charset=utf8", $user, $pwd);
     // Mode d'erreur de PDO sur 'Exception'
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $dbco->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   }
 
   // Gestion des erreurs

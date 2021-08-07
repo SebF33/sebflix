@@ -1,7 +1,9 @@
 <footer>
   <div class="footerInner">
     <!-- Logo du site -->
-    <div class="logo"><a href="/index.php"><img id="logoSite" src="/img/logo_sebflix.png" alt="Sebflix" width="238.5" height="83.5" /></a></div>
+    <div class="logo">
+      <a href="/index.php"><img id="logoSite" src="/img/logo_sebflix.png" alt="Sebflix" width="238.5" height="83.5" /></a>
+    </div>
     <nav>
       <div class="social">
         <!-- Lien vers mon Portfolio -->

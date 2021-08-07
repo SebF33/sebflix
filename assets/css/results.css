@@ -1,0 +1,373 @@
+/*************/
+/* Résultats */
+/*************/
+
+/* Reset User Agent */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Bloc du logo en en-tête */
+.headerLogo {
+  /*border: 1px solid goldenrod;*/
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: auto;
+  text-align: center
+}
+
+/* Logo du header */
+.headerLogo a {
+  text-decoration: none;
+  color: var(--color-light);
+  font-family: var(--font-title);
+  font-size: 1.3em;
+  font-weight: 700;
+  text-align: center;
+}
+
+.headerLogo img {
+  max-width: 100%;
+  height: auto;
+  filter: drop-shadow(2px 2px 2px black);
+}
+
+.headerLogo .logoStudio {
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--color-light);
+  font-family: var(--font-title);
+  font-size: 1.3em;
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.headerLogo .logoStudio img {
+  margin: 0 auto;
+  padding-left: 10px;
+  padding-right: 10px;
+  max-width: 161px;
+  max-height: 109px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  background-color: var(--color-dark);
+  border: 2px solid var(--color-light);
+}
+
+.headerLogo .logoCasting {
+  font-size: 1.2em;
+  font-weight: 500;
+}
+
+.headerLogo .logoCasting img {
+  display: block;
+  background-color: var(--color-dark);
+  border: 2px solid var(--color-light);
+}
+
+/* Intitulé de l'erreur */
+.headerLogo .errorTitle {
+  margin-top: 20px;
+  font-size: calc(1.875rem + 0.6vw);
+  font-weight: 500;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 2px 7px 5px var(--color-dark), 0px -4px 10px var(--color-light);
+  user-select: none;
+}
+
+/* Résultats de recherche */
+.headerLogo .results {
+  /*border: 1px solid white;*/
+  margin-top: 40px;
+  margin-bottom: 0.5rem;
+  margin-left: 20px;
+  margin-right: 20px;
+  color: var(--color-light);
+  font-family: var(--font-title);
+  font-size: calc(1.375rem + 0.6vw);
+  text-align: center;
+  text-shadow: 2px 0 0 black, 0 2px 0 black, 0 -2px 0 black, -2px 0 0 black,
+    2px 2px 0 black, 2px -2px 0 black, -2px 2px 0 black, -2px -2px 0 black;
+}
+
+.headerLogo .results a {
+  text-decoration: underline;
+  font-size: calc(1.375rem + 0.6vw);
+}
+
+/* Tableau */
+.infosTable {
+  table-layout: fixed;
+  width: 90%;
+  border-collapse: collapse;
+  margin: 0 auto;
+  margin-top: 3em;
+  margin-bottom: 4em;
+  filter: drop-shadow(4px 4px 2px #000000);
+}
+
+.infosTable tr th:first-child {
+  width: 9%;
+}
+
+.infosTable tr th:nth-child(2) {
+  width: 14%;
+}
+
+.infosTable tr th:nth-child(3) {
+  max-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.infosTable tr th:nth-child(4) {
+  width: 12%;
+}
+
+/* Cellules d'en-tête du tableau */
+.infosTable th {
+  background-color: var(--color-main);
+  color: var(--color-light);
+  border: thin solid var(--color-light);
+  font-family: var(--font-title);
+  text-transform: uppercase;
+  font-size: 1.2vw;
+  font-weight: 700;
+  text-align: center;
+  text-shadow: black 0.1em 0.1em 0.2em;
+  user-select: none;
+}
+
+/* Cellules du tableau */
+.infosTable td {
+  background-color: var(--color-dark);
+  color: var(--color-light);
+  border: thin solid var(--color-light);
+  font-family: var(--font-text);
+  text-align: left;
+}
+
+.infosTable .tposter {
+  font-family: var(--font-title);
+  font-size: 0.8vw;
+  text-align: center;
+}
+
+.infosTable .tposter a {
+  text-decoration: none;
+  color: var(--color-light);
+}
+
+.infosTable .tposter img {
+  display: block;
+  text-align: center;
+  max-width: 100%;
+  height: auto;
+}
+
+.infosTable .tname {
+  padding: 1%;
+  font-family: var(--font-title);
+  text-align: center;
+  font-size: 1vw;
+}
+
+.infosTable .tsynopsis {
+  padding: 1%;
+  font-size: 0.8vw;
+  font-style: italic;
+  line-height: 1.6;
+  letter-spacing: 0.5px;
+}
+
+.infosTable .max-lines {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical;
+}
+
+.infosTable .tstudio {
+  font-family: var(--font-title);
+  text-align: center;
+  font-size: 1.1em;
+}
+
+.infosTable .tstudio a {
+  text-decoration: none;
+  color: var(--color-light);
+}
+
+.infosTable .tstudio img {
+  display: block;
+  margin: 0 auto;
+  width: 128.8px;
+  height: auto;
+  max-width: 100%;
+  text-align: center;
+}
+
+#gallery {
+  /*border: 1px solid white;*/
+  margin-top: 90px;
+  margin-bottom: 90px;
+  margin-left: 100px;
+  margin-right: 100px;
+}
+
+.gPoster {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 40px;
+}
+
+.gPoster a {
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--color-light);
+  font-family: var(--font-title);
+  font-size: 1.3em;
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.gPoster a .gMedia {
+  display: block;
+  object-fit: cover;
+  background-color: var(--color-dark);
+  border: 1px solid var(--color-light);
+  transition: 0.4s;
+}
+
+.gPoster .gMedia:hover {
+  box-shadow: 1px 1px 38px var(--color-light);
+  transform: scale(1.05);
+  transition: box-shadow 0.1s ease-in-out;
+}
+
+.gPoster .gCasting {
+  background-color: var(--color-dark);
+  border: 2px solid var(--color-light);
+  font-size: 1.2em;
+  font-weight: 700;
+  transition: 0.4s;
+}
+
+.gPoster .gCasting img {
+  display: block;
+  object-fit: cover;
+  border-bottom: 1px solid var(--color-light);
+  transition: 0.4s;
+}
+
+.gPoster .gCasting figcaption {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 11rem;
+  margin: 0 auto;
+}
+
+.gPoster .gCasting:hover {
+  box-shadow: 1px 1px 38px var(--color-light);
+  transform: scale(1.05);
+  transition: box-shadow 0.1s ease-in-out;
+}
+
+.gPoster a .gGenre {
+  display: block;
+  padding: 10px;
+  background-color: var(--color-dark);
+  border: 2px solid var(--color-light);
+  transition: 0.4s;
+}
+
+.gPoster a .gStudio {
+  margin: 0 auto;
+  padding-left: 10px;
+  padding-right: 10px;
+  max-width: 161px;
+  max-height: 109px;
+  height: auto;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  background-color: var(--color-dark);
+  border: 2px solid var(--color-light);
+  transition: 0.4s;
+}
+
+.gPoster .gGenre:hover,
+.gPoster .gStudio:hover {
+  box-shadow: 1px 1px 38px var(--color-light);
+  transform: scale(1.05);
+  transition: box-shadow 0.1s ease-in-out;
+}
+
+/* Pagination */
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  margin: 60px;
+  text-align: center;
+  font-family: var(--font-title);
+  font-size: 1em;
+  font-weight: 500;
+  user-select: none;
+}
+
+ul.pagination {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+  border: 1px solid var(--color-light);
+}
+
+ul.pagination li {
+  display: inline;
+}
+
+.page-item.disabled .page-link {
+  pointer-events: none;
+}
+
+ul.pagination li a {
+  background-color: var(--color-dark);
+  color: var(--color-light);
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+  border: 1px solid var(--color-light);
+}
+
+ul.pagination li a:hover:not(.active) {
+  background-color: var(--color-light);
+  color: var(--color-dark);
+}
+
+.page-item.active .page-link {
+  background-color: var(--color-main);
+  color: var(--color-dark);
+}

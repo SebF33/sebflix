@@ -22,6 +22,7 @@
 //    1.16 Sélection du nom d'un genre par son identifiant
 //    1.17 Sélection des films selon le genre défini depuis la liste
 //    1.18 Sélection des 200 films les plus populaires par leur poster
+//    1.19 Sélection des 40 derniers médias type film ajoutés par leur poster
 
 //  02. Affichages des séries
 //    2.01 Sélection aléatoire de 3 médias type série par son poster
@@ -93,7 +94,7 @@
 //    10.06 Vérification de l'existence de l'ID d'un set
 
 // Appel du script de connexion à la base de données
-require __DIR__ . '/connect.php';
+require __DIR__ . '/datamanager.php';
 
 // 1.01 Sélection aléatoire de 18 médias type film par leur poster
 function select_eighteen_random_movie()
@@ -504,6 +505,28 @@ function select_best_movies()
     $query->execute();
     $movies = $query->fetchAll(PDO::FETCH_ASSOC);
     return $movies;
+  } catch (PDOException $e) {
+    echo "Erreur : " . $e->getMessage();
+  }
+}
+
+// 1.19 Sélection des 40 derniers médias type film ajoutés par leur poster
+function select_last_movie()
+{
+  connexion($dbco);
+  try {
+    $query = $dbco->prepare(
+      "SELECT idMovie, title, synopsis, premiered, cachedurl
+      FROM movie
+      INNER JOIN art ON movie.idMovie = art.media_id
+      WHERE media_type = 'movie'
+      AND type = 'poster'
+      ORDER BY idMovie DESC
+      LIMIT 40"
+    );
+    $query->execute();
+    $result = $query->fetchAll(PDO::FETCH_OBJ);
+    return $result;
   } catch (PDOException $e) {
     echo "Erreur : " . $e->getMessage();
   }

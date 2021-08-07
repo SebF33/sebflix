@@ -99,6 +99,35 @@ nav ul a.btn-icon {
   transform: scale(1.16);
 }
 
+/* Bouton du profil */
+.profile-username {
+  position: fixed;
+  top: 18px;
+  right: 70px;
+  font-family: var(--font-title);
+  font-size: 1em;
+  font-weight: 700;
+  color: var(--color-light);
+}
+
+.profile-btn {
+  position: fixed;
+  top: 12px;
+  right: 16px;
+}
+
+.profile-btn img {
+  display: block;
+  width: 47.2px;
+  height: 33.2px;
+  transition: 0.2s;
+  filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
+}
+
+.profile-btn img:hover {
+  transform: scale(1.1);
+}
+
 /****************/
 /* MAIN CONTENT */
 /****************/
@@ -263,6 +292,10 @@ footer nav {
 }
 
 /* Icônes du footer */
+footer {
+  user-select: none;
+}
+
 footer .dev,
 footer .social {
   margin-bottom: 5px;
@@ -281,15 +314,20 @@ footer .social.show {
 
 footer .dev a,
 footer .social a {
-  padding: 6px;
+  margin-left: 6px;
+  margin-right: 6px;
   text-decoration: none;
 }
 
-.iconFooter img {
+.iconFooter {
+  display: inline-block;
   transition: 0.2s;
+}
+
+.iconFooter img {
   filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
 }
 
-.iconFooter img:hover {
+.iconFooter:hover {
   transform: scale(1.1);
 }

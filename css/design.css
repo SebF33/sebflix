@@ -22,7 +22,7 @@ h1 {
 /* Image de fond sur toute la page */
 body {
   /* Appel de l'image de fond */
-  background-image: url(../img/bg.png);
+  background-image: url(/assets/img/bg.png);
   /* Centrer l'image d'arrière-plan verticalement et horizontalement à tout moment */
   background-position: center center;
   /* Empêcher l'image d'arrière-plan d'être en mosaïque */

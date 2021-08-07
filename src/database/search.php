@@ -1,20 +1,22 @@
-<!------------------------->
-<!-- Moteur de recherche -->
-<!------------------------->
-
 <?php
-// Déclaration et nettoyage des variables d'entrée
-$query = htmlspecialchars($_GET['search']);
-$query = trim($query);
+/////////////////////////
+// Moteur de recherche //
+/////////////////////////
 
-// Initialisation de la variable des résultats
-$result = "";
+// Déclaration et nettoyage de la variable d'entrée
+if (isset($_GET['search']) && !empty($_GET['search'])) {
+  $query = htmlspecialchars($_GET['search']);
+  $query = trim($query);
+}
+
+// Initialisation de la variable du message de résultat(s)
+$msg_result = "";
 
 // Vérification des termes entrés par l'utilisateur
 if (isset($query) && !empty($query)) {
 
   // Traitement de l'option "films" choisie par l'utilisateur
-  if ($type == 'movies') {
+  if (isset($type) && $type == 'movies') {
     // Requête de comptage pour la table "movie"
     $sql = 'SELECT COUNT(*) FROM movie WHERE title LIKE :query';
     connexion($dbco);
@@ -28,11 +30,11 @@ if (isset($query) && !empty($query)) {
 
     // Affichage du résultat non nul
     if ($count >= 1) {
-      $result .= "$count résultat(s) trouvé(s) pour <strong> '$query' </strong> <br/>";
+      $msg_result .= "$count résultat(s) trouvé(s) pour <strong> '$query' </strong> <br/>";
     }
     // Affichage du résultat nul
     else {
-      $result .= "\n <hr/> Aucun résultat trouvé pour <strong> '$query' </strong>";
+      $msg_result .= "\n <hr/> Aucun résultat trouvé pour <strong> '$query' </strong>";
     }
 
     // Définition du nombre de films par page
@@ -57,7 +59,7 @@ if (isset($query) && !empty($query)) {
   }
 
   // Traitement de l'option "séries" choisie par l'utilisateur
-  else if ($type == 'tvshows') {
+  elseif (isset($type) && $type == 'tvshows') {
     // Requête de comptage pour la table "tvshow"
     $sql = 'SELECT COUNT(*) FROM tvshow WHERE title LIKE :query';
     connexion($dbco);
@@ -71,11 +73,11 @@ if (isset($query) && !empty($query)) {
 
     // Affichage du résultat non nul
     if ($count >= 1) {
-      $result .= "$count résultat(s) trouvé(s) pour <strong> '$query' </strong> <br/>";
+      $msg_result .= "$count résultat(s) trouvé(s) pour <strong> '$query' </strong> <br/>";
     }
     // Affichage du résultat nul
     else {
-      $result .= "\n <hr/> Aucun résultat trouvé pour <strong> '$query' </strong>";
+      $msg_result .= "\n <hr/> Aucun résultat trouvé pour <strong> '$query' </strong>";
     }
 
     // Définition du nombre de séries par page
@@ -100,7 +102,7 @@ if (isset($query) && !empty($query)) {
   }
 
   // Traitement de l'option "acteurs" choisie par l'utilisateur
-  else if ($type == 'actors') {
+  elseif (isset($type) && $type == 'actors') {
     // Requête de comptage pour la table "actor"
     $sql = 'SELECT COUNT(*) FROM actor WHERE name LIKE :query';
     connexion($dbco);
@@ -114,11 +116,11 @@ if (isset($query) && !empty($query)) {
 
     // Affichage du résultat non nul
     if ($count >= 1) {
-      $result .= "$count résultat(s) trouvé(s) pour <strong> '$query' </strong> <br/>";
+      $msg_result .= "$count résultat(s) trouvé(s) pour <strong> '$query' </strong> <br/>";
     }
     // Affichage du résultat nul
     else {
-      $result .= "\n <hr/> Aucun résultat trouvé pour <strong> '$query' </strong>";
+      $msg_result .= "\n <hr/> Aucun résultat trouvé pour <strong> '$query' </strong>";
     }
 
     // Définition du nombre d'acteurs par page
@@ -142,7 +144,7 @@ if (isset($query) && !empty($query)) {
   }
 
   // Traitement de l'option "studios" choisie par l'utilisateur
-  else if ($type == 'studios') {
+  elseif (isset($type) && $type == 'studios') {
     // Requête de comptage des studios
     $sql = 'SELECT COUNT(*) FROM studio WHERE name LIKE :query';
     connexion($dbco);
@@ -156,11 +158,11 @@ if (isset($query) && !empty($query)) {
 
     // Affichage du résultat non nul
     if ($count >= 1) {
-      $result .= "$count résultat(s) trouvé(s) pour <strong> '$query' </strong> <br/>";
+      $msg_result .= "$count résultat(s) trouvé(s) pour <strong> '$query' </strong> <br/>";
     }
     // Affichage du résultat nul
     else {
-      $result .= "\n <hr/> Aucun résultat trouvé pour <strong> '$query' </strong>";
+      $msg_result .= "\n <hr/> Aucun résultat trouvé pour <strong> '$query' </strong>";
     }
 
     // Définition du nombre de studios par page
@@ -182,5 +184,48 @@ if (isset($query) && !empty($query)) {
     $queryPrepared->execute();
     $studios = $queryPrepared->fetchAll(PDO::FETCH_ASSOC);
   }
+
+  // Traitement pour le CRUD
+  if (substr($_SERVER['PHP_SELF'], -8) == 'crud.php') {
+    // Requête de comptage pour la table "movie"
+    $sql = 'SELECT COUNT(*) FROM movie WHERE title LIKE :query';
+    connexion($dbco);
+    $queryPrepared = $dbco->prepare($sql);
+    $queryPrepared->bindValue(':query', ('%' . $query . '%'), PDO::PARAM_STR);
+    $queryPrepared->execute();
+
+    // Comptage des résultats des films
+    $count = $queryPrepared->fetchColumn();
+    $nbMovies = (int) $count;
+
+    // Affichage du résultat non nul
+    if ($count >= 1) {
+      $msg_result .= "$count résultat(s) trouvé(s) pour <strong> '$query' </strong> <br/>";
+    }
+    // Affichage du résultat nul
+    else {
+      $msg_result .= "\n <hr/> Aucun résultat trouvé pour <strong> '$query' </strong>";
+    }
+
+    // Définition du nombre de films par page
+    $perPage = 30;
+    // Calcul du nombre de pages total
+    $pages = ceil($nbMovies / $perPage);
+    // Calcul du 1er média de la page
+    $first = ($currentPage * $perPage) - $perPage;
+
+    // Requête de sélection dans la table "movie"
+    $sql = "SELECT idMovie, title, synopsis, premiered, cachedurl
+            FROM movie
+            INNER JOIN art ON movie.idMovie = art.media_id
+            WHERE title LIKE :query AND media_type = 'movie' AND type = 'poster'
+            ORDER BY idMovie DESC LIMIT :first, :perpage;";
+    connexion($dbco);
+    $queryPrepared = $dbco->prepare($sql);
+    $queryPrepared->bindValue(':query', ('%' . $query . '%'), PDO::PARAM_STR);
+    $queryPrepared->bindValue(':first', $first, PDO::PARAM_INT);
+    $queryPrepared->bindValue(':perpage', $perPage, PDO::PARAM_INT);
+    $queryPrepared->execute();
+    $result = $queryPrepared->fetchAll(PDO::FETCH_OBJ);
+  }
 }
-?>

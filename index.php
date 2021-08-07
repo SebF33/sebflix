@@ -54,7 +54,7 @@ require __DIR__ . '/src/database/viewmanager.php';
       background-attachment: fixed;
       background-size: cover;
     }
-  </style>';
+  </style>
 
   <!-- Header -->
   <?php

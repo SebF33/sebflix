@@ -164,9 +164,6 @@ if (empty($result) && empty($result2)) {
   <link data-vue-tag="ssr" rel="icon" type="image/png" sizes="48x48" href="/img/favicon-48.png">
   <link data-vue-tag="ssr" rel="icon" type="image/png" sizes="192x192" href="/img/favicon-192.png">
 
-  <!-- Appel de jQuery -->
-  <script src="/js/jquery-3.6.0.min.js"></script>
-
   <!-- Appel des polices "Truculenta" et "Roboto" sur Google Fonts -->
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Truculenta:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -262,10 +259,6 @@ if (empty($result) && empty($result2)) {
     <script src="/js/to-top.js"></script>
 
   </main>
-
-  <!-- Footer -->
-  <footer>
-  </footer>
 
 </body>
 
