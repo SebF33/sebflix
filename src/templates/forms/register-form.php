@@ -18,8 +18,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   // Validation du pseudo
   if (empty(trim($_POST["username"]))) {
     $username_err = "Merci d'entrer un nom d'utilisateur.";
-  } elseif (strlen(trim($_POST["username"])) > 11) {
-    $username_err = "Le pseudo ne doit pas contenir plus de 11 caractères.";
+  } elseif (strlen(trim($_POST["username"])) > 12) {
+    $username_err = "Le pseudo ne doit pas contenir plus de 12 caractères.";
   } elseif (!preg_match('/^[a-zA-Z0-9_]+$/', trim($_POST["username"]))) {
     $username_err = "Le pseudo peut uniquement contenir des lettres, chiffres et underscores.";
   } else {
@@ -110,22 +110,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       </a>
       <h1>Compte utilisateur</h1>
     </div>
-    <div class="btn-toolbar mx-4">
+    <div class="btn-toolbar text-center justify-content-center mt-4 d-grid gap-2 d-md-flex">
       <?php
-      echo '<a href="/src/views/profile.php" class="button_link"><img src="/assets/img/user.png" title="Utilisateur" height="30" width="30" />' . str_repeat('&nbsp;', 2) . 'Profil</a>';
+      echo '<a href="/index.php" class="button_link"><img src="/assets/img/home.png" title="Accueil" height="30" width="30" />' . str_repeat('&nbsp;', 2) . 'Accueil</a>';
       ?>
     </div>
   </header>
 
   <div class="wrapper">
-    <img src="/assets/img/ticket.png" alt="Ticket">
+    <img src="/assets/img/ticket.png" alt="Ticket" draggable="false" ondragstart="return false">
     <h2>S'inscrire</h2>
     <p>Veuillez remplir ce formulaire pour créer un compte.</p>
 
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
       <div class="form-group">
         <label>Pseudo :</label>
-        <input type="text" name="username" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $username; ?>" placeholder="Saisissez 11 caractères max...">
+        <input type="text" name="username" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $username; ?>" placeholder="Saisissez 12 caractères max...">
         <span class="invalid-feedback"><?php echo $username_err; ?></span>
       </div>
       <div class="form-group">

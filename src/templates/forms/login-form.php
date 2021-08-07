@@ -91,15 +91,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       </a>
       <h1>Compte utilisateur</h1>
     </div>
-    <div class="btn-toolbar mx-4">
+    <div class="btn-toolbar text-center justify-content-center mt-4 d-grid gap-2 d-md-flex">
       <?php
-      echo '<a href="/src/views/profile.php" class="button_link"><img src="/assets/img/user.png" title="Utilisateur" height="30" width="30" />' . str_repeat('&nbsp;', 2) . 'Profil</a>';
+      echo '<a href="/index.php" class="button_link"><img src="/assets/img/home.png" title="Accueil" height="30" width="30" />' . str_repeat('&nbsp;', 2) . 'Accueil</a>';
       ?>
     </div>
   </header>
 
   <div class="wrapper">
-    <img src="/assets/img/ticket.png" alt="Ticket">
+    <img src="/assets/img/ticket.png" alt="Ticket" draggable="false" ondragstart="return false">
     <h2>Connexion</h2>
     <p>Veuillez remplir vos identifiants pour vous connecter.</p>
 

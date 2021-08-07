@@ -126,7 +126,7 @@ session_start();
       echo '<p class="profile disconnected">Non connecté</p>';
     }
     ?>
-    <a class="profile-btn" href="/src/views/profile.php">
+    <a class="profile-btn" href="/src/views/profile.php" draggable="false" ondragstart="return false">
       <img src="/assets/img/profile.png" alt="Profil">
     </a>
   </nav>
