@@ -67,25 +67,12 @@ function select_all_bio_sort(string $sort)
   }
 }
 
-// [A REVOIR] Mise à jour d'un média type film
-function update_movie(array $datas, int $id)
+// Mise à jour d'un média type film
+function update_movie(array $datas, int $id, bool $set_picture)
 {
   connexion($dbco);
   try {
-    $query = $dbco->prepare("SELECT cachedurl FROM art
-    WHERE media_id=:id
-    AND media_type='movie'
-    AND type='poster'");
-    $query->bindValue(':id', $id, PDO::PARAM_INT);
-    $query->execute();
-    $result = $query->fetch(PDO::FETCH_ASSOC);
-    if ($result != "placeholders/generic_poster.jpg" or !empty($result)) {
-      $file_exists = TRUE; // Le fichier existe
-    } else {
-      $file_exists = FALSE; // Le fichier n'existe pas
-    }
-
-    $sql_file = $file_exists ? "; UPDATE art SET cachedurl=:picture WHERE media_id=:id AND media_type='movie' AND type='poster'" : "";
+    $sql_file = $set_picture ? "; UPDATE art SET cachedurl=:picture WHERE media_id=:id AND media_type='movie' AND type='poster'" : "";
 
     $req = $dbco->prepare("UPDATE movie
     SET title=:title, synopsis=:synopsis, catch=:catch, premiered=:premiered
@@ -95,7 +82,7 @@ function update_movie(array $datas, int $id)
     $req->bindValue(':synopsis', $datas['synopsis'], PDO::PARAM_STR);
     $req->bindValue(':catch', $datas['catch'], PDO::PARAM_STR);
     $req->bindValue(':premiered', $datas['premiered'], PDO::PARAM_STR);
-    if ($file_exists) {
+    if ($set_picture) {
       $req->bindValue(':picture', $datas['picture'], PDO::PARAM_STR);
     }
     $req->bindValue(':id', $id, PDO::PARAM_INT);

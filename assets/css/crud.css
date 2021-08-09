@@ -76,6 +76,7 @@ h3 a {
     rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
     rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
   transition: 0.2s;
+  user-select: none;
 }
 
 .button_link:hover {
@@ -202,10 +203,10 @@ h3 a {
 
 .wrapper img {
   position: absolute;
-  top: -35px;
-  left: -40px;
-  width: 142.8px;
-  height: 111.4px;
+  top: -38px;
+  left: -24px;
+  width: 107.1px;
+  height: 83.55px;
   filter: drop-shadow(4px 4px 2px #000000);
 }
 
