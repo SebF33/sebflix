@@ -54,7 +54,7 @@ h3 a {
 }
 
 .modal-title {
-  font-size: calc(0.8rem + .6vw);
+  font-size: calc(1.1rem + .2vw);
   color: #000000;
 }
 
@@ -309,24 +309,6 @@ h3 a {
   user-select: none;
 }
 
-.modal-content {
-  font-family: var(--font-title);
-  font-weight: 600;
-  background-color: var(--color-light);
-  border: 2px solid #000000;
-}
-
-.modal-footer .btn-info {
-  color: #fff;
-  background-color: var(--color-extra);
-  border-color: var(--color-extra);
-}
-
-.modal-footer .btn-danger {
-  background-color: var(--color-main);
-  border-color: var(--color-main);
-}
-
 .tbl-qa .table-row td {
   justify-content: center;
   padding: 10px;
@@ -396,6 +378,41 @@ h3 a {
 }
 
 .form-check-input:checked {
+  background-color: var(--color-main);
+  border-color: var(--color-main);
+}
+
+/* Boîte de dialogue */
+.modal-content {
+  font-family: var(--font-title);
+  font-weight: 600;
+  background-color: var(--color-light);
+  border: 2px solid #000000;
+  filter: drop-shadow(2px 2px 1px #000000);
+}
+
+.modal-body {
+  font-size: 1.2em;
+}
+
+.modal-media-title {
+  font-style: italic;
+  font-weight: 700;
+}
+
+.modal-footer .btn {
+  font-family: var(--font-title);
+  font-size: 1em;
+  font-weight: 700;
+}
+
+.modal-footer .btn-info {
+  color: #fff;
+  background-color: var(--color-extra);
+  border-color: var(--color-extra);
+}
+
+.modal-footer .btn-danger {
   background-color: var(--color-main);
   border-color: var(--color-main);
 }

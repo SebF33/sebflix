@@ -142,6 +142,7 @@ require dirname(__DIR__) . '/database/search.php';
                       </div>
                       <div class="modal-body">
                         <p>Êtes-vous sûr de vouloir supprimer ce média ?</p>
+                        <p class="modal-media-title">"<?= $row->title ?>"</p>
                       </div>
                       <div class="modal-footer">
                         <a href="#" data-dismiss="modal" class="btn btn-info" onclick="$('#dialog-example_<?= $row->idMovie ?>').modal('hide');">Non</a>
