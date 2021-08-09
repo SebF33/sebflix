@@ -98,7 +98,7 @@ function delete_movie(int $id)
   connexion($dbco);
   try {
     $req = $dbco->prepare("DELETE FROM movie
-    WHERE id=:id;
+    WHERE idMovie=:id;
     DELETE FROM art
     WHERE media_id=:id
     AND media_type='movie'");

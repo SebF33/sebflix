@@ -53,6 +53,11 @@ h3 a {
   text-decoration: underline;
 }
 
+.modal-title {
+  font-size: calc(0.8rem + .6vw);
+  color: #000000;
+}
+
 /* Boutons */
 .btn {
   margin: 6px;
@@ -277,20 +282,16 @@ h3 a {
   font-style: italic;
 }
 
-#date {
-  font-weight: 500;
-}
-
-#actions {
-  user-select: none;
-}
-
 .max-lines {
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
+}
+
+#date {
+  font-weight: 500;
 }
 
 #image {
@@ -302,6 +303,28 @@ h3 a {
   text-align: center;
   max-width: 100%;
   height: auto;
+}
+
+#actions {
+  user-select: none;
+}
+
+.modal-content {
+  font-family: var(--font-title);
+  font-weight: 600;
+  background-color: var(--color-light);
+  border: 2px solid #000000;
+}
+
+.modal-footer .btn-info {
+  color: #fff;
+  background-color: var(--color-extra);
+  border-color: var(--color-extra);
+}
+
+.modal-footer .btn-danger {
+  background-color: var(--color-main);
+  border-color: var(--color-main);
 }
 
 .tbl-qa .table-row td {

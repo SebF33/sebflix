@@ -42,6 +42,9 @@ require dirname(__DIR__) . '/database/search.php';
   <link rel="stylesheet" href="/assets/css/results.css">
   <link rel="stylesheet" href="/assets/css/crud.css">
 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="/assets/js/lib/bootstrap.min.js"></script>
+
   <!-- Appel des polices "Truculenta" et "Roboto" sur Google Fonts -->
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Truculenta:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -52,6 +55,7 @@ require dirname(__DIR__) . '/database/search.php';
 </head>
 
 <body>
+  <script src="/assets/js/delete.js"></script>
 
   <header>
     <div class="headerLogo">
@@ -129,7 +133,23 @@ require dirname(__DIR__) . '/database/search.php';
                 <a class="ajax-action-links" href='/src/views/viewpage.php?type=movie&id=<?= $row->idMovie ?>' target="_blank" draggable="false" ondragstart="return false"><img src="/assets/img/view.png" title="Voir" height="30" width="30" /></a>
                 <a class="ajax-action-links" href='/src/templates/forms/media-form.php?id=<?= $row->idMovie ?>&action=edit' draggable="false" ondragstart="return false"><img src="/assets/img/edit.png" title="Éditer" height="30" width="30" /></a>
                 <a class="ajax-action-links" href='/src/templates/forms/media-form.php?id=<?= $row->idMovie ?>&action=copy' draggable="false" ondragstart="return false"><img src="/assets/img/copy.png" title="Copier" height="30" width="30" /></a>
-                <a class="ajax-action-links" href='/src/templates/forms/delete.php?id=<?= $row->idMovie ?>' draggable="false" ondragstart="return false"><img src="/assets/img/delete.png" title="Supprimer" height="30" width="30" /></a>
+                <a onclick="$('#dialog-example_<?= $row->idMovie ?>').modal('show');" class="ajax-action-links" class="btn-show-modal" href="#" data-toggle="modal" draggable="false" ondragstart="return false"><img src="/assets/img/delete.png" title="Supprimer" height="30" width="30" /></a>
+                <div id="dialog-example_<?= $row->idMovie ?>" class="modal fade" role="dialog">
+                  <div class="modal-dialog">
+                    <div class="modal-content" id="dialog-example_<?= $row->idMovie ?>">
+                      <div class="modal-header">
+                        <h3 class="modal-title">Confirmation de suppression</h3>
+                      </div>
+                      <div class="modal-body">
+                        <p>Êtes-vous sûr de vouloir supprimer ce média ?</p>
+                      </div>
+                      <div class="modal-footer">
+                        <a href="#" data-dismiss="modal" class="btn btn-info" onclick="$('#dialog-example_<?= $row->idMovie ?>').modal('hide');">Non</a>
+                        <a href='/src/database/delete.php?id=<?= $row->idMovie ?>' class="btn btn-danger" id="<?= $row->idMovie ?>">Oui</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </td>
             </tr>
         <?php
