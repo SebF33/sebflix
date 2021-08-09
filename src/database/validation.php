@@ -30,6 +30,5 @@ function valid_data_to_display($data)
 // Mettre le premier caractère d'une chaîne en majuscule-multioctet
 function mb_ucfirst($string)
 {
-  $string = mb_strtolower($string);
   return mb_strtoupper(mb_substr($string, 0, 1)) . mb_substr($string, 1);
 }

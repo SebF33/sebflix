@@ -102,10 +102,10 @@ nav ul a.btn-icon {
 /* Bouton du profil */
 .profile {
   position: fixed;
-  top: 18px;
+  top: 20px;
   right: 70px;
   font-family: var(--font-title);
-  font-size: 1em;
+  font-size: 0.9em;
   font-weight: 700;
 }
 

@@ -10,7 +10,7 @@ require __DIR__ . '/datamanager.php';
 $id = htmlspecialchars($_GET['id']);
 
 // Appel de la fonction de suppression des données
-delete_bio_by_id($id);
+delete_movie($id);
 
 // Redirection
 header('location:/src/views/crud.php');

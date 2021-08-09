@@ -98,7 +98,7 @@ h3 a {
 .ajax-action-links {
   display: inline-block;
   margin: 2px;
-  transition: 0.2s;
+  transition: 0.1s;
 }
 
 .ajax-action-links img {
@@ -106,7 +106,7 @@ h3 a {
 }
 
 .ajax-action-links:hover {
-  transform: scale(1.1);
+  transform: scale(1.08);
 }
 
 /* Bloc de recherche */
@@ -192,6 +192,7 @@ h3 a {
   color: var(--color-light);
   font-family: var(--font-title);
   font-weight: 600;
+  border: 2px solid var(--color-light);
   filter: drop-shadow(4px 4px 2px #000000);
 }
 
@@ -270,13 +271,17 @@ h3 a {
   font-weight: 600;
 }
 
+#synopsis {
+  font-size: 1em;
+  font-style: italic;
+}
+
 #date {
   font-weight: 500;
 }
 
-#synopsis {
-  font-size: 1em;
-  font-style: italic;
+#actions {
+  user-select: none;
 }
 
 .max-lines {
@@ -307,11 +312,13 @@ h3 a {
 }
 
 .frm-add {
+  margin-top: 40px;
+  padding: 30px;
   background-color: var(--color-dark);
-  border: var(--color-light) 1px solid;
   font-family: var(--font-title);
   font-weight: 600;
-  padding: 30px;
+  border: 2px solid var(--color-light);
+  filter: drop-shadow(4px 4px 2px #000000);
 }
 
 .demo-form-heading {
@@ -323,6 +330,11 @@ h3 a {
   margin-top: 20px;
 }
 
+.demo-form-row label,
+.demo-form-row #picture {
+  color: var(--color-light);
+}
+
 .demo-form-row img {
   width: 300px;
   height: auto;
@@ -331,14 +343,21 @@ h3 a {
 .demo-form-field {
   width: 300px;
   padding: 10px;
+  font-family: var(--font-text);
+  font-size: 0.8em;
 }
 
 .demo-form-submit {
   color: var(--color-light);
-  background-color: var(--color-dark);
+  background-color: var(--color-main);
   padding: 10px 50px;
   border: 0px;
   cursor: pointer;
+}
+
+.alert {
+  font-family: var(--font-text);
+  font-weight: 600;
 }
 
 /* Liste des utilisateurs */

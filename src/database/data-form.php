@@ -3,12 +3,17 @@
 // Données de formulaire //
 ///////////////////////////
 
+// Appel du script de validation
+require __DIR__ . '/validation.php';
+// Appel du script des requêtes
+require __DIR__ . '/datamanager.php';
+
 // Définition de l'action choisie
 if ($_GET['action'] == 'copy' or $_GET['action'] == 'edit') {
   if (isset($_GET['id'])) {
     $id = valid_data($_GET['id']);
-    // Appel de la fonction de sélection d'un média par son identifiant
-    $result = select_movie_by_id($id);
+    // Appel de la fonction de sélection d'un média type film
+    $result = select_movie($id);
   }
 }
 if (isset($_GET['action'])) {
@@ -18,7 +23,7 @@ if (isset($_GET['action'])) {
 // Traitement du formulaire
 if (!empty($_POST["save_record"])) {
 
-  $fields_required = array($_POST['title'], $_POST['synopsis'], $_POST['autor'], $_POST['price']);
+  $fields_required = array($_POST['title'], $_POST['synopsis'], $_POST['premiered']);
   $set_request = FALSE;
 
   // Vérification que les champs d'entrée ne sont pas vides
@@ -28,8 +33,8 @@ if (!empty($_POST["save_record"])) {
     // Déclaration et nettoyage des variables d'entrée
     $title = valid_data(mb_ucfirst($_POST['title']));
     $synopsis = valid_data($_POST['synopsis']);
-    $autor = valid_data($_POST['autor']);
-    $price = valid_data($_POST['price']);
+    $catch = valid_data($_POST['catch']);
+    $premiered = valid_data($_POST['premiered']);
     $picture = $_FILES['picture'];
 
     // Définition des extensions de fichier d'image autorisées
@@ -49,7 +54,7 @@ if (!empty($_POST["save_record"])) {
     else :
       // Erreur 4 : Aucun fichier n'a été téléversé
       if ($picture['error'] == 4) :
-        $picture_name = 'generic.jpg';
+        $picture_name = 'placeholders/generic_poster.jpg';
         $set_request = TRUE;
       else :
         // Re-vérification de la taille de l'image côté serveur
@@ -66,10 +71,13 @@ if (!empty($_POST["save_record"])) {
           $picture_name = uniqid() . '_' . $picture['name'];
 
           // Placement de l'image dans le dossier et droits de lecture/écriture
-          $img_folder = dirname(__DIR__) . '/src/thumbnails/g/';
+          $img_folder = dirname(__DIR__) . '/thumbnails/g/';
           @mkdir($img_folder, 0777);
           $dir = $img_folder . $picture_name;
           $move_file = @move_uploaded_file($picture['tmp_name'], $dir);
+
+          // Nom du chemin de l'image pour la base de données
+          $picture_name = 'g/' . $picture_name;
 
           if (!$move_file) {
             $msg = "Un problème est survenu pendant le téléversement, merci de renouveler votre envoi.";
@@ -106,19 +114,19 @@ if (!empty($_POST["save_record"])) {
 
     // Définition de la fonction de requête selon l'action choisie
     if ($_GET['action'] == 'add' or $_GET['action'] == 'copy') {
-      // Appel de la fonction d'ajout d'un article
-      $result = add_movie($datas);
+      // Appel de la fonction d'ajout d'un média type film
+      $exec = add_movie($datas);
     } elseif ($_GET['action'] == 'edit') {
-      // Appel de la fonction de mise à jour d'un article par son identifiant
-      $update = update_bio_by_id($datas, $id);
+      // Appel de la fonction de mise à jour d'un média type film
+      $exec = update_movie($datas, $id);
     }
 
     // Définition du message d'erreur ou de succès
-    if ($result) {
+    if ($exec) {
       if ($_GET['action'] == 'add' or $_GET['action'] == 'copy') {
-        $msg = "L'article a été ajouté avec succès.";
+        $msg = "Le média a été ajouté avec succès.";
       } elseif ($_GET['action'] == 'edit') {
-        $msg = "L'article a été modifié avec succès.";
+        $msg = "Le média a été modifié avec succès.";
       }
       $error = 'false';
     } else {

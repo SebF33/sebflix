@@ -66,7 +66,7 @@ require dirname(__DIR__) . '/database/search.php';
       <?php
       echo '<a href="/index.php" class="button_link"><img src="/assets/img/home.png" title="Accueil" height="30" width="30" />' . str_repeat('&nbsp;', 2) . 'Accueil</a>';
       echo '<a href="/src/views/profile.php" class="button_link"><img src="/assets/img/user.png" title="Utilisateur" height="30" width="30" />' . str_repeat('&nbsp;', 2) . 'Profil</a>';
-      echo '<a href="/src/database/data-form.php?action=add" class="button_link"><img src="/assets/img/add.png" title="Ajouter" height="30" width="30" />' . str_repeat('&nbsp;', 2) . 'Créer un média</a>';
+      echo '<a href="/src/templates/forms/media-form.php?action=add" class="button_link"><img src="/assets/img/add.png" title="Ajouter" height="30" width="30" />' . str_repeat('&nbsp;', 2) . 'Créer un média</a>';
       if (isset($_GET['search']) && !empty($_GET['search'])) {
         echo '<a href="crud.php" class="button_link"><img src="/assets/img/list.png" title="Liste" height="30" width="30" />' . str_repeat('&nbsp;', 2) . 'Retour à la liste</a>';
       }
@@ -127,8 +127,8 @@ require dirname(__DIR__) . '/database/search.php';
               </td>
               <td id="actions">
                 <a class="ajax-action-links" href='/src/views/viewpage.php?type=movie&id=<?= $row->idMovie ?>' target="_blank" draggable="false" ondragstart="return false"><img src="/assets/img/view.png" title="Voir" height="30" width="30" /></a>
-                <a class="ajax-action-links" href='/src/database/data-form.php?id=<?= $row->idMovie ?>&action=edit' draggable="false" ondragstart="return false"><img src="/assets/img/edit.png" title="Éditer" height="30" width="30" /></a>
-                <a class="ajax-action-links" href='/src/database/data-form.php?id=<?= $row->idMovie ?>&action=copy' draggable="false" ondragstart="return false"><img src="/assets/img/copy.png" title="Copier" height="30" width="30" /></a>
+                <a class="ajax-action-links" href='/src/templates/forms/media-form.php?id=<?= $row->idMovie ?>&action=edit' draggable="false" ondragstart="return false"><img src="/assets/img/edit.png" title="Éditer" height="30" width="30" /></a>
+                <a class="ajax-action-links" href='/src/templates/forms/media-form.php?id=<?= $row->idMovie ?>&action=copy' draggable="false" ondragstart="return false"><img src="/assets/img/copy.png" title="Copier" height="30" width="30" /></a>
                 <a class="ajax-action-links" href='/src/templates/forms/delete.php?id=<?= $row->idMovie ?>' draggable="false" ondragstart="return false"><img src="/assets/img/delete.png" title="Supprimer" height="30" width="30" /></a>
               </td>
             </tr>
