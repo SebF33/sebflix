@@ -22,9 +22,13 @@ if (isset($_GET['action'])) {
 
 // Traitement du formulaire
 if (!empty($_POST["save_record"])) {
-
-  $fields_required = array($_POST['title'], $_POST['synopsis'], $_POST['premiered']);
   $set_picture = $set_request = FALSE;
+
+  // Champs requis
+  $fields_required = array($_POST['title'], $_POST['synopsis'], $_POST['premiered']);
+
+  // Définition de l'image par défaut
+  $default_picture_name = 'placeholders/generic_poster.jpg';
 
   // Vérification que les champs d'entrée ne sont pas vides
   if (in_array('', $fields_required)) :
@@ -42,7 +46,9 @@ if (!empty($_POST["save_record"])) {
     $set_request = TRUE;
 
     // Traitement de l'image
-    if (isset($_FILES["picture"]) && !empty($_FILES["picture"]["name"])) {
+    if (($action == 'add' or $action == 'copy') && empty($_FILES["picture"]["name"])) {
+      $picture_name = $default_picture_name;
+    } elseif (isset($_FILES["picture"]) && !empty($_FILES["picture"]["name"])) {
       $picture = $_FILES['picture'];
 
       // Définition des extensions de fichier d'image autorisées
@@ -62,7 +68,7 @@ if (!empty($_POST["save_record"])) {
       else :
         // Erreur 4 : Aucun fichier n'a été téléversé
         if ($picture['error'] == 4) :
-          $picture_name = 'placeholders/generic_poster.jpg';
+          $picture_name = $default_picture_name;
           $set_picture = TRUE;
         else :
           // Re-vérification de la taille de l'image côté serveur

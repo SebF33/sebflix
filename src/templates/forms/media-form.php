@@ -16,6 +16,15 @@ if (!isset($_SESSION["loggedadmin"]) || $_SESSION["loggedadmin"] !== TRUE) {
   exit;
 }
 
+// Définition des valeurs autorisées dans les GET
+$actions = array('add', 'copy', 'edit');
+// Vérification des GET ('action' obligatoire)
+if (!isset($_GET['action']) && empty($_GET['action']) || !in_array($_GET['action'], $actions)) {
+  // Redirection si un GET n'est pas vérifié
+  header("location:/index.php");
+  exit;
+}
+
 // Appel du script du formulaire
 require dirname(__DIR__, 2) . '/database/data-form.php';
 ?>
@@ -77,15 +86,22 @@ require dirname(__DIR__, 2) . '/database/data-form.php';
 
   <div class="frm-add">
     <h2 class="demo-form-heading"><?php if ($action == 'add') {
-                                    echo 'Nouvel enregistrement';
+                                    echo 'Nouveau média';
                                   } elseif ($action == 'copy') {
-                                    echo 'Copier enregistrement';
+                                    echo 'Copie de média';
                                   } elseif ($action == 'edit') {
-                                    echo 'Éditer enregistrement';
+                                    echo 'Édition du média';
                                   } ?>
     </h2>
 
     <form name="frmAdd" action="" method="POST" enctype="multipart/form-data">
+      <div class="demo-form-row text-center">
+        <input name="save_record" type="submit" value="<?php if ($action == 'add' or $action == 'copy') {
+                                                          echo 'Ajouter';
+                                                        } elseif ($action == 'edit') {
+                                                          echo 'Enregistrer';
+                                                        } ?>" class="demo-form-submit">
+      </div>
       <div class="demo-form-row">
         <label>Titre * : </label><br>
         <input name="title" type="text" class="demo-form-field" value="<?php if ($action == 'copy' or $action == 'edit') {
@@ -119,15 +135,8 @@ require dirname(__DIR__, 2) . '/database/data-form.php';
         <input type="file" id="picture" name="picture">
       </div>
       <?php if ($action == 'edit') {
-        echo '<div class="demo-form-row"><img src="/src/thumbnails/' . $result['cachedurl'] . '" title="' . $result['cachedurl'] . '" alt="' . $result['cachedurl'] . '" /></div>';
+        echo '<div class="demo-form-row text-center"><img src="/src/thumbnails/' . $result['cachedurl'] . '" title="' . $result['cachedurl'] . '" alt="' . $result['cachedurl'] . '" /></div>';
       } ?>
-      <div class="demo-form-row">
-        <input name="save_record" type="submit" value="<?php if ($action == 'add' or $action == 'copy') {
-                                                          echo 'Ajouter';
-                                                        } elseif ($action == 'edit') {
-                                                          echo 'Enregistrer';
-                                                        } ?>" class="demo-form-submit">
-      </div>
     </form>
   </div>
 

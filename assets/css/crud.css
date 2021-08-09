@@ -313,6 +313,11 @@ h3 a {
 }
 
 .frm-add {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 400px;
   margin-top: 40px;
   padding: 30px;
   background-color: var(--color-dark);
@@ -337,8 +342,9 @@ h3 a {
 }
 
 .demo-form-row img {
-  width: 300px;
-  height: auto;
+  width: 160px;
+  height: 240px;
+  object-fit: cover;
 }
 
 .demo-form-field {
