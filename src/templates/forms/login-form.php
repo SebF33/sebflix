@@ -84,6 +84,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <body>
+  <style type="text/css">
+    body {
+      background-image: url("/assets/img/bg_user.png");
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
+    }
+  </style>
+
   <header>
     <div class="headerLogo">
       <a href="/index.php">

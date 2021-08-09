@@ -54,6 +54,16 @@ setlocale(LC_TIME, 'fr_FR.utf8', 'fra');
 </head>
 
 <body>
+  <style type="text/css">
+    body {
+      background-image: url("/assets/img/bg_crud.png");
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
+    }
+  </style>
+
   <header>
     <div class="headerLogo">
       <a href="/index.php">

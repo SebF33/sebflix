@@ -1,18 +1,6 @@
-/* Image de fond sur toute la page */
-body {
-  /* Appel de l'image de fond */
-  background-image: url(/assets/img/bg_user.png);
-  /* Centrer l'image d'arrière-plan verticalement et horizontalement à tout moment */
-  background-position: center center;
-  /* Empêcher l'image d'arrière-plan d'être en mosaïque */
-  background-repeat: no-repeat;
-  /* Fixer l'image d'arrière-plan dans la fenêtre de sorte qu'elle ne bouge pas lorsque la hauteur du contenu est supérieure à la hauteur de l'image */
-  background-attachment: fixed;
-  /* Redimensionner l'image d'arrière-plan basée sur la taille du conteneur */
-  background-size: cover;
-  /* Définir une couleur d'arrière-plan qui sera affichée pendant le chargement de l'image d'arrière-plan */
-  background-color: var(--color-extralighter);
-}
+/******************/
+/* Interface CRUD */
+/******************/
 
 /* Titres */
 .my-5 {
@@ -61,8 +49,11 @@ h3 a {
 /* Boutons */
 .btn {
   margin: 6px;
-  font-family: var(--font-text);
+  font-family: var(--font-title);
   font-size: 0.8rem;
+  box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px,
+    rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
+    rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
 }
 
 .button_link {
@@ -103,7 +94,7 @@ h3 a {
 
 .ajax-action-links {
   display: inline-block;
-  margin: 2px;
+  margin: 4px;
   transition: 0.1s;
 }
 
@@ -113,6 +104,21 @@ h3 a {
 
 .ajax-action-links:hover {
   transform: scale(1.08);
+}
+
+.demo-form-submit {
+  color: var(--color-light);
+  font-size: 1.1em;
+  font-weight: 700;
+  background-color: var(--color-main);
+  padding: 10px 40px;
+  border: 0px;
+  cursor: pointer;
+}
+
+.demo-form-submit:hover {
+  background-color: var(--color-extra);
+  border-color: var(--color-extra);
 }
 
 /* Bloc de recherche */
@@ -136,6 +142,7 @@ h3 a {
   width: 50px;
   border-style: none;
   padding: 10px;
+  padding-right: 40px;
   font-size: 18px;
   letter-spacing: 2px;
   outline: none;
@@ -143,7 +150,6 @@ h3 a {
   transition: all .5s ease-in-out;
   background-color: var(--color-dark);
   border: 2px solid var(--color-light);
-  padding-right: 40px;
   color: #fff;
   box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px,
     rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
@@ -246,14 +252,13 @@ h3 a {
 }
 
 .tbl-qa th.table-header {
+  padding: 10px;
   background-color: var(--color-dark);
   color: var(--color-light);
   font-family: var(--font-title);
   font-size: 1.2em;
   font-weight: 700;
-  padding: 5px;
   text-align: center;
-  padding: 10px;
 }
 
 .table-row {
@@ -319,12 +324,14 @@ h3 a {
 
 .frm-add {
   margin: 0 auto;
+  margin-bottom: 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 400px;
   margin-top: 40px;
   padding: 30px;
+  padding-top: 20px;
   background-color: var(--color-dark);
   font-family: var(--font-title);
   font-weight: 600;
@@ -357,14 +364,6 @@ h3 a {
   padding: 10px;
   font-family: var(--font-text);
   font-size: 0.8em;
-}
-
-.demo-form-submit {
-  color: var(--color-light);
-  background-color: var(--color-main);
-  padding: 10px 50px;
-  border: 0px;
-  cursor: pointer;
 }
 
 .alert {

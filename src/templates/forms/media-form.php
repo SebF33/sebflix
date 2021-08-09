@@ -53,6 +53,16 @@ require dirname(__DIR__, 2) . '/database/data-form.php';
 </head>
 
 <body>
+  <style type="text/css">
+    body {
+      background-image: url("/assets/img/bg_save.png");
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
+    }
+  </style>
+
   <header>
     <div class="headerLogo">
       <a href="/index.php">
@@ -93,14 +103,18 @@ require dirname(__DIR__, 2) . '/database/data-form.php';
                                     echo 'Édition du média';
                                   } ?>
     </h2>
-
+    <?php if ($action == 'edit') { ?>
+      <div class="text-center">
+        <a class="ajax-action-links" href='/src/views/viewpage.php?type=movie&id=<?= $result['idMovie'] ?>' target="_blank" draggable="false" ondragstart="return false"><img src="/assets/img/view.png" title="Voir" height="17" width="30" /></a>
+      </div>
+    <?php } ?>
     <form name="frmAdd" action="" method="POST" enctype="multipart/form-data">
       <div class="demo-form-row text-center">
         <input name="save_record" type="submit" value="<?php if ($action == 'add' or $action == 'copy') {
                                                           echo 'Ajouter';
                                                         } elseif ($action == 'edit') {
                                                           echo 'Enregistrer';
-                                                        } ?>" class="demo-form-submit">
+                                                        } ?>" class="btn demo-form-submit">
       </div>
       <div class="demo-form-row">
         <label>Titre * : </label><br>
