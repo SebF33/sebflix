@@ -16,15 +16,6 @@ if (!isset($_SESSION["loggedadmin"]) || $_SESSION["loggedadmin"] !== TRUE) {
   exit;
 }
 
-// Définition des valeurs autorisées dans les GET
-$actions = array('add', 'copy', 'edit');
-// Vérification des GET ('action' obligatoire)
-if (!isset($_GET['action']) && empty($_GET['action']) || !in_array($_GET['action'], $actions)) {
-  // Redirection si un GET n'est pas vérifié
-  header("location:/index.php");
-  exit;
-}
-
 // Appel du script du formulaire
 require dirname(__DIR__, 2) . '/database/data-form.php';
 ?>
@@ -149,7 +140,7 @@ require dirname(__DIR__, 2) . '/database/data-form.php';
         <input type="file" id="picture" name="picture">
       </div>
       <?php if ($action == 'edit') {
-        echo '<div class="demo-form-row text-center"><img src="/src/thumbnails/' . $result['cachedurl'] . '" title="' . $result['cachedurl'] . '" alt="' . $result['cachedurl'] . '" /></div>';
+        echo '<div class="demo-form-row text-center"><img src="/src/thumbnails/' . $result['cachedurl'] . '" title="' . $result['cachedurl'] . '" alt="' . $result['cachedurl'] . '" onclick="window.open(this.src)" draggable="false" ondragstart="return false")/></div>';
       } ?>
     </form>
   </div>

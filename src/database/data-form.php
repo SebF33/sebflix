@@ -8,16 +8,34 @@ require __DIR__ . '/validation.php';
 // Appel du script des requêtes
 require __DIR__ . '/datamanager.php';
 
-// Définition de l'action choisie
-if ($_GET['action'] == 'copy' or $_GET['action'] == 'edit') {
-  if (isset($_GET['id'])) {
-    $id = valid_data($_GET['id']);
-    // Appel de la fonction de sélection d'un média type film
-    $result = select_movie($id);
-  }
-}
-if (isset($_GET['action'])) {
+// Définition des valeurs autorisées dans le GET
+$actions = array('add', 'copy', 'edit');
+// Vérification du GET ('action' obligatoire)
+if (isset($_GET['action']) && !empty($_GET['action']) || in_array($_GET['action'], $actions)) {
   $action = valid_data($_GET['action']);
+} else {
+  // Redirection si le GET n'est pas vérifié
+  header("location:/src/views/crud.php");
+  exit;
+}
+if ($_GET['action'] == 'copy' or $_GET['action'] == 'edit') {
+  if (isset($_GET['id']) && !empty($_GET['id'])) {
+    $id = valid_data($_GET['id']);
+    // Requête de vérification de l'existence de l'ID du média type film
+    $checkid = check_id_movie($id);
+    if ($checkid === 0) {
+      // Redirection
+      header("location:/src/views/crud.php");
+      exit;
+    } else {
+      // Appel de la fonction de sélection d'un média type film
+      $result = select_movie($id);
+    }
+  } else {
+    // Redirection
+    header("location:/src/views/crud.php");
+    exit;
+  }
 }
 
 // Traitement du formulaire

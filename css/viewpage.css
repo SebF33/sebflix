@@ -217,7 +217,7 @@ iframe,
 .catch .text div p {
   font-family: var(--font-title);
   font-style: italic;
-  font-size: 1.3em;
+  font-size: 1.1em;
   font-weight: 600;
   overflow: hidden;
   display: -webkit-box;
