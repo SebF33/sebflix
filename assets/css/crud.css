@@ -405,6 +405,7 @@ h3 a {
 .modal-media-title {
   font-style: italic;
   font-weight: 700;
+  text-align: center;
 }
 
 .modal-footer .btn {

@@ -7,6 +7,8 @@
 require __DIR__ . '/validation.php';
 // Appel du script des requêtes
 require __DIR__ . '/datamanager.php';
+// Appel du script de l'upload
+require __DIR__ . '/upload.php';
 
 // Définition des valeurs autorisées dans le GET
 $actions = array('add', 'copy', 'edit');
@@ -67,58 +69,10 @@ if (!empty($_POST["save_record"])) {
     if (($action == 'add' or $action == 'copy') && empty($_FILES["picture"]["name"])) {
       $picture_name = $default_picture_name;
     } elseif (isset($_FILES["picture"]) && !empty($_FILES["picture"]["name"])) {
-      $picture = $_FILES['picture'];
-
-      // Définition des extensions de fichier d'image autorisées
-      $ext = array('png', 'jpg', 'jpeg', 'gif');
-
-      // Gestion des erreurs de la super globale $_FILES => https://www.php.net/manual/fr/features.file-upload.errors.php
-      // Erreur 1 : La taille du fichier téléchargé excède la valeur de upload_max_filesize, configurée dans le php.ini
-      // Erreur 2 : La taille du fichier téléchargé excède la valeur de MAX_FILE_SIZE, qui a été spécifiée dans le formulaire
-      if ($picture['error'] > 0 && $picture['error'] < 3) :
-        $msg = "Fichier trop volumineux (1Mo max).";
-      // Erreur 3 : Le fichier n'a été que partiellement téléversé
-      // Erreur 6 : Un dossier temporaire est manquant
-      // Erreur 7 : Échec de l'écriture du fichier sur le disque
-      // Erreur 8 : Une extension PHP a arrêté l'envoi de fichier
-      elseif ($picture['error'] == 3 || $picture['error'] > 4) :
-        $msg = "Un problème est survenu pendant le téléversement.";
-      else :
-        // Erreur 4 : Aucun fichier n'a été téléversé
-        if ($picture['error'] == 4) :
-          $picture_name = $default_picture_name;
-          $set_picture = TRUE;
-        else :
-          // Re-vérification de la taille de l'image côté serveur
-          if ($picture['size'] > 1048576) {
-            $msg = "Fichier trop volumineux (1Mo max)."; // Poids maxi : 1Mo => 1024*1024
-          }
-          // Vérification que l'extension est bien une image
-          elseif (!in_array(strtolower(pathinfo($picture['name'], PATHINFO_EXTENSION)), $ext)) {
-            $msg = "Le fichier n'est pas une image (Extensions autorisées : '.png', '.jpg', '.jpeg', '.gif').";
-          }
-          // Récupération et stockage du fichier image sur le serveur
-          else {
-            // Nouveau nom à l'image pour éviter les doublons
-            $picture_name = uniqid() . '_' . $picture['name'];
-
-            // Placement de l'image dans le dossier et droits de lecture/écriture
-            $img_folder = dirname(__DIR__) . '/thumbnails/g/';
-            @mkdir($img_folder, 0777);
-            $dir = $img_folder . $picture_name;
-            $move_file = @move_uploaded_file($picture['tmp_name'], $dir);
-
-            // Nom du chemin de l'image pour la base de données
-            $picture_name = 'g/' . $picture_name;
-
-            if (!$move_file) {
-              $msg = "Un problème est survenu pendant le téléversement, merci de renouveler votre envoi.";
-            } else {
-              $set_picture = TRUE;
-            }
-          }
-        endif;
-      endif;
+      $upload_img = upload_img($_FILES['picture'], $default_picture_name);
+      $set_picture = $upload_img[0];
+      $picture_name = $upload_img[1];
+      $msg = $upload_img[2];
     }
   endif;
 
@@ -128,7 +82,7 @@ if (!empty($_POST["save_record"])) {
     $req_get = strrchr($referer, '?');
     $referer = str_replace($req_get, '', $referer);
   }
-  if (isset($msg)) {
+  if (isset($msg) && !empty($msg)) {
     if ($action == 'add') {
       header("Location: $referer?action=$action&msg=$msg&error=true");
     } elseif ($action == 'copy' or $action == 'edit') {
