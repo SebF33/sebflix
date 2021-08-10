@@ -1,4 +1,4 @@
-// Suppression
+// Boîte de dialogue
 $(function () {
   $(".btn-show-modal").click(function (e) {
     e.preventDefault();

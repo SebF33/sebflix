@@ -42,7 +42,7 @@ require dirname(__DIR__) . '/database/search.php';
   <link rel="stylesheet" href="/assets/css/results.css">
   <link rel="stylesheet" href="/assets/css/crud.css">
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="/assets/js/lib/jquery-3.6.0.min.js"></script>
   <script src="/assets/js/lib/bootstrap.min.js"></script>
 
   <!-- Appel des polices "Truculenta" et "Roboto" sur Google Fonts -->
@@ -65,7 +65,7 @@ require dirname(__DIR__) . '/database/search.php';
     }
   </style>
 
-  <script src="/assets/js/delete.js"></script>
+  <script src="/assets/js/dialog.js"></script>
 
   <header>
     <div class="headerLogo">
@@ -141,28 +141,29 @@ require dirname(__DIR__) . '/database/search.php';
               </td>
               <td id="actions">
                 <a class="ajax-action-links" href='/src/views/viewpage.php?type=movie&id=<?= $row->idMovie ?>' target="_blank" draggable="false" ondragstart="return false"><img src="/assets/img/view.png" title="Voir" height="17" width="30" /></a>
-                <a class="ajax-action-links" href='/src/templates/forms/media-form.php?id=<?= $row->idMovie ?>&action=edit' draggable="false" ondragstart="return false"><img src="/assets/img/edit.png" title="Éditer" height="25" width="25" /></a>
-                <a class="ajax-action-links" href='/src/templates/forms/media-form.php?id=<?= $row->idMovie ?>&action=copy' draggable="false" ondragstart="return false"><img src="/assets/img/copy.png" title="Copier" height="25" width="25" /></a>
+                <a class="ajax-action-links" href='/src/templates/forms/media-form.php?id=<?= $row->idMovie ?>&action=edit' draggable="false" ondragstart="return false"><img src="/assets/img/edit.png" title="Éditer" height="25" width="24" /></a>
+                <a class="ajax-action-links" href='/src/templates/forms/media-form.php?id=<?= $row->idMovie ?>&action=copy' draggable="false" ondragstart="return false"><img src="/assets/img/copy.png" title="Copier" height="25" width="22" /></a>
                 <a onclick="$('#dialog-example_<?= $row->idMovie ?>').modal('show');" class="ajax-action-links" class="btn-show-modal" href="#" data-toggle="modal" draggable="false" ondragstart="return false"><img src="/assets/img/delete.png" title="Supprimer" height="25" width="18" /></a>
-                <div id="dialog-example_<?= $row->idMovie ?>" class="modal fade" role="dialog">
-                  <div class="modal-dialog">
-                    <div class="modal-content" id="dialog-example_<?= $row->idMovie ?>">
-                      <div class="modal-header">
-                        <h3 class="modal-title">Confirmation de suppression</h3>
-                      </div>
-                      <div class="modal-body">
-                        <p>Êtes-vous sûr de vouloir supprimer ce média ?</p>
-                        <p class="modal-media-title">"<?= $row->title ?>"</p>
-                      </div>
-                      <div class="modal-footer">
-                        <a href="#" data-dismiss="modal" class="btn btn-info" onclick="$('#dialog-example_<?= $row->idMovie ?>').modal('hide');">Non</a>
-                        <a href='/src/database/delete.php?id=<?= $row->idMovie ?>' class="btn btn-danger" id="<?= $row->idMovie ?>">Oui</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
               </td>
             </tr>
+            <!-- Boîte de dialogue de suppression -->
+            <div id="dialog-example_<?= $row->idMovie ?>" class="modal fade" role="dialog">
+              <div class="modal-dialog">
+                <div class="modal-content" id="dialog-example_<?= $row->idMovie ?>">
+                  <div class="modal-header">
+                    <h3 class="modal-title">Confirmation de suppression</h3>
+                  </div>
+                  <div class="modal-body">
+                    <p>Êtes-vous sûr de vouloir supprimer ce média ?</p>
+                    <p class="modal-media-title">"<?= $row->title ?>"</p>
+                  </div>
+                  <div class="modal-footer">
+                    <a href="#" data-dismiss="modal" class="btn btn-info" onclick="$('#dialog-example_<?= $row->idMovie ?>').modal('hide');">Non</a>
+                    <a href='/src/database/delete.php?id=<?= $row->idMovie ?>' class="btn btn-danger" id="<?= $row->idMovie ?>">Oui</a>
+                  </div>
+                </div>
+              </div>
+            </div>
         <?php
           }
         }
