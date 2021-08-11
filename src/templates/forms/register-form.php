@@ -7,9 +7,11 @@
 require dirname(__DIR__, 2) . '/database/usermanager.php';
 // Appel du script de validation des données
 require dirname(__DIR__, 2) . '/database/validation.php';
+// Appel du script de l'upload
+require dirname(__DIR__, 2) . '/database/upload.php';
 
 // Définition des variables et initialisation avec des valeurs vides
-$username = $email = $password = $confirm_password = "";
+$username = $genre = $email = $password = $confirm_password = "";
 $username_err = $email_err = $password_err = $confirm_password_err = "";
 
 // Traitement du formulaire de données quand il est parvenu
@@ -30,6 +32,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($username_db) {
       $username_err = "Le pseudo est déjà pris.";
     }
+  }
+
+  // Validation du genre
+  if ($_POST["genre"] == '0' or $_POST["genre"] == '1') {
+    $genre = valid_data($_POST['genre']);
+  } else {
+    // Redirection
+    header("location:/index.php");
+    exit;
   }
 
   // Validation de l'adresse mail
@@ -68,15 +79,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
   }
 
+  // Définition de l'avatar
+  $img_folder = dirname(__DIR__) . '/thumbnails/users/';
+  if ($_POST["genre"] == '0') {
+    $default_picture_name = 'users/generic_woman.png';
+  } elseif ($_POST["genre"] == '1') {
+    $default_picture_name = 'users/generic_man.png';
+  } else {
+    // Redirection si valeur invalide
+    header("location:/index.php");
+    exit;
+  }
+  if (empty($_FILES["picture"]["name"])) {
+    $picture_name = $default_picture_name;
+  }
+
   // Vérification des erreurs de saisie avant insertion dans la base de données
   if (empty($username_err) && empty($email_err) && empty($password_err) && empty($confirm_password_err)) {
-    // Hachage du mot de passe
-    $password = password_hash($password, PASSWORD_DEFAULT);
-    // Requête de création de l'utilisateur
-    add_user($username, $email, $password);
 
-    // Redirection de l'utilisateur vers la page du profil
-    header("location:/src/views/profile.php");
+    // Traitement de l'avatar
+    $upload_img = upload_img($_FILES['picture'], $default_picture_name, $img_folder);
+    $set_request = $upload_img[0];
+    $avatar = $upload_img[1];
+    $avatar_err = $upload_img[2];
+
+    if ($set_request) {
+      // Hachage du mot de passe
+      $password = password_hash($password, PASSWORD_DEFAULT);
+
+      // Création de l'utilisateur
+      add_user($username, $genre, $email, $password, $avatar);
+
+      // Redirection de l'utilisateur vers la page du profil
+      header("location:/src/views/profile.php");
+    }
   }
 }
 ?>
@@ -132,11 +168,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <h2>S'inscrire</h2>
     <p>Veuillez remplir ce formulaire pour créer un compte.</p>
 
-    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
       <div class="form-group">
         <label>Pseudo :</label>
         <input type="text" name="username" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $username; ?>" placeholder="Saisissez 12 caractères max...">
         <span class="invalid-feedback"><?php echo $username_err; ?></span>
+      </div>
+      <div class="form-group">
+        <div class="form-check">
+          <input id="flexRadioDefault1" class="form-check-input" type="radio" name="genre" value="0" checked /> Femme
+        </div>
+        <div class="form-check">
+          <input id="flexRadioDefault1" class="form-check-input" type="radio" name="genre" value="1" /> Homme
+        </div>
       </div>
       <div class="form-group">
         <label>Adresse mail :</label>
@@ -152,6 +196,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <label>Confirmer le mot de passe :</label>
         <input type="password" name="confirm_password" class="form-control <?php echo (!empty($confirm_password_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $confirm_password; ?>">
         <span class="invalid-feedback"><?php echo $confirm_password_err; ?></span>
+      </div>
+      <div class="form-group">
+        <label for="picture">Avatar : </label>
+        <input type="hidden" name="MAX_FILE_SIZE" value="1048576"> <!-- Poids maxi : 1Mo => 1024*1024 -->
+        <input type="file" id="picture" name="picture">
+        <span class="invalid-feedback"><?php echo $avatar_err; ?></span>
       </div>
       <div class="form-group">
         <input type="submit" class="btn btn-primary" value="Envoyer">

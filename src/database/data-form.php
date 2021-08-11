@@ -49,6 +49,8 @@ if (!empty($_POST["save_record"])) {
 
   // Définition de l'image par défaut
   $default_picture_name = 'placeholders/generic_poster.jpg';
+  // Définition du dossier qui contiendra l'image
+  $img_folder = dirname(__DIR__) . '/thumbnails/g/';
 
   // Vérification que les champs d'entrée ne sont pas vides
   if (in_array('', $fields_required)) :
@@ -69,7 +71,7 @@ if (!empty($_POST["save_record"])) {
     if (($action == 'add' or $action == 'copy') && empty($_FILES["picture"]["name"])) {
       $picture_name = $default_picture_name;
     } elseif (isset($_FILES["picture"]) && !empty($_FILES["picture"]["name"])) {
-      $upload_img = upload_img($_FILES['picture'], $default_picture_name);
+      $upload_img = upload_img($_FILES['picture'], $default_picture_name, $img_folder);
       $set_picture = $upload_img[0];
       $picture_name = $upload_img[1];
       $msg = $upload_img[2];

@@ -25,6 +25,11 @@ if (!isset($_SESSION["logged"]) || $_SESSION["logged"] !== TRUE) {
   <link rel="stylesheet" href="/assets/css/results.css">
   <link rel="stylesheet" href="/assets/css/crud.css">
 
+  <!-- Appel de jQuery -->
+  <script src="/assets/js/lib/jquery-3.6.0.min.js"></script>
+  <!-- Appel de Bootstrap -->
+  <script src="/assets/js/lib/bootstrap.min.js"></script>
+
   <!-- Appel des polices "Truculenta" et "Roboto" sur Google Fonts -->
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Truculenta:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -47,6 +52,7 @@ if (!isset($_SESSION["logged"]) || $_SESSION["logged"] !== TRUE) {
       <a href="/index.php">
         <img src="/img/logo_sebflix.png" alt="Sebflix" width="190.8" height="66.8" />
       </a>
+      <img id="avatar-img" class="img-fluid m-5 rounded-circle img-thumbnail z-depth-2" alt="<?= $_SESSION["avatar"] ?>" src="/src/thumbnails/<?= $_SESSION["avatar"] ?>" data-holder-rendered="true">
       <h1 class="my-5">Bonjour, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>.<br>Bienvenue<?php if ($_SESSION["loggedadmin"] == TRUE and $_SESSION['role'] === 1) {
                                                                                                               echo ' cher administrateur';
                                                                                                             } elseif ($_SESSION["loggedadmin"] == TRUE and $_SESSION['role'] === 2) {

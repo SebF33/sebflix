@@ -3,7 +3,7 @@
 // Téléversement d'image //
 ///////////////////////////
 
-function upload_img($picture, $default_picture_name)
+function upload_img($picture, $default_picture_name, $img_folder)
 {
   $set_picture = FALSE;
   $msg_error = "";
@@ -42,7 +42,6 @@ function upload_img($picture, $default_picture_name)
         $picture_name = uniqid() . '_' . $picture['name'];
 
         // Placement de l'image dans le dossier et droits de lecture/écriture
-        $img_folder = dirname(__DIR__) . '/thumbnails/g/';
         @mkdir($img_folder, 0777);
         $dir = $img_folder . $picture_name;
         $move_file = @move_uploaded_file($picture['tmp_name'], $dir);

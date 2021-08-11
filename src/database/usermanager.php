@@ -83,15 +83,18 @@ function select_email(string $email)
 }
 
 // Création d'un nouvel utilisateur
-function add_user(string $username, string $email, string $password)
+function add_user(string $username, string $genre, string $email, string $password, string $avatar)
 {
   connexion($dbco);
   try {
-    $req = $dbco->prepare("INSERT INTO users(username, email, password) VALUES (:username, :email, :password)");
+    $req = $dbco->prepare("INSERT INTO users(username, email, password, genre, avatar)
+    VALUES (:username, :email, :password, :genre, :avatar)");
 
     $req->bindValue(':username', $username, PDO::PARAM_STR);
+    $req->bindValue(':genre', $genre, PDO::PARAM_STR);
     $req->bindValue(':email', $email, PDO::PARAM_STR);
     $req->bindValue(':password', $password, PDO::PARAM_STR);
+    $req->bindValue(':avatar', $avatar, PDO::PARAM_STR);
     $req->execute();
   } catch (PDOException $e) {
     echo "Erreur : " . $e->getMessage();

@@ -42,7 +42,9 @@ require dirname(__DIR__) . '/database/search.php';
   <link rel="stylesheet" href="/assets/css/results.css">
   <link rel="stylesheet" href="/assets/css/crud.css">
 
+  <!-- Appel de jQuery -->
   <script src="/assets/js/lib/jquery-3.6.0.min.js"></script>
+  <!-- Appel de Bootstrap -->
   <script src="/assets/js/lib/bootstrap.min.js"></script>
 
   <!-- Appel des polices "Truculenta" et "Roboto" sur Google Fonts -->
