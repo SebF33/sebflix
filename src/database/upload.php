@@ -46,9 +46,6 @@ function upload_img($picture, $default_picture_name, $img_folder)
         $dir = $img_folder . $picture_name;
         $move_file = @move_uploaded_file($picture['tmp_name'], $dir);
 
-        // Nom du chemin de l'image pour la base de données
-        $picture_name = 'g/' . $picture_name;
-
         if (!$move_file) {
           $msg_error = "Un problème est survenu pendant le téléversement, merci de renouveler votre envoi.";
         } else {

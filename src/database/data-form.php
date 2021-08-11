@@ -72,9 +72,9 @@ if (!empty($_POST["save_record"])) {
       $picture_name = $default_picture_name;
     } elseif (isset($_FILES["picture"]) && !empty($_FILES["picture"]["name"])) {
       $upload_img = upload_img($_FILES['picture'], $default_picture_name, $img_folder);
-      $set_picture = $upload_img[0];
-      $picture_name = $upload_img[1];
-      $msg = $upload_img[2];
+      $set_picture = $upload_img[0]; // Autorisation de création de l'image
+      $picture_name = 'g/' . $upload_img[1]; // Nom du chemin de l'image pour la base de données
+      $msg = $upload_img[2]; // Message d'erreur de l'upload
     }
   endif;
 

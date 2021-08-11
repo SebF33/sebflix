@@ -80,7 +80,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 
   // Définition de l'avatar
-  $img_folder = dirname(__DIR__) . '/thumbnails/users/';
+  $img_folder = dirname(__DIR__, 2) . '/thumbnails/users/';
   if ($_POST["genre"] == '0') {
     $default_picture_name = 'users/generic_woman.png';
   } elseif ($_POST["genre"] == '1') {
@@ -93,26 +93,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if (empty($_FILES["picture"]["name"])) {
     $picture_name = $default_picture_name;
   }
+  // Traitement de l'avatar
+  if (empty($username_err) && empty($email_err) && empty($password_err) && empty($confirm_password_err)) {
+    $upload_img = upload_img($_FILES['picture'], $default_picture_name, $img_folder);
+    $set_request = $upload_img[0]; // Autorisation de création de l'utilisateur
+    $avatar_name = 'users/' . $upload_img[1]; // Nom du chemin de l'image pour la base de données
+    $avatar_err = $upload_img[2]; // Message d'erreur de l'upload
+  }
 
   // Vérification des erreurs de saisie avant insertion dans la base de données
-  if (empty($username_err) && empty($email_err) && empty($password_err) && empty($confirm_password_err)) {
+  if (empty($username_err) && empty($email_err) && empty($password_err) && empty($confirm_password_err) && $set_request) {
 
-    // Traitement de l'avatar
-    $upload_img = upload_img($_FILES['picture'], $default_picture_name, $img_folder);
-    $set_request = $upload_img[0];
-    $avatar = $upload_img[1];
-    $avatar_err = $upload_img[2];
+    // Hachage du mot de passe
+    $password = password_hash($password, PASSWORD_DEFAULT);
 
-    if ($set_request) {
-      // Hachage du mot de passe
-      $password = password_hash($password, PASSWORD_DEFAULT);
+    // Création de l'utilisateur
+    add_user($username, $genre, $email, $password, $avatar_name);
 
-      // Création de l'utilisateur
-      add_user($username, $genre, $email, $password, $avatar);
-
-      // Redirection de l'utilisateur vers la page du profil
-      header("location:/src/views/profile.php");
-    }
+    // Redirection de l'utilisateur vers la page du profil
+    header("location:/src/views/profile.php");
   }
 }
 ?>
