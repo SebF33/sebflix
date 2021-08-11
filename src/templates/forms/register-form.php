@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 
   // Validation du genre
-  if ($_POST["genre"] == '0' or $_POST["genre"] == '1') {
+  if ($_POST["genre"] == '0' or $_POST["genre"] == '1' or $_POST["genre"] == '2') {
     $genre = valid_data($_POST['genre']);
   } else {
     // Redirection
@@ -79,12 +79,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
   }
 
-  // Définition de l'avatar
-  $img_folder = dirname(__DIR__, 2) . '/thumbnails/users/';
+  // Définition du dossier qui contiendra l'avatar
+  $img_folder = '/src/thumbnails/users/';
+  // Définition de l'image par défaut
   if ($_POST["genre"] == '0') {
-    $default_picture_name = 'users/generic_woman.png';
+    $default_picture_name = 'generic_woman.png';
   } elseif ($_POST["genre"] == '1') {
-    $default_picture_name = 'users/generic_man.png';
+    $default_picture_name = 'generic_man.png';
+  } elseif ($_POST["genre"] == '2') {
+    $default_picture_name = 'generic_child.png';
   } else {
     // Redirection si valeur invalide
     header("location:/index.php");
@@ -179,6 +182,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
         <div class="form-check">
           <input id="flexRadioDefault1" class="form-check-input" type="radio" name="genre" value="1" /> Homme
+        </div>
+        <div class="form-check">
+          <input id="flexRadioDefault1" class="form-check-input" type="radio" name="genre" value="2" /> Enfant
         </div>
       </div>
       <div class="form-group">

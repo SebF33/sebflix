@@ -384,7 +384,8 @@ h3 a {
 }
 
 .alert {
-  font-family: var(--font-text);
+  font-family: var(--font-title);
+  font-size: 1em;
   font-weight: 600;
 }
 

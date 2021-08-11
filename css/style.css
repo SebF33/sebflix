@@ -132,7 +132,7 @@ nav ul a.btn-icon {
   border: 2px solid var(--color-darker);
   border-radius: 50%;
   object-fit: cover;
-  transition: 0.2s;
+  transition: 0.1s;
   filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
 }
 
@@ -140,13 +140,13 @@ nav ul a.btn-icon {
   display: block;
   width: 47.2px;
   height: 33.2px;
-  transition: 0.2s;
+  transition: 0.1s;
   filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
 }
 
 .avatar-btn img:hover,
 .profile-btn img:hover {
-  transform: scale(1.1);
+  transform: scale(1.08);
 }
 
 /****************/

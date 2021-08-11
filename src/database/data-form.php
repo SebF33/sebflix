@@ -47,10 +47,10 @@ if (!empty($_POST["save_record"])) {
   // Champs requis
   $fields_required = array($_POST['title'], $_POST['synopsis'], $_POST['premiered']);
 
+  // Définition du dossier qui contiendra l'image
+  $img_folder = '/src/thumbnails/g/';
   // Définition de l'image par défaut
   $default_picture_name = 'placeholders/generic_poster.jpg';
-  // Définition du dossier qui contiendra l'image
-  $img_folder = dirname(__DIR__) . '/thumbnails/g/';
 
   // Vérification que les champs d'entrée ne sont pas vides
   if (in_array('', $fields_required)) :
