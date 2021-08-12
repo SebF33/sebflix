@@ -44,15 +44,10 @@ require dirname(__DIR__, 2) . '/database/data-form.php';
 </head>
 
 <body>
-  <style type="text/css">
-    body {
-      background-image: url("/assets/img/bg_save.png");
-      background-position: center center;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      background-size: cover;
-    }
-  </style>
+  <?php
+  // Background selon la catégorie définie
+  include "../background.php";
+  ?>
 
   <header>
     <div class="headerLogo">

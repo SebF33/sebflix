@@ -44,6 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['id'] = (int)$userdb['id'];
         $_SESSION['username'] = $userdb['username'];
         $_SESSION['role'] = (int)$userdb['role'];
+        $_SESSION['genre'] = (int)$userdb['genre'];
         $_SESSION['avatar'] = $userdb['avatar'];
         if ($_SESSION['role'] === 1 or $_SESSION['role'] === 2) {
           $_SESSION['loggedadmin'] = TRUE;

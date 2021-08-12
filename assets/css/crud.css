@@ -278,25 +278,25 @@ h3 a {
   border-width: 1;
 }
 
-#id,
-#title,
-#text,
+#td-id,
+#td-title,
+#td-text,
 #td-avatar,
-#actions {
+#td-actions {
   font-size: 1em;
   justify-content: center;
   text-align: center;
 }
 
-#id {
+#td-id {
   font-weight: 700;
 }
 
-#title {
+#td-title {
   font-weight: 600;
 }
 
-#italic {
+#td-italic {
   font-size: 1em;
   font-style: italic;
 }
@@ -309,11 +309,11 @@ h3 a {
   -webkit-box-orient: vertical;
 }
 
-#text {
+#td-text {
   font-weight: 500;
 }
 
-#image,
+#td-image,
 #td-avatar {
   padding: 0;
 }
@@ -323,7 +323,7 @@ h3 a {
   padding-bottom: 8px;
 }
 
-#image img {
+#td-image img {
   display: block;
   text-align: center;
   max-width: 100%;
@@ -340,7 +340,7 @@ h3 a {
   cursor: pointer;
 }
 
-#actions {
+#td-actions {
   user-select: none;
 }
 

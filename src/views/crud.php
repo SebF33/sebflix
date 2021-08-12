@@ -132,16 +132,16 @@ require dirname(__DIR__) . '/database/search.php';
             $french_date = utf8_encode(strftime('%e %B %Y', strtotime($row->premiered)));
           ?>
             <tr class="table-row">
-              <td id="id"><?= $row->idMovie ?></td>
-              <td id="title"><?= $row->title ?></td>
-              <td id="italic">
+              <td id="td-id"><?= $row->idMovie ?></td>
+              <td id="td-title"><?= $row->title ?></td>
+              <td id="td-italic">
                 <div class="max-lines"><?= $row->synopsis ?></div>
               </td>
-              <td id="text"><?= $french_date ?></td>
-              <td id="image">
+              <td id="td-text"><?= $french_date ?></td>
+              <td id="td-image">
                 <img src="/src/thumbnails/<?= $row->cachedurl ?>" title="<?= $row->cachedurl ?>" alt="<?= $row->title ?>" height="216" width="144" />
               </td>
-              <td id="actions">
+              <td id="td-actions">
                 <a class="ajax-action-links" href='/src/views/viewpage.php?type=movie&id=<?= $row->idMovie ?>' target="_blank" draggable="false" ondragstart="return false"><img src="/assets/img/view.png" title="Voir" height="17" width="30" /></a>
                 <a class="ajax-action-links" href='/src/templates/forms/media-form.php?id=<?= $row->idMovie ?>&action=edit' draggable="false" ondragstart="return false"><img src="/assets/img/edit.png" title="Éditer" height="25" width="24" /></a>
                 <a class="ajax-action-links" href='/src/templates/forms/media-form.php?id=<?= $row->idMovie ?>&action=copy' draggable="false" ondragstart="return false"><img src="/assets/img/copy.png" title="Copier" height="25" width="22" /></a>

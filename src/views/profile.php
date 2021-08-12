@@ -53,10 +53,12 @@ if (!isset($_SESSION["logged"]) || $_SESSION["logged"] !== TRUE) {
         <img src="/img/logo_sebflix.png" alt="Sebflix" width="190.8" height="66.8" />
       </a>
       <img id="avatar-img" class="img-fluid m-5 rounded-circle img-thumbnail z-depth-2" alt="<?= $_SESSION["avatar"] ?>" src="/src/thumbnails/<?= $_SESSION["avatar"] ?>" data-holder-rendered="true" draggable="false" ondragstart="return false">
-      <h1 class="my-5">Bonjour, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>.<br>Bienvenue<?php if ($_SESSION["loggedadmin"] == TRUE and $_SESSION['role'] === 1) {
+      <h1 class="my-5">Bonjour, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>.<br>Bienvenue<?php if ($_SESSION["loggedadmin"] == TRUE and $_SESSION["role"] === 1) {
                                                                                                               echo ' cher administrateur';
-                                                                                                            } elseif ($_SESSION["loggedadmin"] == TRUE and $_SESSION['role'] === 2) {
+                                                                                                            } elseif ($_SESSION["loggedadmin"] == TRUE and $_SESSION["role"] === 2) {
                                                                                                               echo ' super administrateur';
+                                                                                                            } elseif ($_SESSION["loggedadmin"] == FALSE and $_SESSION["genre"] === 2) {
+                                                                                                              echo ' petit(e)';
                                                                                                             } ?>.</h1>
     </div>
   </header>

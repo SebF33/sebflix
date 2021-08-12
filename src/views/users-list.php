@@ -111,19 +111,19 @@ setlocale(LC_TIME, 'fr_FR.utf8', 'fra');
           $french_date = utf8_encode(strftime('%e %B %Y &agrave; %Hh%M', strtotime($row["created_at"])));
       ?>
           <tr class="table-row">
-            <td id="id"><?php echo $row["id"]; ?></td>
-            <td id="title"><?php echo $row["username"]; ?></td>
+            <td id="td-id"><?php echo $row["id"]; ?></td>
+            <td id="td-title"><?php echo $row["username"]; ?></td>
             <td id="td-avatar"><img class="img-fluid rounded-circle img-thumbnail z-depth-2" alt="<?php echo $row["avatar"]; ?>" src="/src/thumbnails/<?php echo $row["avatar"]; ?>" onclick="window.open(this.src)" data-holder-rendered="true" draggable="false" ondragstart="return false"></td>
-            <td id="italic"><?php echo $row["email"]; ?></td>
-            <td id="italic"><?php echo $french_date; ?></td>
-            <td id="title"><?php if ($row["role"] == 1) {
-                              echo 'Administrateur';
-                            } elseif ($row["role"] == 0) {
-                              echo 'Utilisateur';
-                            } elseif ($row["role"] == 2) {
-                              echo 'Super administrateur';
-                            } ?></td>
-            <td id="title">
+            <td id="td-italic"><?php echo $row["email"]; ?></td>
+            <td id="td-italic"><?php echo $french_date; ?></td>
+            <td id="td-title"><?php if ($row["role"] == 1) {
+                                echo 'Administrateur';
+                              } elseif ($row["role"] == 0) {
+                                echo 'Utilisateur';
+                              } elseif ($row["role"] == 2) {
+                                echo 'Super administrateur';
+                              } ?></td>
+            <td id="td-title">
               <?php if ($row["role"] != 2) { ?>
                 <form action="" method="post">
                   <div class="form-check">
