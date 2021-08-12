@@ -3,6 +3,9 @@
 <!------------------->
 
 <?php
+// Initialisation de la session
+session_start();
+
 // Appel du script d'affichage des données
 require dirname(__DIR__) . '/database/viewmanager.php';
 // Appel du script de validation des données
@@ -25,6 +28,24 @@ if (isset($_GET['id']) && !empty($_GET['id']) && ($_GET['type'] == 'movie' or $_
     // Redirection
     header("location:/index.php");
     exit;
+  }
+
+  // Vérifications pour la watchlist
+  if (isset($_SESSION["logged"]) || $_SESSION["logged"] == TRUE) {
+    $user = $_SESSION['id'];
+    connexion($dbco);
+    try {
+      $query = $dbco->prepare(
+        "SELECT id FROM watchlist WHERE user_id = :user AND media_id = :id AND media_type = :type"
+      );
+      $query->bindValue(':user', $user, PDO::PARAM_INT);
+      $query->bindValue(':id', $id, PDO::PARAM_INT);
+      $query->bindValue(':type', $type, PDO::PARAM_STR);
+      $query->execute();
+      $checkWatchlist = $query->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+      echo "Erreur : " . $e->getMessage();
+    }
   }
 
   // Requêtes pour l'affichage selon le type de média défini
@@ -112,7 +133,7 @@ if (isset($_GET['id']) && !empty($_GET['id']) && ($_GET['type'] == 'movie' or $_
   <header id="headerViewpage" role="banner">
     <div id="headerLeft">
       <?php
-      // Créer un tableau à 4 colonnes
+      // Créer un tableau à 5 colonnes
       echo
       "<table class='table-rating'>
           <tr>
@@ -120,6 +141,7 @@ if (isset($_GET['id']) && !empty($_GET['id']) && ($_GET['type'] == 'movie' or $_
           <th>CSA</th>
           <th>Pays</th>
           <th>Année</th>
+          <th>Fav</th>
           </tr>";
       // Note du média
       if (empty($rating['rating'])) {
@@ -146,9 +168,28 @@ if (isset($_GET['id']) && !empty($_GET['id']) && ($_GET['type'] == 'movie' or $_
       } else {
         echo '<td class="tpremiered">' . $date->format("Y") . '</td>';
       }
-      echo "</tr>";
-      echo "</table>";
-      ?>
+      // Favori pour watchlist
+      echo '<td class="tfav">';
+      if ($checkWatchlist) { ?>
+        <a data-id="<?php echo $id; ?>" data-type="<?php echo $type; ?>" data-user="<?php echo $_SESSION['id']; ?>" class="watchlist-btn" onclick="removeFromWatchlist(this)" title="Retirer de la watchlist">
+          <?php include "../templates/watch-on.html"; ?>
+          <?php include "../templates/watch-off.html"; ?>
+        </a>
+        <script>
+          $("#watch-off").hide();
+        </script>
+      <?php } else { ?>
+        <a data-id="<?php echo $id; ?>" data-type="<?php echo $type; ?>" data-user="<?php echo $_SESSION['id']; ?>" class="watchlist-btn" onclick="addToWatchlist(this)" title="Ajouter à la watchlist">
+          <?php include "../templates/watch-off.html"; ?>
+          <?php include "../templates/watch-on.html"; ?>
+        </a>
+        <script>
+          $("#watch-on").hide();
+        </script>
+      <?php } ?>
+      </td>
+      </tr>
+      </table>
     </div>
 
     <div id="headerMain">
@@ -157,7 +198,7 @@ if (isset($_GET['id']) && !empty($_GET['id']) && ($_GET['type'] == 'movie' or $_
       if (!$logo or empty($logo['cachedurl'])) {
         echo $result->title;
       } else {
-        echo '<img src="../thumbnails/' . $logo['cachedurl'] . '" title="' . $result->title . '" alt="' . $result->title . '" height="124" width="320" draggable="false" ondragstart="return false"/>';
+        echo '<img class="header-logo" src="../thumbnails/' . $logo['cachedurl'] . '" title="' . $result->title . '" alt="' . $result->title . '" height="124" width="320" draggable="false" ondragstart="return false"/>';
       }
       ?>
     </div>
@@ -289,6 +330,9 @@ if (isset($_GET['id']) && !empty($_GET['id']) && ($_GET['type'] == 'movie' or $_
     <script src="/js/to-top.js"></script>
 
   </main>
+
+  <script type="text/javascript" src="/assets/js/lib/jquery-3.6.0.min.js"></script>
+  <script type="text/javascript" src="/assets/js/watchlist.js"></script>
 
 </body>
 
