@@ -5,7 +5,7 @@
 
 // Appel du script de validation
 require __DIR__ . '/validation.php';
-// Appel du script des requêtes
+// Appel du script d'administration des données
 require __DIR__ . '/datamanager.php';
 // Appel du script de l'upload
 require __DIR__ . '/upload.php';

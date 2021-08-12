@@ -134,10 +134,10 @@ require dirname(__DIR__) . '/database/search.php';
             <tr class="table-row">
               <td id="id"><?= $row->idMovie ?></td>
               <td id="title"><?= $row->title ?></td>
-              <td id="synopsis">
+              <td id="italic">
                 <div class="max-lines"><?= $row->synopsis ?></div>
               </td>
-              <td id="date"><?= $french_date ?></td>
+              <td id="text"><?= $french_date ?></td>
               <td id="image">
                 <img src="/src/thumbnails/<?= $row->cachedurl ?>" title="<?= $row->cachedurl ?>" alt="<?= $row->title ?>" height="216" width="144" />
               </td>
@@ -157,11 +157,11 @@ require dirname(__DIR__) . '/database/search.php';
                   </div>
                   <div class="modal-body">
                     <p>Êtes-vous sûr de vouloir supprimer ce média ?</p>
-                    <p class="modal-media-title">"<?= $row->title ?>"</p>
+                    <p class="modal-media-title">"<strong><?= $row->title ?></strong>"</p>
                   </div>
                   <div class="modal-footer">
                     <a href="#" data-dismiss="modal" class="btn btn-info" onclick="$('#dialog-example_<?= $row->idMovie ?>').modal('hide');">Non</a>
-                    <a href='/src/database/delete.php?id=<?= $row->idMovie ?>' class="btn btn-danger" id="<?= $row->idMovie ?>">Oui</a>
+                    <a href='/src/database/delete.php?type=movie&id=<?= $row->idMovie ?>' class="btn btn-danger" id="<?= $row->idMovie ?>">Oui</a>
                   </div>
                 </div>
               </div>

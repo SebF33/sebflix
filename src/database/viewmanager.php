@@ -85,7 +85,7 @@
 //    9.01 Comptage du nombre total de médias
 //    9.02 Comptage du nombre total de fichiers image sur le serveur
 
-// Appel du script de connexion à la base de données
+// Appel du script d'administration des données
 require __DIR__ . '/datamanager.php';
 
 // 1.01 Sélection aléatoire de 18 médias type film par leur poster

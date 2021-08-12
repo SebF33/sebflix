@@ -3,8 +3,8 @@
 // Requêtes d'administration des utilisateurs //
 ////////////////////////////////////////////////
 
-// Appel du script de connexion à la base de données
-require __DIR__ . '/connect.php';
+// Appel du script d'administration des données
+require __DIR__ . '/datamanager.php';
 
 // Sélection de tous les utilisateurs
 function select_all_user()
@@ -110,6 +110,21 @@ function update_pwd(string $username, string $pwd)
 
     $req->bindValue(':username', $username, PDO::PARAM_STR);
     $req->bindValue(':password', $pwd, PDO::PARAM_STR);
+    $req->execute();
+  } catch (PDOException $e) {
+    echo "Erreur : " . $e->getMessage();
+  }
+}
+
+// Suppression d'un utilisateur
+function delete_user(int $id)
+{
+  connexion($dbco);
+  try {
+    $req = $dbco->prepare("DELETE FROM users
+    WHERE id=:id");
+
+    $req->bindValue(':id', $id, PDO::PARAM_INT);
     $req->execute();
   } catch (PDOException $e) {
     echo "Erreur : " . $e->getMessage();

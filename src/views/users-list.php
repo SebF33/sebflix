@@ -47,6 +47,11 @@ setlocale(LC_TIME, 'fr_FR.utf8', 'fra');
   <link rel="stylesheet" href="/assets/css/results.css">
   <link rel="stylesheet" href="/assets/css/crud.css">
 
+  <!-- Appel de jQuery -->
+  <script src="/assets/js/lib/jquery-3.6.0.min.js"></script>
+  <!-- Appel de Bootstrap -->
+  <script src="/assets/js/lib/bootstrap.min.js"></script>
+
   <!-- Appel des polices "Truculenta" et "Roboto" sur Google Fonts -->
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Truculenta:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -63,6 +68,8 @@ setlocale(LC_TIME, 'fr_FR.utf8', 'fra');
       background-size: cover;
     }
   </style>
+
+  <script src="/assets/js/dialog.js"></script>
 
   <header>
     <div class="headerLogo">
@@ -87,9 +94,11 @@ setlocale(LC_TIME, 'fr_FR.utf8', 'fra');
   <table class="tbl-qa tbl-user" border="3">
     <thead>
       <tr>
-        <th class="table-header" width="10%">#</th>
-        <th class="table-header" width="35%">Pseudo</th>
-        <th class="table-header" width="25%">Date d'enregistrement</th>
+        <th class="table-header" width="5%">#</th>
+        <th class="table-header" width="10%">Pseudo</th>
+        <th class="table-header" width="15%">Avatar</th>
+        <th class="table-header" width="25%">Adresse mail</th>
+        <th class="table-header" width="15%">Date d'enregistrement</th>
         <th class="table-header" width="20%">Rôle</th>
         <th class="table-header" width="10%">Droits</th>
       </tr>
@@ -104,7 +113,9 @@ setlocale(LC_TIME, 'fr_FR.utf8', 'fra');
           <tr class="table-row">
             <td id="id"><?php echo $row["id"]; ?></td>
             <td id="title"><?php echo $row["username"]; ?></td>
-            <td id="title"><?php echo $french_date; ?></td>
+            <td id="td-avatar"><img class="img-fluid rounded-circle img-thumbnail z-depth-2" alt="<?php echo $row["avatar"]; ?>" src="/src/thumbnails/<?php echo $row["avatar"]; ?>" onclick="window.open(this.src)" data-holder-rendered="true" draggable="false" ondragstart="return false"></td>
+            <td id="italic"><?php echo $row["email"]; ?></td>
+            <td id="italic"><?php echo $french_date; ?></td>
             <td id="title"><?php if ($row["role"] == 1) {
                               echo 'Administrateur';
                             } elseif ($row["role"] == 0) {
@@ -123,13 +134,34 @@ setlocale(LC_TIME, 'fr_FR.utf8', 'fra');
                   </div>
                   <input type="hidden" name="id" value="<?php echo $row["id"]; ?>" />
                 </form>
-              <?php } ?>
+                <a onclick="$('#dialog-example_<?php echo $row['id']; ?>').modal('show');" class="ajax-action-links" class="btn-show-modal" href="#" data-toggle="modal" draggable="false" ondragstart="return false"><img src="/assets/img/delete.png" title="Supprimer" height="25" width="18" /></a>
             </td>
           </tr>
-      <?php
+          <!-- Boîte de dialogue de suppression -->
+          <div id="dialog-example_<?php echo $row['id']; ?>" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content" id="dialog-example_<?php echo $row['id']; ?>">
+                <div class="modal-header">
+                  <h3 class="modal-title">Confirmation de suppression</h3>
+                </div>
+                <div class="modal-body">
+                  <p>Êtes-vous sûr de vouloir supprimer cet utilisateur ?</p>
+                  <p class="modal-media-title">"<strong><?php echo $row['username']; ?></strong>" enregistré le <?php echo $french_date; ?></p>
+                </div>
+                <div class="modal-footer">
+                  <a href="#" data-dismiss="modal" class="btn btn-info" onclick="$('#dialog-example_<?php echo $row['id']; ?>').modal('hide');">Non</a>
+                  <a href='/src/database/delete.php?type=user&id=<?php echo $row['id']; ?>' class="btn btn-danger" id="<?php echo $row['id']; ?>">Oui</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        <?php } ?>
+        </td>
+        </tr>
+    <?php
         }
       }
-      ?>
+    ?>
     </tbody>
   </table>
 </body>

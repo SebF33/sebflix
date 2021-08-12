@@ -125,15 +125,20 @@ nav ul a.btn-icon {
 }
 
 .avatar-btn img {
+  display: block;
   width: 38px;
   height: 38px;
   padding: .10rem;
   background-color: var(--color-light);
   border: 2px solid var(--color-darker);
-  border-radius: 50%;
   object-fit: cover;
   transition: 0.1s;
   filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
+}
+
+.avatar-btn,
+.avatar-btn img {
+  border-radius: 50px;
 }
 
 .profile-btn img {

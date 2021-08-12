@@ -8,7 +8,7 @@ require dirname(__DIR__) . '/database/viewmanager.php';
 // Appel du script de validation des données
 require dirname(__DIR__) . '/database/validation.php';
 
-// Définition des valeurs autorisées dans les GET
+// Définition des valeurs autorisées dans le GET
 $categories = array('movies', 'tvshows', 'animes', 'animation', 'spectacles');
 
 // Vérification du GET ('category' obligatoire)

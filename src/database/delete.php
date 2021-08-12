@@ -3,14 +3,33 @@
 // SUPPRESSION DES DONNÉES //
 /////////////////////////////
 
-// Appel du script d'administration des données
-require __DIR__ . '/datamanager.php';
+// Appel du script de validation
+require __DIR__ . '/validation.php';
+// Appel du script d'administration des utilisateurs
+require __DIR__ . '/usermanager.php';
 
-// Déclaration et nettoyage des variables d'entrée
-$id = htmlspecialchars($_GET['id']);
+// Définition des valeurs autorisées dans le GET
+$types = array('movie', 'tvshow', 'user');
 
-// Appel de la fonction de suppression des données
-delete_movie($id);
+// Vérification des GET ('type' obligatoire)
+if (isset($_GET['type']) && !empty($_GET['type']) && in_array($_GET['type'], $types)) {
+  // Déclaration et nettoyage des GET
+  $type = valid_get($_GET['type']);
+  $id = valid_data($_GET['id']);
 
-// Redirection
-header('location:/src/views/crud.php');
+  if ($type == 'movie') {
+    // Appel de la fonction de suppression d'un média type film
+    delete_movie($id);
+    // Redirection
+    header('location:/src/views/crud.php');
+  } elseif ($type == 'user') {
+    // Appel de la fonction de suppression d'un utilisateur
+    delete_user($id);
+    // Redirection
+    header('location:/src/views/users-list.php');
+  }
+} else {
+  // Redirection
+  header("location:/index.php");
+  exit;
+}

@@ -19,7 +19,7 @@ require dirname(__DIR__) . '/database/viewmanager.php';
 // Appel du script de validation des données
 require dirname(__DIR__) . '/database/validation.php';
 
-// Définition des valeurs autorisées dans les GET
+// Définition des valeurs autorisées dans le GET
 $types = array('movies', 'tvshows', 'actors', 'studios', 'achievement', 'direction', 'filmography', 'genres', 'genre', 'beststudios', 'sets', 'collection', 'moviecast', 'tvshowcast');
 
 // Vérification des GET ('type' obligatoire)
