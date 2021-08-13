@@ -81,9 +81,12 @@
 //    8.04 Sélection jusqu'à 1 directrice/directeur du média type film
 //    8.05 Sélection des films d'un(e) directrice/directeur par son identifiant
 
-//  09. Comptages
-//    9.01 Comptage du nombre total de médias
-//    9.02 Comptage du nombre total de fichiers image sur le serveur
+//  09. Affichages de la watchlist
+//    9.01 Sélection des médias type film de la watchlist
+
+//  10. Comptages
+//   10.01 Comptage du nombre total de médias
+//   10.02 Comptage du nombre total de fichiers image sur le serveur
 
 // Appel du script d'administration des données
 require __DIR__ . '/datamanager.php';
@@ -1578,7 +1581,33 @@ function select_movie_from_director(int $id)
   }
 }
 
-// 9.01 Comptage du nombre total de médias
+// 9.01 Sélection des médias type film de la watchlist
+function select_my_movie(int $user)
+{
+  connexion($dbco);
+  try {
+    $query = $dbco->prepare(
+      "SELECT m.idMovie, m.title, m.premiered, a.cachedurl, w.created_at
+      FROM movie AS m
+      JOIN watchlist AS w
+      ON w.media_id = m.idMovie
+      JOIN art AS a
+      ON m.idMovie = a.media_id
+      WHERE w.user_id = :user
+      AND a.media_type = 'movie'
+      AND a.type = 'poster'
+      ORDER BY w.created_at DESC"
+    );
+    $query->bindValue(':user', $user, PDO::PARAM_INT);
+    $query->execute();
+    $result = $query->fetchAll(PDO::FETCH_OBJ);
+    return $result;
+  } catch (PDOException $e) {
+    echo "Erreur : " . $e->getMessage();
+  }
+}
+
+// 10.01 Comptage du nombre total de médias
 function count_all_media()
 {
   connexion($dbco);
@@ -1592,7 +1621,7 @@ function count_all_media()
   }
 }
 
-// 9.02 Comptage du nombre total de fichiers image sur le serveur
+// 10.02 Comptage du nombre total de fichiers image sur le serveur
 function count_all_image()
 {
   $img_folder = dirname(__DIR__) . '/thumbnails/*/';

@@ -130,3 +130,20 @@ function delete_user(int $id)
     echo "Erreur : " . $e->getMessage();
   }
 }
+
+// Suppression d'un média type film de la watchlist
+function delete_my_movie(int $user, int $media, string $type)
+{
+  connexion($dbco);
+  try {
+    $req = $dbco->prepare(
+      "DELETE FROM watchlist WHERE user_id = :user AND media_id = :media AND media_type = :type"
+    );
+    $req->bindValue(':user', $user, PDO::PARAM_INT);
+    $req->bindValue(':media', $media, PDO::PARAM_INT);
+    $req->bindValue(':type', $type, PDO::PARAM_STR);
+    $req->execute();
+  } catch (PDOException $e) {
+    echo "Erreur : " . $e->getMessage();
+  }
+}

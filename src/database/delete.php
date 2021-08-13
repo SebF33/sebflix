@@ -17,7 +17,7 @@ if (isset($_GET['type']) && !empty($_GET['type']) && in_array($_GET['type'], $ty
   $type = valid_get($_GET['type']);
   $id = valid_data($_GET['id']);
 
-  if ($type == 'movie') {
+  if ($type == 'movie' && !isset($_GET['user'])) {
     // Appel de la fonction de suppression d'un média type film
     delete_movie($id);
     // Redirection
@@ -27,6 +27,12 @@ if (isset($_GET['type']) && !empty($_GET['type']) && in_array($_GET['type'], $ty
     delete_user($id);
     // Redirection
     header('location:/src/views/users-list.php');
+  } elseif (isset($_GET['user']) && !empty($_GET['user'])) {
+    $user = valid_data($_GET['user']);
+    // Appel de la fonction de suppression d'un média type film de la watchlist
+    delete_my_movie($user, $id, $type);
+    // Redirection
+    header('location:/src/views/watchlist.php');
   }
 } else {
   // Redirection
