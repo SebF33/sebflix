@@ -12,7 +12,7 @@ function addToWatchlist(obj) {
       setTimeout(function () {
         $(obj).find("#watch-on").show();
         markedAsChecked($(obj));
-      }, 400);
+      }, 50);
     },
   });
 }
@@ -30,7 +30,7 @@ function removeFromWatchlist(obj) {
       setTimeout(function () {
         $(obj).find("#watch-off").show();
         markedAsUnchecked($(obj));
-      }, 400);
+      }, 50);
     },
   });
 }

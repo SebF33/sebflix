@@ -31,7 +31,7 @@ if (isset($_GET['id']) && !empty($_GET['id']) && ($_GET['type'] == 'movie' or $_
   }
 
   // Vérifications pour la watchlist
-  if (isset($_SESSION["logged"]) || $_SESSION["logged"] == TRUE) {
+  if (isset($_SESSION["logged"]) && $_SESSION["logged"] == TRUE) {
     $user = $_SESSION['id'];
     connexion($dbco);
     try {
@@ -170,7 +170,7 @@ if (isset($_GET['id']) && !empty($_GET['id']) && ($_GET['type'] == 'movie' or $_
       }
       // Favori pour watchlist
       echo '<td class="tfav">';
-      if ($checkWatchlist) { ?>
+      if (isset($checkWatchlist) && $checkWatchlist) { ?>
         <a data-id="<?php echo $id; ?>" data-type="<?php echo $type; ?>" data-user="<?php echo $_SESSION['id']; ?>" class="watchlist-btn" onclick="removeFromWatchlist(this)" title="Retirer de la watchlist">
           <?php include "../templates/watch-on.html"; ?>
           <?php include "../templates/watch-off.html"; ?>
@@ -178,6 +178,10 @@ if (isset($_GET['id']) && !empty($_GET['id']) && ($_GET['type'] == 'movie' or $_
         <script>
           $("#watch-off").hide();
         </script>
+      <?php } elseif (!isset($_SESSION["logged"]) || $_SESSION["logged"] !== TRUE) { ?>
+        <a class="watchlist-btn" href="/src/templates/forms/login-form.php" title="Ajouter à la watchlist">
+          <?php include "../templates/watch-off.html"; ?>
+        </a>
       <?php } else { ?>
         <a data-id="<?php echo $id; ?>" data-type="<?php echo $type; ?>" data-user="<?php echo $_SESSION['id']; ?>" class="watchlist-btn" onclick="addToWatchlist(this)" title="Ajouter à la watchlist">
           <?php include "../templates/watch-off.html"; ?>
