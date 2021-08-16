@@ -96,11 +96,13 @@ setlocale(LC_TIME, 'fr_FR.utf8', 'fra');
       <tr>
         <th class="table-header" width="5%">#</th>
         <th class="table-header" width="10%">Pseudo</th>
-        <th class="table-header" width="15%">Avatar</th>
-        <th class="table-header" width="25%">Adresse mail</th>
+        <th class="table-header" width="10%">Avatar</th>
+        <th class="table-header" width="5%">Genre</th>
+        <th class="table-header" width="20%">Adresse mail</th>
         <th class="table-header" width="15%">Date d'enregistrement</th>
-        <th class="table-header" width="20%">Rôle</th>
+        <th class="table-header" width="15%">Rôle</th>
         <th class="table-header" width="10%">Droits</th>
+        <th class="table-header" width="10%">Actions</th>
       </tr>
     </thead>
     <tbody id="table-body">
@@ -114,6 +116,13 @@ setlocale(LC_TIME, 'fr_FR.utf8', 'fra');
             <td id="td-id"><?php echo $row["id"]; ?></td>
             <td id="td-title"><?php echo $row["username"]; ?></td>
             <td id="td-avatar"><img class="img-fluid rounded-circle img-thumbnail z-depth-2" alt="<?php echo $row["avatar"]; ?>" src="/src/thumbnails/<?php echo $row["avatar"]; ?>" onclick="window.open(this.src)" data-holder-rendered="true" draggable="false" ondragstart="return false"></td>
+            <td id="td-genre"><?php if ($row["genre"] == 1) {
+                                echo '<img src="/assets/img/male.png" alt="Homme" title="Homme" draggable="false" ondragstart="return false">';
+                              } elseif ($row["genre"] == 0) {
+                                echo '<img src="/assets/img/female.png" alt="Femme" title="Femme" draggable="false" ondragstart="return false">';
+                              } elseif ($row["genre"] == 2) {
+                                echo '<img src="/assets/img/child.png" alt="Enfant" title="Enfant" draggable="false" ondragstart="return false">';
+                              } ?></td>
             <td id="td-italic"><?php echo $row["email"]; ?></td>
             <td id="td-italic"><?php echo $french_date; ?></td>
             <td id="td-title"><?php if ($row["role"] == 1) {
@@ -134,7 +143,10 @@ setlocale(LC_TIME, 'fr_FR.utf8', 'fra');
                   </div>
                   <input type="hidden" name="id" value="<?php echo $row["id"]; ?>" />
                 </form>
-                <a onclick="$('#dialog-example_<?php echo $row['id']; ?>').modal('show');" class="ajax-action-links" class="btn-show-modal" href="#" data-toggle="modal" draggable="false" ondragstart="return false"><img src="/assets/img/delete.png" title="Supprimer" height="25" width="18" /></a>
+            </td>
+            <td id="td-actions">
+              <a class="ajax-action-links" href='/src/views/watchlist.php?user=<?php echo $row['id']; ?>' target="_blank" draggable="false" ondragstart="return false"><img src="/assets/img/fav.png" alt="Watchlist" title="Watchlist" height="25" width="25" /></a>
+              <a onclick="$('#dialog-example_<?php echo $row['id']; ?>').modal('show');" class="ajax-action-links" class="btn-show-modal" href="#" data-toggle="modal" draggable="false" ondragstart="return false"><img src="/assets/img/delete.png" alt="Supprimer" title="Supprimer" height="25" width="18" /></a>
             </td>
           </tr>
           <!-- Boîte de dialogue de suppression -->

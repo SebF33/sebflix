@@ -20,6 +20,28 @@ setlocale(LC_TIME, 'fr_FR.utf8', 'fra');
 
 // Appel du script d'affichage des données
 require dirname(__DIR__) . '/database/viewmanager.php';
+// Appel du script de validation des données
+require dirname(__DIR__) . '/database/validation.php';
+
+// Vérification du GET
+if (isset($_GET['user']) && !empty($_GET['user'])) {
+  // Récupération et validation de l'ID de l'utilisateur
+  $user = (int)valid_get($_GET['user']);
+
+  // Vérification et autorisation de l'ID de l'utilisateur
+  $checkid = check_id_user($user);
+  if ($checkid === 0 || ($_SESSION["id"] !== $user && $_SESSION["loggedadmin"] == FALSE)) {
+    // Redirection
+    header("location:/src/views/profile.php");
+    exit;
+  } else {
+    $username = select_username_by_id($user);
+  }
+} else {
+  // Redirection
+  header("location:/index.php");
+  exit;
+}
 ?>
 
 <html>
@@ -64,7 +86,11 @@ require dirname(__DIR__) . '/database/viewmanager.php';
       <a href="/index.php">
         <img src="/img/logo_sebflix.png" alt="Sebflix" width="190.8" height="66.8" />
       </a>
-      <h1>Watchlist</h1>
+      <h1><?php if ($_SESSION["id"] == $user) {
+            echo "Ma ";
+          } ?>Watchlist<?php if ($_SESSION["id"] !== $user) {
+                          echo ' de "' . $username['username'] . '"';
+                        } ?></h1>
     </div>
 
     <!-- Boutons de gestion -->
@@ -80,7 +106,7 @@ require dirname(__DIR__) . '/database/viewmanager.php';
 
     <?php
     // Appel de la fonction de sélection des médias type film de la watchlist
-    $result = select_my_movie($_SESSION['id']);
+    $result = select_my_movie($user);
     if (!empty($result)) {
     ?>
       <table class="tbl-qa tbl-user justify-content-center table-responsive" border="3">
@@ -125,7 +151,7 @@ require dirname(__DIR__) . '/database/viewmanager.php';
                   </div>
                   <div class="modal-footer">
                     <a href="#" data-dismiss="modal" class="btn btn-info" onclick="$('#dialog-example_<?= $row->idMovie ?>').modal('hide');">Non</a>
-                    <a href='/src/database/delete.php?user=<?= $_SESSION['id'] ?>&type=movie&id=<?= $row->idMovie ?>' class="btn btn-danger" id="<?= $row->idMovie ?>">Oui</a>
+                    <a href='/src/database/delete.php?user=<?= $user ?>&type=movie&id=<?= $row->idMovie ?>' class="btn btn-danger" id="<?= $row->idMovie ?>">Oui</a>
                   </div>
                 </div>
               </div>

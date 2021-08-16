@@ -282,6 +282,7 @@ h3 a {
 #td-title,
 #td-text,
 #td-avatar,
+#td-genre,
 #td-actions {
   font-size: 1em;
   justify-content: center;
@@ -318,7 +319,8 @@ h3 a {
   padding: 0;
 }
 
-#td-avatar {
+#td-avatar,
+#td-genre {
   padding-top: 8px;
   padding-bottom: 8px;
 }
@@ -338,6 +340,11 @@ h3 a {
   border: 2px solid var(--color-dark);
   object-fit: cover;
   cursor: pointer;
+}
+
+#td-genre img {
+  width: 20px;
+  height: auto;
 }
 
 #td-actions {

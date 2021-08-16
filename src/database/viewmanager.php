@@ -83,6 +83,8 @@
 
 //  09. Affichages de la watchlist
 //    9.01 Sélection des médias type film de la watchlist
+//    9.02 Sélection des médias type série de la watchlist
+//    9.03 Sélection d'un pseudo d'utilisateur par son identifiant
 
 //  10. Comptages
 //   10.01 Comptage du nombre total de médias
@@ -1601,6 +1603,22 @@ function select_my_movie(int $user)
     $query->bindValue(':user', $user, PDO::PARAM_INT);
     $query->execute();
     $result = $query->fetchAll(PDO::FETCH_OBJ);
+    return $result;
+  } catch (PDOException $e) {
+    echo "Erreur : " . $e->getMessage();
+  }
+}
+
+// 9.03 Sélection d'un pseudo d'utilisateur par son identifiant
+function select_username_by_id(int $id)
+{
+  connexion($dbco);
+  try {
+    $query = $dbco->prepare("SELECT username FROM users WHERE id=:id");
+
+    $query->bindValue(':id', $id, PDO::PARAM_INT);
+    $query->execute();
+    $result = $query->fetch(PDO::FETCH_ASSOC);
     return $result;
   } catch (PDOException $e) {
     echo "Erreur : " . $e->getMessage();

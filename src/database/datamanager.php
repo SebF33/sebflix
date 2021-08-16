@@ -23,6 +23,7 @@
 //    5.04 Vérification de l'existence de l'ID d'un(e) actrice/acteur/doubleur/directrice/directeur
 //    5.05 Vérification de l'existence de l'ID d'un genre
 //    5.06 Vérification de l'existence de l'ID d'un set
+//    5.07 Vérification de l'existence de l'ID d'un utilisateur
 
 // Appel du script de connexion à la base de données
 require __DIR__ . '/connect.php';
@@ -248,6 +249,25 @@ function check_id_set(int $id)
       WHERE idSet = :id"
     );
     $query->bindValue(':id', $id, PDO::PARAM_INT);
+    $query->execute();
+    $checkid = $query->rowCount();
+    return $checkid;
+  } catch (PDOException $e) {
+    echo "Erreur : " . $e->getMessage();
+  }
+}
+
+// 5.07 Vérification de l'existence de l'ID d'un utilisateur
+function check_id_user(int $user)
+{
+  connexion($dbco);
+  try {
+    $query = $dbco->prepare(
+      "SELECT id
+      FROM users
+      WHERE id = :user"
+    );
+    $query->bindValue(':user', $user, PDO::PARAM_INT);
     $query->execute();
     $checkid = $query->rowCount();
     return $checkid;
