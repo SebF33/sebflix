@@ -13,13 +13,6 @@ if (!isset($_SESSION["loggedadmin"]) || $_SESSION["loggedadmin"] !== TRUE) {
   exit;
 }
 
-// Définition de la page en cours
-if (isset($_GET['page']) && !empty($_GET['page'])) {
-  $currentPage = (int) strip_tags($_GET['page']);
-} else {
-  $currentPage = 1;
-}
-
 // Fuseau horaire
 date_default_timezone_set('EUROPE/Paris');
 // Traduction de la date en français
@@ -27,7 +20,6 @@ setlocale(LC_TIME, 'fr_FR.utf8', 'fra');
 
 // Appel du script d'affichage des données
 require dirname(__DIR__) . '/database/viewmanager.php';
-
 // Appel du script du moteur de recherche
 require dirname(__DIR__) . '/database/search.php';
 ?>
@@ -80,7 +72,7 @@ require dirname(__DIR__) . '/database/search.php';
     <!-- Boutons de gestion -->
     <div class="btn-toolbar text-center justify-content-center d-grid gap-3 d-md-flex">
       <?php
-      echo '<a href="/index.php" class="button_link"><img src="/assets/img/home.png" title="Accueil" height="30" width="30" />' . str_repeat('&nbsp;', 2) . 'Accueil</a>';
+      echo '<a href="/index.php" class="button_link"><img src="/assets/img/home.png" alt="Accueil" title="Accueil" height="30" width="32" />' . str_repeat('&nbsp;', 2) . 'Accueil</a>';
       echo '<a href="/src/views/profile.php" class="button_link"><img src="/assets/img/user.png" title="Utilisateur" height="30" width="30" />' . str_repeat('&nbsp;', 2) . 'Profil</a>';
       echo '<a href="/src/templates/forms/media-form.php?action=add" class="button_link"><img src="/assets/img/add.png" title="Ajouter" height="30" width="30" />' . str_repeat('&nbsp;', 2) . 'Créer un média</a>';
       if (isset($_GET['search']) && !empty($_GET['search'])) {
@@ -174,25 +166,45 @@ require dirname(__DIR__) . '/database/search.php';
       </table>
 
       <?php
-      if (isset($count) && $count >= 1) { ?>
+      if (isset($total_rows) && $total_rows >= 1) { ?>
         <!-- Pagination -->
         <div class="pagination-container">
-          <ul class="pagination">
-            <!-- Lien vers la page précédente (désactivé si on se trouve sur la 1ère page) -->
-            <li class="page-item <?= ($currentPage == 1) ? "disabled" : "" ?>">
-              <a href="./crud.php?search=<?= $query ?>&page=<?= $currentPage - 1 ?>" class="page-link">«</a>
-            </li>
+          <ul class="pagination-list">
             <?php
-            for ($page = 1; $page <= $pages; $page++) : ?>
-              <!-- Lien vers chacune des pages (activé si on se trouve sur la page correspondante) -->
-              <li class="page-item <?= ($currentPage == $page) ? "active" : "" ?>">
-                <a href="./crud.php?search=<?= $query ?>&page=<?= $page ?>" class="page-link"><?= $page ?></a>
+            // Lien vers la page précédente et/ou ellipse (sauf si on se trouve sur la 1ère page)
+            if ($prev_page > 0) { ?>
+              <li class="page-item">
+                <a class="page-url" href="./crud.php?search=<?= $query ?>&page=<?= $prev_page ?>">«</a>
               </li>
-            <?php endfor ?>
-            <!-- Lien vers la page suivante (désactivé si on se trouve sur la dernière page) -->
-            <li class="page-item <?= ($currentPage == $pages) ? "disabled" : "" ?>">
-              <a href="./crud.php?search=<?= $query ?>&page=<?= $currentPage + 1 ?>" class="page-link">»</a>
-            </li>
+            <?php }
+            if ($page_from != 1) { ?>
+              <li class="page-item">
+                <a class="page-url" href="./crud.php?search=<?= $query ?>&page=1">1</a>
+              </li>
+              <li class="page-item disabled">
+                <a class="page-url">...</a>
+              </li>
+            <?php }
+            // Lien vers chacune des pages (activé si on se trouve sur la page correspondante)
+            for ($p = $page_from; $p <= $page_to; $p++) { ?>
+              <li class="page-item <?= ($current_page == $p) ? "active" : "" ?>">
+                <a class="page-url" href="./crud.php?search=<?= $query ?>&page=<?= $p ?>"><?= $p ?></a>
+              </li>
+            <?php }
+            // Lien vers la page suivante et/ou ellipse (sauf si on se trouve sur la dernière page)
+            if ($page_to != $total_pages) { ?>
+              <li class="page-item disabled">
+                <a class="page-url">...</a>
+              </li>
+              <li class="page-item">
+                <a class="page-url" href="./crud.php?search=<?= $query ?>&page=<?= $total_pages ?>"><?= $total_pages ?></a>
+              </li>
+            <?php }
+            if ($next_page > 0) { ?>
+              <li class="page-item">
+                <a class="page-url" href="./crud.php?search=<?= $query ?>&page=<?= $next_page ?>">»</a>
+              </li>
+            <?php } ?>
           </ul>
         </div>
       <?php } ?>

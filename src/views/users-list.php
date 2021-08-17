@@ -80,7 +80,7 @@ setlocale(LC_TIME, 'fr_FR.utf8', 'fra');
     </div>
     <div class="btn-toolbar text-center justify-content-center mt-4 d-grid gap-2 d-md-flex">
       <?php
-      echo '<a href="/index.php" class="button_link"><img src="/assets/img/home.png" title="Accueil" height="30" width="30" />' . str_repeat('&nbsp;', 2) . 'Accueil</a>';
+      echo '<a href="/index.php" class="button_link"><img src="/assets/img/home.png" alt="Accueil" title="Accueil" height="30" width="32" />' . str_repeat('&nbsp;', 2) . 'Accueil</a>';
       echo '<a href="/src/views/profile.php" class="button_link"><img src="/assets/img/user.png" title="Utilisateur" height="30" width="30" />' . str_repeat('&nbsp;', 2) . 'Profil</a>';
       ?>
     </div>

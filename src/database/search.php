@@ -3,229 +3,142 @@
 // Moteur de recherche //
 /////////////////////////
 
+// Initialisation des variables
+$result = $studios = $actors = $tvshows = $movies = $msg_result = "";
+
 // Déclaration et nettoyage de la variable d'entrée
 if (isset($_GET['search']) && !empty($_GET['search'])) {
   $query = htmlspecialchars($_GET['search']);
   $query = trim($query);
 }
 
-// Initialisation de la variable du message de résultat(s)
-$msg_result = "";
+// Définition de la page en cours
+if (isset($_GET['page']) && !empty($_GET['page'])) {
+  $current_page = (int) strip_tags($_GET['page']);
+} else {
+  $current_page = 1;
+}
 
-// Vérification des termes entrés par l'utilisateur
+// Définition du nombre de résultats par page
+$max_rows = 30;
+// Valeurs par défaut pour la pagination
+$total_rows = 0;
+$total_pages = 1;
+$prev_page = 0;
+$next_page = 0;
+$page_from = 1;
+$page_to = 0;
+
 if (isset($query) && !empty($query)) {
-
-  // Traitement de l'option "films" choisie par l'utilisateur
+  // Traitement de l'option "films" choisie par l'utilisateur pour la requête de comptage
   if (isset($type) && $type == 'movies') {
-    // Requête de comptage pour la table "movie"
-    $sql = 'SELECT COUNT(*) FROM movie WHERE title LIKE :query';
-    connexion($dbco);
-    $queryPrepared = $dbco->prepare($sql);
-    $queryPrepared->bindValue(':query', ('%' . $query . '%'), PDO::PARAM_STR);
-    $queryPrepared->execute();
-
-    // Comptage des résultats des films
-    $count = $queryPrepared->fetchColumn();
-    $nbMovies = (int) $count;
-
-    // Affichage du résultat non nul
-    if ($count >= 1) {
-      $msg_result .= "$count résultat(s) trouvé(s) pour <strong> '$query' </strong> <br/>";
-    }
-    // Affichage du résultat nul
-    else {
-      $msg_result .= "\n <hr/> Aucun résultat trouvé pour <strong> '$query' </strong>";
-    }
-
-    // Définition du nombre de films par page
-    $perPage = 30;
-    // Calcul du nombre de pages total
-    $pages = ceil($nbMovies / $perPage);
-    // Calcul du 1er média de la page
-    $first = ($currentPage * $perPage) - $perPage;
-
-    // Requête de sélection dans la table "movie"
-    $sql = "SELECT * FROM movie
-            INNER JOIN art ON movie.idMovie = art.media_id
-            WHERE title LIKE :query AND media_type = 'movie' AND type = 'poster'
-            ORDER BY premiered DESC LIMIT :first, :perpage;";
-    connexion($dbco);
-    $queryPrepared = $dbco->prepare($sql);
-    $queryPrepared->bindValue(':query', ('%' . $query . '%'), PDO::PARAM_STR);
-    $queryPrepared->bindValue(':first', $first, PDO::PARAM_INT);
-    $queryPrepared->bindValue(':perpage', $perPage, PDO::PARAM_INT);
-    $queryPrepared->execute();
-    $movies = $queryPrepared->fetchAll(PDO::FETCH_ASSOC);
+    $sqlCount = "SELECT COUNT(*) FROM movie WHERE title LIKE :query";
   }
-
-  // Traitement de l'option "séries" choisie par l'utilisateur
+  // Traitement de l'option "séries" choisie par l'utilisateur pour la requête de comptage
   elseif (isset($type) && $type == 'tvshows') {
-    // Requête de comptage pour la table "tvshow"
-    $sql = 'SELECT COUNT(*) FROM tvshow WHERE title LIKE :query';
-    connexion($dbco);
-    $queryPrepared = $dbco->prepare($sql);
-    $queryPrepared->bindValue(':query', ('%' . $query . '%'), PDO::PARAM_STR);
-    $queryPrepared->execute();
-
-    // Comptage des résultats des séries
-    $count = $queryPrepared->fetchColumn();
-    $nbTvshows = (int) $count;
-
-    // Affichage du résultat non nul
-    if ($count >= 1) {
-      $msg_result .= "$count résultat(s) trouvé(s) pour <strong> '$query' </strong> <br/>";
-    }
-    // Affichage du résultat nul
-    else {
-      $msg_result .= "\n <hr/> Aucun résultat trouvé pour <strong> '$query' </strong>";
-    }
-
-    // Définition du nombre de séries par page
-    $perPage = 30;
-    // Calcul du nombre de pages total
-    $pages = ceil($nbTvshows / $perPage);
-    // Calcul de la 1ère série de la page
-    $first = ($currentPage * $perPage) - $perPage;
-
-    // Requête de sélection dans la table "tvshow"
-    $sql = "SELECT * FROM tvshow
-    INNER JOIN art ON tvshow.idShow = art.media_id
-    WHERE title LIKE :query AND media_type = 'tvshow' AND type = 'poster'
-    ORDER BY premiered DESC LIMIT :first, :perpage;";
-    connexion($dbco);
-    $queryPrepared = $dbco->prepare($sql);
-    $queryPrepared->bindValue(':query', ('%' . $query . '%'), PDO::PARAM_STR);
-    $queryPrepared->bindValue(':first', $first, PDO::PARAM_INT);
-    $queryPrepared->bindValue(':perpage', $perPage, PDO::PARAM_INT);
-    $queryPrepared->execute();
-    $tvshows = $queryPrepared->fetchAll(PDO::FETCH_ASSOC);
+    $sqlCount = "SELECT COUNT(*) FROM tvshow WHERE title LIKE :query";
   }
-
-  // Traitement de l'option "acteurs" choisie par l'utilisateur
+  // Traitement de l'option "acteurs" choisie par l'utilisateur pour la requête de comptage
   elseif (isset($type) && $type == 'actors') {
-    // Requête de comptage pour la table "actor"
-    $sql = 'SELECT COUNT(*) FROM actor WHERE name LIKE :query';
-    connexion($dbco);
-    $queryPrepared = $dbco->prepare($sql);
-    $queryPrepared->bindValue(':query', ('%' . $query . '%'), PDO::PARAM_STR);
-    $queryPrepared->execute();
-
-    // Comptage des résultats pour la table "actor"
-    $count = $queryPrepared->fetchColumn();
-    $nbActors = (int) $count;
-
-    // Affichage du résultat non nul
-    if ($count >= 1) {
-      $msg_result .= "$count résultat(s) trouvé(s) pour <strong> '$query' </strong> <br/>";
-    }
-    // Affichage du résultat nul
-    else {
-      $msg_result .= "\n <hr/> Aucun résultat trouvé pour <strong> '$query' </strong>";
-    }
-
-    // Définition du nombre d'acteurs par page
-    $perPage = 60;
-    // Calcul du nombre de pages total
-    $pages = ceil($nbActors / $perPage);
-    // Calcul du 1er acteur de la page
-    $first = ($currentPage * $perPage) - $perPage;
-
-    // Requête de sélection dans la table "actor"
-    $sql = 'SELECT * FROM actor
-            WHERE name LIKE :query
-            ORDER BY name LIMIT :first, :perpage;';
-    connexion($dbco);
-    $queryPrepared = $dbco->prepare($sql);
-    $queryPrepared->bindValue(':query', ('%' . $query . '%'), PDO::PARAM_STR);
-    $queryPrepared->bindValue(':first', $first, PDO::PARAM_INT);
-    $queryPrepared->bindValue(':perpage', $perPage, PDO::PARAM_INT);
-    $queryPrepared->execute();
-    $actors = $queryPrepared->fetchAll(PDO::FETCH_ASSOC);
+    $sqlCount = "SELECT COUNT(*) FROM actor WHERE name LIKE :query";
   }
-
-  // Traitement de l'option "studios" choisie par l'utilisateur
+  // Traitement de l'option "studios" choisie par l'utilisateur pour la requête de comptage
   elseif (isset($type) && $type == 'studios') {
-    // Requête de comptage des studios
-    $sql = 'SELECT COUNT(*) FROM studio WHERE name LIKE :query';
-    connexion($dbco);
-    $queryPrepared = $dbco->prepare($sql);
-    $queryPrepared->bindValue(':query', ('%' . $query . '%'), PDO::PARAM_STR);
-    $queryPrepared->execute();
-
-    // Comptage des résultats pour les studios
-    $count = $queryPrepared->fetchColumn();
-    $nbStudios = (int) $count;
-
-    // Affichage du résultat non nul
-    if ($count >= 1) {
-      $msg_result .= "$count résultat(s) trouvé(s) pour <strong> '$query' </strong> <br/>";
-    }
-    // Affichage du résultat nul
-    else {
-      $msg_result .= "\n <hr/> Aucun résultat trouvé pour <strong> '$query' </strong>";
-    }
-
-    // Définition du nombre de studios par page
-    $perPage = 60;
-    // Calcul du nombre de pages total
-    $pages = ceil($nbStudios / $perPage);
-    // Calcul du 1er studio de la page
-    $first = ($currentPage * $perPage) - $perPage;
-
-    // Requête de sélection des studios
-    $sql = 'SELECT * FROM studio
-            WHERE name LIKE :query
-            ORDER BY name LIMIT :first, :perpage;';
-    connexion($dbco);
-    $queryPrepared = $dbco->prepare($sql);
-    $queryPrepared->bindValue(':query', ('%' . $query . '%'), PDO::PARAM_STR);
-    $queryPrepared->bindValue(':first', $first, PDO::PARAM_INT);
-    $queryPrepared->bindValue(':perpage', $perPage, PDO::PARAM_INT);
-    $queryPrepared->execute();
-    $studios = $queryPrepared->fetchAll(PDO::FETCH_ASSOC);
+    $sqlCount = "SELECT COUNT(*) FROM studio WHERE name LIKE :query";
+  }
+  // Traitement pour la requête de comptage du CRUD
+  if (substr($_SERVER['PHP_SELF'], -8) == 'crud.php') {
+    $sqlCount = "SELECT COUNT(*) FROM movie WHERE title LIKE :query";
   }
 
-  // Traitement pour le CRUD
-  if (substr($_SERVER['PHP_SELF'], -8) == 'crud.php') {
-    // Requête de comptage pour la table "movie"
-    $sql = 'SELECT COUNT(*) FROM movie WHERE title LIKE :query';
-    connexion($dbco);
-    $queryPrepared = $dbco->prepare($sql);
-    $queryPrepared->bindValue(':query', ('%' . $query . '%'), PDO::PARAM_STR);
-    $queryPrepared->execute();
+  // Requête de comptage
+  connexion($dbco);
+  $stmt = $dbco->prepare($sqlCount);
+  $stmt->bindValue(':query', ('%' . $query . '%'), PDO::PARAM_STR);
+  $stmt->execute();
+  // Comptage des résultats
+  $count = $stmt->fetchColumn();
+  $total_rows = (int) $count;
 
-    // Comptage des résultats des films
-    $count = $queryPrepared->fetchColumn();
-    $nbMovies = (int) $count;
+  // Affichage du résultat non nul
+  if ($total_rows >= 1) {
+    $msg_result .= "$count résultat(s) trouvé(s) pour <strong> '$query' </strong> <br/>";
+  }
+  // Affichage du résultat nul
+  else {
+    $msg_result .= "\n <hr/> Aucun résultat trouvé pour <strong> '$query' </strong>";
+  }
 
-    // Affichage du résultat non nul
-    if ($count >= 1) {
-      $msg_result .= "$count résultat(s) trouvé(s) pour <strong> '$query' </strong> <br/>";
-    }
-    // Affichage du résultat nul
-    else {
-      $msg_result .= "\n <hr/> Aucun résultat trouvé pour <strong> '$query' </strong>";
-    }
-
-    // Définition du nombre de films par page
-    $perPage = 30;
+  if ($total_rows > 0) {
     // Calcul du nombre de pages total
-    $pages = ceil($nbMovies / $perPage);
-    // Calcul du 1er média de la page
-    $first = ($currentPage * $perPage) - $perPage;
+    $total_pages = ceil($total_rows / $max_rows);
+    // Re-définition de la page en cours si elle est plus élevée que le nombre de pages total
+    if ($current_page > $total_pages) $current_page = $total_pages;
+    // Calcul du 1er résultat de la page
+    $db_start_row = ($current_page * $max_rows) - $max_rows;
 
-    // Requête de sélection dans la table "movie"
-    $sql = "SELECT idMovie, title, synopsis, premiered, cachedurl
-            FROM movie
-            INNER JOIN art ON movie.idMovie = art.media_id
-            WHERE title LIKE :query AND media_type = 'movie' AND type = 'poster'
-            ORDER BY idMovie DESC LIMIT :first, :perpage;";
+    // Traitement de l'option "films" choisie par l'utilisateur pour la requête de sélection
+    if (isset($type) && $type == 'movies') {
+      $sqlSelect = "SELECT * FROM movie
+                INNER JOIN art ON movie.idMovie = art.media_id
+                WHERE title LIKE :query AND media_type = 'movie' AND type = 'poster'
+                ORDER BY premiered DESC LIMIT :first, :perpage";
+    }
+    // Traitement de l'option "séries" choisie par l'utilisateur pour la requête de sélection
+    elseif (isset($type) && $type == 'tvshows') {
+      $sqlSelect = "SELECT * FROM tvshow
+                INNER JOIN art ON tvshow.idShow = art.media_id
+                WHERE title LIKE :query AND media_type = 'tvshow' AND type = 'poster'
+                ORDER BY premiered DESC LIMIT :first, :perpage";
+    }
+    // Traitement de l'option "acteurs" choisie par l'utilisateur pour la requête de sélection
+    elseif (isset($type) && $type == 'actors') {
+      $sqlSelect = "SELECT * FROM actor
+                WHERE name LIKE :query
+                ORDER BY name LIMIT :first, :perpage";
+    }
+    // Traitement de l'option "studios" choisie par l'utilisateur pour la requête de sélection
+    elseif (isset($type) && $type == 'studios') {
+      $sqlSelect = "SELECT * FROM studio
+                WHERE name LIKE :query
+                ORDER BY name LIMIT :first, :perpage";
+    }
+    // Traitement pour la requête de sélection du CRUD
+    if (substr($_SERVER['PHP_SELF'], -8) == 'crud.php') {
+      $sqlSelect = "SELECT idMovie, title, synopsis, premiered, cachedurl
+                FROM movie
+                INNER JOIN art ON movie.idMovie = art.media_id
+                WHERE title LIKE :query AND media_type = 'movie' AND type = 'poster'
+                ORDER BY idMovie DESC LIMIT :first, :perpage";
+    }
+
+    // Requête de sélection
     connexion($dbco);
-    $queryPrepared = $dbco->prepare($sql);
-    $queryPrepared->bindValue(':query', ('%' . $query . '%'), PDO::PARAM_STR);
-    $queryPrepared->bindValue(':first', $first, PDO::PARAM_INT);
-    $queryPrepared->bindValue(':perpage', $perPage, PDO::PARAM_INT);
-    $queryPrepared->execute();
-    $result = $queryPrepared->fetchAll(PDO::FETCH_OBJ);
+    $stmt = $dbco->prepare($sqlSelect);
+    $stmt->bindValue(':query', ('%' . $query . '%'), PDO::PARAM_STR);
+    $stmt->bindValue(':first', $db_start_row, PDO::PARAM_INT);
+    $stmt->bindValue(':perpage', $max_rows, PDO::PARAM_INT);
+    $stmt->execute();
+    if (isset($type) && $type == 'movies') {
+      $movies = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } elseif (isset($type) && $type == 'tvshows') {
+      $tvshows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } elseif (isset($type) && $type == 'actors') {
+      $actors = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } elseif (isset($type) && $type == 'studios') {
+      $studios = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    if (substr($_SERVER['PHP_SELF'], -8) == 'crud.php') {
+      $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    // Définition des variables pour contrôler les numéros de page affichés
+    $page_to = $total_pages;
+    if ($current_page > 1) $prev_page = $current_page - 1;
+    if ($total_pages > $current_page) $next_page = $current_page + 1;
+    if ($total_pages > 5) {
+      if (($current_page - 2) > 1) $page_from = $current_page - 2;
+      if (($current_page + 2) < $total_pages) $page_to = $current_page + 2;
+    }
   }
 }

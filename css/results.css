@@ -332,42 +332,42 @@
   margin: 60px;
   text-align: center;
   font-family: var(--font-title);
-  font-size: 1em;
-  font-weight: 500;
+  font-size: 0.7em;
+  font-weight: 700;
   user-select: none;
 }
 
-ul.pagination {
+.pagination-list {
   display: inline-block;
   padding: 0;
   margin: 0;
   border: 1px solid var(--color-light);
 }
 
-ul.pagination li {
+.pagination-list li {
   display: inline;
 }
 
-.page-item.disabled .page-link {
+.page-item.disabled .page-url {
   pointer-events: none;
 }
 
-ul.pagination li a {
+.pagination-list li a {
   background-color: var(--color-dark);
   color: var(--color-light);
   float: left;
-  padding: 8px 16px;
+  padding: 6px 10px;
   text-decoration: none;
   transition: background-color .3s;
   border: 1px solid var(--color-light);
 }
 
-ul.pagination li a:hover:not(.active) {
+.pagination-list li a:hover:not(.active) {
   background-color: var(--color-light);
   color: var(--color-dark);
 }
 
-.page-item.active .page-link {
+.page-item.active .page-url {
   background-color: var(--color-main);
   color: var(--color-dark);
 }

@@ -39,7 +39,7 @@ if (!isset($_SESSION["logged"]) || $_SESSION["logged"] !== TRUE) {
 <body>
   <style type="text/css">
     body {
-      background-image: url("/assets/img/bg_user.png");
+      background-image: url("/assets/img/bg_welcome.png");
       background-position: center center;
       background-repeat: no-repeat;
       background-attachment: fixed;
@@ -70,12 +70,12 @@ if (!isset($_SESSION["logged"]) || $_SESSION["logged"] !== TRUE) {
   </div>
   <div class="btn-toolbar text-center justify-content-center mt-4 d-grid gap-2 d-md-flex">
     <?php
-    echo '<a href="/index.php" class="button_link"><img src="/assets/img/home.png" title="Accueil" height="30" width="30" />' . str_repeat('&nbsp;', 2) . 'Accueil</a>';
+    echo '<a href="/index.php" class="button_link"><img src="/assets/img/home.png" alt="Accueil" title="Accueil" height="30" width="32" />' . str_repeat('&nbsp;', 2) . 'Accueil</a>';
     echo '<a href="/src/views/watchlist.php?user=' . $_SESSION["id"] . '" class="button_link"><img src="/assets/img/fav.png" title="Watchlist" height="30" width="30" />' . str_repeat('&nbsp;', 2) . 'Watchlist</a>';
     // Vérification si l'admin est loggé pour l'affichage des boutons d'administration
     if ($_SESSION["loggedadmin"] == TRUE) {
-      echo '<a href="crud.php" class="button_link"><img src="/assets/img/product.png" title="Product" height="30" width="30" />' . str_repeat('&nbsp;', 2) . 'Médias</a>';
-      echo '<a href="users-list.php" class="button_link"><img src="/assets/img/user.png" title="User" height="30" width="30" />' . str_repeat('&nbsp;', 2) . 'Utilisateurs</a>';
+      echo '<a href="crud.php" class="button_link"><img src="/assets/img/crud.png" alt="Médias" title="Médias" height="30" width="26" />' . str_repeat('&nbsp;', 2) . 'Médias</a>';
+      echo '<a href="users-list.php" class="button_link"><img src="/assets/img/users.png" alt="Utilisateurs" title="Utilisateurs" height="30" width="33" />' . str_repeat('&nbsp;', 2) . 'Utilisateurs</a>';
     }
     ?>
   </div>

@@ -3,17 +3,6 @@
 <!------------------------>
 
 <?php
-if ($_GET['type'] == 'movies' or $_GET['type'] == 'tvshows' or $_GET['type'] == 'actors' or $_GET['type'] == 'studios') {
-  // Définition de la page en cours
-  if (isset($_GET['page']) && !empty($_GET['page'])) {
-    $currentPage = (int) strip_tags($_GET['page']);
-  } else {
-    $currentPage = 1;
-  }
-}
-?>
-
-<?php
 // Appel du script d'affichage des données
 require dirname(__DIR__) . '/database/viewmanager.php';
 // Appel du script de validation des données
@@ -356,25 +345,45 @@ if (isset($_GET['type']) && !empty($_GET['type']) && in_array($_GET['type'], $ty
 
     <?php
     if ($type == 'movies' or $type == 'tvshows' or $type == 'actors' or $type == 'studios') {
-      if ($count >= 1) { ?>
+      if ($total_rows > 0) { ?>
         <!-- Pagination -->
         <div class="pagination-container">
-          <ul class="pagination">
-            <!-- Lien vers la page précédente (désactivé si on se trouve sur la 1ère page) -->
-            <li class="page-item <?= ($currentPage == 1) ? "disabled" : "" ?>">
-              <a href="./display-results.php?type=<?= $type ?>&search=<?= $query ?>&page=<?= $currentPage - 1 ?>" class="page-link">«</a>
-            </li>
+          <ul class="pagination-list">
             <?php
-            for ($page = 1; $page <= $pages; $page++) : ?>
-              <!-- Lien vers chacune des pages (activé si on se trouve sur la page correspondante) -->
-              <li class="page-item <?= ($currentPage == $page) ? "active" : "" ?>">
-                <a href="./display-results.php?type=<?= $type ?>&search=<?= $query ?>&page=<?= $page ?>" class="page-link"><?= $page ?></a>
+            // Lien vers la page précédente et/ou ellipse (sauf si on se trouve sur la 1ère page)
+            if ($prev_page > 0) { ?>
+              <li class="page-item">
+                <a class="page-url" href="./display-results.php?type=<?= $type ?>&search=<?= $query ?>&page=<?= $prev_page ?>">«</a>
               </li>
-            <?php endfor ?>
-            <!-- Lien vers la page suivante (désactivé si on se trouve sur la dernière page) -->
-            <li class="page-item <?= ($currentPage == $pages) ? "disabled" : "" ?>">
-              <a href="./display-results.php?type=<?= $type ?>&search=<?= $query ?>&page=<?= $currentPage + 1 ?>" class="page-link">»</a>
-            </li>
+            <?php }
+            if ($page_from != 1) { ?>
+              <li class="page-item">
+                <a class="page-url" href="./display-results.php?type=<?= $type ?>&search=<?= $query ?>&page=1">1</a>
+              </li>
+              <li class="page-item disabled">
+                <a class="page-url">...</a>
+              </li>
+            <?php }
+            // Lien vers chacune des pages (activé si on se trouve sur la page correspondante)
+            for ($p = $page_from; $p <= $page_to; $p++) { ?>
+              <li class="page-item <?= ($current_page == $p) ? "active" : "" ?>">
+                <a class="page-url" href="./display-results.php?type=<?= $type ?>&search=<?= $query ?>&page=<?= $p ?>"><?= $p ?></a>
+              </li>
+            <?php }
+            // Lien vers la page suivante et/ou ellipse (sauf si on se trouve sur la dernière page)
+            if ($page_to != $total_pages) { ?>
+              <li class="page-item disabled">
+                <a class="page-url">...</a>
+              </li>
+              <li class="page-item">
+                <a class="page-url" href="./display-results.php?type=<?= $type ?>&search=<?= $query ?>&page=<?= $total_pages ?>"><?= $total_pages ?></a>
+              </li>
+            <?php }
+            if ($next_page > 0) { ?>
+              <li class="page-item">
+                <a class="page-url" href="./display-results.php?type=<?= $type ?>&search=<?= $query ?>&page=<?= $next_page ?>">»</a>
+              </li>
+            <?php } ?>
           </ul>
         </div>
     <?php }
