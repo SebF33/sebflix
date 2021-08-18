@@ -19,10 +19,6 @@
   <link rel="stylesheet" href="/css/results.css" type="text/css" media="screen">
   <link rel="stylesheet" href="/css/menu.css" type="text/css" media="screen">
 
-  <!-- Appel de la police "Truculenta" sur Google Fonts -->
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Truculenta:wght@400;500;600;700&display=swap" rel="stylesheet">
-
   <!-- Appel des icônes sur Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>

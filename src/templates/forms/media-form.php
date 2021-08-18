@@ -36,11 +36,6 @@ require dirname(__DIR__, 2) . '/database/data-form.php';
   <link rel="stylesheet" href="/assets/css/design.css">
   <link rel="stylesheet" href="/assets/css/results.css">
   <link rel="stylesheet" href="/assets/css/crud.css">
-
-  <!-- Appel des polices "Truculenta" et "Roboto" sur Google Fonts -->
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Truculenta:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -133,7 +128,7 @@ require dirname(__DIR__, 2) . '/database/data-form.php';
       <div class="demo-form-row">
         <label for="poster">Poster : </label>
         <input type="hidden" name="MAX_FILE_SIZE" value="1048576"> <!-- Poids maxi : 1Mo => 1024*1024 -->
-        <input type="file" id="poster" name="poster">
+        <input id="picture-file" type="file" name="poster">
       </div>
       <?php if ($action == 'edit') {
         echo '<div class="demo-form-row text-center"><img src="/src/thumbnails/' . $result['cachedurl'] . '" title="' . $result['cachedurl'] . '" alt="' . $result['cachedurl'] . '" onclick="window.open(this.src)" draggable="false" ondragstart="return false")/></div>';

@@ -277,6 +277,10 @@ h3 a {
   text-align: center;
 }
 
+#table-body {
+  font-family: var(--font-text);
+}
+
 .table-row {
   border-width: 1;
 }
@@ -389,7 +393,8 @@ h3 a {
 }
 
 .demo-form-row label,
-.demo-form-row #picture {
+.demo-form-row #picture,
+.demo-form-row #picture-file {
   color: var(--color-light);
 }
 

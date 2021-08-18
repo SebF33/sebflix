@@ -39,11 +39,6 @@ require dirname(__DIR__) . '/database/search.php';
   <!-- Appel de Bootstrap -->
   <script src="/assets/js/lib/bootstrap.min.js"></script>
 
-  <!-- Appel des polices "Truculenta" et "Roboto" sur Google Fonts -->
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Truculenta:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500&display=swap" rel="stylesheet">
-
   <!-- Appel des icônes sur Font Awesome -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
 </head>
