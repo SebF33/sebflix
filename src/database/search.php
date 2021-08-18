@@ -62,7 +62,7 @@ if (isset($query) && !empty($query)) {
 
   // Affichage du résultat non nul
   if ($total_rows >= 1) {
-    $msg_result .= "$count résultat(s) trouvé(s) pour <strong> '$query' </strong> <br/>";
+    $msg_result .= "$count résultat(s) trouvé(s) pour <strong> '$query' </strong>";
   }
   // Affichage du résultat nul
   else {

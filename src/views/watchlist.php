@@ -103,6 +103,21 @@ if (isset($_GET['user']) && !empty($_GET['user'])) {
   </header>
 
   <main>
+    <?php
+    // Appel de la fonction de comptage des médias de la watchlist
+    $total_rows = count_my_movie($user);
+    // Affichage du résultat non nul
+    if ($total_rows >= 1) {
+      $msg_result = "$total_rows favori(s)";
+    }
+    // Affichage du résultat nul
+    else {
+      $msg_result = "\n <hr/> Aucun favori";
+    }
+    ?>
+    <div class="alert">
+      <h2><?php echo "\n" . $msg_result ?></h2>
+    </div>
 
     <?php
     // Appel de la fonction de sélection des médias type film de la watchlist

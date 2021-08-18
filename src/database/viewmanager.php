@@ -88,7 +88,8 @@
 
 //  10. Comptages
 //   10.01 Comptage du nombre total de médias
-//   10.02 Comptage du nombre total de fichiers image sur le serveur
+//   10.02 Comptage des médias de la watchlist
+//   10.03 Comptage du nombre total de fichiers image sur le serveur
 
 // Appel du script d'administration des données
 require __DIR__ . '/datamanager.php';
@@ -1639,7 +1640,25 @@ function count_all_media()
   }
 }
 
-// 10.02 Comptage du nombre total de fichiers image sur le serveur
+// 10.02 Comptage des médias de la watchlist
+function count_my_movie(int $user)
+{
+  connexion($dbco);
+  try {
+    $query = $dbco->prepare(
+      "SELECT COUNT(*) FROM watchlist WHERE user_id LIKE :user"
+    );
+    $query->bindValue(':user', $user, PDO::PARAM_INT);
+    $query->execute();
+    $count = $query->fetchColumn();
+    $total_rows = (int) $count;
+    return $total_rows;
+  } catch (PDOException $e) {
+    echo "Erreur : " . $e->getMessage();
+  }
+}
+
+// 10.03 Comptage du nombre total de fichiers image sur le serveur
 function count_all_image()
 {
   $img_folder = dirname(__DIR__) . '/thumbnails/*/';
