@@ -72,11 +72,11 @@ require dirname(__DIR__) . '/database/search.php';
     <!-- Boutons de gestion -->
     <div class="btn-toolbar text-center justify-content-center d-grid gap-3 d-md-flex">
       <?php
-      echo '<a href="/index.php" class="button_link"><img src="/assets/img/home.png" alt="Accueil" title="Accueil" height="30" width="32" />' . str_repeat('&nbsp;', 2) . 'Accueil</a>';
-      echo '<a href="/src/views/profile.php" class="button_link"><img src="/assets/img/user.png" title="Utilisateur" height="30" width="30" />' . str_repeat('&nbsp;', 2) . 'Profil</a>';
-      echo '<a href="/src/templates/forms/media-form.php?action=add" class="button_link"><img src="/assets/img/add.png" title="Ajouter" height="30" width="30" />' . str_repeat('&nbsp;', 2) . 'Créer un média</a>';
+      echo '<a href="/index.php" class="button_link" draggable="false" ondragstart="return false"><img src="/assets/img/home.png" alt="Accueil" title="Accueil" height="30" width="32" />' . str_repeat('&nbsp;', 2) . 'Accueil</a>';
+      echo '<a href="/src/views/profile.php" class="button_link" draggable="false" ondragstart="return false"><img src="/assets/img/user.png" title="Utilisateur" height="30" width="30" />' . str_repeat('&nbsp;', 2) . 'Profil</a>';
+      echo '<a href="/src/templates/forms/media-form.php?action=add" class="button_link" draggable="false" ondragstart="return false"><img src="/assets/img/add.png" title="Ajouter" height="30" width="30" />' . str_repeat('&nbsp;', 2) . 'Créer un média</a>';
       if (isset($_GET['search']) && !empty($_GET['search'])) {
-        echo '<a href="crud.php" class="button_link"><img src="/assets/img/list.png" title="Liste" height="30" width="30" />' . str_repeat('&nbsp;', 2) . 'Retour à la liste</a>';
+        echo '<a href="crud.php" class="button_link" draggable="false" ondragstart="return false"><img src="/assets/img/list.png" title="Liste" height="30" width="30" />' . str_repeat('&nbsp;', 2) . 'Retour à la liste</a>';
       }
       ?>
     </div>

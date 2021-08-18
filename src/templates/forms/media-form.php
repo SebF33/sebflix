@@ -60,7 +60,7 @@ require dirname(__DIR__, 2) . '/database/data-form.php';
     <!-- Boutons de gestion -->
     <div class="btn-toolbar text-center justify-content-center d-grid gap-3 d-md-flex">
       <?php
-      echo '<a href="/src/views/crud.php" class="button_link"><img src="/assets/img/list.png" title="List" height="30" width="30" />' . str_repeat('&nbsp;', 2) . 'Retour à la liste</a>';
+      echo '<a href="/src/views/crud.php" class="button_link" draggable="false" ondragstart="return false"><img src="/assets/img/list.png" title="List" height="30" width="30" />' . str_repeat('&nbsp;', 2) . 'Retour à la liste</a>';
       ?>
     </div>
   </header>

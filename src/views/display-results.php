@@ -209,7 +209,7 @@ if (isset($_GET['type']) && !empty($_GET['type']) && in_array($_GET['type'], $ty
         <!-- Affichage des données -->
         <?php
         // Affichage des films
-        if ($type == 'movies' or $type == 'genre' or $type == 'direction') {
+        if (($type == 'movies' or $type == 'genre' or $type == 'direction') && !empty($movies)) {
           foreach ($movies as $row) {
             $date = DateTime::createFromFormat("Y-m-d", $row['premiered']);
             echo '<a class="card_button" href="viewpage.php?type=movie&id=' . $row['idMovie'] . '" draggable="false" ondragstart="return false">
@@ -238,7 +238,7 @@ if (isset($_GET['type']) && !empty($_GET['type']) && in_array($_GET['type'], $ty
           }
         }
         // Affichage des séries
-        elseif ($type == 'tvshows') {
+        elseif (($type == 'tvshows') && !empty($tvshows)) {
           foreach ($tvshows as $row) {
             $date = DateTime::createFromFormat("Y-m-d", $row['premiered']);
             echo '<a class="card_button" href="viewpage.php?type=tvshow&id=' . $row['idShow'] . '" draggable="false" ondragstart="return false">
@@ -267,7 +267,7 @@ if (isset($_GET['type']) && !empty($_GET['type']) && in_array($_GET['type'], $ty
           }
         }
         // Affichage des acteurs
-        elseif ($type == 'actors' or $type == 'moviecast' or $type == 'tvshowcast') {
+        elseif (($type == 'actors' or $type == 'moviecast' or $type == 'tvshowcast') && !empty($actors)) {
           foreach ($actors as $row) {
             if (empty($row['cachedurl'])) {
               echo '<a class="gCasting" href="display-results.php?type=filmography&id=' . $row['actor_id'] . '"><figure><img src="../thumbnails/placeholders/casting.png" title="' . $row['name'] . '" alt="' . $row['name'] . '" height="288" width="192"/><figcaption>' . $row['name'] . '</figcaption></figure></a>';
@@ -277,7 +277,7 @@ if (isset($_GET['type']) && !empty($_GET['type']) && in_array($_GET['type'], $ty
           }
         }
         // Affichage des studios
-        elseif ($type == 'beststudios' or $type == 'studios') {
+        elseif (($type == 'beststudios' or $type == 'studios') && !empty($studios)) {
           foreach ($studios as $row) {
             echo '<a href="display-results.php?type=achievement&id=' . $row['name'] . '"><img class="gStudio" src="../thumbnails/studios/' . $row['name'] . '" title="' . $row['name'] . '" alt="' . $row['name'] . '" height="109" width="161"/></a>';
           }
