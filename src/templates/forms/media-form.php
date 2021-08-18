@@ -65,21 +65,6 @@ require dirname(__DIR__, 2) . '/database/data-form.php';
     </div>
   </header>
 
-  <?php if (isset($_GET['msg'])) :
-    $error = $_GET['error'];
-  ?>
-    <!-- Message d'alerte -->
-    <div class="alert alert-<?php if ($error == 'false') {
-                              echo 'success';
-                            } elseif ($error == 'true') {
-                              echo 'danger';
-                            } else {
-                              echo 'secondary';
-                            } ?>" role="alert">
-      <?php echo $_GET['msg']; ?>
-    </div>
-  <?php endif; ?>
-
   <div class="frm-add">
     <h2 class="demo-form-heading"><?php if ($action == 'add') {
                                     echo 'Nouveau média';
@@ -89,6 +74,22 @@ require dirname(__DIR__, 2) . '/database/data-form.php';
                                     echo 'Édition du média';
                                   } ?>
     </h2>
+
+    <?php if (isset($_GET['msg'])) :
+      $error = $_GET['error'];
+    ?>
+      <!-- Message d'alerte -->
+      <div class="alert alert-<?php if ($error == 'false') {
+                                echo 'success';
+                              } elseif ($error == 'true') {
+                                echo 'danger';
+                              } else {
+                                echo 'secondary';
+                              } ?>" role="alert">
+        <?php echo $_GET['msg']; ?>
+      </div>
+    <?php endif; ?>
+
     <?php if ($action == 'edit') { ?>
       <div class="text-center">
         <a class="ajax-action-links" href='/src/views/viewpage.php?type=movie&id=<?= $result['idMovie'] ?>' target="_blank" draggable="false" ondragstart="return false"><img src="/assets/img/view.png" title="Voir" height="17" width="30" /></a>

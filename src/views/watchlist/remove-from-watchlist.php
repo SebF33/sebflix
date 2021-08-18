@@ -1,5 +1,4 @@
 <?php
-
 // Appel du script de connexion à la base de données
 require_once __DIR__ . "/../../database/connect.php";
 
@@ -20,4 +19,8 @@ if (!empty($_POST["id"]) && !empty($_POST["type"]) && !empty($_POST["user"])) {
     echo "Erreur : " . $e->getMessage();
   }
   exit();
+} else {
+  // Redirection
+  header("location:/index.php");
+  exit;
 }
