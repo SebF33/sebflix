@@ -80,7 +80,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 
   // Définition du dossier qui contiendra l'avatar
-  $img_folder = '/src/thumbnails/users/';
+  $img_folder = dirname(dirname(dirname(__DIR__))) . '/src/thumbnails/users/';
   // Définition de l'image par défaut
   if ($_POST["genre"] == '0') {
     $default_picture_name = 'generic_woman.png';

@@ -48,7 +48,7 @@ if (!empty($_POST["save_record"])) {
   $fields_required = array($_POST['title'], $_POST['synopsis'], $_POST['premiered']);
 
   // Définition du dossier qui contiendra l'image
-  $img_folder = '/src/thumbnails/g/';
+  $img_folder = dirname(dirname(__DIR__)) . '/src/thumbnails/g/';
   // Définition de l'image par défaut
   $default_poster_name = 'placeholders/generic_poster.jpg';
 

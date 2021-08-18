@@ -92,7 +92,7 @@ function add_movie(array $datas)
 // 3.01 Mise à jour d'un média type film
 function update_movie(array $datas, int $id, bool $set_poster, string $default_poster_name)
 {
-  $img_folder = "/src/thumbnails/";
+  $img_folder = dirname(dirname(__DIR__)) . '/src/thumbnails/';
   $sql_poster_file = $set_poster ? "; UPDATE art SET cachedurl=:poster WHERE media_id=:id AND media_type='movie' AND type='poster'" : "";
 
   connexion($dbco);
