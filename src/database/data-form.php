@@ -42,7 +42,7 @@ if ($_GET['action'] == 'copy' or $_GET['action'] == 'edit') {
 
 // Traitement du formulaire
 if (!empty($_POST["save_record"])) {
-  $set_picture = $set_request = FALSE;
+  $set_poster = $set_request = FALSE;
 
   // Champs requis
   $fields_required = array($_POST['title'], $_POST['synopsis'], $_POST['premiered']);
@@ -50,7 +50,7 @@ if (!empty($_POST["save_record"])) {
   // Définition du dossier qui contiendra l'image
   $img_folder = '/src/thumbnails/g/';
   // Définition de l'image par défaut
-  $default_picture_name = 'placeholders/generic_poster.jpg';
+  $default_poster_name = 'placeholders/generic_poster.jpg';
 
   // Vérification que les champs d'entrée ne sont pas vides
   if (in_array('', $fields_required)) :
@@ -68,12 +68,13 @@ if (!empty($_POST["save_record"])) {
     $set_request = TRUE;
 
     // Traitement de l'image
-    if (($action == 'add' or $action == 'copy') && empty($_FILES["picture"]["name"])) {
-      $picture_name = $default_picture_name;
-    } elseif (isset($_FILES["picture"]) && !empty($_FILES["picture"]["name"])) {
-      $upload_img = upload_img($_FILES['picture'], $default_picture_name, $img_folder);
-      $set_picture = $upload_img[0]; // Autorisation de création de l'image
-      $picture_name = 'g/' . $upload_img[1]; // Nom du chemin de l'image pour la base de données
+    if (($action == 'add' or $action == 'copy') && empty($_FILES["poster"]["name"])) {
+      $poster_name = $default_poster_name;
+    } elseif (isset($_FILES["poster"]) && !empty($_FILES["poster"]["name"])) {
+      // Appel de la fonction de téléversement d'image
+      $upload_img = upload_img($_FILES["poster"], $default_poster_name, $img_folder);
+      $set_poster = $upload_img[0]; // Autorisation de création de l'image
+      $poster_name = 'g/' . $upload_img[1]; // Nom du chemin de l'image pour la base de données
       $msg = $upload_img[2]; // Message d'erreur de l'upload
     }
   endif;
@@ -97,7 +98,7 @@ if (!empty($_POST["save_record"])) {
       'synopsis' => $synopsis,
       'catch' => $catch,
       'premiered' => $premiered,
-      'picture' => $picture_name
+      'poster' => $poster_name
     );
 
     // Définition de la fonction de requête selon l'action choisie
@@ -106,7 +107,7 @@ if (!empty($_POST["save_record"])) {
       $exec = add_movie($datas);
     } elseif ($_GET['action'] == 'edit') {
       // Appel de la fonction de mise à jour d'un média type film
-      $exec = update_movie($datas, $id, $set_picture);
+      $exec = update_movie($datas, $id, $set_poster, $default_poster_name);
     }
 
     // Définition du message d'erreur ou de succès

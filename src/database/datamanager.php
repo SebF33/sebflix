@@ -76,13 +76,13 @@ function add_movie(array $datas)
     $req = $dbco->prepare("INSERT INTO movie(title, synopsis, catch, premiered)
 		VALUES(:title, :synopsis, :catch, :premiered);
 		INSERT INTO art(media_id, media_type, type, cachedurl)
-		VALUES(LAST_INSERT_ID(), 'movie', 'poster', :picture)");
+		VALUES(LAST_INSERT_ID(), 'movie', 'poster', :poster)");
 
     $req->bindValue(':title', $datas['title'], PDO::PARAM_STR);
     $req->bindValue(':synopsis', $datas['synopsis'], PDO::PARAM_STR);
     $req->bindValue(':catch', $datas['catch'], PDO::PARAM_STR);
     $req->bindValue(':premiered', $datas['premiered'], PDO::PARAM_STR);
-    $req->bindValue(':picture', $datas['picture'], PDO::PARAM_STR);
+    $req->bindValue(':poster', $datas['poster'], PDO::PARAM_STR);
     return $req->execute();
   } catch (PDOException $e) {
     echo "Erreur : " . $e->getMessage();
@@ -90,24 +90,37 @@ function add_movie(array $datas)
 }
 
 // 3.01 Mise à jour d'un média type film
-function update_movie(array $datas, int $id, bool $set_picture)
+function update_movie(array $datas, int $id, bool $set_poster, string $default_poster_name)
 {
+  $img_folder = "/src/thumbnails/";
+  $sql_poster_file = $set_poster ? "; UPDATE art SET cachedurl=:poster WHERE media_id=:id AND media_type='movie' AND type='poster'" : "";
+
   connexion($dbco);
   try {
-    $sql_file = $set_picture ? "; UPDATE art SET cachedurl=:picture WHERE media_id=:id AND media_type='movie' AND type='poster'" : "";
+    $query = $dbco->prepare(
+      "SELECT cachedurl FROM art WHERE media_id = :id AND media_type = 'movie' AND type = 'poster'"
+    );
+    $query->bindValue(':id', $id, PDO::PARAM_INT);
+    $query->execute();
+    $current_poster = $query->fetch(PDO::FETCH_ASSOC);
 
     $req = $dbco->prepare("UPDATE movie
     SET title=:title, synopsis=:synopsis, catch=:catch, premiered=:premiered
     WHERE idMovie=:id
-    $sql_file");
+    $sql_poster_file");
     $req->bindValue(':title', $datas['title'], PDO::PARAM_STR);
     $req->bindValue(':synopsis', $datas['synopsis'], PDO::PARAM_STR);
     $req->bindValue(':catch', $datas['catch'], PDO::PARAM_STR);
     $req->bindValue(':premiered', $datas['premiered'], PDO::PARAM_STR);
-    if ($set_picture) {
-      $req->bindValue(':picture', $datas['picture'], PDO::PARAM_STR);
+    if ($set_poster) {
+      $req->bindValue(':poster', $datas['poster'], PDO::PARAM_STR);
+      // Suppression de l'ancien poster si celui-ci n'est pas par défaut
+      if ($current_poster['cachedurl'] != $default_poster_name) {
+        unlink($img_folder . $current_poster['cachedurl']);
+      }
     }
     $req->bindValue(':id', $id, PDO::PARAM_INT);
+
     return $req->execute();
   } catch (PDOException $e) {
     echo "Erreur : " . $e->getMessage();

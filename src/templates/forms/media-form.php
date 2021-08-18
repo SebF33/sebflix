@@ -131,9 +131,9 @@ require dirname(__DIR__, 2) . '/database/data-form.php';
                                                                                                                           } ?>" required />
       </div>
       <div class="demo-form-row">
-        <label for="picture">Poster : </label>
+        <label for="poster">Poster : </label>
         <input type="hidden" name="MAX_FILE_SIZE" value="1048576"> <!-- Poids maxi : 1Mo => 1024*1024 -->
-        <input type="file" id="picture" name="picture">
+        <input type="file" id="poster" name="poster">
       </div>
       <?php if ($action == 'edit') {
         echo '<div class="demo-form-row text-center"><img src="/src/thumbnails/' . $result['cachedurl'] . '" title="' . $result['cachedurl'] . '" alt="' . $result['cachedurl'] . '" onclick="window.open(this.src)" draggable="false" ondragstart="return false")/></div>';

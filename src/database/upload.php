@@ -3,7 +3,7 @@
 // Téléversement d'image //
 ///////////////////////////
 
-function upload_img($picture, $default_picture_name, $img_folder)
+function upload_img($picture, $default_picture_name, string $img_folder)
 {
   $set_picture = FALSE;
   $msg_error = "";
