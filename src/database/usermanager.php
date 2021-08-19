@@ -110,7 +110,7 @@ function update_pwd(string $username, string $pwd)
 
     $req->bindValue(':username', $username, PDO::PARAM_STR);
     $req->bindValue(':password', $pwd, PDO::PARAM_STR);
-    $req->execute();
+    return $req->execute();
   } catch (PDOException $e) {
     echo "Erreur : " . $e->getMessage();
   }

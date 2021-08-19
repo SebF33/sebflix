@@ -66,7 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   } elseif (strlen(trim($_POST["password"])) < 6) {
     $password_err = "Le mot de passe doit contenir au moins 6 caractères.";
   } else {
-    $password = valid_data($_POST['password']);
+    $password = valid_data($_POST["password"]);
   }
 
   // Confirmation du password
