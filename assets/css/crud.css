@@ -208,6 +208,35 @@ h3 a {
   transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
 }
 
+/* Autocomplétion Chrome */
+.search-box input:-webkit-autofill,
+.search-box input:-webkit-autofill:hover,
+.search-box input:-webkit-autofill:focus,
+.search-box input:-webkit-autofill:active {
+  background-color: var(--color-dark);
+  -webkit-text-fill-color: var(--color-light);
+  transition: background-color 5000s ease-in-out 0s;
+  -webkit-animation: autofill 0s forwards;
+  animation: autofill 0s forwards;
+}
+
+.search-box input:-webkit-autofill::first-line {
+  font-family: var(--font-title);
+  font-size: 18px;
+}
+
+@keyframes autofill {
+  100% {
+    font-size: inherit;
+  }
+}
+
+@-webkit-keyframes autofill {
+  100% {
+    font-size: inherit;
+  }
+}
+
 /* Formulaires */
 .wrapper {
   position: relative;
