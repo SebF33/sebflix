@@ -6,13 +6,7 @@
 // Initialisation de la session
 session_start();
 // Profil enfant
-if (isset($_SESSION["logged"]) && $_SESSION["genre"] == 2) {
-  $sqlWhereChild = "WHERE profile=2";
-  $sqlAndChild = "AND profile=2";
-} else {
-  $sqlAndChild = $sqlWhereChild = "";
-}
-
+require dirname(__DIR__) . '/database/child.php';
 // Appel du script d'affichage des données
 require dirname(__DIR__) . '/database/viewmanager.php';
 // Appel du script de validation des données
@@ -99,7 +93,7 @@ if (isset($_GET['type']) && !empty($_GET['type']) && in_array($_GET['type'], $ty
   }
   // Type "liste des collections"
   elseif ($type == 'sets') {
-    $result = select_all_sets();
+    $result = select_all_sets($sqlAndAliasChild);
     $h1 = $title = "Collections";
   }
   // Type "contenu d'une collection"

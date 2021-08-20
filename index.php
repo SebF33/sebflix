@@ -6,15 +6,7 @@
 // Initialisation de la session
 session_start();
 // Profil enfant
-if (isset($_SESSION["logged"]) && $_SESSION["genre"] == 2) {
-  $set_child = TRUE;
-  $sqlWhereChild = "WHERE profile=2";
-  $sqlAndChild = "AND profile=2";
-} else {
-  $set_child = FALSE;
-  $sqlAndChild = $sqlWhereChild = "";
-}
-
+require __DIR__ . '/src/database/child.php';
 // Appel du script d'affichage des données
 require __DIR__ . '/src/database/viewmanager.php';
 ?>

@@ -1297,7 +1297,7 @@ function select_spectacle_by_numeric()
 }
 
 // 6.01 Sélection de toutes les collections par leur poster
-function select_all_sets()
+function select_all_sets(string $sqlChild)
 {
   connexion($dbco);
   try {
@@ -1308,6 +1308,7 @@ function select_all_sets()
       INNER JOIN movie AS m ON s.idSet = m.idSet
       WHERE a.media_type = 'set'
       AND a.type = 'poster'
+      $sqlChild
       ORDER BY s.strSet, m.premiered DESC"
     );
     $query->execute();
