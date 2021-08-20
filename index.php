@@ -70,15 +70,31 @@ require __DIR__ . '/src/database/viewmanager.php';
 
   <!-- Header -->
   <?php
-  $navLeft = [
-    'Films' => 'src/views/alphabet.php?category=movies',
-    'Séries' => 'src/views/alphabet.php?category=tvshows',
-    'Animes' => 'src/views/alphabet.php?category=animes'
-  ];
-  $navRight = [
-    'Dessins animés' => 'src/views/alphabet.php?category=animation',
-    'Spectacles' => 'src/views/alphabet.php?category=spectacles'
-  ];
+  // Construction de la barre de navigation
+  if ($set_child) {
+    $navLeft = [
+      'Films' => 'src/views/alphabet.php?category=movies',
+      'Séries' => 'src/views/alphabet.php?category=tvshows'
+    ];
+  } else {
+    $navLeft = [
+      'Films' => 'src/views/alphabet.php?category=movies',
+      'Séries' => 'src/views/alphabet.php?category=tvshows',
+      'Animes' => 'src/views/alphabet.php?category=animes'
+    ];
+  }
+  if ($set_child) {
+    $navRight = [
+      'Animes' => 'src/views/alphabet.php?category=animes',
+      'Dessins animés' => 'src/views/alphabet.php?category=animation'
+    ];
+    $btnNavClass = "";
+  } else {
+    $navRight = [
+      'Dessins animés' => 'src/views/alphabet.php?category=animation',
+      'Spectacles' => 'src/views/alphabet.php?category=spectacles'
+    ];
+  }
   $btnNavClass = "";
   include "src/templates/navigation.php"
   ?>
@@ -98,8 +114,8 @@ require __DIR__ . '/src/database/viewmanager.php';
                                                                         } else {
                                                                           echo "vous";
                                                                         } ?> propose la découverte de <span><?= $nCount ?></span> œuvres cinématographiques ou télévisuelles<?php if ($set_child) {
-                                                                                                                                                                                                                                echo " pour enfants";
-                                                                                                                                                                                                                              } ?>."</p>
+                                                                                                                                                                              echo " pour enfants";
+                                                                                                                                                                            } ?>."</p>
       </div>
 
       <!-- Appel des scripts pour le formulaire de recherche -->

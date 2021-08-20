@@ -38,8 +38,13 @@ if (isset($_GET['category']) && !empty($_GET['category']) && in_array($_GET['cat
     $result = select_seven_recent_tvshow($sqlAndChild);
   } elseif ($category == 'animes') {
     $title = "Animes";
-    $type = "tvshow";
-    $result = select_seven_recent_anime();
+    if ($set_child) {
+      $type = "movie";
+      $result = select_seven_recent_anime_movie($sqlAndChild);
+    } else {
+      $type = "tvshow";
+      $result = select_seven_recent_anime_tvshow();
+    }
   } elseif ($category == 'animation') {
     $title = "Dessins animés";
     $type = "movie";
@@ -97,25 +102,14 @@ if (isset($_GET['category']) && !empty($_GET['category']) && in_array($_GET['cat
   <!-- Header -->
   <?php
   // Construction de la barre de navigation
-  if ($category == 'movies') {
-    if ($set_child) {
-      $navLeft = [
-        'Comédie' => '/src/views/table.php?category=' . $category . '&genre=comedy'
-      ];
-    } else {
+  if (!$set_child) {
+    if ($category == 'movies') {
       $navLeft = [
         'Comédie' => '/src/views/table.php?category=' . $category . '&genre=comedy',
         'Thriller' => '/src/views/table.php?category=' . $category . '&genre=thriller',
         'Science-Fiction' => '/src/views/table.php?category=' . $category . '&genre=sf',
         'Horreur' => '/src/views/table.php?category=' . $category . '&genre=horror'
       ];
-    }
-    if ($set_child) {
-      $navRight = [
-        'Science-Fiction' => '/src/views/table.php?category=' . $category . '&genre=sf'
-      ];
-      $btnNavClass = "";
-    } else {
       $navRight = [
         'Guerre' => '/src/views/table.php?category=' . $category . '&genre=war',
         'Péplum' => '/src/views/table.php?category=' . $category . '&genre=peplum',
@@ -123,53 +117,43 @@ if (isset($_GET['category']) && !empty($_GET['category']) && in_array($_GET['cat
         'Arts Martiaux' => '/src/views/table.php?category=' . $category . '&genre=martial'
       ];
       $btnNavClass = " btn-type-movie";
-    }
-  } elseif ($category == 'tvshows') {
-    if ($set_child) {
-      $navLeft = [
-        'Animation' => '/src/views/table.php?category=' . $category . '&genre=animation'
-      ];
-    } else {
+    } elseif ($category == 'tvshows') {
       $navLeft = [
         'Science-Fiction' => '/src/views/table.php?category=' . $category . '&genre=sf',
         'Thriller' => '/src/views/table.php?category=' . $category . '&genre=thriller'
       ];
-    }
-    if ($set_child) {
-      $navRight = [
-        'Science-Fiction' => '/src/views/table.php?category=' . $category . '&genre=sf'
-      ];
-    } else {
       $navRight = [
         'Horreur' => '/src/views/table.php?category=' . $category . '&genre=horror',
         'Animation' => '/src/views/table.php?category=' . $category . '&genre=animation'
       ];
+      $btnNavClass = "";
+    } elseif ($category == 'animes') {
+      $navLeft = [
+        'Shōnen' => '/src/views/table.php?category=' . $category . '&genre=shonen'
+      ];
+      $navRight = [
+        'Seinen' => '/src/views/table.php?category=' . $category . '&genre=seinen'
+      ];
+      $btnNavClass = "";
+    } elseif ($category == 'animation') {
+      $navLeft = [
+        'Familial' => '/src/views/table.php?category=' . $category . '&genre=familial'
+      ];
+      $navRight = [
+        'Courts-métrages' => '/src/views/table.php?category=' . $category . '&genre=short'
+      ];
+      $btnNavClass = "";
+    } elseif ($category == 'spectacles') {
+      $navLeft = [
+        'One-man-show' => '/src/views/table.php?category=' . $category . '&genre=man'
+      ];
+      $navRight = [
+        'One-woman-show' => '/src/views/table.php?category=' . $category . '&genre=woman'
+      ];
+      $btnNavClass = "";
     }
-    $btnNavClass = "";
-  } elseif ($category == 'animes') {
-    $navLeft = [
-      'Shōnen' => '/src/views/table.php?category=' . $category . '&genre=shonen'
-    ];
-    $navRight = [
-      'Seinen' => '/src/views/table.php?category=' . $category . '&genre=seinen'
-    ];
-    $btnNavClass = "";
-  } elseif ($category == 'animation') {
-    $navLeft = [
-      'Familial' => '/src/views/table.php?category=' . $category . '&genre=familial'
-    ];
-    $navRight = [
-      'Courts-métrages' => '/src/views/table.php?category=' . $category . '&genre=short'
-    ];
-    $btnNavClass = "";
-  } elseif ($category == 'spectacles') {
-    $navLeft = [
-      'One-man-show' => '/src/views/table.php?category=' . $category . '&genre=man'
-    ];
-    $navRight = [
-      'One-woman-show' => '/src/views/table.php?category=' . $category . '&genre=woman'
-    ];
-    $btnNavClass = "";
+  } else {
+    $navLeft = $navRight = "";
   }
   include "../templates/navigation.php"
   ?>
@@ -179,30 +163,32 @@ if (isset($_GET['category']) && !empty($_GET['category']) && in_array($_GET['cat
 
     <div class="mainAlphabetTop">
       <h1 class="alphabet-title"><?= $title ?></h1>
-      <ul class="alphabet">
-        <?php
-        echo '<li><a href="table.php?category=' . $category . '&letter=numeric" class="letters" draggable="false" ondragstart="return false"><span class="&">&</span></a></li>';
-        foreach (range('A', 'N') as $i) {
-          echo '<li><a href="table.php?category=' . $category . '&letter=' . strtolower($i) . '" class="letters" draggable="false" ondragstart="return false"><span class="' . $i . '">' . $i . '</span></a></li>';
-        }
-        echo "<br></br>";
-        foreach (range('O', 'Z') as $i) {
-          echo '<li><a href="table.php?category=' . $category . '&letter=' . strtolower($i) . '" class="letters" draggable="false" ondragstart="return false"><span class="' . $i . '">' . $i . '</span></a></li>';
-        }
-        ?>
-      </ul>
-      <div class="select-box">
-        <select onchange="location = this.value">
-          <optgroup>
-            <?php
-            echo '<option style="font-family: truculenta" value="table.php?category=' . $category . '&letter=numeric">&</option>';
-            foreach (range('A', 'Z') as $i) {
-              echo '<option style="font-family: truculenta" value="table.php?category=' . $category . '&letter=' . strtolower($i) . '">' . $i . '</option>';
-            }
-            ?>
-          </optgroup>
-        </select>
-      </div>
+      <?php if (!$set_child) { ?>
+        <ul class="alphabet">
+          <?php
+          echo '<li><a href="table.php?category=' . $category . '&letter=numeric" class="letters" draggable="false" ondragstart="return false"><span class="&">&</span></a></li>';
+          foreach (range('A', 'N') as $i) {
+            echo '<li><a href="table.php?category=' . $category . '&letter=' . strtolower($i) . '" class="letters" draggable="false" ondragstart="return false"><span class="' . $i . '">' . $i . '</span></a></li>';
+          }
+          echo "<br></br>";
+          foreach (range('O', 'Z') as $i) {
+            echo '<li><a href="table.php?category=' . $category . '&letter=' . strtolower($i) . '" class="letters" draggable="false" ondragstart="return false"><span class="' . $i . '">' . $i . '</span></a></li>';
+          }
+          ?>
+        </ul>
+        <div class="select-box">
+          <select onchange="location = this.value">
+            <optgroup>
+              <?php
+              echo '<option style="font-family: truculenta" value="table.php?category=' . $category . '&letter=numeric">&</option>';
+              foreach (range('A', 'Z') as $i) {
+                echo '<option style="font-family: truculenta" value="table.php?category=' . $category . '&letter=' . strtolower($i) . '">' . $i . '</option>';
+              }
+              ?>
+            </optgroup>
+          </select>
+        </div>
+      <?php } ?>
     </div>
 
     <div class="mainAlphabetBottom">

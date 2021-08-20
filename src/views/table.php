@@ -7,10 +7,9 @@
 session_start();
 // Profil enfant
 if (isset($_SESSION["logged"]) && $_SESSION["genre"] == 2) {
-  $sqlWhereChild = "WHERE profile=2";
-  $sqlAndChild = "AND profile=2";
-} else {
-  $sqlAndChild = $sqlWhereChild = "";
+  // Redirection
+  header("location:/index.php");
+  exit;
 }
 
 // Appel du script d'affichage des données
@@ -183,12 +182,7 @@ if (empty($result) && empty($result2)) {
 <body>
   <style type="text/css">
     body {
-      background-image: url(<?php if (isset($_SESSION["logged"]) && $_SESSION["genre"] == 2) {
-                              // Profil enfant
-                              echo '"/assets/img/bg_child.png"';
-                            } else {
-                              echo '"/assets/img/bg.png"';
-                            } ?>);
+      background-image: url("/assets/img/bg.png");
       background-position: center center;
       background-repeat: no-repeat;
       background-attachment: fixed;

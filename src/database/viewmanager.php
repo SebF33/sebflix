@@ -40,15 +40,16 @@
 //    2.13 Sélection des séries dont le titre commence par un chiffre
 
 //  03. Affichages des animes
-//    3.01 Sélection des 7 animes les plus récents par leur poster
-//    3.02 Sélection des shōnen de type série
-//    3.03 Sélection des shōnen de type film
-//    3.04 Sélection des seinen de type série
-//    3.05 Sélection des seinen de type film
-//    3.06 Sélection des animes de type série dont le titre commence par le caractère défini
-//    3.07 Sélection des animes de type film dont le titre commence par le caractère défini
-//    3.08 Sélection des animes de type série dont le titre commence par un chiffre
-//    3.09 Sélection des animes de type film dont le titre commence par un chiffre
+//    3.01 Sélection des 7 animes de type film les plus récents par leur poster
+//    3.02 Sélection des 7 animes de type série les plus récents par leur poster
+//    3.03 Sélection des shōnen de type série
+//    3.04 Sélection des shōnen de type film
+//    3.05 Sélection des seinen de type série
+//    3.06 Sélection des seinen de type film
+//    3.07 Sélection des animes de type série dont le titre commence par le caractère défini
+//    3.08 Sélection des animes de type film dont le titre commence par le caractère défini
+//    3.09 Sélection des animes de type série dont le titre commence par un chiffre
+//    3.10 Sélection des animes de type film dont le titre commence par un chiffre
 
 //  04. Affichages des dessins animés
 //    4.01 Sélection des 7 dessins animés les plus récents par leur poster
@@ -828,8 +829,32 @@ function select_tvshow_by_numeric()
   }
 }
 
-// 3.01 Sélection des 7 animes les plus récents par leur poster
-function select_seven_recent_anime()
+// 3.01 Sélection des 7 animes de type film les plus récents par leur poster
+function select_seven_recent_anime_movie(string $sqlChild)
+{
+  connexion($dbco);
+  try {
+    $query = $dbco->prepare(
+      "SELECT idMovie, title, cachedurl
+      FROM movie
+      INNER JOIN art ON movie.idMovie = art.media_id
+      WHERE media_type = 'movie'
+      AND type = 'poster'
+      AND genre LIKE '%Anime%'
+      $sqlChild
+      ORDER BY premiered DESC
+      LIMIT 7"
+    );
+    $query->execute();
+    $result = $query->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
+  } catch (PDOException $e) {
+    echo "Erreur : " . $e->getMessage();
+  }
+}
+
+// 3.02 Sélection des 7 animes de type série les plus récents par leur poster
+function select_seven_recent_anime_tvshow()
 {
   connexion($dbco);
   try {
@@ -851,7 +876,7 @@ function select_seven_recent_anime()
   }
 }
 
-// 3.02 Sélection des shōnen de type série
+// 3.03 Sélection des shōnen de type série
 function select_shonen_tvshow()
 {
   connexion($dbco);
@@ -875,7 +900,7 @@ function select_shonen_tvshow()
   }
 }
 
-// 3.03 Sélection des shōnen de type film
+// 3.04 Sélection des shōnen de type film
 function select_shonen_movie()
 {
   connexion($dbco);
@@ -899,7 +924,7 @@ function select_shonen_movie()
   }
 }
 
-// 3.04 Sélection des seinen de type série
+// 3.05 Sélection des seinen de type série
 function select_seinen_tvshow()
 {
   connexion($dbco);
@@ -924,7 +949,7 @@ function select_seinen_tvshow()
   }
 }
 
-// 3.05 Sélection des seinen de type film
+// 3.06 Sélection des seinen de type film
 function select_seinen_movie()
 {
   connexion($dbco);
@@ -950,7 +975,7 @@ function select_seinen_movie()
   }
 }
 
-// 3.06 Sélection des animes de type série dont le titre commence par le caractère défini
+// 3.07 Sélection des animes de type série dont le titre commence par le caractère défini
 function select_anime_tvshow_by_letter(string $letter)
 {
   connexion($dbco);
@@ -974,7 +999,7 @@ function select_anime_tvshow_by_letter(string $letter)
   }
 }
 
-// 3.07 Sélection des animes de type film dont le titre commence par le caractère défini
+// 3.08 Sélection des animes de type film dont le titre commence par le caractère défini
 function select_anime_movie_by_letter(string $letter)
 {
   connexion($dbco);
@@ -998,7 +1023,7 @@ function select_anime_movie_by_letter(string $letter)
   }
 }
 
-// 3.08 Sélection des animes de type série dont le titre commence par un chiffre
+// 3.09 Sélection des animes de type série dont le titre commence par un chiffre
 function select_anime_tvshow_by_numeric()
 {
   connexion($dbco);
@@ -1030,7 +1055,7 @@ function select_anime_tvshow_by_numeric()
   }
 }
 
-// 3.09 Sélection des animes de type film dont le titre commence par un chiffre
+// 3.10 Sélection des animes de type film dont le titre commence par un chiffre
 function select_anime_movie_by_numeric()
 {
   connexion($dbco);

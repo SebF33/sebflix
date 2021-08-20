@@ -1,8 +1,11 @@
 <header>
   <nav role='navigation'>
     <ul>
-      <?php foreach ($navLeft as $navTitle => $link) {
-        echo '<li><a class="btn-type' . $btnNavClass . '" href="' . $link . '" draggable="false" ondragstart="return false">' . $navTitle . '</a></li>';
+      <?php
+      if (!$set_child || substr($_SERVER['PHP_SELF'], -9) == 'index.php') {
+        foreach ($navLeft as $navTitle => $link) {
+          echo '<li><a class="btn-type' . $btnNavClass . '" href="' . $link . '" draggable="false" ondragstart="return false">' . $navTitle . '</a></li>';
+        }
       }
       ?>
       <li id="icon-trigger" class="icon icon-trigger"><a class="btn-icon" href="/index.php" draggable="false" ondragstart="return false">
@@ -109,8 +112,11 @@
             </g>
           </svg>
         </a></li>
-      <?php foreach ($navRight as $navTitle => $link) {
-        echo '<li><a class="btn-type' . $btnNavClass . '" href="' . $link . '" draggable="false" ondragstart="return false">' . $navTitle . '</a></li>';
+      <?php
+      if (!$set_child || substr($_SERVER['PHP_SELF'], -9) == 'index.php') {
+        foreach ($navRight as $navTitle => $link) {
+          echo '<li><a class="btn-type' . $btnNavClass . '" href="' . $link . '" draggable="false" ondragstart="return false">' . $navTitle . '</a></li>';
+        }
       }
       ?>
     </ul>

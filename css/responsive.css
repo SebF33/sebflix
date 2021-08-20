@@ -120,22 +120,26 @@
   }
 }
 
-@media all and (max-width: 1024px),
+@media all and (max-width: 1024px) {
+  .tType td {
+    padding: 6px;
+  }
+
+  .tType td img {
+    width: 96px;
+    height: 144px;
+  }
+}
+
+@media all and (max-width: 800px),
 all and (max-height: 800px) {
-  .mainAlphabetTop {
-    height: 100%;
+  .tType td {
+    padding: 4px;
   }
 
-  .mainAlphabetBottom {
-    height: 0%;
-  }
-
-  .mainAlphabetBottom table {
-    display: none;
-  }
-
-  .alphabet-title {
-    margin-top: 0px;
+  .tType td img {
+    width: 48px;
+    height: 72px;
   }
 
   .alphabet li {
@@ -148,7 +152,7 @@ all and (max-height: 800px) {
 }
 
 /* Boîte de sélection */
-@media (max-width: 767px) {
+@media (max-width: 1024px) {
   .mainAlphabetTop ul {
     display: none;
   }
