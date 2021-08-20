@@ -1635,8 +1635,34 @@ function select_my_movie(int $user)
     );
     $query->bindValue(':user', $user, PDO::PARAM_INT);
     $query->execute();
-    $result = $query->fetchAll(PDO::FETCH_OBJ);
-    return $result;
+    $movies = $query->fetchAll(PDO::FETCH_OBJ);
+    return $movies;
+  } catch (PDOException $e) {
+    echo "Erreur : " . $e->getMessage();
+  }
+}
+
+// 9.02 Sélection des médias type série de la watchlist
+function select_my_tvshow(int $user)
+{
+  connexion($dbco);
+  try {
+    $query = $dbco->prepare(
+      "SELECT t.idShow, t.title, t.premiered, a.cachedurl, w.created_at
+      FROM tvshow AS t
+      JOIN watchlist AS w
+      ON w.media_id = t.idShow
+      JOIN art AS a
+      ON t.idShow = a.media_id
+      WHERE w.user_id = :user
+      AND a.media_type = 'tvshow'
+      AND a.type = 'poster'
+      ORDER BY w.created_at DESC"
+    );
+    $query->bindValue(':user', $user, PDO::PARAM_INT);
+    $query->execute();
+    $tvshows = $query->fetchAll(PDO::FETCH_OBJ);
+    return $tvshows;
   } catch (PDOException $e) {
     echo "Erreur : " . $e->getMessage();
   }
@@ -1673,7 +1699,7 @@ function count_all_media(string $sqlChild)
 }
 
 // 10.02 Comptage des médias de la watchlist
-function count_my_movie(int $user)
+function count_my_watchlist(int $user)
 {
   connexion($dbco);
   try {

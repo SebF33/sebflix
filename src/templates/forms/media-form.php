@@ -99,13 +99,13 @@ require dirname(__DIR__, 2) . '/database/data-form.php';
                                                         } ?>" class="btn demo-form-submit">
       </div>
       <div class="demo-form-row">
-        <label>Titre * : </label><br>
+        <label>Titre <span>*</span> : </label><br>
         <input name="title" type="text" class="demo-form-field" value="<?php if ($action == 'copy' or $action == 'edit') {
                                                                           echo $result['title'];
                                                                         } ?>" required />
       </div>
       <div class="demo-form-row">
-        <label>Synopsis * : </label>
+        <label>Synopsis <span>*</span> : </label>
         <br>
         <textarea name="synopsis" class="demo-form-field" rows="1" required><?php if ($action == 'copy' or $action == 'edit') {
                                                                               echo $result['synopsis'];
@@ -119,7 +119,7 @@ require dirname(__DIR__, 2) . '/database/data-form.php';
                                                                         } ?>" />
       </div>
       <div class="demo-form-row">
-        <label>Date de sortie * : </label>
+        <label>Date de sortie <span>*</span> : </label>
         <br>
         <input name="premiered" type="date" class="demo-form-field" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" value="<?php if ($action == 'copy' or $action == 'edit') {
                                                                                                                             echo $result['premiered'];

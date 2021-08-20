@@ -6,8 +6,7 @@
 .my-5 {
   margin-top: 0 !important;
   color: var(--color-light);
-  font-size: 2.6em;
-  text-shadow: 3px 8px 6px #000, 0px -5px 12px #000;
+  font-size: 2.4em;
 }
 
 h1,
@@ -19,7 +18,7 @@ h3 {
   text-transform: uppercase;
   letter-spacing: 2px;
   color: var(--color-light);
-  text-shadow: 3px 8px 6px var(--color-dark), 0px -5px 12px var(--color-dark);
+  text-shadow: 3px 8px 6px #000, 0px -5px 12px #000;
 }
 
 h1 {
@@ -304,6 +303,13 @@ h3 a {
   font-weight: 700;
   text-transform: uppercase;
   text-align: center;
+  text-shadow: 1px 3px 4px #000, 0px -3px 6px #000;
+}
+
+.tbl-qa th.table-header.title {
+  padding-top: 5px;
+  padding-bottom: 0;
+  font-size: 1.4em;
 }
 
 #table-body {
@@ -425,6 +431,12 @@ h3 a {
 .demo-form-row #picture,
 .demo-form-row #picture-file {
   color: var(--color-light);
+}
+
+.form-group label span,
+.demo-form-row label span {
+  color: var(--color-main);
+  font-weight: 900;
 }
 
 .demo-form-row img {

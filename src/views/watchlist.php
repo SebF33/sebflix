@@ -100,7 +100,7 @@ if (isset($_GET['user']) && !empty($_GET['user'])) {
   <main>
     <?php
     // Appel de la fonction de comptage des médias de la watchlist
-    $total_rows = count_my_movie($user);
+    $total_rows = count_my_watchlist($user);
     // Affichage du résultat non nul
     if ($total_rows >= 1) {
       $msg_result = "$total_rows favori(s)";
@@ -116,11 +116,14 @@ if (isset($_GET['user']) && !empty($_GET['user'])) {
 
     <?php
     // Appel de la fonction de sélection des médias type film de la watchlist
-    $result = select_my_movie($user);
-    if (!empty($result)) {
+    $movies = select_my_movie($user);
+    if (!empty($movies)) {
     ?>
       <table class="tbl-qa tbl-user justify-content-center table-responsive" border="3">
         <thead>
+          <tr>
+            <th class="table-header title" colspan="5">Film(s)</th>
+          </tr>
           <tr>
             <th class="table-header" width="20%">Affiche</th>
             <th class="table-header" width="25%">Titre</th>
@@ -131,7 +134,7 @@ if (isset($_GET['user']) && !empty($_GET['user'])) {
         </thead>
         <tbody id="table-body">
           <?php
-          foreach ($result as $row) {
+          foreach ($movies as $row) {
             // Formatage des dates en français
             $french_release_date = utf8_encode(strftime('%e %B %Y', strtotime($row->premiered)));
             $french_save_date = utf8_encode(strftime('%e %B %Y &agrave; %Hh%M', strtotime($row->created_at)));
@@ -166,16 +169,82 @@ if (isset($_GET['user']) && !empty($_GET['user'])) {
                 </div>
               </div>
             </div>
-        <?php
+          <?php
           }
-        }
-        ?>
+          ?>
         </tbody>
       </table>
+    <?php
+    }
+    ?>
 
-      <!-- Flèche retour au début -->
-      <button class="scrollToTopBtn">☝️</button>
-      <script src="/assets/js/to-top.js"></script>
+    <?php
+    // Appel de la fonction de sélection des médias type série de la watchlist
+    $tvshows = select_my_tvshow($user);
+    if (!empty($tvshows)) {
+    ?>
+      <table class="tbl-qa tbl-user justify-content-center table-responsive" border="3">
+        <thead>
+          <tr>
+            <th class="table-header title" colspan="5">Série(s)</th>
+          </tr>
+          <tr>
+            <th class="table-header" width="20%">Affiche</th>
+            <th class="table-header" width="25%">Titre</th>
+            <th class="table-header" width="20%">Date de sortie</th>
+            <th class="table-header" width="20%">Date d'ajout</th>
+            <th class="table-header" width="15%">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="table-body">
+          <?php
+          foreach ($tvshows as $row) {
+            // Formatage des dates en français
+            $french_release_date = utf8_encode(strftime('%e %B %Y', strtotime($row->premiered)));
+            $french_save_date = utf8_encode(strftime('%e %B %Y &agrave; %Hh%M', strtotime($row->created_at)));
+          ?>
+            <tr class="table-row">
+              <td id="td-image">
+                <img src="/src/thumbnails/<?= $row->cachedurl ?>" title="<?= $row->cachedurl ?>" alt="<?= $row->title ?>" height="216" width="144" />
+              </td>
+              <td id="td-title"><?= $row->title ?></td>
+              <td id="td-text"><?= $french_release_date ?></td>
+              <td id="td-italic"><?= $french_save_date ?></td>
+              <td id="td-actions">
+                <a class="ajax-action-links" href='/src/views/viewpage.php?type=tvshow&id=<?= $row->idShow ?>' target="_blank" draggable="false" ondragstart="return false"><img src="/assets/img/view.png" title="Voir" height="17" width="30" /></a>
+                <a onclick="$('#dialog-example_<?= $row->idShow ?>').modal('show');" class="ajax-action-links" class="btn-show-modal" href="#" data-toggle="modal" draggable="false" ondragstart="return false"><img src="/assets/img/delete.png" title="Supprimer" height="25" width="18" /></a>
+              </td>
+            </tr>
+            <!-- Boîte de dialogue de suppression -->
+            <div id="dialog-example_<?= $row->idShow ?>" class="modal fade" role="dialog">
+              <div class="modal-dialog">
+                <div class="modal-content" id="dialog-example_<?= $row->idShow ?>">
+                  <div class="modal-header">
+                    <h3 class="modal-title">Confirmation de suppression</h3>
+                  </div>
+                  <div class="modal-body">
+                    <p>Êtes-vous sûr de vouloir le retirer de votre watchlist ?</p>
+                    <p class="modal-media-title">"<strong><?= $row->title ?></strong>"</p>
+                  </div>
+                  <div class="modal-footer">
+                    <a href="#" data-dismiss="modal" class="btn btn-info" onclick="$('#dialog-example_<?= $row->idShow ?>').modal('hide');">Non</a>
+                    <a href='/src/database/delete.php?user=<?= $user ?>&type=tvshow&id=<?= $row->idShow ?>' class="btn btn-danger" id="<?= $row->idShow ?>">Oui</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <?php
+          }
+          ?>
+        </tbody>
+      </table>
+    <?php
+    }
+    ?>
+
+    <!-- Flèche retour au début -->
+    <button class="scrollToTopBtn">☝️</button>
+    <script src="/assets/js/to-top.js"></script>
 
   </main>
 
