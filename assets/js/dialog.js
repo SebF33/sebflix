@@ -6,7 +6,7 @@ $(function () {
     var modal_id = "dialog-example_" + id;
     $("#" + modal_id).modal("show");
   });
-  $(".btn btn-danger").click(function (e) {
+  $(".btn btn-danger").click(function () {
     var id = $(this).attr("id");
     var modal_id = "dialog-example_" + id;
     $("#" + modal_id).modal("hide");

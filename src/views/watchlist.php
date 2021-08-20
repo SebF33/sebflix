@@ -42,6 +42,13 @@ if (isset($_GET['user']) && !empty($_GET['user'])) {
   header("location:/index.php");
   exit;
 }
+
+// Option du type de média
+if (isset($_POST['type']) && $_POST['type'] == '0') {
+  $set_tvshow = TRUE;
+} else {
+  $set_tvshow = FALSE;
+}
 ?>
 
 <html>
@@ -114,15 +121,35 @@ if (isset($_GET['user']) && !empty($_GET['user'])) {
       <h2><?php echo "\n" . $msg_result ?></h2>
     </div>
 
+    <div class="check-group">
+      <form action="" method="post">
+        <div class="form-check">
+          <input id="flexRadioDefault1" class="form-check-input" type="radio" name="type" value="1" onchange="this.form.submit();" <?php if (!$set_tvshow) echo "checked"; ?> /> Film(s)
+        </div>
+        <div class="form-check">
+          <input id="flexRadioDefault1" class="form-check-input" type="radio" name="type" value="0" onchange="this.form.submit();" <?php if ($set_tvshow) echo "checked"; ?> /> Série(s)
+        </div>
+      </form>
+    </div>
+
     <?php
-    // Appel de la fonction de sélection des médias type film de la watchlist
-    $movies = select_my_movie($user);
-    if (!empty($movies)) {
+    if ($set_tvshow) {
+      // Appel de la fonction de sélection des médias type série de la watchlist
+      $title = "Série(s)";
+      $link = "tvshow";
+      $result = select_my_tvshow($user);
+    } else {
+      // Appel de la fonction de sélection des médias type film de la watchlist
+      $title = "Film(s)";
+      $link = "movie";
+      $result = select_my_movie($user);
+    }
+    if (!empty($result)) {
     ?>
       <table class="tbl-qa tbl-user justify-content-center table-responsive" border="3">
         <thead>
           <tr>
-            <th class="table-header title" colspan="5">Film(s)</th>
+            <th class="table-header title" colspan="5"><?= $title ?></th>
           </tr>
           <tr>
             <th class="table-header" width="20%">Affiche</th>
@@ -134,7 +161,12 @@ if (isset($_GET['user']) && !empty($_GET['user'])) {
         </thead>
         <tbody id="table-body">
           <?php
-          foreach ($movies as $row) {
+          foreach ($result as $row) {
+            if ($set_tvshow) {
+              $id = $row->idShow;
+            } else {
+              $id = $row->idMovie;
+            }
             // Formatage des dates en français
             $french_release_date = utf8_encode(strftime('%e %B %Y', strtotime($row->premiered)));
             $french_save_date = utf8_encode(strftime('%e %B %Y &agrave; %Hh%M', strtotime($row->created_at)));
@@ -147,14 +179,14 @@ if (isset($_GET['user']) && !empty($_GET['user'])) {
               <td id="td-text"><?= $french_release_date ?></td>
               <td id="td-italic"><?= $french_save_date ?></td>
               <td id="td-actions">
-                <a class="ajax-action-links" href='/src/views/viewpage.php?type=movie&id=<?= $row->idMovie ?>' target="_blank" draggable="false" ondragstart="return false"><img src="/assets/img/view.png" title="Voir" height="17" width="30" /></a>
-                <a onclick="$('#dialog-example_<?= $row->idMovie ?>').modal('show');" class="ajax-action-links" class="btn-show-modal" href="#" data-toggle="modal" draggable="false" ondragstart="return false"><img src="/assets/img/delete.png" title="Supprimer" height="25" width="18" /></a>
+                <a class="ajax-action-links" href='/src/views/viewpage.php?type=<?= $link ?>&id=<?= $id ?>' target="_blank" draggable="false" ondragstart="return false"><img src="/assets/img/view.png" title="Voir" height="17" width="30" /></a>
+                <a onclick="$('#dialog-example_<?= $id ?>').modal('show');" class="ajax-action-links" class="btn-show-modal" href="#" data-toggle="modal" draggable="false" ondragstart="return false"><img src="/assets/img/delete.png" title="Supprimer" height="25" width="18" /></a>
               </td>
             </tr>
             <!-- Boîte de dialogue de suppression -->
-            <div id="dialog-example_<?= $row->idMovie ?>" class="modal fade" role="dialog">
+            <div id="dialog-example_<?= $id ?>" class="modal fade" role="dialog">
               <div class="modal-dialog">
-                <div class="modal-content" id="dialog-example_<?= $row->idMovie ?>">
+                <div class="modal-content" id="dialog-example_<?= $id ?>">
                   <div class="modal-header">
                     <h3 class="modal-title">Confirmation de suppression</h3>
                   </div>
@@ -163,8 +195,8 @@ if (isset($_GET['user']) && !empty($_GET['user'])) {
                     <p class="modal-media-title">"<strong><?= $row->title ?></strong>"</p>
                   </div>
                   <div class="modal-footer">
-                    <a href="#" data-dismiss="modal" class="btn btn-info" onclick="$('#dialog-example_<?= $row->idMovie ?>').modal('hide');">Non</a>
-                    <a href='/src/database/delete.php?user=<?= $user ?>&type=movie&id=<?= $row->idMovie ?>' class="btn btn-danger" id="<?= $row->idMovie ?>">Oui</a>
+                    <a href="#" data-dismiss="modal" class="btn btn-info" onclick="$('#dialog-example_<?= $id ?>').modal('hide');">Non</a>
+                    <a href='/src/database/delete.php?user=<?= $user ?>&type=<?= $link ?>&id=<?= $id ?>' class="btn btn-danger" id="<?= $id ?>">Oui</a>
                   </div>
                 </div>
               </div>
@@ -177,71 +209,7 @@ if (isset($_GET['user']) && !empty($_GET['user'])) {
     <?php
     }
     ?>
-
-    <?php
-    // Appel de la fonction de sélection des médias type série de la watchlist
-    $tvshows = select_my_tvshow($user);
-    if (!empty($tvshows)) {
-    ?>
-      <table class="tbl-qa tbl-user justify-content-center table-responsive" border="3">
-        <thead>
-          <tr>
-            <th class="table-header title" colspan="5">Série(s)</th>
-          </tr>
-          <tr>
-            <th class="table-header" width="20%">Affiche</th>
-            <th class="table-header" width="25%">Titre</th>
-            <th class="table-header" width="20%">Date de sortie</th>
-            <th class="table-header" width="20%">Date d'ajout</th>
-            <th class="table-header" width="15%">Actions</th>
-          </tr>
-        </thead>
-        <tbody id="table-body">
-          <?php
-          foreach ($tvshows as $row) {
-            // Formatage des dates en français
-            $french_release_date = utf8_encode(strftime('%e %B %Y', strtotime($row->premiered)));
-            $french_save_date = utf8_encode(strftime('%e %B %Y &agrave; %Hh%M', strtotime($row->created_at)));
-          ?>
-            <tr class="table-row">
-              <td id="td-image">
-                <img src="/src/thumbnails/<?= $row->cachedurl ?>" title="<?= $row->cachedurl ?>" alt="<?= $row->title ?>" height="216" width="144" />
-              </td>
-              <td id="td-title"><?= $row->title ?></td>
-              <td id="td-text"><?= $french_release_date ?></td>
-              <td id="td-italic"><?= $french_save_date ?></td>
-              <td id="td-actions">
-                <a class="ajax-action-links" href='/src/views/viewpage.php?type=tvshow&id=<?= $row->idShow ?>' target="_blank" draggable="false" ondragstart="return false"><img src="/assets/img/view.png" title="Voir" height="17" width="30" /></a>
-                <a onclick="$('#dialog-example_<?= $row->idShow ?>').modal('show');" class="ajax-action-links" class="btn-show-modal" href="#" data-toggle="modal" draggable="false" ondragstart="return false"><img src="/assets/img/delete.png" title="Supprimer" height="25" width="18" /></a>
-              </td>
-            </tr>
-            <!-- Boîte de dialogue de suppression -->
-            <div id="dialog-example_<?= $row->idShow ?>" class="modal fade" role="dialog">
-              <div class="modal-dialog">
-                <div class="modal-content" id="dialog-example_<?= $row->idShow ?>">
-                  <div class="modal-header">
-                    <h3 class="modal-title">Confirmation de suppression</h3>
-                  </div>
-                  <div class="modal-body">
-                    <p>Êtes-vous sûr de vouloir le retirer de votre watchlist ?</p>
-                    <p class="modal-media-title">"<strong><?= $row->title ?></strong>"</p>
-                  </div>
-                  <div class="modal-footer">
-                    <a href="#" data-dismiss="modal" class="btn btn-info" onclick="$('#dialog-example_<?= $row->idShow ?>').modal('hide');">Non</a>
-                    <a href='/src/database/delete.php?user=<?= $user ?>&type=tvshow&id=<?= $row->idShow ?>' class="btn btn-danger" id="<?= $row->idShow ?>">Oui</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          <?php
-          }
-          ?>
-        </tbody>
-      </table>
-    <?php
-    }
-    ?>
-
+    <?php var_dump($result); ?>
     <!-- Flèche retour au début -->
     <button class="scrollToTopBtn">☝️</button>
     <script src="/assets/js/to-top.js"></script>

@@ -135,6 +135,15 @@ h3 a {
   border-color: var(--color-extra);
 }
 
+.form-check-input {
+  background-color: var(--color-light);
+}
+
+.form-check-input:checked {
+  background-color: var(--color-main);
+  border-color: var(--color-main);
+}
+
 /* Bloc de recherche */
 .container-search {
   margin-bottom: 40px;
@@ -467,11 +476,6 @@ h3 a {
   width: 40%;
 }
 
-.form-check-input:checked {
-  background-color: var(--color-main);
-  border-color: var(--color-main);
-}
-
 /* Boîte de dialogue */
 .modal-content {
   font-family: var(--font-title);
@@ -506,4 +510,23 @@ h3 a {
 .modal-footer .btn-danger {
   background-color: var(--color-main);
   border-color: var(--color-main);
+}
+
+/* Watchlist */
+.check-group {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  color: var(--color-light);
+  font-family: var(--font-title);
+  font-size: 1.1em;
+  font-weight: 600;
+  text-shadow: 1px 2px 2px #000, 0px -1px 2px #000;
+  user-select: none;
+}
+
+.check-group input {
+  box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px,
+    rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
+    rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
 }

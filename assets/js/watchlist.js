@@ -8,11 +8,11 @@ function addToWatchlist(obj) {
     url: "watchlist/add-to-watchlist.php",
     type: "POST",
     data: { id: id, type: type, user: user },
-    success: function (data) {
+    success: function () {
       setTimeout(function () {
         $(obj).find("#watch-on").show();
         markedAsChecked($(obj));
-      }, 50);
+      }, 80);
     },
   });
 }
@@ -26,11 +26,11 @@ function removeFromWatchlist(obj) {
     url: "watchlist/remove-from-watchlist.php",
     type: "POST",
     data: { id: id, type: type, user: user },
-    success: function (data) {
+    success: function () {
       setTimeout(function () {
         $(obj).find("#watch-off").show();
         markedAsUnchecked($(obj));
-      }, 50);
+      }, 80);
     },
   });
 }

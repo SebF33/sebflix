@@ -1629,6 +1629,7 @@ function select_my_movie(int $user)
       JOIN art AS a
       ON m.idMovie = a.media_id
       WHERE w.user_id = :user
+      AND w.media_type = 'movie'
       AND a.media_type = 'movie'
       AND a.type = 'poster'
       ORDER BY w.created_at DESC"
@@ -1655,6 +1656,7 @@ function select_my_tvshow(int $user)
       JOIN art AS a
       ON t.idShow = a.media_id
       WHERE w.user_id = :user
+      AND w.media_type = 'tvshow'
       AND a.media_type = 'tvshow'
       AND a.type = 'poster'
       ORDER BY w.created_at DESC"
