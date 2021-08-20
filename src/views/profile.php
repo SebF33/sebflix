@@ -34,7 +34,12 @@ if (!isset($_SESSION["logged"]) || $_SESSION["logged"] !== TRUE) {
 <body>
   <style type="text/css">
     body {
-      background-image: url("/assets/img/bg_welcome.png");
+      background-image: url(<?php if (isset($_SESSION["logged"]) && $_SESSION["genre"] == 2) {
+                              // Profil enfant
+                              echo '"/assets/img/bg_children.png"';
+                            } else {
+                              echo '"/assets/img/bg_welcome.png"';
+                            } ?>);
       background-position: center center;
       background-repeat: no-repeat;
       background-attachment: fixed;

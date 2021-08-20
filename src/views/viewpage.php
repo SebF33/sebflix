@@ -69,6 +69,13 @@ if (isset($_GET['id']) && !empty($_GET['id']) && ($_GET['type'] == 'movie' or $_
   header("location:/index.php");
   exit;
 }
+
+// Profil enfant
+if (isset($_SESSION["logged"]) && $_SESSION["genre"] == 2 && $result->profile !== "2") {
+  // Redirection
+  header("location:/index.php");
+  exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -187,6 +194,11 @@ if (isset($_GET['id']) && !empty($_GET['id']) && ($_GET['type'] == 'movie' or $_
         </script>
       <?php } ?>
       </td>
+      </tr>
+      <tr>
+        <td class="tgenre" colspan="5">
+          <p><?= $result->genre ?></p>
+        </td>
       </tr>
       </table>
     </div>

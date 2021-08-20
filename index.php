@@ -3,6 +3,16 @@
 <!-------------------->
 
 <?php
+// Initialisation de la session
+session_start();
+// Profil enfant
+if (isset($_SESSION["logged"]) && $_SESSION["genre"] == 2) {
+  $sqlWhereChild = "WHERE profile=2";
+  $sqlAndChild = "AND profile=2";
+} else {
+  $sqlAndChild = $sqlWhereChild = "";
+}
+
 // Appel du script d'affichage des données
 require __DIR__ . '/src/database/viewmanager.php';
 ?>
@@ -43,7 +53,12 @@ require __DIR__ . '/src/database/viewmanager.php';
 <body>
   <style type="text/css">
     body {
-      background-image: url("/img/bg_index.png");
+      background-image: url(<?php if (isset($_SESSION["logged"]) && $_SESSION["genre"] == 2) {
+                              // Profil enfant
+                              echo '"/assets/img/bg_child.png"';
+                            } else {
+                              echo '"/assets/img/bg_index.png"';
+                            } ?>);
       background-position: center center;
       background-repeat: no-repeat;
       background-attachment: fixed;
@@ -129,9 +144,8 @@ require __DIR__ . '/src/database/viewmanager.php';
       <div class="card-carousel">
         <?php
         // Appel des fonctions de sélection aléatoire de 21 médias
-        $randMovie = select_eighteen_random_movie();
-        $randTvshow = select_three_random_tvshow();
-
+        $randMovie = select_eighteen_random_movie($sqlAndChild);
+        $randTvshow = select_three_random_tvshow($sqlAndChild);
         // Affichage dans le carrousel des données appelées
         foreach ($randMovie as $row) {
           echo '<div class="my-card"><a class="my-btn-card" href="src/views/viewpage.php?type=movie&id=' . $row['idMovie'] . '" draggable="false" ondragstart="return false"><img src="src/thumbnails/' . $row['cachedurl'] . '" title="' . $row['title'] . '" alt="' . $row['title'] . '" width="160" height="240" draggable="false" ondragstart="return false;"/></a></div>';

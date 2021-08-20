@@ -32,11 +32,11 @@ $page_to = 0;
 if (isset($query) && !empty($query)) {
   // Traitement de l'option "films" choisie par l'utilisateur pour la requête de comptage
   if (isset($type) && $type == 'movies') {
-    $sqlCount = "SELECT COUNT(*) FROM movie WHERE title LIKE :query";
+    $sqlCount = "SELECT COUNT(*) FROM movie WHERE title LIKE :query $sqlAndChild";
   }
   // Traitement de l'option "séries" choisie par l'utilisateur pour la requête de comptage
   elseif (isset($type) && $type == 'tvshows') {
-    $sqlCount = "SELECT COUNT(*) FROM tvshow WHERE title LIKE :query";
+    $sqlCount = "SELECT COUNT(*) FROM tvshow WHERE title LIKE :query $sqlAndChild";
   }
   // Traitement de l'option "acteurs" choisie par l'utilisateur pour la requête de comptage
   elseif (isset($type) && $type == 'actors') {
@@ -81,14 +81,14 @@ if (isset($query) && !empty($query)) {
     if (isset($type) && $type == 'movies') {
       $sqlSelect = "SELECT * FROM movie
                 INNER JOIN art ON movie.idMovie = art.media_id
-                WHERE title LIKE :query AND media_type = 'movie' AND type = 'poster'
+                WHERE title LIKE :query AND media_type = 'movie' AND type = 'poster' $sqlAndChild
                 ORDER BY premiered DESC LIMIT :first, :perpage";
     }
     // Traitement de l'option "séries" choisie par l'utilisateur pour la requête de sélection
     elseif (isset($type) && $type == 'tvshows') {
       $sqlSelect = "SELECT * FROM tvshow
                 INNER JOIN art ON tvshow.idShow = art.media_id
-                WHERE title LIKE :query AND media_type = 'tvshow' AND type = 'poster'
+                WHERE title LIKE :query AND media_type = 'tvshow' AND type = 'poster' $sqlAndChild
                 ORDER BY premiered DESC LIMIT :first, :perpage";
     }
     // Traitement de l'option "acteurs" choisie par l'utilisateur pour la requête de sélection

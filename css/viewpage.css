@@ -387,6 +387,16 @@ td {
   filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
 }
 
+.tgenre {
+  text-align: center;
+}
+
+.tgenre p {
+  margin: 10px;
+  font-size: 1em;
+  text-shadow: black 0.1em 0.1em 0.2em;
+}
+
 .tdiscart {
   text-align: center;
   padding: 8px;

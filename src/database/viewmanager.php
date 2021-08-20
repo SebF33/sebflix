@@ -95,7 +95,7 @@
 require __DIR__ . '/datamanager.php';
 
 // 1.01 Sélection aléatoire de 18 médias type film par leur poster
-function select_eighteen_random_movie()
+function select_eighteen_random_movie(string $sqlChild)
 {
   connexion($dbco);
   try {
@@ -105,6 +105,7 @@ function select_eighteen_random_movie()
       INNER JOIN art ON movie.idMovie = art.media_id
       WHERE media_type = 'movie'
       AND type = 'poster'
+      $sqlChild
       ORDER BY RAND()
       LIMIT 18"
     );
@@ -117,7 +118,7 @@ function select_eighteen_random_movie()
 }
 
 // 1.02 Sélection des 7 films les plus récents par leur poster
-function select_seven_recent_movie()
+function select_seven_recent_movie(string $sqlChild)
 {
   connexion($dbco);
   try {
@@ -127,6 +128,7 @@ function select_seven_recent_movie()
       INNER JOIN art ON movie.idMovie = art.media_id
       WHERE media_type = 'movie'
       AND type = 'poster'
+      $sqlChild
       AND genre NOT LIKE '%Animation%'
       AND genre NOT LIKE '%Anime%'
       AND genre NOT LIKE '%Spectacle%'
@@ -142,7 +144,7 @@ function select_seven_recent_movie()
 }
 
 // 1.03 Sélection aléatoire de 10 médias type film par leur fanart
-function select_ten_random_movie()
+function select_ten_random_movie(string $sqlChild)
 {
   connexion($dbco);
   try {
@@ -152,6 +154,7 @@ function select_ten_random_movie()
       INNER JOIN art ON movie.idMovie = art.media_id
       WHERE media_type = 'movie'
       AND type = 'fanart'
+      $sqlChild
       ORDER BY RAND()
       LIMIT 10"
     );
@@ -184,7 +187,7 @@ function select_infos_movie(int $id)
   connexion($dbco);
   try {
     $query = $dbco->prepare(
-      "SELECT title, synopsis, catch, classification, studio, embed, country, premiered
+      "SELECT title, synopsis, catch, classification, genre, studio, embed, country, premiered, profile
       FROM movie
       WHERE idMovie = :id"
     );
@@ -531,7 +534,7 @@ function select_last_movie()
 }
 
 // 2.01 Sélection aléatoire de 3 médias type série par son poster
-function select_three_random_tvshow()
+function select_three_random_tvshow(string $sqlChild)
 {
   connexion($dbco);
   try {
@@ -541,6 +544,7 @@ function select_three_random_tvshow()
       INNER JOIN art ON tvshow.idShow = art.media_id
       WHERE media_type = 'tvshow'
       AND type = 'poster'
+      $sqlChild
       ORDER BY RAND()
       LIMIT 3"
     );
@@ -553,7 +557,7 @@ function select_three_random_tvshow()
 }
 
 // 2.02 Sélection des 7 séries les plus récentes par leur poster
-function select_seven_recent_tvshow()
+function select_seven_recent_tvshow(string $sqlChild)
 {
   connexion($dbco);
   try {
@@ -563,6 +567,7 @@ function select_seven_recent_tvshow()
       INNER JOIN art ON tvshow.idShow = art.media_id
       WHERE media_type = 'tvshow'
       AND type = 'poster'
+      $sqlChild
       AND genre NOT LIKE '%Anime%'
       ORDER BY premiered DESC
       LIMIT 7"
@@ -576,7 +581,7 @@ function select_seven_recent_tvshow()
 }
 
 // 2.03 Sélection aléatoire de 2 médias type série par leur fanart
-function select_two_random_tvshow()
+function select_two_random_tvshow(string $sqlChild)
 {
   connexion($dbco);
   try {
@@ -586,6 +591,7 @@ function select_two_random_tvshow()
       INNER JOIN art ON tvshow.idShow = art.media_id
       WHERE media_type = 'tvshow'
       AND type = 'fanart'
+      $sqlChild
       ORDER BY RAND()
       LIMIT 2"
     );
@@ -618,7 +624,7 @@ function select_infos_tvshow(int $id)
   connexion($dbco);
   try {
     $query = $dbco->prepare(
-      "SELECT title, synopsis, premiered, classification, studio, embed, country
+      "SELECT title, synopsis, premiered, classification, genre, studio, embed, country, profile
       FROM tvshow
       WHERE idShow = :id"
     );

@@ -3,6 +3,16 @@
 <!------------------------>
 
 <?php
+// Initialisation de la session
+session_start();
+// Profil enfant
+if (isset($_SESSION["logged"]) && $_SESSION["genre"] == 2) {
+  $sqlWhereChild = "WHERE profile=2";
+  $sqlAndChild = "AND profile=2";
+} else {
+  $sqlAndChild = $sqlWhereChild = "";
+}
+
 // Appel du script d'affichage des données
 require dirname(__DIR__) . '/database/viewmanager.php';
 // Appel du script de validation des données
@@ -19,11 +29,11 @@ if (isset($_GET['category']) && !empty($_GET['category']) && in_array($_GET['cat
   if ($category == 'movies') {
     $title = "Films";
     $type = "movie";
-    $result = select_seven_recent_movie();
+    $result = select_seven_recent_movie($sqlAndChild);
   } elseif ($category == 'tvshows') {
     $title = "Séries";
     $type = "tvshow";
-    $result = select_seven_recent_tvshow();
+    $result = select_seven_recent_tvshow($sqlAndChild);
   } elseif ($category == 'animes') {
     $title = "Animes";
     $type = "tvshow";
@@ -84,29 +94,55 @@ if (isset($_GET['category']) && !empty($_GET['category']) && in_array($_GET['cat
 
   <!-- Header -->
   <?php
+  // Construction de la barre de navigation
   if ($category == 'movies') {
-    $navLeft = [
-      'Comédie' => '/src/views/table.php?category=' . $category . '&genre=comedy',
-      'Thriller' => '/src/views/table.php?category=' . $category . '&genre=thriller',
-      'Science-Fiction' => '/src/views/table.php?category=' . $category . '&genre=sf',
-      'Horreur' => '/src/views/table.php?category=' . $category . '&genre=horror'
-    ];
-    $navRight = [
-      'Guerre' => '/src/views/table.php?category=' . $category . '&genre=war',
-      'Péplum' => '/src/views/table.php?category=' . $category . '&genre=peplum',
-      'Western' => '/src/views/table.php?category=' . $category . '&genre=western',
-      'Arts Martiaux' => '/src/views/table.php?category=' . $category . '&genre=martial'
-    ];
-    $btnNavClass = " btn-type-movie";
+    if (isset($_SESSION["logged"]) && $_SESSION["genre"] == 2) {
+      $navLeft = [
+        'Comédie' => '/src/views/table.php?category=' . $category . '&genre=comedy'
+      ];
+    } else {
+      $navLeft = [
+        'Comédie' => '/src/views/table.php?category=' . $category . '&genre=comedy',
+        'Thriller' => '/src/views/table.php?category=' . $category . '&genre=thriller',
+        'Science-Fiction' => '/src/views/table.php?category=' . $category . '&genre=sf',
+        'Horreur' => '/src/views/table.php?category=' . $category . '&genre=horror'
+      ];
+    }
+    if (isset($_SESSION["logged"]) && $_SESSION["genre"] == 2) {
+      $navRight = [
+        'Science-Fiction' => '/src/views/table.php?category=' . $category . '&genre=sf'
+      ];
+      $btnNavClass = "";
+    } else {
+      $navRight = [
+        'Guerre' => '/src/views/table.php?category=' . $category . '&genre=war',
+        'Péplum' => '/src/views/table.php?category=' . $category . '&genre=peplum',
+        'Western' => '/src/views/table.php?category=' . $category . '&genre=western',
+        'Arts Martiaux' => '/src/views/table.php?category=' . $category . '&genre=martial'
+      ];
+      $btnNavClass = " btn-type-movie";
+    }
   } elseif ($category == 'tvshows') {
-    $navLeft = [
-      'Science-Fiction' => '/src/views/table.php?category=' . $category . '&genre=sf',
-      'Thriller' => '/src/views/table.php?category=' . $category . '&genre=thriller'
-    ];
-    $navRight = [
-      'Horreur' => '/src/views/table.php?category=' . $category . '&genre=horror',
-      'Animation' => '/src/views/table.php?category=' . $category . '&genre=animation'
-    ];
+    if (isset($_SESSION["logged"]) && $_SESSION["genre"] == 2) {
+      $navLeft = [
+        'Animation' => '/src/views/table.php?category=' . $category . '&genre=animation'
+      ];
+    } else {
+      $navLeft = [
+        'Science-Fiction' => '/src/views/table.php?category=' . $category . '&genre=sf',
+        'Thriller' => '/src/views/table.php?category=' . $category . '&genre=thriller'
+      ];
+    }
+    if (isset($_SESSION["logged"]) && $_SESSION["genre"] == 2) {
+      $navRight = [
+        'Science-Fiction' => '/src/views/table.php?category=' . $category . '&genre=sf'
+      ];
+    } else {
+      $navRight = [
+        'Horreur' => '/src/views/table.php?category=' . $category . '&genre=horror',
+        'Animation' => '/src/views/table.php?category=' . $category . '&genre=animation'
+      ];
+    }
     $btnNavClass = "";
   } elseif ($category == 'animes') {
     $navLeft = [

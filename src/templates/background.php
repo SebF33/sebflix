@@ -1,6 +1,9 @@
 <style type="text/css">
   body {
-    background-image: url(<?php if (isset($type) && isset($fanart['cachedurl']) && ($type == 'collection' or $type == 'moviecast' or $type == 'tvshowcast') && !empty($fanart['cachedurl'])) {
+    background-image: url(<?php if (isset($_SESSION["logged"]) && $_SESSION["genre"] == 2) {
+                            // Profil enfant
+                            echo '"/assets/img/bg_child.png"';
+                          } elseif (isset($type) && isset($fanart['cachedurl']) && ($type == 'collection' or $type == 'moviecast' or $type == 'tvshowcast') && !empty($fanart['cachedurl'])) {
                             echo '"/src/thumbnails/' . $fanart['cachedurl'] . '"';
                           } elseif (isset($type) && isset($id) && ($type == 'filmography' and $id == '26276')) {
                             // Charlie Chaplin

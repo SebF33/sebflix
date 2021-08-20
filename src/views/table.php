@@ -3,6 +3,16 @@
 <!--------------------->
 
 <?php
+// Initialisation de la session
+session_start();
+// Profil enfant
+if (isset($_SESSION["logged"]) && $_SESSION["genre"] == 2) {
+  $sqlWhereChild = "WHERE profile=2";
+  $sqlAndChild = "AND profile=2";
+} else {
+  $sqlAndChild = $sqlWhereChild = "";
+}
+
 // Appel du script d'affichage des données
 require dirname(__DIR__) . '/database/viewmanager.php';
 // Appel du script de validation des données
@@ -171,6 +181,20 @@ if (empty($result) && empty($result2)) {
 <!-- Corps de page -->
 
 <body>
+  <style type="text/css">
+    body {
+      background-image: url(<?php if (isset($_SESSION["logged"]) && $_SESSION["genre"] == 2) {
+                              // Profil enfant
+                              echo '"/assets/img/bg_child.png"';
+                            } else {
+                              echo '"/assets/img/bg.png"';
+                            } ?>);
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
+    }
+  </style>
 
   <!-- Header -->
   <header role="banner">

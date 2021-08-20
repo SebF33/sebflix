@@ -1,7 +1,3 @@
-<?php
-// Initialisation de la session
-session_start();
-?>
 <header>
   <nav role='navigation'>
     <ul>
