@@ -7,9 +7,11 @@
 session_start();
 // Profil enfant
 if (isset($_SESSION["logged"]) && $_SESSION["genre"] == 2) {
+  $set_child = TRUE;
   $sqlWhereChild = "WHERE profile=2";
   $sqlAndChild = "AND profile=2";
 } else {
+  $set_child = FALSE;
   $sqlAndChild = $sqlWhereChild = "";
 }
 
@@ -96,7 +98,7 @@ if (isset($_GET['category']) && !empty($_GET['category']) && in_array($_GET['cat
   <?php
   // Construction de la barre de navigation
   if ($category == 'movies') {
-    if (isset($_SESSION["logged"]) && $_SESSION["genre"] == 2) {
+    if ($set_child) {
       $navLeft = [
         'Comédie' => '/src/views/table.php?category=' . $category . '&genre=comedy'
       ];
@@ -108,7 +110,7 @@ if (isset($_GET['category']) && !empty($_GET['category']) && in_array($_GET['cat
         'Horreur' => '/src/views/table.php?category=' . $category . '&genre=horror'
       ];
     }
-    if (isset($_SESSION["logged"]) && $_SESSION["genre"] == 2) {
+    if ($set_child) {
       $navRight = [
         'Science-Fiction' => '/src/views/table.php?category=' . $category . '&genre=sf'
       ];
@@ -123,7 +125,7 @@ if (isset($_GET['category']) && !empty($_GET['category']) && in_array($_GET['cat
       $btnNavClass = " btn-type-movie";
     }
   } elseif ($category == 'tvshows') {
-    if (isset($_SESSION["logged"]) && $_SESSION["genre"] == 2) {
+    if ($set_child) {
       $navLeft = [
         'Animation' => '/src/views/table.php?category=' . $category . '&genre=animation'
       ];
@@ -133,7 +135,7 @@ if (isset($_GET['category']) && !empty($_GET['category']) && in_array($_GET['cat
         'Thriller' => '/src/views/table.php?category=' . $category . '&genre=thriller'
       ];
     }
-    if (isset($_SESSION["logged"]) && $_SESSION["genre"] == 2) {
+    if ($set_child) {
       $navRight = [
         'Science-Fiction' => '/src/views/table.php?category=' . $category . '&genre=sf'
       ];

@@ -7,9 +7,11 @@
 session_start();
 // Profil enfant
 if (isset($_SESSION["logged"]) && $_SESSION["genre"] == 2) {
+  $set_child = TRUE;
   $sqlWhereChild = "WHERE profile=2";
   $sqlAndChild = "AND profile=2";
 } else {
+  $set_child = FALSE;
   $sqlAndChild = $sqlWhereChild = "";
 }
 
@@ -53,7 +55,7 @@ require __DIR__ . '/src/database/viewmanager.php';
 <body>
   <style type="text/css">
     body {
-      background-image: url(<?php if (isset($_SESSION["logged"]) && $_SESSION["genre"] == 2) {
+      background-image: url(<?php if ($set_child) {
                               // Profil enfant
                               echo '"/assets/img/bg_child.png"';
                             } else {
@@ -89,9 +91,15 @@ require __DIR__ . '/src/database/viewmanager.php';
       <div class="welcome-text">
         <?php
         // Appel de la fonction de comptage du nombre total de médias
-        $nCount = count_all_media();
-        echo '<p>"<strong>Sebflix</strong> est un site internet culturel qui vous propose la découverte de <span>' . $nCount . '</span> œuvres cinématographiques ou télévisuelles."</p>';
+        $nCount = count_all_media($sqlWhereChild);
         ?>
+        <p>"<strong>Sebflix</strong> est un site internet culturel qui <?php if ($set_child) {
+                                                                          echo "te";
+                                                                        } else {
+                                                                          echo "vous";
+                                                                        } ?> propose la découverte de <span><?= $nCount ?></span> œuvres cinématographiques ou télévisuelles<?php if ($set_child) {
+                                                                                                                                                                                                                                echo " pour enfants";
+                                                                                                                                                                                                                              } ?>."</p>
       </div>
 
       <!-- Appel des scripts pour le formulaire de recherche -->

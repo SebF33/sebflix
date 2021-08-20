@@ -1633,12 +1633,12 @@ function select_username_by_id(int $id)
 }
 
 // 10.01 Comptage du nombre total de médias
-function count_all_media()
+function count_all_media(string $sqlChild)
 {
   connexion($dbco);
   try {
-    $nMovies = $dbco->query("SELECT COUNT(*) FROM movie")->fetchColumn();
-    $nTvshows = $dbco->query("SELECT COUNT(*) FROM tvshow")->fetchColumn();
+    $nMovies = $dbco->query("SELECT COUNT(*) FROM movie $sqlChild")->fetchColumn();
+    $nTvshows = $dbco->query("SELECT COUNT(*) FROM tvshow $sqlChild")->fetchColumn();
     $nCount = $nMovies + $nTvshows;
     return $nCount;
   } catch (PDOException $e) {
