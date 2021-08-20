@@ -10,7 +10,7 @@
 /* HEADER */
 /**********/
 /* Liste d'éléments sans ordre */
-@media all and (min-width: 1024px) {
+@media all and (min-width: 1224px) {
   nav ul {
     flex-direction: row;
     justify-content: center;
@@ -19,14 +19,14 @@
 }
 
 /* Éléments de la liste */
-@media all and (max-width: 1400px) {
+@media all and (max-width: 1600px) {
   nav ul a.btn-type-movie {
     font-size: 0.8em;
     padding: 22px 16px;
   }
 }
 
-@media all and (max-width: 1023px) {
+@media all and (max-width: 1223px) {
   nav ul a.btn-type-movie {
     font-size: 1.2em;
   }
@@ -40,7 +40,7 @@
   }
 }
 
-@media all and (min-width: 1024px) {
+@media all and (min-width: 1224px) {
   nav ul li {
     display: block;
   }
@@ -51,7 +51,7 @@
 }
 
 /* Icône Sebflix */
-@media all and (min-width: 1024px) {
+@media all and (min-width: 1224px) {
   .icon {
     display: block;
     margin: initial;
@@ -62,7 +62,7 @@
   }
 }
 
-@media all and (max-width: 1023px) {
+@media all and (max-width: 1223px) {
   .btn-icon svg:hover {
     transform: unset;
   }

@@ -119,13 +119,25 @@ function update_pwd(string $username, string $pwd)
 // Suppression d'un utilisateur
 function delete_user(int $id)
 {
+  $img_folder = dirname(dirname(__DIR__)) . '/src/thumbnails/';
+
   connexion($dbco);
   try {
-    $req = $dbco->prepare("DELETE FROM users
-    WHERE id=:id");
+    $query = $dbco->prepare(
+      "SELECT avatar FROM users WHERE id=:id"
+    );
+    $query->bindValue(':id', $id, PDO::PARAM_INT);
+    $query->execute();
+    $current_avatar = $query->fetch(PDO::FETCH_ASSOC);
 
+    $req = $dbco->prepare("DELETE FROM users WHERE id=:id");
     $req->bindValue(':id', $id, PDO::PARAM_INT);
     $req->execute();
+
+    // Suppression de l'avatar si celui-ci n'est pas par défaut
+    if (!str_starts_with($current_avatar['avatar'], 'users/generic')) {
+      unlink($img_folder . $current_avatar['avatar']);
+    }
   } catch (PDOException $e) {
     echo "Erreur : " . $e->getMessage();
   }

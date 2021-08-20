@@ -6,7 +6,7 @@ $("#icon-trigger").click(function () {
 // Suppression du lien de l'icône en responsive
 var checkSize = function () {
   var minSize = $(window).width();
-  if (minSize <= 1023) {
+  if (minSize <= 1223) {
     $(".btn-icon").removeAttr("href");
   } else {
     $(".btn-icon").attr("href", "/index.php");
