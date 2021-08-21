@@ -6,9 +6,6 @@
 // Initialisation de la session
 session_start();
 
-// Utilisation de l'encodage interne UTF-8
-mb_internal_encoding("UTF-8");
-
 // Vérification si l'administrateur est bien connecté
 if (!isset($_SESSION["loggedadmin"]) || $_SESSION["loggedadmin"] !== TRUE) {
   // Redirection si l'administrateur n'est pas connecté
@@ -16,21 +13,40 @@ if (!isset($_SESSION["loggedadmin"]) || $_SESSION["loggedadmin"] !== TRUE) {
   exit;
 }
 
+// Utilisation de l'encodage interne UTF-8
+mb_internal_encoding("UTF-8");
+
 // Appel du script du formulaire
 require dirname(__DIR__, 2) . '/database/data-form.php';
+
+// Type du formulaire
+if ($action == 'add') {
+  $type = 'Nouvel enregistrement';
+  $h2 = 'Nouveau média';
+  $save = 'Ajouter';
+} elseif ($action == 'copy') {
+  $type = 'Copier enregistrement';
+  $h2 = 'Copie de média';
+  $save = 'Ajouter';
+} elseif ($action == 'edit') {
+  $type = 'Éditer enregistrement';
+  $h2 = 'Édition du média';
+  $save = 'Enregistrer';
+}
+if ($action == 'copy' or $action == 'edit') {
+  $title = $result['title'];
+  $synopsis = $result['synopsis'];
+  $catch = $result['catch'];
+  $premiered = $result['premiered'];
+} else {
+  $premiered = $catch = $synopsis = $title = '';
+}
 ?>
 
 <html>
 
 <head>
-  <title><?php if ($action == 'add') {
-            echo 'Nouvel enregistrement';
-          } elseif ($action == 'copy') {
-            echo 'Copier enregistrement';
-          } elseif ($action == 'edit') {
-            echo 'Éditer enregistrement';
-          } ?>
-  </title>
+  <title><?= $type ?></title>
 
   <link rel="stylesheet" href="/assets/css/lib/bootstrap.min.css">
   <link rel="stylesheet" href="/assets/css/design.css">
@@ -40,7 +56,7 @@ require dirname(__DIR__, 2) . '/database/data-form.php';
 
 <body>
   <?php
-  // Background selon la catégorie définie
+  // Background selon le type du formulaire
   include "../background.php";
   ?>
 
@@ -61,26 +77,20 @@ require dirname(__DIR__, 2) . '/database/data-form.php';
   </header>
 
   <div class="frm-add">
-    <h2 class="demo-form-heading"><?php if ($action == 'add') {
-                                    echo 'Nouveau média';
-                                  } elseif ($action == 'copy') {
-                                    echo 'Copie de média';
-                                  } elseif ($action == 'edit') {
-                                    echo 'Édition du média';
-                                  } ?>
-    </h2>
+    <h2 class="demo-form-heading"><?= $h2 ?></h2>
 
+    <!-- Message d'alerte -->
     <?php if (isset($_GET['msg'])) :
       $error = $_GET['error'];
+      if ($error == 'false') {
+        $alert = 'success';
+      } elseif ($error == 'true') {
+        $alert = 'danger';
+      } else {
+        $alert = 'secondary';
+      }
     ?>
-      <!-- Message d'alerte -->
-      <div class="alert alert-<?php if ($error == 'false') {
-                                echo 'success';
-                              } elseif ($error == 'true') {
-                                echo 'danger';
-                              } else {
-                                echo 'secondary';
-                              } ?>" role="alert">
+      <div class="alert alert-<?= $alert ?>" role="alert">
         <?php echo $_GET['msg']; ?>
       </div>
     <?php endif; ?>
@@ -89,41 +99,30 @@ require dirname(__DIR__, 2) . '/database/data-form.php';
       <div class="text-center">
         <a class="ajax-action-links" href='/src/views/viewpage.php?type=movie&id=<?= $result['idMovie'] ?>' target="_blank" draggable="false" ondragstart="return false"><img src="/assets/img/view.png" title="Voir" height="17" width="30" /></a>
       </div>
+
     <?php } ?>
     <form name="frmAdd" action="" method="POST" enctype="multipart/form-data">
       <div class="demo-form-row text-center">
-        <input name="save_record" type="submit" value="<?php if ($action == 'add' or $action == 'copy') {
-                                                          echo 'Ajouter';
-                                                        } elseif ($action == 'edit') {
-                                                          echo 'Enregistrer';
-                                                        } ?>" class="btn demo-form-submit">
+        <input name="save_record" type="submit" value="<?= $save ?>" class="btn demo-form-submit">
       </div>
       <div class="demo-form-row">
         <label>Titre <span>*</span> : </label><br>
-        <input name="title" type="text" class="demo-form-field" value="<?php if ($action == 'copy' or $action == 'edit') {
-                                                                          echo $result['title'];
-                                                                        } ?>" required />
+        <input name="title" type="text" class="demo-form-field" value="<?= $title ?>" required />
       </div>
       <div class="demo-form-row">
         <label>Synopsis <span>*</span> : </label>
         <br>
-        <textarea name="synopsis" class="demo-form-field" rows="1" required><?php if ($action == 'copy' or $action == 'edit') {
-                                                                              echo $result['synopsis'];
-                                                                            } ?></textarea>
+        <textarea name="synopsis" class="demo-form-field" rows="1" required><?= $synopsis ?></textarea>
       </div>
       <div class="demo-form-row">
         <label>Phrase d'accroche : </label>
         <br>
-        <input name="catch" type="text" class="demo-form-field" value="<?php if ($action == 'copy' or $action == 'edit') {
-                                                                          echo $result['catch'];
-                                                                        } ?>" />
+        <input name="catch" type="text" class="demo-form-field" value="<?= $catch ?>" />
       </div>
       <div class="demo-form-row">
         <label>Date de sortie <span>*</span> : </label>
         <br>
-        <input name="premiered" type="date" class="demo-form-field" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" value="<?php if ($action == 'copy' or $action == 'edit') {
-                                                                                                                            echo $result['premiered'];
-                                                                                                                          } ?>" required />
+        <input name="premiered" type="date" class="demo-form-field" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" value="<?= $premiered ?>" required />
       </div>
       <div class="demo-form-row">
         <label for="poster">Poster : </label>

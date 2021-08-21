@@ -209,7 +209,7 @@ if (isset($_POST['type']) && $_POST['type'] == '0') {
     <?php
     }
     ?>
-    <?php var_dump($result); ?>
+
     <!-- Flèche retour au début -->
     <button class="scrollToTopBtn">☝️</button>
     <script src="/assets/js/to-top.js"></script>
