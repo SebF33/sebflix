@@ -68,6 +68,7 @@ if (isset($_GET['category']) && !empty($_GET['category']) && in_array($_GET['cat
   <!-- Appel des feuilles de styles -->
   <link rel="stylesheet" href="/css/design.css" type="text/css" media="screen">
   <link rel="stylesheet" href="/css/style.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="/css/footer.css" type="text/css" media="screen">
   <link rel="stylesheet" href="/css/alphabet.css" type="text/css" media="screen">
   <link rel="stylesheet" href="/css/menu.css" type="text/css" media="screen">
   <link rel="stylesheet" href="/css/responsive.css" type="text/css" media="screen">

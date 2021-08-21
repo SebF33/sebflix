@@ -47,9 +47,9 @@ if (!empty($_POST["save_record"])) {
   // Champs requis
   $fields_required = array($_POST['title'], $_POST['synopsis'], $_POST['premiered']);
 
-  // Définition du dossier qui contiendra l'image
+  // Définition du dossier qui contiendra les images
   $img_folder = dirname(dirname(__DIR__)) . '/src/thumbnails/g/';
-  // Définition de l'image par défaut
+  // Définition du poster par défaut
   $default_poster_name = 'placeholders/generic_poster.jpg';
 
   // Vérification que les champs d'entrée ne sont pas vides
@@ -67,14 +67,14 @@ if (!empty($_POST["save_record"])) {
     $premiered = valid_data($_POST['premiered']);
     $set_request = TRUE;
 
-    // Traitement de l'image
+    // Traitement du poster
     if (($action == 'add' or $action == 'copy') && empty($_FILES["poster"]["name"])) {
       $poster_name = $default_poster_name;
     } elseif (isset($_FILES["poster"]) && !empty($_FILES["poster"]["name"])) {
-      // Appel de la fonction de téléversement d'image
+      // Appel de la fonction de téléversement d'image pour le poster
       $upload_img = upload_img($_FILES["poster"], $default_poster_name, $img_folder);
-      $set_poster = $upload_img[0]; // Autorisation de création de l'image
-      $poster_name = 'g/' . $upload_img[1]; // Nom du chemin de l'image pour la base de données
+      $set_poster = $upload_img[0]; // Autorisation de création du poster
+      $poster_name = 'g/' . $upload_img[1]; // Nom du chemin du poster pour la base de données
       $msg = $upload_img[2]; // Message d'erreur de l'upload
     }
   endif;

@@ -1,0 +1,59 @@
+/************/
+/* À propos */
+/************/
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100vh;
+}
+
+.wrapper-about {
+  margin: 40px;
+  background-color: var(--color-light);
+  background-image: url(/assets/img/lines.png), url(/assets/img/paper.png);
+  background-repeat: repeat-y, repeat;
+  border-radius: 12px;
+  box-shadow: 0px 2px 14px #000;
+  border-top: 1px solid var(--color-light);
+  border-bottom: 1px solid var(--color-light);
+}
+
+p {
+  padding: 8px;
+  color: var(--color-dark);
+  font-family: var(--font-text);
+  font-size: 1em;
+  font-weight: 600;
+}
+
+.italic {
+  font-style: italic;
+  text-align: right;
+}
+
+p a {
+  text-decoration: underline;
+  font-size: 1em;
+  font-weight: 700;
+  text-align: center;
+}
+
+lottie-player {
+  position: fixed;
+  left: 35%;
+  bottom: -55px;
+  z-index: -1;
+}

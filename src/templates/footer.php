@@ -17,7 +17,7 @@
         <a href="/index.php" class="copyright">© Sebflix &mdash; Tous droits réservés.</a>
       </div>
       <div class="dev">
-        <a href="/src/templates/about.php">À propos</a>
+        <a href="/src/views/about.php">À propos</a>
         <a href="https://developer.mozilla.org/fr/docs/Web/Guide/HTML/HTML5" class="iconFooter iconDev" target="_blank"><img src="/img/HTML.png" alt="HTML" width="35" height="35" /></a>
         <a href="https://developer.mozilla.org/fr/docs/Web/CSS" class="iconFooter iconDev" target="_blank"><img src="/img/CSS.png" alt="CSS" width="31" height="35" /></a>
         <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript" class="iconFooter iconDev" target="_blank"><img src="/img/JavaScript.png" alt="JavaScript" width="35" height="35" /></a>
