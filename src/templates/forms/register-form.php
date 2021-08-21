@@ -207,7 +207,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="submit" class="btn btn-primary" value="Envoyer">
         <input type="reset" class="btn btn-secondary ml-2" value="Réinitialiser">
       </div>
-      <p>Vous avez déjà un compte ? <a href="login-form.php">Se connecter</a></p>
+      <p>Vous avez déjà un compte ? <a class="invite" href="login-form.php">Se connecter</a></p>
     </form>
   </div>
 </body>

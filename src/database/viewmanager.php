@@ -89,8 +89,15 @@
 
 //  10. Comptages
 //   10.01 Comptage du nombre total de médias
-//   10.02 Comptage des médias de la watchlist
-//   10.03 Comptage du nombre total de fichiers image sur le serveur
+//   10.02 Comptage du nombre total de films
+//   10.03 Comptage du nombre total de séries
+//   10.04 Comptage du nombre total d'animes
+//   10.05 Comptage du nombre total de dessins animés
+//   10.06 Comptage du nombre total de spectacles
+//   10.07 Comptage du nombre total d'actrices/acteurs/doubleurs
+//   10.08 Comptage du nombre total d'utilisateurs
+//   10.09 Comptage des médias de la watchlist
+//   10.10 Comptage du nombre total de fichiers image sur le serveur
 
 // Appel du script d'administration des données
 require __DIR__ . '/datamanager.php';
@@ -1700,7 +1707,126 @@ function count_all_media(string $sqlChild)
   }
 }
 
-// 10.02 Comptage des médias de la watchlist
+// 10.02 Comptage du nombre total de films
+function count_all_movie()
+{
+  connexion($dbco);
+  try {
+    $query = $dbco->prepare(
+      "SELECT COUNT(*) FROM movie WHERE genre NOT LIKE '%Animation%' AND genre NOT LIKE '%Anime%' AND genre NOT LIKE '%Spectacle%'"
+    );
+    $query->execute();
+    $count = $query->fetchColumn();
+    $total_rows = (int) $count;
+    return $total_rows;
+  } catch (PDOException $e) {
+    echo "Erreur : " . $e->getMessage();
+  }
+}
+
+// 10.03 Comptage du nombre total de séries
+function count_all_tvshow()
+{
+  connexion($dbco);
+  try {
+    $query = $dbco->prepare(
+      "SELECT COUNT(*) FROM tvshow WHERE genre NOT LIKE '%Anime%'"
+    );
+    $query->execute();
+    $count = $query->fetchColumn();
+    $total_rows = (int) $count;
+    return $total_rows;
+  } catch (PDOException $e) {
+    echo "Erreur : " . $e->getMessage();
+  }
+}
+
+// 10.04 Comptage du nombre total d'animes
+function count_all_anime()
+{
+  connexion($dbco);
+  try {
+    $query = $dbco->prepare(
+      "SELECT COUNT(*) FROM tvshow WHERE genre LIKE '%Anime%'"
+    );
+    $query->execute();
+    $count = $query->fetchColumn();
+    $total_rows = (int) $count;
+    return $total_rows;
+  } catch (PDOException $e) {
+    echo "Erreur : " . $e->getMessage();
+  }
+}
+
+// 10.05 Comptage du nombre total de dessins animés
+function count_all_animation()
+{
+  connexion($dbco);
+  try {
+    $query = $dbco->prepare(
+      "SELECT COUNT(*) FROM movie WHERE genre LIKE '%Animation%'"
+    );
+    $query->execute();
+    $count = $query->fetchColumn();
+    $total_rows = (int) $count;
+    return $total_rows;
+  } catch (PDOException $e) {
+    echo "Erreur : " . $e->getMessage();
+  }
+}
+
+// 10.06 Comptage du nombre total de spectacles
+function count_all_spectacle()
+{
+  connexion($dbco);
+  try {
+    $query = $dbco->prepare(
+      "SELECT COUNT(*) FROM movie WHERE genre LIKE '%Spectacle%'"
+    );
+    $query->execute();
+    $count = $query->fetchColumn();
+    $total_rows = (int) $count;
+    return $total_rows;
+  } catch (PDOException $e) {
+    echo "Erreur : " . $e->getMessage();
+  }
+}
+
+// 10.07 Comptage du nombre total d'actrices/acteurs/doubleurs
+function count_all_actor()
+{
+  connexion($dbco);
+  try {
+    $query = $dbco->prepare(
+      "SELECT COUNT(*) FROM actor"
+    );
+    $query->execute();
+    $count = $query->fetchColumn();
+    $total_rows = (int) $count;
+    return $total_rows;
+  } catch (PDOException $e) {
+    echo "Erreur : " . $e->getMessage();
+  }
+}
+
+// 10.08 Comptage du nombre total d'utilisateurs
+function count_all_user()
+{
+  connexion($dbco);
+  try {
+    $query = $dbco->prepare(
+      "SELECT COUNT(*) FROM users"
+    );
+    $query->execute();
+    $count = $query->fetchColumn();
+    $total_rows = (int) $count;
+    return $total_rows;
+  } catch (PDOException $e) {
+    echo "Erreur : " . $e->getMessage();
+  }
+}
+
+// 10.09 Comptage des médias de la watchlist
 function count_my_watchlist(int $user)
 {
   connexion($dbco);
@@ -1718,7 +1844,7 @@ function count_my_watchlist(int $user)
   }
 }
 
-// 10.03 Comptage du nombre total de fichiers image sur le serveur
+// 10.10 Comptage du nombre total de fichiers image sur le serveur
 function count_all_image()
 {
   $img_folder = dirname(__DIR__) . '/thumbnails/*/';
