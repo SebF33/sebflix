@@ -4,133 +4,135 @@
 
 /* Menu circulaire à gauche */
 .circular-menu {
-    position: fixed;
-    bottom: 50%;
-    right: auto;
-    left: 1em;
-    z-index: 9999;
-    border-radius: 50%;
-    border: 2px solid var(--color-light);
-    box-shadow: 0 4px 8px 0 hsla(0, 0%, 0%, .8);
+  position: fixed;
+  bottom: 50%;
+  right: auto;
+  left: 1em;
+  z-index: 9999;
+  border-radius: 50%;
+  border: 2px solid var(--color-light);
+  box-shadow: 0 4px 8px 0 hsla(0, 0%, 0%, .8);
 }
+
 .circular-menu:after {
-    display: block;
-    content: ' ';
-    width: 3.5em;
-    height: 3.5em;
-    border-radius: 50%;
-    position: absolute;
-    top: 0;
-    right: 0;
-    z-index: -2;
-    transition: all .3s ease;
-    border: 0.2px solid var(--color-light);
-    box-shadow: 0 4px 8px 0 hsla(0, 0%, 0%, .8);
+  display: block;
+  content: ' ';
+  width: 3.5em;
+  height: 3.5em;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: -2;
+  transition: all .3s ease;
+  border: 0.2px solid var(--color-light);
+  box-shadow: 0 4px 8px 0 hsla(0, 0%, 0%, .8);
 }
+
 .circular-menu.active:after {
-    transform: scale3d(5.5, 5.5, 1);
-    transition-timing-function: cubic-bezier(.68, 1.55, .265, 1);
-    border: 0.2px solid var(--color-light);
+  transform: scale3d(5.5, 5.5, 1);
+  transition-timing-function: cubic-bezier(.68, 1.55, .265, 1);
+  border: 0.2px solid var(--color-light);
 }
 
 /* Bouton flottant */
 .circular-menu .floating-btn {
-    display: block;
-    width: 3.5em;
-    height: 3.5em;
-    border-radius: 50%;
-    color: var(--color-light);
-    text-align: center;
-    line-height: 3.9;
-    cursor: pointer;
+  display: block;
+  width: 3.5em;
+  height: 3.5em;
+  border-radius: 50%;
+  color: var(--color-light);
+  text-align: center;
+  line-height: 3.9;
+  cursor: pointer;
 }
 
 .circular-menu .floating-btn i {
-    font-size: 1.3em;
-    transition: transform .2s;
+  font-size: 1.3em;
+  transition: transform .2s;
 }
 
 .circular-menu.active .floating-btn i {
-    transform: rotate(-45deg);
+  transform: rotate(-45deg);
 }
 
 .circular-menu .items-wrapper {
-    padding: 0;
-    margin: 0;
+  padding: 0;
+  margin: 0;
 }
 
 /* Boutons dans le menu */
 .circular-menu .menu-item {
-    display: flex;
-    justify-content: center;
-    position: absolute;
-    top: .2em;
-    right: .2em;
-    z-index: -1;
-    text-decoration: none;
-    color: var(--color-light);
-    width: 3em;
-    height: 3em;
-    border-radius: 50%;
-    line-height: 3;
-    background-color: hsla(0, 0%, 0%, .1);
-    transition: transform .3s ease, background .2s ease;
-    cursor: pointer;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  top: .2em;
+  right: .2em;
+  z-index: -1;
+  text-decoration: none;
+  color: var(--color-light);
+  width: 3em;
+  height: 3em;
+  border-radius: 50%;
+  line-height: 3;
+  background-color: hsla(0, 0%, 0%, .1);
+  transition: transform .3s ease, background .2s ease;
+  cursor: pointer;
 }
 
 .circular-menu .menu-item svg {
-    align-self: center;
-    height: 2rem;
-    width: 2rem;
-    fill: var(--color-light);
-    transition: all .2s ease-in-out;
+  align-self: center;
+  height: 2rem;
+  width: 2rem;
+  fill: var(--color-light);
+  transition: all .2s ease-in-out;
 }
 
 .circular-menu .menu-item:hover {
-    background-color: hsla(0, 0%, 0%, .3);
+  background-color: hsla(0, 0%, 0%, .3);
 }
 
 .circular-menu .menu-item:hover svg {
-    fill: var(--color-main);
+  fill: var(--color-main);
 }
 
 .circular-menu.active .menu-item {
-    transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .circular-menu .floating-btn {
-    background-color: var(--color-dark);
+  background-color: var(--color-dark);
 }
 
 .circular-menu:after {
-    background-color: var(--color-dark);
+  background-color: var(--color-dark);
 }
 
 .circular-menu.active .floating-btn i {
-    transform: rotate(90deg);
+  transform: rotate(90deg);
 }
 
 /* Position des boutons dans le menu */
 .circular-menu.active .menu-item:nth-child(1) {
-    transform: translate3d(0em, -7em, 0);
+  transform: translate3d(0em, -7em, 0);
 }
 
 .circular-menu.active .menu-item:nth-child(2) {
-    transform: translate3d(4em, -5.6em, 0);
+  transform: translate3d(4em, -5.6em, 0);
 }
 
 .circular-menu.active .menu-item:nth-child(3) {
-    transform: translate3d(6.7em, -2.1em, 0);
+  transform: translate3d(6.7em, -2.1em, 0);
 }
 
 .circular-menu.active .menu-item:nth-child(4) {
-    transform: translate3d(6.7em, 2.1em, 0);
+  transform: translate3d(6.7em, 2.1em, 0);
 }
 
 .circular-menu.active .menu-item:nth-child(5) {
-    transform: translate3d(4.2em, 5.8em, 0);
+  transform: translate3d(4.2em, 5.8em, 0);
 }
 
 .circular-menu.active .menu-item:nth-child(6) {
-    transform: translate3d(0em, 7.3em, 0);
+  transform: translate3d(0em, 7.3em, 0);
 }

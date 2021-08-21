@@ -24,6 +24,7 @@ header {
   left: 0;
   width: 100%;
   background: var(--color-dark);
+  background-image: url(/assets/img/header.png);
   z-index: 99999;
   border-bottom: 6px solid var(--color-darker);
   box-shadow: 0px 0px 30px #000;

@@ -1,3 +1,18 @@
+<!------------------->
+<!-- Page à propos -->
+<!------------------->
+
+<?php
+// Initialisation de la session
+session_start();
+if (isset($_SESSION["logged"]) && $_SESSION["logged"] == TRUE) {
+  $user = $_SESSION["id"];
+}
+
+// Appel du script d'affichage des données
+require dirname(__DIR__) . '/database/viewmanager.php';
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -26,16 +41,30 @@
 
 <body>
   <header>
-    <h1>À propos de <strong>Sebflix</strong></h1>
+    <h1>À propos de <strong>Sebflix...</strong></h1>
+    <script>
+      var $h1 = $('h1');
+      $(window).scroll(function() {
+        if ($(this).scrollTop() > 0) {
+          $h1.fadeOut(200);
+        } else {
+          $h1.fadeIn(200);
+        }
+      });
+    </script>
   </header>
 
   <main>
-    <div class="wrapper-about">
-      <p>Le site propose actuellement :</p>
-      <p>X fiches de films ;</p>
-      <p>X fiches de séries ;</p>
-      <p class="italic">« J’ai pris un plaisir infini à développer ce site en partant de rien, j’ai hâte de vous partager mes autres passions à travers de futurs projets. »</p>
-      <p class="italic">&mdash; Sébastien</p>
+    <div class="about-container">
+      <div class="wrapper-about">
+        <p><a href="/src/templates/forms/register-form.php">Inscrivez-vous</a> gratuitement sur <a href="/index.php">Sebflix</a> et installez-vous bien confortablement dans votre fauteuil, devant votre écran, accompagné d’un peu de pop-corn...</p>
+        <p>Recherchez vos œuvres et acteurs préférés parmi des milliers de fiches disponibles, puis regardez les bandes-annonces comme si vous étiez au cinéma…</p>
+        <p>X fiches de films, X fiches de séries.</p>
+        <p>Enfin, et surtout, faites votre propre <a href="/src/views/watchlist.php?user=<?= $user ?>">liste de favoris</a> ❤</p>
+        <br>
+        <p class="italic">« J’ai pris un plaisir infini à développer ce site, maintenant j’ai hâte de vous partager mes autres passions à travers de futurs projets. »</p>
+        <p class="italic sign">&mdash; Sébastien</p>
+      </div>
     </div>
 
     <script src="/assets/js/lib/lottie-player.js"></script>

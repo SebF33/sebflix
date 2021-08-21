@@ -9,7 +9,7 @@ session_start();
 // Vérification si l'utilisateur est bien connecté
 if (!isset($_SESSION["logged"]) || $_SESSION["logged"] !== TRUE) {
   // Redirection si l'utilisateur n'est pas connecté
-  header("location:/index.php");
+  header("location:/src/templates/forms/login-form.php");
   exit;
 }
 
