@@ -57,6 +57,7 @@ require dirname(__DIR__) . '/database/viewmanager.php';
   <main>
     <div class="about-container">
       <div class="wrapper-about">
+        <img src="/assets/img/favicon-192.png" alt="Icon" draggable="false" ondragstart="return false">
         <p><a href="/src/templates/forms/register-form.php">Inscrivez-vous</a> gratuitement sur <a href="/index.php">Sebflix</a> et installez-vous bien confortablement dans votre fauteuil, devant votre écran, accompagné d’un peu de pop-corn...</p>
         <p>Recherchez vos œuvres et acteurs préférés parmi des milliers de fiches disponibles, puis regardez les bandes-annonces comme si vous étiez au cinéma…</p>
         <p>X fiches de films, X fiches de séries.</p>
