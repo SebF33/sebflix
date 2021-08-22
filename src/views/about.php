@@ -65,8 +65,8 @@ $nbActor = count_all_actor();
     <div class="about-container">
       <div class="wrapper-about">
         <img src="/assets/img/favicon-192.png" alt="Icon" draggable="false" ondragstart="return false">
-        <p><a href="/src/templates/forms/register-form.php">Inscrivez-vous</a> gratuitement sur <a href="/index.php">Sebflix</a> et installez-vous bien confortablement dans votre fauteuil, devant votre écran, accompagné d’un peu de pop-corn...</p>
-        <p>Recherchez vos médias préférés, puis regardez les bandes-annonces comme si vous étiez au cinéma… parmi <?= $nbMovie ?> fiches de film, <?= $nbAnimation ?> de dessin animé, <?= $nbTvshow ?> de série, <?= $nbAnime ?> d'anime, <?= $nbSpectacle ?> de spectacle, joués par <?= $nbActor ?> actrices/acteurs/doubleurs.</p>
+        <p><a href="/src/templates/forms/register-form.php">Inscrivez-vous</a> gratuitement sur <a href="/index.php">www.sebflix.fr</a> et installez-vous bien confortablement dans votre fauteuil, devant votre écran, accompagné d’un peu de pop-corn...</p>
+        <p>Recherchez vos médias préférés, puis regardez les bandes-annonces comme si vous étiez au cinéma… parmi <?= $nbMovie ?> fiches de film, <?= $nbAnimation ?> de dessin animé, <?= $nbTvshow ?> de série, <?= $nbAnime ?> d'anime, <?= $nbSpectacle ?> de spectacle, joués par <?= $nbActor ?> actrices/acteurs/doubleurs. Créez un compte à vos jeunes enfants afin qu’ils accèdent à un contenu adapté.</p>
         <p>Enfin, et surtout, faites votre propre <a href="/src/views/watchlist.php?user=<?= $user ?>">liste de favoris</a> ❤ Vous êtes déjà <?= $nbUser ?> membres !</p>
         <br>
         <p class="italic">« J’ai pris un plaisir infini à développer ce site, maintenant j’ai hâte de vous partager mes autres passions au travers de futurs projets. »</p>
