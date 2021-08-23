@@ -12,7 +12,7 @@ function connexion(&$dbco)
 
   // Tentative de connexion
   try {
-    $dbco = new PDO("mysql:host=$host;dbname=182x2_myvideos;charset=utf8", $user, $pwd);
+    $dbco = new PDO("mysql:host=$host;dbname=182x2_myvideos;charset=utf8mb4", $user, $pwd);
     // Mode d'erreur de PDO sur 'Exception'
     $dbco->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   }

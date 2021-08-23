@@ -3,7 +3,7 @@
 // VALIDATION DES DONNÉES //
 ////////////////////////////
 
-// Nettoyage v.1
+// Nettoyage v.0 (à virer)
 function valid_get($data)
 {
   $data = trim($data);
@@ -11,12 +11,10 @@ function valid_get($data)
   return $data;
 }
 
-// Nettoyage v.2
-// Convertit tous les caractères éligibles en entités HTML
-// Convertit les guillemets doubles et les guillemets simples
+// Nettoyage
 function valid_data($data)
 {
-  return htmlentities(trim($data), ENT_QUOTES);
+  return htmlspecialchars(trim($data), ENT_QUOTES, 'UTF-8');
 }
 
 // Décoder et ré-encoder pour éviter le surencodage

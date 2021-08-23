@@ -70,10 +70,11 @@ function add_movie(array $datas)
 {
   connexion($dbco);
   try {
-    $req = $dbco->prepare("INSERT INTO movie(title, synopsis, catch, premiered)
-		VALUES(:title, :synopsis, :catch, :premiered)");
+    $req = $dbco->prepare("INSERT INTO movie(title, synopsis, genre, catch, premiered)
+		VALUES(:title, :synopsis, :genre, :catch, :premiered)");
     $req->bindValue(':title', $datas['title'], PDO::PARAM_STR);
     $req->bindValue(':synopsis', $datas['synopsis'], PDO::PARAM_STR);
+    $req->bindValue(':genre', $datas['genre'], PDO::PARAM_STR);
     $req->bindValue(':catch', $datas['catch'], PDO::PARAM_STR);
     $req->bindValue(':premiered', $datas['premiered'], PDO::PARAM_STR);
     $req->execute();
@@ -119,12 +120,13 @@ function update_movie(array $datas, int $id, bool $set_poster, string $default_p
 
     // Mise à jour de la base de données
     $req = $dbco->prepare("UPDATE movie
-    SET title=:title, synopsis=:synopsis, catch=:catch, premiered=:premiered
+    SET title=:title, synopsis=:synopsis, genre=:genre, catch=:catch, premiered=:premiered
     WHERE idMovie=:id
     $sql_poster_file
     $sql_background_file");
     $req->bindValue(':title', $datas['title'], PDO::PARAM_STR);
     $req->bindValue(':synopsis', $datas['synopsis'], PDO::PARAM_STR);
+    $req->bindValue(':genre', $datas['genre'], PDO::PARAM_STR);
     $req->bindValue(':catch', $datas['catch'], PDO::PARAM_STR);
     $req->bindValue(':premiered', $datas['premiered'], PDO::PARAM_STR);
     if ($set_poster) {

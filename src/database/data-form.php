@@ -47,7 +47,7 @@ if (!empty($_POST["save_record"])) {
   // Définition des autorisations par défaut
   $set_request = $set_poster = $set_background = FALSE;
   // Champs requis
-  $fields_required = array($_POST['title'], $_POST['synopsis'], $_POST['premiered']);
+  $fields_required = array($_POST['title'], $_POST['synopsis'], $_POST['genre'], $_POST['premiered']);
   // Définition du dossier qui contiendra les images
   $img_folder = dirname(dirname(__DIR__)) . '/src/thumbnails/g/';
   // Définition de l'affiche par défaut
@@ -62,6 +62,7 @@ if (!empty($_POST["save_record"])) {
     // Déclaration et nettoyage des variables d'entrée
     $title = valid_data(mb_ucfirst($_POST['title']));
     $synopsis = valid_data($_POST['synopsis']);
+    $genre = valid_data($_POST['genre']);
     if (empty($_POST['catch'])) {
       $catch = "À découvrir...";
     } else {
@@ -109,6 +110,7 @@ if (!empty($_POST["save_record"])) {
     $datas = array(
       'title' => $title,
       'synopsis' => $synopsis,
+      'genre' => $genre,
       'catch' => $catch,
       'premiered' => $premiered,
       'poster' => $poster_name,

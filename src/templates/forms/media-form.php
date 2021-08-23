@@ -13,11 +13,10 @@ if (!isset($_SESSION["loggedadmin"]) || $_SESSION["loggedadmin"] !== TRUE) {
   exit;
 }
 
-// Utilisation de l'encodage interne UTF-8
-mb_internal_encoding("UTF-8");
-
 // Appel du script du formulaire
 require dirname(__DIR__, 2) . '/database/data-form.php';
+// Appel du tableau des genres
+require dirname(__DIR__, 2) . '/database/genres.php';
 
 // Type du formulaire
 if ($action == 'add') {
@@ -36,6 +35,7 @@ if ($action == 'add') {
 if ($action == 'copy' or $action == 'edit') {
   $title = $result['title'];
   $synopsis = $result['synopsis'];
+  $genre = $result['genre'];
   $catch = $result['catch'];
   $premiered = $result['premiered'];
   $poster = $result['cachedurl'];
@@ -117,6 +117,22 @@ if ($action == 'copy' or $action == 'edit') {
         <textarea name="synopsis" class="demo-form-field" rows="1" required><?= $synopsis ?></textarea>
       </div>
       <div class="demo-form-row">
+        <label>Genre(s) <span>*</span> : </label><br>
+        <select name="genre" class="dropdown">
+          <?php
+          for ($i = 0; $i < count($genres); $i++) {
+            if ($genres[$i] == $genre) {
+              $selected = ' selected';
+            } else {
+              $selected = '';
+            }
+          ?> <option value="<?php echo $genres[$i]; ?>" <?php echo $selected; ?>><?php echo $genres[$i]; ?></option>
+          <?php
+          }
+          ?>
+        </select>
+      </div>
+      <div class="demo-form-row">
         <label>Phrase d'accroche : </label>
         <br>
         <input name="catch" type="text" class="demo-form-field" value="<?= $catch ?>" />
@@ -133,7 +149,7 @@ if ($action == 'copy' or $action == 'edit') {
       </div>
       <?php if ($action == 'edit') {
         // Affiche
-        echo '<div class="demo-form-row text-center"><img src="/src/thumbnails/' . $poster . '" title="' . $poster . '" alt="' . $poster . '" onclick="window.open(this.src)" draggable="false" ondragstart="return false")/></div>';
+        echo '<div class="demo-form-row text-center"><img class="form-poster" src="/src/thumbnails/' . $poster . '" title="' . $poster . '" alt="' . $poster . '" onclick="window.open(this.src)" draggable="false" ondragstart="return false")/></div>';
       } ?>
       <div class="demo-form-row">
         <label for="background">Fond : </label>
@@ -142,7 +158,7 @@ if ($action == 'copy' or $action == 'edit') {
       </div>
       <?php if ($action == 'edit') {
         // Fond
-        echo '<div class="demo-form-row text-center"><img src="/src/thumbnails/' . $background . '" title="' . $background . '" alt="' . $background . '" onclick="window.open(this.src)" draggable="false" ondragstart="return false")/></div>';
+        echo '<div class="demo-form-row text-center"><img class="form-background" src="/src/thumbnails/' . $background . '" title="' . $background . '" alt="' . $background . '" onclick="window.open(this.src)" draggable="false" ondragstart="return false")/></div>';
       } ?>
     </form>
   </div>
