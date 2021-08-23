@@ -15,8 +15,8 @@ if (!isset($_SESSION["loggedadmin"]) || $_SESSION["loggedadmin"] !== TRUE) {
 
 // Appel du script du formulaire
 require dirname(__DIR__, 2) . '/database/data-form.php';
-// Appel du tableau des genres
-require dirname(__DIR__, 2) . '/database/genres.php';
+// Appel des listes des options
+require dirname(__DIR__, 2) . '/database/options.php';
 
 // Type du formulaire
 if ($action == 'add') {
@@ -32,14 +32,23 @@ if ($action == 'add') {
   $h2 = 'Édition du média';
   $save = 'Enregistrer';
 }
+// Traitement de l'affichage des données
 if ($action == 'copy' or $action == 'edit') {
   $title = $result['title'];
   $synopsis = $result['synopsis'];
   $genre = $result['genre'];
+  if (!isset($rating['rating'])) {
+    $rating = '';
+  } else {
+    $rating = $rating['rating'];
+  }
+  $age = $result['classification'];
   $catch = $result['catch'];
   $premiered = $result['premiered'];
   $poster = $result['cachedurl'];
-  $background = $bg['cachedurl'];
+  if (isset($bg['cachedurl'])) {
+    $background = $bg['cachedurl'];
+  }
 } else {
   $premiered = $catch = $synopsis = $title = '';
 }
@@ -104,44 +113,73 @@ if ($action == 'copy' or $action == 'edit') {
 
     <?php } ?>
     <form name="frmAdd" action="" method="POST" enctype="multipart/form-data">
+
       <div class="demo-form-row text-center">
         <input name="save_record" type="submit" value="<?= $save ?>" class="btn demo-form-submit">
       </div>
+
       <div class="demo-form-row">
         <label>Titre <span>*</span> : </label><br>
         <input name="title" type="text" class="demo-form-field" value="<?= $title ?>" required />
       </div>
+
       <div class="demo-form-row">
         <label>Synopsis <span>*</span> : </label>
         <br>
         <textarea name="synopsis" class="demo-form-field" rows="1" required><?= $synopsis ?></textarea>
       </div>
+
       <div class="demo-form-row">
         <label>Genre(s) <span>*</span> : </label><br>
-        <select name="genre" class="dropdown">
+        <select name="genre" class="genre">
           <?php
           for ($i = 0; $i < count($genres); $i++) {
             if ($genres[$i] == $genre) {
-              $selected = ' selected';
+              $genreSelected = ' selected';
             } else {
-              $selected = '';
+              $genreSelected = '';
             }
-          ?> <option value="<?php echo $genres[$i]; ?>" <?php echo $selected; ?>><?php echo $genres[$i]; ?></option>
+          ?> <option value="<?php echo $genres[$i]; ?>" <?php echo $genreSelected; ?>><?php echo $genres[$i]; ?></option>
           <?php
           }
           ?>
         </select>
       </div>
+
+      <div class="demo-form-row">
+        <label>Note sur 10 : </label>
+        <input name="rating" class="number" type="number" step="0.1" min="0" max="10" class="demo-form-field" value="<?= $rating ?>" />
+      </div>
+
+      <div class="demo-form-row">
+        <label>Âge : </label>
+        <select name="age" class="age">
+          <?php
+          for ($i = 0; $i < count($ages); $i++) {
+            if ($ages[$i] == $age) {
+              $ageSelected = ' selected';
+            } else {
+              $ageSelected = '';
+            }
+          ?> <option value="<?php echo $ages[$i]; ?>" <?php echo $ageSelected; ?>><?php echo $ages[$i]; ?></option>
+          <?php
+          }
+          ?>
+        </select>
+      </div>
+
       <div class="demo-form-row">
         <label>Phrase d'accroche : </label>
         <br>
         <input name="catch" type="text" class="demo-form-field" value="<?= $catch ?>" />
       </div>
+
       <div class="demo-form-row">
         <label>Date de sortie <span>*</span> : </label>
         <br>
         <input name="premiered" type="date" class="demo-form-field" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" value="<?= $premiered ?>" required />
       </div>
+
       <div class="demo-form-row">
         <label for="poster">Poster : </label>
         <input type="hidden" name="MAX_FILE_SIZE" value="1048576"> <!-- Poids maxi : 1Mo => 1024*1024 -->
@@ -151,15 +189,17 @@ if ($action == 'copy' or $action == 'edit') {
         // Affiche
         echo '<div class="demo-form-row text-center"><img class="form-poster" src="/src/thumbnails/' . $poster . '" title="' . $poster . '" alt="' . $poster . '" onclick="window.open(this.src)" draggable="false" ondragstart="return false")/></div>';
       } ?>
+
       <div class="demo-form-row">
         <label for="background">Fond : </label>
         <input type="hidden" name="MAX_FILE_SIZE" value="1048576"> <!-- Poids maxi : 1Mo => 1024*1024 -->
         <input id="picture-file" type="file" name="background">
       </div>
-      <?php if ($action == 'edit') {
+      <?php if ($action == 'edit' && isset($background)) {
         // Fond
         echo '<div class="demo-form-row text-center"><img class="form-background" src="/src/thumbnails/' . $background . '" title="' . $background . '" alt="' . $background . '" onclick="window.open(this.src)" draggable="false" ondragstart="return false")/></div>';
       } ?>
+
     </form>
   </div>
 

@@ -450,8 +450,23 @@ h3 a {
   font-weight: 900;
 }
 
-.demo-form-row .dropdown {
+.demo-form-row .genre {
   width: 300px;
+  font-family: var(--font-text);
+  font-size: 0.9em;
+}
+
+.demo-form-row .number {
+  width: 50px;
+  font-family: var(--font-text);
+  font-size: 0.9em;
+  text-align: center;
+}
+
+.demo-form-row .age {
+  width: 60px;
+  font-family: var(--font-text);
+  font-size: 0.9em;
 }
 
 .demo-form-row img {

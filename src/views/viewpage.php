@@ -101,10 +101,9 @@ if (isset($_SESSION["logged"]) && $_SESSION["genre"] == 2 && $result->profile !=
   <link data-vue-tag="ssr" rel="icon" type="image/png" sizes="192x192" href="/img/favicon-192.png">
 
   <!-- Appel de jQuery -->
-  <script src="/js/jquery-3.6.0.min.js"></script>
-
+  <script src="/assets/js/lib/jquery-3.6.0.min.js"></script>
   <!-- Appel de GSAP -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js"></script>
+  <script src="/assets/js/lib/gsap.min.js"></script>
 
   <!-- Appel des icônes sur Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
@@ -140,7 +139,7 @@ if (isset($_SESSION["logged"]) && $_SESSION["genre"] == 2 && $result->profile !=
       "<table class='table-rating'>
           <tr>
           <th>Note</th>
-          <th>CSA</th>
+          <th>Âge</th>
           <th>Pays</th>
           <th>Année</th>
           <th>Fav</th>

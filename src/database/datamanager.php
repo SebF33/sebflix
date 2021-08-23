@@ -5,7 +5,8 @@
 
 //  01. Sélections
 //    1.01 Sélection d'un média type film
-//    1.02 Sélection du fond d'un média type film
+//    1.02 Sélection de la note d'un média type film
+//    1.03 Sélection du fond d'un média type film
 
 //  02. Ajouts
 //    2.01 Ajout d'un média type film
@@ -49,7 +50,23 @@ function select_movie(int $id)
   }
 }
 
-// 1.02 Sélection du fond d'un média type film
+// 1.02 Sélection de la note d'un média type film
+function select_movie_rating(int $id)
+{
+  connexion($dbco);
+  try {
+    $query = $dbco->prepare("SELECT rating FROM rating WHERE media_id = :id AND media_type = 'movie'");
+
+    $query->bindValue(':id', $id, PDO::PARAM_INT);
+    $query->execute();
+    $result = $query->fetch(PDO::FETCH_ASSOC);
+    return $result;
+  } catch (PDOException $e) {
+    echo "Erreur : " . $e->getMessage();
+  }
+}
+
+// 1.03 Sélection du fond d'un média type film
 function select_movie_background(int $id)
 {
   connexion($dbco);
@@ -70,15 +87,21 @@ function add_movie(array $datas)
 {
   connexion($dbco);
   try {
-    $req = $dbco->prepare("INSERT INTO movie(title, synopsis, genre, catch, premiered)
-		VALUES(:title, :synopsis, :genre, :catch, :premiered)");
+    $req = $dbco->prepare("INSERT INTO movie(title, synopsis, genre, classification, catch, premiered)
+		VALUES(:title, :synopsis, :genre, :age, :catch, :premiered)");
     $req->bindValue(':title', $datas['title'], PDO::PARAM_STR);
     $req->bindValue(':synopsis', $datas['synopsis'], PDO::PARAM_STR);
     $req->bindValue(':genre', $datas['genre'], PDO::PARAM_STR);
+    $req->bindValue(':age', $datas['age'], PDO::PARAM_STR);
     $req->bindValue(':catch', $datas['catch'], PDO::PARAM_STR);
     $req->bindValue(':premiered', $datas['premiered'], PDO::PARAM_STR);
     $req->execute();
     $lastId = $dbco->lastInsertId();
+
+    $reqRating = $dbco->prepare("INSERT INTO rating(media_id, media_type, rating)
+		VALUES($lastId, 'movie', :rating)");
+    $reqRating->bindValue(':rating', $datas['rating'], PDO::PARAM_STR);
+    $reqRating->execute();
 
     $reqArts = $dbco->prepare("INSERT INTO art(media_id, media_type, type, cachedurl)
 		VALUES($lastId, 'movie', 'poster', :poster);
@@ -120,13 +143,16 @@ function update_movie(array $datas, int $id, bool $set_poster, string $default_p
 
     // Mise à jour de la base de données
     $req = $dbco->prepare("UPDATE movie
-    SET title=:title, synopsis=:synopsis, genre=:genre, catch=:catch, premiered=:premiered
+    SET title=:title, synopsis=:synopsis, genre=:genre, classification=:age, catch=:catch, premiered=:premiered
     WHERE idMovie=:id
     $sql_poster_file
-    $sql_background_file");
+    $sql_background_file;
+    UPDATE rating SET rating=:rating WHERE media_id=:id AND media_type='movie'");
     $req->bindValue(':title', $datas['title'], PDO::PARAM_STR);
     $req->bindValue(':synopsis', $datas['synopsis'], PDO::PARAM_STR);
     $req->bindValue(':genre', $datas['genre'], PDO::PARAM_STR);
+    $req->bindValue(':rating', $datas['rating'], PDO::PARAM_STR);
+    $req->bindValue(':age', $datas['age'], PDO::PARAM_STR);
     $req->bindValue(':catch', $datas['catch'], PDO::PARAM_STR);
     $req->bindValue(':premiered', $datas['premiered'], PDO::PARAM_STR);
     if ($set_poster) {
@@ -159,6 +185,9 @@ function delete_movie(int $id)
     $req = $dbco->prepare("DELETE FROM movie
     WHERE idMovie=:id;
     DELETE FROM art
+    WHERE media_id=:id
+    AND media_type='movie';
+    DELETE FROM rating
     WHERE media_id=:id
     AND media_type='movie'");
 

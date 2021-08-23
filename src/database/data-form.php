@@ -32,6 +32,8 @@ if ($_GET['action'] == 'copy' or $_GET['action'] == 'edit') {
     } else {
       // Appel de la fonction de sélection d'un média type film
       $result = select_movie($id);
+      // Appel de la fonction de sélection de la note d'un média type film
+      $rating = select_movie_rating($id);
       // Appel de la fonction de sélection du fond d'un média type film
       $bg = select_movie_background($id);
     }
@@ -63,6 +65,8 @@ if (!empty($_POST["save_record"])) {
     $title = valid_data(mb_ucfirst($_POST['title']));
     $synopsis = valid_data($_POST['synopsis']);
     $genre = valid_data($_POST['genre']);
+    $rating = (float)valid_data($_POST['rating']);
+    $age = valid_data($_POST['age']);
     if (empty($_POST['catch'])) {
       $catch = "À découvrir...";
     } else {
@@ -111,6 +115,8 @@ if (!empty($_POST["save_record"])) {
       'title' => $title,
       'synopsis' => $synopsis,
       'genre' => $genre,
+      'rating' => $rating,
+      'age' => $age,
       'catch' => $catch,
       'premiered' => $premiered,
       'poster' => $poster_name,
