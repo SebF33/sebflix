@@ -32,6 +32,8 @@ if ($_GET['action'] == 'copy' or $_GET['action'] == 'edit') {
     } else {
       // Appel de la fonction de sélection d'un média type film
       $result = select_movie($id);
+      // Appel de la fonction de sélection du fond d'un média type film
+      $bg = select_movie_background($id);
     }
   } else {
     // Redirection
@@ -42,15 +44,16 @@ if ($_GET['action'] == 'copy' or $_GET['action'] == 'edit') {
 
 // Traitement du formulaire
 if (!empty($_POST["save_record"])) {
-  $set_poster = $set_request = FALSE;
-
+  // Définition des autorisations par défaut
+  $set_request = $set_poster = $set_background = FALSE;
   // Champs requis
   $fields_required = array($_POST['title'], $_POST['synopsis'], $_POST['premiered']);
-
   // Définition du dossier qui contiendra les images
   $img_folder = dirname(dirname(__DIR__)) . '/src/thumbnails/g/';
-  // Définition du poster par défaut
+  // Définition de l'affiche par défaut
   $default_poster_name = 'placeholders/generic_poster.jpg';
+  // Définition du fond par défaut
+  $default_background_name = 'placeholders/generic_background.png';
 
   // Vérification que les champs d'entrée ne sont pas vides
   if (in_array('', $fields_required)) :
@@ -67,14 +70,24 @@ if (!empty($_POST["save_record"])) {
     $premiered = valid_data($_POST['premiered']);
     $set_request = TRUE;
 
-    // Traitement du poster
+    // Traitement de l'affiche
     if (($action == 'add' or $action == 'copy') && empty($_FILES["poster"]["name"])) {
       $poster_name = $default_poster_name;
     } elseif (isset($_FILES["poster"]) && !empty($_FILES["poster"]["name"])) {
-      // Appel de la fonction de téléversement d'image pour le poster
+      // Appel de la fonction de téléversement d'image pour l'affiche
       $upload_img = upload_img($_FILES["poster"], $default_poster_name, $img_folder);
-      $set_poster = $upload_img[0]; // Autorisation de création du poster
-      $poster_name = 'g/' . $upload_img[1]; // Nom du chemin du poster pour la base de données
+      $set_poster = $upload_img[0]; // Autorisation de création de l'affiche
+      $poster_name = 'g/' . $upload_img[1]; // Nom du chemin de l'affiche pour la base de données
+      $msg = $upload_img[2]; // Message d'erreur de l'upload
+    }
+    // Traitement du fond
+    if (($action == 'add' or $action == 'copy') && empty($_FILES["background"]["name"])) {
+      $background_name = $default_background_name;
+    } elseif (isset($_FILES["background"]) && !empty($_FILES["background"]["name"])) {
+      // Appel de la fonction de téléversement d'image pour le fond
+      $upload_img = upload_img($_FILES["background"], $default_background_name, $img_folder);
+      $set_background = $upload_img[0]; // Autorisation de création de l'affiche
+      $background_name = 'g/' . $upload_img[1]; // Nom du chemin de l'affiche pour la base de données
       $msg = $upload_img[2]; // Message d'erreur de l'upload
     }
   endif;
@@ -98,7 +111,8 @@ if (!empty($_POST["save_record"])) {
       'synopsis' => $synopsis,
       'catch' => $catch,
       'premiered' => $premiered,
-      'poster' => $poster_name
+      'poster' => $poster_name,
+      'background' => $background_name
     );
 
     // Définition de la fonction de requête selon l'action choisie
@@ -107,7 +121,7 @@ if (!empty($_POST["save_record"])) {
       $exec = add_movie($datas);
     } elseif ($_GET['action'] == 'edit') {
       // Appel de la fonction de mise à jour d'un média type film
-      $exec = update_movie($datas, $id, $set_poster, $default_poster_name);
+      $exec = update_movie($datas, $id, $set_poster, $default_poster_name, $set_background, $default_background_name);
     }
 
     // Définition du message d'erreur ou de succès

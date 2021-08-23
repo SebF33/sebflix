@@ -38,6 +38,8 @@ if ($action == 'copy' or $action == 'edit') {
   $synopsis = $result['synopsis'];
   $catch = $result['catch'];
   $premiered = $result['premiered'];
+  $poster = $result['cachedurl'];
+  $background = $bg['cachedurl'];
 } else {
   $premiered = $catch = $synopsis = $title = '';
 }
@@ -130,7 +132,17 @@ if ($action == 'copy' or $action == 'edit') {
         <input id="picture-file" type="file" name="poster">
       </div>
       <?php if ($action == 'edit') {
-        echo '<div class="demo-form-row text-center"><img src="/src/thumbnails/' . $result['cachedurl'] . '" title="' . $result['cachedurl'] . '" alt="' . $result['cachedurl'] . '" onclick="window.open(this.src)" draggable="false" ondragstart="return false")/></div>';
+        // Affiche
+        echo '<div class="demo-form-row text-center"><img src="/src/thumbnails/' . $poster . '" title="' . $poster . '" alt="' . $poster . '" onclick="window.open(this.src)" draggable="false" ondragstart="return false")/></div>';
+      } ?>
+      <div class="demo-form-row">
+        <label for="background">Fond : </label>
+        <input type="hidden" name="MAX_FILE_SIZE" value="1048576"> <!-- Poids maxi : 1Mo => 1024*1024 -->
+        <input id="picture-file" type="file" name="background">
+      </div>
+      <?php if ($action == 'edit') {
+        // Fond
+        echo '<div class="demo-form-row text-center"><img src="/src/thumbnails/' . $background . '" title="' . $background . '" alt="' . $background . '" onclick="window.open(this.src)" draggable="false" ondragstart="return false")/></div>';
       } ?>
     </form>
   </div>
