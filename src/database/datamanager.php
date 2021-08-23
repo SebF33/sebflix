@@ -87,12 +87,14 @@ function add_movie(array $datas)
 {
   connexion($dbco);
   try {
-    $req = $dbco->prepare("INSERT INTO movie(title, synopsis, genre, classification, catch, premiered)
-		VALUES(:title, :synopsis, :genre, :age, :catch, :premiered)");
+    $req = $dbco->prepare("INSERT INTO movie(title, synopsis, genre, classification, country, embed, catch, premiered)
+		VALUES(:title, :synopsis, :genre, :age, :country, :embed, :catch, :premiered)");
     $req->bindValue(':title', $datas['title'], PDO::PARAM_STR);
     $req->bindValue(':synopsis', $datas['synopsis'], PDO::PARAM_STR);
     $req->bindValue(':genre', $datas['genre'], PDO::PARAM_STR);
     $req->bindValue(':age', $datas['age'], PDO::PARAM_STR);
+    $req->bindValue(':country', $datas['country'], PDO::PARAM_STR);
+    $req->bindValue(':embed', $datas['embed'], PDO::PARAM_STR);
     $req->bindValue(':catch', $datas['catch'], PDO::PARAM_STR);
     $req->bindValue(':premiered', $datas['premiered'], PDO::PARAM_STR);
     $req->execute();
@@ -143,7 +145,7 @@ function update_movie(array $datas, int $id, bool $set_poster, string $default_p
 
     // Mise à jour de la base de données
     $req = $dbco->prepare("UPDATE movie
-    SET title=:title, synopsis=:synopsis, genre=:genre, classification=:age, catch=:catch, premiered=:premiered
+    SET title=:title, synopsis=:synopsis, genre=:genre, classification=:age, country=:country, embed=:embed, catch=:catch, premiered=:premiered
     WHERE idMovie=:id
     $sql_poster_file
     $sql_background_file;
@@ -153,6 +155,8 @@ function update_movie(array $datas, int $id, bool $set_poster, string $default_p
     $req->bindValue(':genre', $datas['genre'], PDO::PARAM_STR);
     $req->bindValue(':rating', $datas['rating'], PDO::PARAM_STR);
     $req->bindValue(':age', $datas['age'], PDO::PARAM_STR);
+    $req->bindValue(':country', $datas['country'], PDO::PARAM_STR);
+    $req->bindValue(':embed', $datas['embed'], PDO::PARAM_STR);
     $req->bindValue(':catch', $datas['catch'], PDO::PARAM_STR);
     $req->bindValue(':premiered', $datas['premiered'], PDO::PARAM_STR);
     if ($set_poster) {
@@ -180,19 +184,38 @@ function update_movie(array $datas, int $id, bool $set_poster, string $default_p
 // 4.01 Suppression d'un média type film
 function delete_movie(int $id)
 {
+  $img_folder = dirname(dirname(__DIR__)) . '/src/thumbnails/';
+
   connexion($dbco);
   try {
-    $req = $dbco->prepare("DELETE FROM movie
-    WHERE idMovie=:id;
-    DELETE FROM art
-    WHERE media_id=:id
-    AND media_type='movie';
-    DELETE FROM rating
-    WHERE media_id=:id
-    AND media_type='movie'");
+    $query = $dbco->prepare(
+      "SELECT cachedurl FROM art WHERE media_id=:id AND media_type='movie' AND type='poster'"
+    );
+    $query->bindValue(':id', $id, PDO::PARAM_INT);
+    $query->execute();
+    $current_poster = $query->fetch(PDO::FETCH_ASSOC);
 
+    $query = $dbco->prepare(
+      "SELECT cachedurl FROM art WHERE media_id=:id AND media_type='movie' AND type='fanart'"
+    );
+    $query->bindValue(':id', $id, PDO::PARAM_INT);
+    $query->execute();
+    $current_background = $query->fetch(PDO::FETCH_ASSOC);
+
+    $req = $dbco->prepare("DELETE FROM movie WHERE idMovie=:id;
+    DELETE FROM art WHERE media_id=:id AND media_type='movie';
+    DELETE FROM rating WHERE media_id=:id AND media_type='movie'");
     $req->bindValue(':id', $id, PDO::PARAM_INT);
     $req->execute();
+
+    // Suppression du serveur de l'affiche si celle-ci n'est pas par défaut
+    if (!str_starts_with($current_poster['cachedurl'], 'placeholders/generic_poster')) { // PHP 8
+      unlink($img_folder . $current_poster['cachedurl']);
+    }
+    // Suppression du serveur du fond si celui-ci n'est pas par défaut
+    if (!str_starts_with($current_background['cachedurl'], 'placeholders/generic_background')) { // PHP 8
+      unlink($img_folder . $current_background['cachedurl']);
+    }
   } catch (PDOException $e) {
     echo "Erreur : " . $e->getMessage();
   }

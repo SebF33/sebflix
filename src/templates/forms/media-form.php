@@ -37,20 +37,23 @@ if ($action == 'copy' or $action == 'edit') {
   $title = $result['title'];
   $synopsis = $result['synopsis'];
   $genre = $result['genre'];
+  $premiered = $result['premiered'];
   if (!isset($rating['rating'])) {
     $rating = '';
   } else {
     $rating = $rating['rating'];
   }
   $age = $result['classification'];
+  $country = $result['country'];
+  $embed = $result['embed'];
+  $embed = substr($embed, 30);
   $catch = $result['catch'];
-  $premiered = $result['premiered'];
   $poster = $result['cachedurl'];
   if (isset($bg['cachedurl'])) {
     $background = $bg['cachedurl'];
   }
 } else {
-  $premiered = $catch = $synopsis = $title = '';
+  $catch = $embed = $premiered = $synopsis = $title = '';
 }
 ?>
 
@@ -147,6 +150,12 @@ if ($action == 'copy' or $action == 'edit') {
       </div>
 
       <div class="demo-form-row">
+        <label>Date de sortie <span>*</span> : </label>
+        <br>
+        <input name="premiered" type="date" class="demo-form-field" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" value="<?= $premiered ?>" required />
+      </div>
+
+      <div class="demo-form-row">
         <label>Note sur 10 : </label>
         <input name="rating" class="number" type="number" step="0.1" min="0" max="10" class="demo-form-field" value="<?= $rating ?>" />
       </div>
@@ -169,15 +178,31 @@ if ($action == 'copy' or $action == 'edit') {
       </div>
 
       <div class="demo-form-row">
-        <label>Phrase d'accroche : </label>
-        <br>
-        <input name="catch" type="text" class="demo-form-field" value="<?= $catch ?>" />
+        <label>Pays : </label>
+        <select name="country" class="country">
+          <?php
+          for ($i = 0; $i < count($countries); $i++) {
+            if ($countries[$i] == $country) {
+              $countrySelected = ' selected';
+            } else {
+              $countrySelected = '';
+            }
+          ?> <option value="<?php echo $countries[$i]; ?>" <?php echo $countrySelected; ?>><?php echo $countries[$i]; ?></option>
+          <?php
+          }
+          ?>
+        </select>
       </div>
 
       <div class="demo-form-row">
-        <label>Date de sortie <span>*</span> : </label>
+        <label>Bande-annonce :<br><span>https://www.youtube.com/embed/</span></label>
+        <input name="embed" class="embed" type="text" class="demo-form-field" value="<?= $embed ?>" />
+      </div>
+
+      <div class="demo-form-row">
+        <label>Phrase d'accroche : </label>
         <br>
-        <input name="premiered" type="date" class="demo-form-field" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" value="<?= $premiered ?>" required />
+        <input name="catch" type="text" class="demo-form-field" value="<?= $catch ?>" />
       </div>
 
       <div class="demo-form-row">

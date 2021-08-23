@@ -13,6 +13,7 @@ $ages = array(
 );
 
 $countries = array(
+  '',
   'Argentina',
   'Australia',
   'Bahamas',

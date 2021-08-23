@@ -450,23 +450,32 @@ h3 a {
   font-weight: 900;
 }
 
-.demo-form-row .genre {
-  width: 300px;
+.demo-form-row select,
+.demo-form-row .number,
+.demo-form-row .embed {
   font-family: var(--font-text);
   font-size: 0.9em;
 }
 
+.demo-form-row .genre {
+  width: 300px;
+}
+
 .demo-form-row .number {
   width: 50px;
-  font-family: var(--font-text);
-  font-size: 0.9em;
   text-align: center;
 }
 
 .demo-form-row .age {
   width: 60px;
-  font-family: var(--font-text);
-  font-size: 0.9em;
+}
+
+.demo-form-row .country {
+  width: 180px;
+}
+
+.demo-form-row .embed {
+  width: 200px;
 }
 
 .demo-form-row img {
@@ -491,7 +500,7 @@ h3 a {
   width: 300px;
   padding: 10px;
   font-family: var(--font-text);
-  font-size: 0.8em;
+  font-size: 0.9em;
 }
 
 .alert {

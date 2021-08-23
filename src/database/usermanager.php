@@ -134,8 +134,8 @@ function delete_user(int $id)
     $req->bindValue(':id', $id, PDO::PARAM_INT);
     $req->execute();
 
-    // Suppression de l'avatar si celui-ci n'est pas par défaut
-    if (!str_starts_with($current_avatar['avatar'], 'users/generic')) {
+    // Suppression du serveur de l'avatar si celui-ci n'est pas par défaut
+    if (!str_starts_with($current_avatar['avatar'], 'users/generic')) { // PHP 8
       unlink($img_folder . $current_avatar['avatar']);
     }
   } catch (PDOException $e) {

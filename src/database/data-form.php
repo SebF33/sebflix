@@ -65,14 +65,16 @@ if (!empty($_POST["save_record"])) {
     $title = valid_data(mb_ucfirst($_POST['title']));
     $synopsis = valid_data($_POST['synopsis']);
     $genre = valid_data($_POST['genre']);
+    $premiered = valid_data($_POST['premiered']);
     $rating = (float)valid_data($_POST['rating']);
     $age = valid_data($_POST['age']);
+    $country = valid_data($_POST['country']);
+    $embed = 'https://www.youtube.com/embed/' . valid_data($_POST['embed']);
     if (empty($_POST['catch'])) {
       $catch = "À découvrir...";
     } else {
       $catch = valid_data($_POST['catch']);
     }
-    $premiered = valid_data($_POST['premiered']);
     $set_request = TRUE;
 
     // Traitement de l'affiche
@@ -115,10 +117,12 @@ if (!empty($_POST["save_record"])) {
       'title' => $title,
       'synopsis' => $synopsis,
       'genre' => $genre,
+      'premiered' => $premiered,
       'rating' => $rating,
       'age' => $age,
+      'country' => $country,
+      'embed' => $embed,
       'catch' => $catch,
-      'premiered' => $premiered,
       'poster' => $poster_name,
       'background' => $background_name
     );
