@@ -131,5 +131,5 @@
     }
     ?>
   </nav>
-  <script src="/js/icon.js"></script>
+  <script src="/assets/js/icon.js"></script>
 </header>

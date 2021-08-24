@@ -91,14 +91,14 @@ if (isset($_SESSION["logged"]) && $_SESSION["genre"] == 2 && $result->profile !=
   <meta name="Description" content="Détails du média">
 
   <!-- Appel des feuilles de styles -->
-  <link rel="stylesheet" href="/css/design.css" type="text/css" media="screen">
-  <link rel="stylesheet" href="/css/viewpage.css" type="text/css" media="screen">
-  <link rel="stylesheet" href="/css/menu.css" type="text/css" media="screen">
-  <link rel="stylesheet" href="/css/responsive.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="/assets/css/design.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="/assets/css/viewpage.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="/assets/css/menu.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="/assets/css/responsive.css" type="text/css" media="screen">
 
   <!-- Appel de l'icône -->
-  <link data-vue-tag="ssr" rel="icon" type="image/png" sizes="48x48" href="/img/favicon-48.png">
-  <link data-vue-tag="ssr" rel="icon" type="image/png" sizes="192x192" href="/img/favicon-192.png">
+  <link data-vue-tag="ssr" rel="icon" type="image/png" sizes="48x48" href="/assets/img/favicon-48.png">
+  <link data-vue-tag="ssr" rel="icon" type="image/png" sizes="192x192" href="/assets/img/favicon-192.png">
 
   <!-- Appel de jQuery -->
   <script src="/assets/js/lib/jquery-3.6.0.min.js"></script>
@@ -117,7 +117,7 @@ if (isset($_SESSION["logged"]) && $_SESSION["genre"] == 2 && $result->profile !=
   <style type="text/css">
     body {
       background-image: url(<?php if (empty($fanart['cachedurl'])) {
-                              echo '"/img/bg.png"';
+                              echo '"/assets/img/bg.png"';
                             } else {
                               echo '"../thumbnails/' . $fanart['cachedurl'] . '"';
                             }
@@ -227,7 +227,7 @@ if (isset($_SESSION["logged"]) && $_SESSION["genre"] == 2 && $result->profile !=
       echo "</table>";
       ?>
     </div>
-    <script src="/js/discart.js"></script>
+    <script src="/assets/js/discart.js"></script>
   </header>
 
   <!-- Main content -->
@@ -289,7 +289,7 @@ if (isset($_SESSION["logged"]) && $_SESSION["genre"] == 2 && $result->profile !=
       </div>
 
       <!-- Appel du script ReadAndSpeech -->
-      <script src="/js/readandspeech.js"></script>
+      <script src="/assets/js/readandspeech.js"></script>
 
       <div class="mainBottom">
         <?php
@@ -337,11 +337,10 @@ if (isset($_SESSION["logged"]) && $_SESSION["genre"] == 2 && $result->profile !=
 
     <!-- Flèche retour au début -->
     <button class="scrollToTopBtn">☝️</button>
-    <script src="/js/to-top.js"></script>
+    <script src="/assets/js/to-top.js"></script>
 
   </main>
 
-  <script type="text/javascript" src="/assets/js/lib/jquery-3.6.0.min.js"></script>
   <script type="text/javascript" src="/assets/js/watchlist.js"></script>
 
 </body>

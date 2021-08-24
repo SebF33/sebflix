@@ -66,22 +66,22 @@ if (isset($_GET['category']) && !empty($_GET['category']) && in_array($_GET['cat
   <meta name="Description" content="Alphabet">
 
   <!-- Appel des feuilles de styles -->
-  <link rel="stylesheet" href="/css/design.css" type="text/css" media="screen">
-  <link rel="stylesheet" href="/css/style.css" type="text/css" media="screen">
-  <link rel="stylesheet" href="/css/footer.css" type="text/css" media="screen">
-  <link rel="stylesheet" href="/css/alphabet.css" type="text/css" media="screen">
-  <link rel="stylesheet" href="/css/menu.css" type="text/css" media="screen">
-  <link rel="stylesheet" href="/css/responsive.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="/assets/css/design.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="/assets/css/style.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="/assets/css/footer.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="/assets/css/alphabet.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="/assets/css/menu.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="/assets/css/responsive.css" type="text/css" media="screen">
 
   <!-- Appel de l'icône -->
-  <link data-vue-tag="ssr" rel="icon" type="image/png" sizes="48x48" href="../../img/favicon-48.png">
-  <link data-vue-tag="ssr" rel="icon" type="image/png" sizes="192x192" href="../../img/favicon-192.png">
+  <link data-vue-tag="ssr" rel="icon" type="image/png" sizes="48x48" href="/assets/img/favicon-48.png">
+  <link data-vue-tag="ssr" rel="icon" type="image/png" sizes="192x192" href="/assets/img/favicon-192.png">
 
   <!-- Appel de jQuery -->
-  <script src="/js/jquery-3.6.0.min.js"></script>
+  <script src="/assets/js/lib/jquery-3.6.0.min.js"></script>
 
   <!-- Appel des icônes sur Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
 </head>
 
 <!-- Corps de page -->

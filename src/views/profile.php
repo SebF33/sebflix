@@ -50,7 +50,7 @@ if (!isset($_SESSION["logged"]) || $_SESSION["logged"] !== TRUE) {
   <header>
     <div class="headerLogo">
       <a href="/index.php">
-        <img src="/img/logo_sebflix.png" alt="Sebflix" width="190.8" height="66.8" />
+        <img src="/assets/img/logo_sebflix.png" alt="Sebflix" width="190.8" height="66.8" />
       </a>
       <img id="avatar-img" class="img-fluid m-5 rounded-circle img-thumbnail z-depth-2" alt="<?= $_SESSION["avatar"] ?>" src="/src/thumbnails/<?= $_SESSION["avatar"] ?>" data-holder-rendered="true" draggable="false" ondragstart="return false">
       <h1 class="my-5">Bonjour, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>.<br>Bienvenue<?php if ($_SESSION["loggedadmin"] == TRUE and $_SESSION["role"] === 1) {

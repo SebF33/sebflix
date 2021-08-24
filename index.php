@@ -24,23 +24,23 @@ require __DIR__ . '/src/database/viewmanager.php';
   <meta name="Description" content="Page d'accueil Sebflix">
 
   <!-- Appel des feuilles de styles -->
-  <link rel="stylesheet" href="css/design.css" type="text/css" media="screen">
-  <link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
-  <link rel="stylesheet" href="/css/footer.css" type="text/css" media="screen">
-  <link rel="stylesheet" href="css/search-button.css" type="text/css" media="screen">
-  <link rel="stylesheet" href="css/menu.css" type="text/css" media="screen">
-  <link rel="stylesheet" href="css/carousel.css" type="text/css" media="screen">
-  <link rel="stylesheet" href="css/responsive.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="assets/css/design.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="assets/css/style.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="assets/css/footer.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="assets/css/search-button.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="assets/css/menu.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="assets/css/carousel.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="assets/css/responsive.css" type="text/css" media="screen">
 
   <!-- Appel de l'icône -->
-  <link data-vue-tag="ssr" rel="icon" type="image/png" sizes="48x48" href="/img/favicon-48.png">
-  <link data-vue-tag="ssr" rel="icon" type="image/png" sizes="192x192" href="/img/favicon-192.png">
+  <link data-vue-tag="ssr" rel="icon" type="image/png" sizes="48x48" href="assets//img/favicon-48.png">
+  <link data-vue-tag="ssr" rel="icon" type="image/png" sizes="192x192" href="assets//img/favicon-192.png">
 
   <!-- Appel de jQuery -->
-  <script src="js/jquery-3.6.0.min.js"></script>
+  <script src="assets/js/lib/jquery-3.6.0.min.js"></script>
 
   <!-- Appel des icônes sur Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
 </head>
 
 <!-- Corps de page -->
@@ -112,8 +112,8 @@ require __DIR__ . '/src/database/viewmanager.php';
       </div>
 
       <!-- Appel des scripts pour le formulaire de recherche -->
-      <script src="js/submit.js"></script>
-      <script src="js/placeholder.js"></script>
+      <script src="assets/js/submit.js"></script>
+      <script src="assets/js/placeholder.js"></script>
 
       <!-- Bloc de recherche -->
       <div id="cover">
@@ -171,9 +171,9 @@ require __DIR__ . '/src/database/viewmanager.php';
           echo '<div class="my-card"><a class="my-btn-card" href="src/views/viewpage.php?type=tvshow&id=' . $row['idShow'] . '" draggable="false" ondragstart="return false"><img src="src/thumbnails/' . $row['cachedurl'] . '" title="' . $row['title'] . '" alt="' . $row['title'] . '" width="160" height="240" draggable="false" ondragstart="return false"/></a></div>';
         }
         ?>
-        <script src="/js/carousel.js"></script>
+        <script src="/assets/js/carousel.js"></script>
       </div>
-      <script src="/js/keyboard.js"></script>
+      <script src="/assets/js/keyboard.js"></script>
     </div>
 
     <!-- Menu circulaire -->

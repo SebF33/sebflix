@@ -24,19 +24,19 @@ require dirname(__DIR__) . '/database/viewmanager.php';
   <meta name="Description" content="Galerie">
 
   <!-- Appel des feuilles de styles -->
-  <link rel="stylesheet" href="/css/design.css" type="text/css" media="screen">
-  <link rel="stylesheet" href="/css/results.css" type="text/css" media="screen">
-  <link rel="stylesheet" href="/css/gallery.css" type="text/css" media="screen">
-  <link rel="stylesheet" href="/css/menu.css" type="text/css" media="screen">
-  <link rel="stylesheet" href="/css/responsive.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="/assets/css/design.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="/assets/css/results.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="/assets/css/gallery.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="/assets/css/menu.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="/assets/css/responsive.css" type="text/css" media="screen">
 
   <!-- Appel de l'icône -->
-  <link data-vue-tag="ssr" rel="icon" type="image/png" sizes="48x48" href="/img/favicon-48.png">
-  <link data-vue-tag="ssr" rel="icon" type="image/png" sizes="192x192" href="/img/favicon-192.png">
+  <link data-vue-tag="ssr" rel="icon" type="image/png" sizes="48x48" href="/assets/img/favicon-48.png">
+  <link data-vue-tag="ssr" rel="icon" type="image/png" sizes="192x192" href="/assets/img/favicon-192.png">
 
   <!-- Appel de FlexSlider -->
-  <link rel="stylesheet" href="/css/flexslider.css" type="text/css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+  <link rel="stylesheet" href="/assets/css/lib/flexslider.css" type="text/css">
+  <script src="/assets/js/lib/jquery-1.6.2.min.js"></script>
   <script type="text/javascript" charset="utf-8">
     $(window).load(function() {
       $(".flexslider").flexslider();
@@ -44,7 +44,7 @@ require dirname(__DIR__) . '/database/viewmanager.php';
   </script>
 
   <!-- Appel des icônes sur Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
 </head>
 
 <!-- Corps de page -->
@@ -55,7 +55,7 @@ require dirname(__DIR__) . '/database/viewmanager.php';
   <header role="banner">
     <!-- Logo du site -->
     <div class="headerLogo">
-      <a href="/index.php"><img src="/img/logo_sebflix.png" alt="Sebflix" width="190.8" height="66.8" /></a>
+      <a href="/index.php"><img src="/assets/img/logo_sebflix.png" alt="Sebflix" width="190.8" height="66.8" /></a>
       <h1 class="results">Galerie</h1>
     </div>
   </header>
@@ -80,7 +80,7 @@ require dirname(__DIR__) . '/database/viewmanager.php';
         }
         ?>
       </ul>
-      <script src="/js/flexslider.js"></script>
+      <script src="/assets/js/lib/flexslider.js"></script>
     </div>
 
     <!-- Menu circulaire -->

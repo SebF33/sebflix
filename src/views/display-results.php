@@ -140,15 +140,15 @@ if (isset($_GET['type']) && !empty($_GET['type']) && in_array($_GET['type'], $ty
   <meta name="Description" content="Résultats">
 
   <!-- Appel des feuilles de styles -->
-  <link rel="stylesheet" href="/css/design.css" type="text/css" media="screen">
-  <link rel="stylesheet" href="/css/results.css" type="text/css" media="screen">
-  <link rel="stylesheet" href="/css/card.css" type="text/css" media="screen">
-  <link rel="stylesheet" href="/css/menu.css" type="text/css" media="screen">
-  <link rel="stylesheet" href="/css/responsive.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="/assets/css/design.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="/assets/css/results.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="/assets/css/card.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="/assets/css/menu.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="/assets/css/responsive.css" type="text/css" media="screen">
 
   <!-- Appel de l'icône -->
-  <link data-vue-tag="ssr" rel="icon" type="image/png" sizes="48x48" href="/img/favicon-48.png">
-  <link data-vue-tag="ssr" rel="icon" type="image/png" sizes="192x192" href="/img/favicon-192.png">
+  <link data-vue-tag="ssr" rel="icon" type="image/png" sizes="48x48" href="/assets/img/favicon-48.png">
+  <link data-vue-tag="ssr" rel="icon" type="image/png" sizes="192x192" href="/assets/img/favicon-192.png">
 
   <!-- Appel des icônes sur Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -192,7 +192,7 @@ if (isset($_GET['type']) && !empty($_GET['type']) && in_array($_GET['type'], $ty
         }
       } else {
         // Logo du site
-        echo '<a href="/index.php"><img src="/img/logo_sebflix.png" alt="Sebflix" width="190.8" height="66.8" /></a>';
+        echo '<a href="/index.php"><img src="/assets/img/logo_sebflix.png" alt="Sebflix" width="190.8" height="66.8" /></a>';
       }
       ?>
       <!-- En-tête de résultats -->
@@ -393,7 +393,7 @@ if (isset($_GET['type']) && !empty($_GET['type']) && in_array($_GET['type'], $ty
 
     <!-- Bouton retour au début -->
     <button class="scrollToTopBtn">☝️</button>
-    <script src="/js/to-top.js"></script>
+    <script src="/assets/js/to-top.js"></script>
 
   </main>
 

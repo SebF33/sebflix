@@ -77,7 +77,7 @@ if ($action == 'copy' or $action == 'edit') {
   <header>
     <div class="headerLogo">
       <a href="/index.php">
-        <img src="/img/logo_sebflix.png" alt="Sebflix" width="190.8" height="66.8" />
+        <img src="/assets/img/logo_sebflix.png" alt="Sebflix" width="190.8" height="66.8" />
       </a>
       <h1>Gestionnaire de médias</h1>
     </div>

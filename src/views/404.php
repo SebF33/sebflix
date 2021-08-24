@@ -15,12 +15,12 @@
   <meta name="Description" content="Page 404">
 
   <!-- Appel des feuilles de styles -->
-  <link rel="stylesheet" href="/css/design.css" type="text/css" media="screen">
-  <link rel="stylesheet" href="/css/results.css" type="text/css" media="screen">
-  <link rel="stylesheet" href="/css/menu.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="/assets/css/design.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="/assets/css/results.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="/assets/css/menu.css" type="text/css" media="screen">
 
   <!-- Appel des icônes sur Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
 </head>
 
 <!-- Corps de page -->
@@ -28,7 +28,7 @@
 <body>
   <style>
     body {
-      background-image: url('/img/bg_404.png');
+      background-image: url('/assets/img/bg_404.png');
     }
   </style>
 
@@ -36,7 +36,7 @@
   <header role="banner">
     <div class="headerLogo">
       <!-- Logo du site -->
-      <a href="/index.php"><img src="/img/logo_sebflix.png" alt="Sebflix" width="190.8" height="66.8" /></a>
+      <a href="/index.php"><img src="/assets/img/logo_sebflix.png" alt="Sebflix" width="190.8" height="66.8" /></a>
       <h1 class="errorTitle">Page introuvable</h1>
       <p class="results">Oups, la page n'est pas (encore) disponible... vous pouvez retourner à <a href="/index.php"> l'entrée</a>.</p>
     </div>

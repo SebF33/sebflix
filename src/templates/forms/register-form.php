@@ -149,7 +149,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <header>
     <div class="headerLogo">
       <a href="/index.php">
-        <img src="/img/logo_sebflix.png" alt="Sebflix" width="190.8" height="66.8" />
+        <img src="/assets/img/logo_sebflix.png" alt="Sebflix" width="190.8" height="66.8" />
       </a>
       <h1>Compte utilisateur</h1>
     </div>

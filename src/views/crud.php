@@ -40,7 +40,7 @@ require dirname(__DIR__) . '/database/search.php';
   <script src="/assets/js/lib/bootstrap.min.js"></script>
 
   <!-- Appel des icônes sur Font Awesome -->
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
 </head>
 
 <body>
@@ -59,7 +59,7 @@ require dirname(__DIR__) . '/database/search.php';
   <header>
     <div class="headerLogo">
       <a href="/index.php">
-        <img src="/img/logo_sebflix.png" alt="Sebflix" width="190.8" height="66.8" />
+        <img src="/assets/img/logo_sebflix.png" alt="Sebflix" width="190.8" height="66.8" />
       </a>
       <h1>Gestionnaire de médias</h1>
     </div>

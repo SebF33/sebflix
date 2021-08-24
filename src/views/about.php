@@ -36,16 +36,16 @@ $nbActor = count_all_actor();
   <link rel="stylesheet" href="/assets/css/design.css">
   <link rel="stylesheet" href="/assets/css/results.css">
   <link rel="stylesheet" href="/assets/css/crud.css">
-  <link rel="stylesheet" href="/css/footer.css" type="text/css" media="screen">
-  <link rel="stylesheet" href="/css/about.css" type="text/css" media="screen">
-  <link rel="stylesheet" href="/css/menu.css" type="text/css" media="screen">
-  <link rel="stylesheet" href="/css/responsive.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="/assets/css/footer.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="/assets/css/about.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="/assets/css/menu.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="/assets/css/responsive.css" type="text/css" media="screen">
 
   <!-- Appel de jQuery -->
-  <script src="/js/jquery-3.6.0.min.js"></script>
+  <script src="/assets/js/lib/jquery-3.6.0.min.js"></script>
 
   <!-- Appel des icônes sur Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
 </head>
 
 <body>
