@@ -161,14 +161,14 @@ function update_movie(array $datas, int $id, bool $set_poster, string $default_p
     $req->bindValue(':premiered', $datas['premiered'], PDO::PARAM_STR);
     if ($set_poster) {
       $req->bindValue(':poster', $datas['poster'], PDO::PARAM_STR);
-      // Suppression de l'ancienne affiche si celle-ci n'est pas par défaut
+      // Suppression du serveur de l'ancienne affiche si celle-ci n'est pas par défaut
       if ($current_poster['cachedurl'] != $default_poster_name) {
         unlink($img_folder . $current_poster['cachedurl']);
       }
     }
     if ($set_background) {
       $req->bindValue(':background', $datas['background'], PDO::PARAM_STR);
-      // Suppression de l'ancien fond si celui-ci n'est pas par défaut
+      // Suppression du serveur de l'ancien fond si celui-ci n'est pas par défaut
       if ($current_background['cachedurl'] != $default_background_name) {
         unlink($img_folder . $current_background['cachedurl']);
       }
@@ -204,7 +204,8 @@ function delete_movie(int $id)
 
     $req = $dbco->prepare("DELETE FROM movie WHERE idMovie=:id;
     DELETE FROM art WHERE media_id=:id AND media_type='movie';
-    DELETE FROM rating WHERE media_id=:id AND media_type='movie'");
+    DELETE FROM rating WHERE media_id=:id AND media_type='movie';
+    DELETE FROM watchlist WHERE media_id=:id AND media_type='movie'");
     $req->bindValue(':id', $id, PDO::PARAM_INT);
     $req->execute();
 

@@ -116,6 +116,21 @@ function update_pwd(string $username, string $pwd)
   }
 }
 
+// Mise à jour de l'avatar
+function update_avatar(string $username, string $avatar)
+{
+  connexion($dbco);
+  try {
+    $req = $dbco->prepare("UPDATE users SET avatar=:avatar WHERE username=:username");
+
+    $req->bindValue(':username', $username, PDO::PARAM_STR);
+    $req->bindValue(':avatar', $avatar, PDO::PARAM_STR);
+    return $req->execute();
+  } catch (PDOException $e) {
+    echo "Erreur : " . $e->getMessage();
+  }
+}
+
 // Suppression d'un utilisateur
 function delete_user(int $id)
 {
