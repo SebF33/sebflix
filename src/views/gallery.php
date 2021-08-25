@@ -56,7 +56,9 @@ require dirname(__DIR__) . '/database/viewmanager.php';
     <!-- Logo du site -->
     <div class="headerLogo">
       <a href="/index.php"><img src="/assets/img/logo_sebflix.png" alt="Sebflix" width="190.8" height="66.8" /></a>
-      <h1 class="results">Galerie</h1>
+      <h1 class="results">Galerie<?php if ($set_child) {
+                                    echo " des enfants";
+                                  } ?></h1>
     </div>
   </header>
 

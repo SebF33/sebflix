@@ -64,30 +64,15 @@ require __DIR__ . '/src/database/viewmanager.php';
   <!-- Header -->
   <?php
   // Construction de la barre de navigation
-  if ($set_child) {
-    $navLeft = [
-      'Films' => 'src/views/alphabet.php?category=movies',
-      'Séries' => 'src/views/alphabet.php?category=tvshows'
-    ];
-  } else {
-    $navLeft = [
-      'Films' => 'src/views/alphabet.php?category=movies',
-      'Séries' => 'src/views/alphabet.php?category=tvshows',
-      'Animes' => 'src/views/alphabet.php?category=animes'
-    ];
-  }
-  if ($set_child) {
-    $navRight = [
-      'Animes' => 'src/views/alphabet.php?category=animes',
-      'Dessins animés' => 'src/views/alphabet.php?category=animation'
-    ];
-    $btnNavClass = "";
-  } else {
-    $navRight = [
-      'Dessins animés' => 'src/views/alphabet.php?category=animation',
-      'Spectacles' => 'src/views/alphabet.php?category=spectacles'
-    ];
-  }
+  $navLeft = [
+    'Films' => 'src/views/alphabet.php?category=movies',
+    'Séries' => 'src/views/alphabet.php?category=tvshows',
+    'Animes' => 'src/views/alphabet.php?category=animes'
+  ];
+  $navRight = [
+    'Dessins animés' => 'src/views/alphabet.php?category=animation',
+    'Spectacles' => 'src/views/alphabet.php?category=spectacles'
+  ];
   $btnNavClass = "";
   include "src/templates/navigation.php"
   ?>

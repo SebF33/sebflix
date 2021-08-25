@@ -30,9 +30,9 @@ if (isset($_GET['type']) && !empty($_GET['type']) && in_array($_GET['type'], $ty
     } elseif ($type == 'direction' or $type == 'filmography') {
       $checkid = check_id_actor($id);
     } elseif ($type == 'genre') {
-      $checkid = check_id_genre($id);
+      $checkid = check_id_genre($id, $sqlGenresChild);
     } elseif ($type == 'collection') {
-      $checkid = check_id_set($id);
+      $checkid = check_id_set($id, $sqlAndChild);
     } elseif ($type == 'moviecast') {
       $checkid = check_id_movie($id);
     } elseif ($type == 'tvshowcast') {
@@ -55,29 +55,29 @@ if (isset($_GET['type']) && !empty($_GET['type']) && in_array($_GET['type'], $ty
   }
   // Type "réalisations du studio"
   elseif ($type == 'achievement') {
-    $movies = select_movie_from_studio($id);
-    $tvshows = select_tvshow_from_studio($id);
+    $movies = select_movie_from_studio($id, $sqlAndChild);
+    $tvshows = select_tvshow_from_studio($id, $sqlAndChild);
     $title = $id;
     $h1 = 'Réalisation(s) de ' . $id . '';
   }
   // Type "œuvre(s) de la/du directrice/directeur"
   elseif ($type == 'direction') {
     $actor = select_actor_name($id);
-    $movies = select_movie_from_director($id);
+    $movies = select_movie_from_director($id, $sqlAndMovieAliasChild);
     $title = $actor['name'];
     $h1 = 'Œuvres réalisées par ' . $actor['name'] . '';
   }
   // Type "filmographie de l'actrice/acteur/doubleur"
   elseif ($type == 'filmography') {
     $actor = select_actor_name($id);
-    $movies = select_movie_from_actor($id);
-    $tvshows = select_tvshow_from_actor($id);
+    $movies = select_movie_from_actor($id, $sqlAndChild);
+    $tvshows = select_tvshow_from_actor($id, $sqlAndChild);
     $title = $actor['name'];
     $h1 = 'Filmographie pour ' . $actor['name'] . '';
   }
   // Type "liste des genres pour les films"
   elseif ($type == 'genres') {
-    $genres = select_movie_genres();
+    $genres = select_movie_genres($sqlGenresChild);
     $h1 = $title = "Liste des genres pour les films";
   }
   // Type "films selon le genre défini"
@@ -93,8 +93,11 @@ if (isset($_GET['type']) && !empty($_GET['type']) && in_array($_GET['type'], $ty
   }
   // Type "liste des collections"
   elseif ($type == 'sets') {
-    $result = select_all_sets($sqlAndAliasChild);
+    $result = select_all_sets($sqlAndSetAliasChild);
     $h1 = $title = "Collections";
+    if ($set_child) {
+      $h1 = "Collections pour enfants";
+    }
   }
   // Type "contenu d'une collection"
   elseif ($type == 'collection') {

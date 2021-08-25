@@ -40,11 +40,11 @@ if (isset($_GET['category']) && !empty($_GET['category']) && in_array($_GET['cat
   } elseif ($category == 'animation') {
     $title = "Dessins animés";
     $type = "movie";
-    $result = select_seven_recent_animation();
+    $result = select_seven_recent_animation($sqlAndChild);
   } elseif ($category == 'spectacles') {
     $title = "Spectacles";
     $type = "movie";
-    $result = select_seven_recent_spectacle();
+    $result = select_seven_recent_spectacle($sqlAndChild);
   }
 } else {
   // Redirection si un GET n'est pas vérifié

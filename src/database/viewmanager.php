@@ -428,7 +428,7 @@ function select_movie_by_numeric()
 }
 
 // 1.15 Sélection des genres pour les films
-function select_movie_genres()
+function select_movie_genres(string $sqlChild)
 {
   connexion($dbco);
   try {
@@ -440,6 +440,7 @@ function select_movie_genres()
       AND name NOT LIKE '%Erotique%'
       AND name NOT LIKE '%Peplum%'
       AND name NOT LIKE '%Suspense%'
+      $sqlChild
       ORDER BY name"
     );
     $query->execute();
@@ -1095,7 +1096,7 @@ function select_anime_movie_by_numeric()
 }
 
 // 4.01 Sélection des 7 dessins animés les plus récents par leur poster
-function select_seven_recent_animation()
+function select_seven_recent_animation(string $sqlChild)
 {
   connexion($dbco);
   try {
@@ -1107,6 +1108,7 @@ function select_seven_recent_animation()
       AND type = 'poster'
       AND genre LIKE '%Animation%'
       AND genre NOT LIKE '%Court-métrage%'
+      $sqlChild
       ORDER BY premiered DESC
       LIMIT 7"
     );
@@ -1201,7 +1203,7 @@ function select_animation_by_numeric()
 }
 
 // 5.01 Sélection des 7 spectacles les plus récents par leur poster
-function select_seven_recent_spectacle()
+function select_seven_recent_spectacle(string $sqlChild)
 {
   connexion($dbco);
   try {
@@ -1212,6 +1214,7 @@ function select_seven_recent_spectacle()
       WHERE media_type = 'movie'
       AND type = 'poster'
       AND genre LIKE '%Spectacle%'
+      $sqlChild
       ORDER BY premiered DESC
       LIMIT 7"
     );
@@ -1417,7 +1420,7 @@ function select_fanart_collection(int $id)
 }
 
 // 7.01 Sélection des films d'un studio par son nom
-function select_movie_from_studio(string $id)
+function select_movie_from_studio(string $id, string $sqlChild)
 {
   connexion($dbco);
   try {
@@ -1428,6 +1431,7 @@ function select_movie_from_studio(string $id)
       WHERE studio LIKE :id
       AND media_type = 'movie'
       AND type = 'poster'
+      $sqlChild
       ORDER BY premiered DESC"
     );
     $query->bindValue(':id', $id, PDO::PARAM_STR);
@@ -1440,7 +1444,7 @@ function select_movie_from_studio(string $id)
 }
 
 // 7.02 Sélection des séries d'un studio par son nom
-function select_tvshow_from_studio(string $id)
+function select_tvshow_from_studio(string $id, string $sqlChild)
 {
   connexion($dbco);
   try {
@@ -1451,6 +1455,7 @@ function select_tvshow_from_studio(string $id)
       WHERE studio LIKE :id
       AND media_type = 'tvshow'
       AND type = 'poster'
+      $sqlChild
       ORDER BY premiered DESC"
     );
     $query->bindValue(':id', $id, PDO::PARAM_STR);
@@ -1527,7 +1532,7 @@ function select_actor_name(int $id)
 }
 
 // 8.02 Sélection des films d'un(e) actrice/acteur/doubleur par son identifiant
-function select_movie_from_actor(int $id)
+function select_movie_from_actor(int $id, string $sqlChild)
 {
   connexion($dbco);
   try {
@@ -1539,6 +1544,7 @@ function select_movie_from_actor(int $id)
       WHERE actor_id = :id
       AND media_type = 'movie'
       AND type = 'poster'
+      $sqlChild
       ORDER BY premiered DESC"
     );
     $query->bindValue(':id', $id, PDO::PARAM_INT);
@@ -1551,7 +1557,7 @@ function select_movie_from_actor(int $id)
 }
 
 // 8.03 Sélection des séries d'un(e) actrice/acteur/doubleur par son identifiant
-function select_tvshow_from_actor(int $id)
+function select_tvshow_from_actor(int $id, string $sqlChild)
 {
   connexion($dbco);
   try {
@@ -1563,6 +1569,7 @@ function select_tvshow_from_actor(int $id)
       WHERE actor_id = :id
       AND media_type = 'tvshow'
       AND type = 'poster'
+      $sqlChild
       ORDER BY premiered DESC"
     );
     $query->bindValue(':id', $id, PDO::PARAM_INT);
@@ -1598,7 +1605,7 @@ function select_director_movie(int $id)
 }
 
 // 8.05 Sélection des films d'un(e) directrice/directeur par son identifiant
-function select_movie_from_director(int $id)
+function select_movie_from_director(int $id, string $sqlChild)
 {
   connexion($dbco);
   try {
@@ -1612,6 +1619,7 @@ function select_movie_from_director(int $id)
       WHERE d.actor_id = :id
       AND a.media_type = 'movie'
       AND a.type = 'poster'
+      $sqlChild
       ORDER BY m.premiered DESC"
     );
     $query->bindValue(':id', $id, PDO::PARAM_INT);

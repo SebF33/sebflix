@@ -310,14 +310,20 @@ function check_id_actor(int $id)
 }
 
 // 5.05 Vérification de l'existence de l'ID d'un genre
-function check_id_genre(int $id)
+function check_id_genre(int $id, string $sqlChild)
 {
   connexion($dbco);
   try {
     $query = $dbco->prepare(
       "SELECT genre_id
       FROM genre
-      WHERE genre_id = :id"
+      WHERE genre_id = :id
+      AND name NOT LIKE '%Adulte%'
+      AND name NOT LIKE '%Arts Martiaux%'
+      AND name NOT LIKE '%Erotique%'
+      AND name NOT LIKE '%Peplum%'
+      AND name NOT LIKE '%Suspense%'
+      $sqlChild"
     );
     $query->bindValue(':id', $id, PDO::PARAM_INT);
     $query->execute();
@@ -329,14 +335,15 @@ function check_id_genre(int $id)
 }
 
 // 5.06 Vérification de l'existence de l'ID d'un set
-function check_id_set(int $id)
+function check_id_set(int $id, string $sqlChild)
 {
   connexion($dbco);
   try {
     $query = $dbco->prepare(
       "SELECT idSet
       FROM sets
-      WHERE idSet = :id"
+      WHERE idSet = :id
+      $sqlChild"
     );
     $query->bindValue(':id', $id, PDO::PARAM_INT);
     $query->execute();
