@@ -18,9 +18,9 @@
 //    1.12 Sélection des films selon le genre défini
 //    1.13 Sélection des films dont le titre commence par le caractère défini
 //    1.14 Sélection des films dont le titre commence par un chiffre
-//    1.15 Sélection des genres pour les films
-//    1.16 Sélection du nom d'un genre par son identifiant
-//    1.17 Sélection des films selon le genre défini depuis la liste
+//    1.15 Sélection des grands genres pour les films
+//    1.16 Sélection du nom d'un grand genre depuis la liste par son identifiant
+//    1.17 Sélection des films selon le grand genre défini
 //    1.18 Sélection des 200 films les plus populaires par leur poster
 //    1.19 Sélection des 40 derniers médias type film ajoutés par leur poster
 
@@ -427,7 +427,7 @@ function select_movie_by_numeric()
   }
 }
 
-// 1.15 Sélection des genres pour les films
+// 1.15 Sélection des grands genres pour les films
 function select_movie_genres(string $sqlChild)
 {
   connexion($dbco);
@@ -451,7 +451,7 @@ function select_movie_genres(string $sqlChild)
   }
 }
 
-// 1.16 Sélection du nom d'un genre par son identifiant
+// 1.16 Sélection du nom d'un grand genre depuis la liste par son identifiant
 function select_genre_name(int $id)
 {
   connexion($dbco);
@@ -470,25 +470,25 @@ function select_genre_name(int $id)
   }
 }
 
-// 1.17 Sélection des films selon le genre défini depuis la liste
-function select_genre_movie(int $id)
+// 1.17 Sélection des films selon le grand genre défini
+function select_genre_movie(string $genre, string $sqlChild)
 {
   connexion($dbco);
   try {
     $query = $dbco->prepare(
       "SELECT idMovie, title, synopsis, classification, genre, premiered, cachedurl
       FROM movie
-      INNER JOIN genre_link ON movie.idMovie = genre_link.media_id
-      INNER JOIN art ON genre_link.media_id = art.media_id
+      INNER JOIN art ON movie.idMovie = art.media_id
       WHERE media_type = 'movie'
       AND type = 'poster'
-      AND genre_id LIKE :id
+      AND genre LIKE :genre
       AND genre NOT LIKE '%Anime%'
       AND genre NOT LIKE '%Court-métrage%'
       AND genre NOT LIKE '%Spectacle%'
+      $sqlChild
       ORDER BY premiered"
     );
-    $query->bindValue(':id', $id, PDO::PARAM_INT);
+    $query->bindValue(':genre', ('%' . $genre . '%'), PDO::PARAM_STR);
     $query->execute();
     $result = $query->fetchAll(PDO::FETCH_ASSOC);
     return $result;
@@ -1537,13 +1537,16 @@ function select_movie_from_actor(int $id, string $sqlChild)
   connexion($dbco);
   try {
     $query = $dbco->prepare(
-      "SELECT idMovie, title, cachedurl
-      FROM movie
-      INNER JOIN art ON movie.idMovie = art.media_id
-      INNER JOIN actor_link_movie ON art.media_id = actor_link_movie.media_id
-      WHERE actor_id = :id
-      AND media_type = 'movie'
-      AND type = 'poster'
+      "SELECT m.idMovie, m.title, a.cachedurl
+      FROM movie AS m
+      INNER JOIN art AS a
+      ON m.idMovie = a.media_id
+      INNER JOIN actor_link AS al
+      ON a.media_id = al.media_id
+      WHERE al.actor_id = :id
+      AND al.media_type = 'movie'
+      AND a.media_type = 'movie'
+      AND a.type = 'poster'
       $sqlChild
       ORDER BY premiered DESC"
     );
@@ -1562,13 +1565,16 @@ function select_tvshow_from_actor(int $id, string $sqlChild)
   connexion($dbco);
   try {
     $query = $dbco->prepare(
-      "SELECT idShow, title, cachedurl
-      FROM tvshow
-      INNER JOIN art ON tvshow.idShow = art.media_id
-      INNER JOIN actor_link_tvshow ON art.media_id = actor_link_tvshow.media_id
-      WHERE actor_id = :id
-      AND media_type = 'tvshow'
-      AND type = 'poster'
+      "SELECT t.idShow, t.title, a.cachedurl
+      FROM tvshow AS t
+      INNER JOIN art AS a
+      ON t.idShow = a.media_id
+      INNER JOIN actor_link AS al
+      ON a.media_id = al.media_id
+      WHERE al.actor_id = :id
+      AND al.media_type = 'tvshow'
+      AND a.media_type = 'tvshow'
+      AND a.type = 'poster'
       $sqlChild
       ORDER BY premiered DESC"
     );
@@ -1612,11 +1618,12 @@ function select_movie_from_director(int $id, string $sqlChild)
     $query = $dbco->prepare(
       "SELECT m.idMovie, m.title, m.synopsis, m.classification, m.genre, m.premiered, a.cachedurl
       FROM movie AS m
-      JOIN director_link AS d
-      ON m.idMovie = d.media_id
+      JOIN director_link AS dl
+      ON m.idMovie = dl.media_id
       JOIN art AS a
-      ON d.media_id = a.media_id
-      WHERE d.actor_id = :id
+      ON dl.media_id = a.media_id
+      WHERE dl.actor_id = :id
+      AND dl.media_type = 'movie'
       AND a.media_type = 'movie'
       AND a.type = 'poster'
       $sqlChild

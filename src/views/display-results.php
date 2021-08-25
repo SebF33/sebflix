@@ -70,20 +70,20 @@ if (isset($_GET['type']) && !empty($_GET['type']) && in_array($_GET['type'], $ty
   // Type "filmographie de l'actrice/acteur/doubleur"
   elseif ($type == 'filmography') {
     $actor = select_actor_name($id);
-    $movies = select_movie_from_actor($id, $sqlAndChild);
-    $tvshows = select_tvshow_from_actor($id, $sqlAndChild);
+    $movies = select_movie_from_actor($id, $sqlAndMovieAliasChild);
+    $tvshows = select_tvshow_from_actor($id, $sqlAndTvshowAliasChild);
     $title = $actor['name'];
     $h1 = 'Filmographie pour ' . $actor['name'] . '';
   }
-  // Type "liste des genres pour les films"
+  // Type "liste des grands genres pour les films"
   elseif ($type == 'genres') {
     $genres = select_movie_genres($sqlGenresChild);
     $h1 = $title = "Liste des genres pour les films";
   }
-  // Type "films selon le genre défini"
+  // Type "films selon le grand genre défini"
   elseif ($type == 'genre') {
     $genre = select_genre_name($id);
-    $movies = select_genre_movie($id);
+    $movies = select_genre_movie($genre['name'], $sqlAndChild);
     $h1 = $title = 'Genre "' . $genre['name'] . '"';
   }
   // Type "studios les plus populaires"
