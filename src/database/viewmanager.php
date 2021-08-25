@@ -486,7 +486,7 @@ function select_genre_movie(string $genre, string $sqlChild)
       AND genre NOT LIKE '%Court-métrage%'
       AND genre NOT LIKE '%Spectacle%'
       $sqlChild
-      ORDER BY premiered"
+      ORDER BY premiered DESC"
     );
     $query->bindValue(':genre', ('%' . $genre . '%'), PDO::PARAM_STR);
     $query->execute();

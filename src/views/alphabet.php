@@ -46,6 +46,16 @@ if (isset($_GET['category']) && !empty($_GET['category']) && in_array($_GET['cat
     $type = "movie";
     $result = select_seven_recent_spectacle($sqlAndChild);
   }
+  if ($set_child) {
+    if ($category == 'tvshows') {
+      $last = 'Dernières ';
+    } else {
+      $last = 'Derniers ';
+    }
+  } else {
+    $last = '';
+  }
+  $h1 = $last . $title;
 } else {
   // Redirection si un GET n'est pas vérifié
   header("location:/index.php");
@@ -155,7 +165,7 @@ if (isset($_GET['category']) && !empty($_GET['category']) && in_array($_GET['cat
   <main class="mainAlphabet">
 
     <div class="mainAlphabetTop">
-      <h1 class="alphabet-title"><?= $title ?></h1>
+      <h1 class="alphabet-title"><?= $h1 ?></h1>
       <?php if (!$set_child) { ?>
         <ul class="alphabet">
           <?php
