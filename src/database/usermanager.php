@@ -52,20 +52,6 @@ function select_username(string $username)
   }
 }
 
-// Mise à jour du rôle par son identifiant
-function update_role_by_id(int $role, int $id)
-{
-  connexion($dbco);
-  try {
-    $req = $dbco->prepare("UPDATE users SET role=:role WHERE id=:id");
-    $req->bindValue(':role', $role, PDO::PARAM_INT);
-    $req->bindValue(':id', $id, PDO::PARAM_INT);
-    $req->execute();
-  } catch (PDOException $e) {
-    echo "Erreur : " . $e->getMessage();
-  }
-}
-
 // Sélection d'une adresse mail
 function select_email(string $email)
 {
@@ -77,6 +63,36 @@ function select_email(string $email)
     $query->execute();
     $result = $query->fetch(PDO::FETCH_ASSOC);
     return $result;
+  } catch (PDOException $e) {
+    echo "Erreur : " . $e->getMessage();
+  }
+}
+
+// Sélection d'un avatar par l'identifiant d'un utilisateur
+function select_avatar_by_id(int $id)
+{
+  connexion($dbco);
+  try {
+    $query = $dbco->prepare("SELECT avatar FROM users WHERE id=:id");
+
+    $query->bindValue(':id', $id, PDO::PARAM_INT);
+    $query->execute();
+    $result = $query->fetch(PDO::FETCH_ASSOC);
+    return $result;
+  } catch (PDOException $e) {
+    echo "Erreur : " . $e->getMessage();
+  }
+}
+
+// Mise à jour du rôle par son identifiant
+function update_role_by_id(int $role, int $id)
+{
+  connexion($dbco);
+  try {
+    $req = $dbco->prepare("UPDATE users SET role=:role WHERE id=:id");
+    $req->bindValue(':role', $role, PDO::PARAM_INT);
+    $req->bindValue(':id', $id, PDO::PARAM_INT);
+    $req->execute();
   } catch (PDOException $e) {
     echo "Erreur : " . $e->getMessage();
   }
@@ -117,15 +133,28 @@ function update_pwd(string $username, string $pwd)
 }
 
 // Mise à jour de l'avatar
-function update_avatar(string $username, string $avatar)
+function update_avatar(int $id, string $avatar)
 {
+  $img_folder = dirname(dirname(__DIR__)) . '/src/thumbnails/';
+
   connexion($dbco);
   try {
-    $req = $dbco->prepare("UPDATE users SET avatar=:avatar WHERE username=:username");
+    $query = $dbco->prepare("SELECT avatar FROM users WHERE id=:id");
+    $query->bindValue(':id', $id, PDO::PARAM_INT);
+    $query->execute();
+    $current_avatar = $query->fetch(PDO::FETCH_ASSOC);
 
-    $req->bindValue(':username', $username, PDO::PARAM_STR);
+    $req = $dbco->prepare("UPDATE users SET avatar=:avatar WHERE id=:id");
+    $req->bindValue(':id', $id, PDO::PARAM_INT);
     $req->bindValue(':avatar', $avatar, PDO::PARAM_STR);
-    return $req->execute();
+    $req->execute();
+
+    // Suppression du serveur de l'avatar si celui-ci n'est pas par défaut
+    if (!str_starts_with($current_avatar['avatar'], 'users/generic')) { // PHP 8
+      unlink($img_folder . $current_avatar['avatar']);
+    }
+
+    return $req;
   } catch (PDOException $e) {
     echo "Erreur : " . $e->getMessage();
   }
@@ -138,9 +167,7 @@ function delete_user(int $id)
 
   connexion($dbco);
   try {
-    $query = $dbco->prepare(
-      "SELECT avatar FROM users WHERE id=:id"
-    );
+    $query = $dbco->prepare("SELECT avatar FROM users WHERE id=:id");
     $query->bindValue(':id', $id, PDO::PARAM_INT);
     $query->execute();
     $current_avatar = $query->fetch(PDO::FETCH_ASSOC);

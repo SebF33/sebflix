@@ -7,10 +7,38 @@
 session_start();
 
 // Vérification si l'utilisateur est bien connecté
-if (!isset($_SESSION["logged"]) || $_SESSION["logged"] !== TRUE) {
+if (!isset($_SESSION['logged']) || $_SESSION['logged'] !== TRUE) {
   // Redirection si l'utilisateur n'est pas connecté
   header("location:/src/templates/forms/login-form.php");
   exit;
+}
+
+// Appel du script d'administration des utilisateurs
+require dirname(__DIR__) . '/database/usermanager.php';
+// Appel du script de l'upload d'image
+require dirname(__DIR__) . '/database/upload.php';
+
+// Appel de la fonction de sélection d'un avatar par l'identifiant d'un utilisateur
+$avatar = select_avatar_by_id($_SESSION['id']);
+$_SESSION['avatar'] = $avatar['avatar'];
+// Définition des variables et initialisation avec des valeurs vides
+$avatar_err = $default_picture_name = "";
+// Traitement du formulaire de données quand il est parvenu
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  // Définition du dossier qui contiendra l'avatar
+  $img_folder = dirname(__DIR__, 2) . '/src/thumbnails/users/';
+  // Traitement de l'avatar
+  $upload_img = upload_img($_FILES['picture'], $default_picture_name, $img_folder);
+  $set_request = $upload_img[0]; // Autorisation de création de l'utilisateur
+  $avatar_name = 'users/' . $upload_img[1]; // Nom du chemin de l'image pour la base de données
+  $avatar_err = $upload_img[2]; // Message d'erreur de l'upload
+  // Vérification des erreurs avant insertion dans la base de données
+  if ($set_request) {
+    // Appel de la fonction de mise à jour de l'avatar
+    update_avatar($_SESSION['id'], $avatar_name);
+    // Redirection de l'utilisateur vers la page du profil
+    header("location:/src/views/profile.php");
+  }
 }
 ?>
 
@@ -52,7 +80,14 @@ if (!isset($_SESSION["logged"]) || $_SESSION["logged"] !== TRUE) {
       <a href="/index.php">
         <img src="/assets/img/logo_sebflix.png" alt="Sebflix" width="190.8" height="66.8" />
       </a>
-      <img id="avatar-img" class="img-fluid m-5 rounded-circle img-thumbnail z-depth-2" alt="<?= $_SESSION["avatar"] ?>" src="/src/thumbnails/<?= $_SESSION["avatar"] ?>" data-holder-rendered="true" draggable="false" ondragstart="return false">
+
+      <img id="avatar-img" class="img-fluid m-5 rounded-circle img-thumbnail z-depth-2" alt="<?= $_SESSION['avatar'] ?>" src="/src/thumbnails/<?= $_SESSION['avatar'] ?>" data-holder-rendered="true" draggable="false" ondragstart="return false">
+
+      <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="MAX_FILE_SIZE" value="1048576"> <!-- Poids maxi : 1Mo => 1024*1024 -->
+        <input type="file" id="picture" name="picture" hidden="true">
+      </form>
+
       <h1 class="my-5">Bonjour, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>.<br>Bienvenue<?php if ($_SESSION["loggedadmin"] == TRUE and $_SESSION["role"] === 1) {
                                                                                                               echo ' cher administrateur';
                                                                                                             } elseif ($_SESSION["loggedadmin"] == TRUE and $_SESSION["role"] === 2) {
@@ -79,6 +114,24 @@ if (!isset($_SESSION["logged"]) || $_SESSION["logged"] !== TRUE) {
     }
     ?>
   </div>
+
+  <?php if (isset($avatar_err) && !empty($avatar_err)) :
+    // Message d'alerte
+  ?>
+    <div class="alert alert-danger" role="alert">
+      <?php echo $avatar_err; ?>
+    </div>
+  <?php endif; ?>
+
+  <script>
+    document.querySelector('#avatar-img').addEventListener('click', function() {
+      document.querySelector('#picture').click();
+    });
+    document.querySelector('#picture').addEventListener('change', function() {
+      this.form.submit();
+    });
+  </script>
+
 </body>
 
 </html>

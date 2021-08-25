@@ -122,9 +122,9 @@
     </ul>
     <?php
     // Vérification si l'utilisateur est bien connecté
-    if (isset($_SESSION["logged"]) && !empty($_SESSION["logged"])) {
+    if (isset($_SESSION['logged']) && !empty($_SESSION['logged'])) {
       echo '<p class="profile username">' . $_SESSION['username'] . '</p>';
-      echo '<a class="avatar-btn" href="/src/views/profile.php" draggable="false" ondragstart="return false"><img id="avatar-btn" src="/src/thumbnails/' . $_SESSION["avatar"] . '" alt="' . $_SESSION["avatar"] . '"></a>';
+      echo '<a class="avatar-btn" href="/src/views/profile.php" draggable="false" ondragstart="return false"><img id="avatar-btn" src="/src/thumbnails/' . $_SESSION['avatar'] . '" alt="' . $_SESSION['avatar'] . '"></a>';
     } else {
       echo '<p class="profile disconnected">Non connecté</p>';
       echo '<a class="profile-btn" href="/src/views/profile.php" draggable="false" ondragstart="return false"><img src="/assets/img/profile.png" alt="Profil"></a>';

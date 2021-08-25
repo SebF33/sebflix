@@ -7,7 +7,7 @@
 require __DIR__ . '/validation.php';
 // Appel du script d'administration des données
 require __DIR__ . '/datamanager.php';
-// Appel du script de l'upload
+// Appel du script de l'upload d'image
 require __DIR__ . '/upload.php';
 
 // Définition des valeurs autorisées dans le GET
@@ -66,12 +66,16 @@ if (!empty($_POST["save_record"])) {
     $synopsis = valid_data($_POST['synopsis']);
     $genre = valid_data($_POST['genre']);
     $premiered = valid_data($_POST['premiered']);
-    $rating = (float)valid_data($_POST['rating']);
+    if (empty($_POST['rating'])) {
+      $rating = NULL;
+    } else {
+      $rating = (float)valid_data($_POST['rating']);
+    }
     $age = valid_data($_POST['age']);
     $country = valid_data($_POST['country']);
     $embed = 'https://www.youtube.com/embed/' . valid_data($_POST['embed']);
     if (empty($_POST['catch'])) {
-      $catch = "À découvrir...";
+      $catch = 'À découvrir...';
     } else {
       $catch = valid_data($_POST['catch']);
     }

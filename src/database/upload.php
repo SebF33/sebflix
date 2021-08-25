@@ -6,7 +6,7 @@
 function upload_img($picture, $default_picture_name, string $img_folder)
 {
   $set_picture = FALSE;
-  $msg_error = "";
+  $msg_error = $picture_name = '';
 
   // Définition des extensions de fichier d'image autorisées
   $ext = array('png', 'jpg', 'jpeg', 'gif');

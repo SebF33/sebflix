@@ -93,8 +93,8 @@ if ($action == 'copy' or $action == 'edit') {
   <div class="frm-add">
     <h2 class="demo-form-heading"><?= $h2 ?></h2>
 
-    <!-- Message d'alerte -->
     <?php if (isset($_GET['msg'])) :
+      // Message d'alerte
       $error = $_GET['error'];
       if ($error == 'false') {
         $alert = 'success';

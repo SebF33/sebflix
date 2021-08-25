@@ -7,7 +7,7 @@
 require dirname(__DIR__, 2) . '/database/usermanager.php';
 // Appel du script de validation des données
 require dirname(__DIR__, 2) . '/database/validation.php';
-// Appel du script de l'upload
+// Appel du script de l'upload d'image
 require dirname(__DIR__, 2) . '/database/upload.php';
 
 // Définition des variables et initialisation avec des valeurs vides
@@ -80,7 +80,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 
   // Définition du dossier qui contiendra l'avatar
-  $img_folder = dirname(dirname(dirname(__DIR__))) . '/src/thumbnails/users/';
+  $img_folder = dirname(__DIR__, 3) . '/src/thumbnails/users/';
   // Définition de l'image par défaut
   if ($_POST["genre"] == '0') {
     $default_picture_name = 'generic_woman.png';
@@ -106,13 +106,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
   // Vérification des erreurs de saisie avant insertion dans la base de données
   if (empty($username_err) && empty($email_err) && empty($password_err) && empty($confirm_password_err) && $set_request) {
-
     // Hachage du mot de passe
     $password = password_hash($password, PASSWORD_DEFAULT);
-
     // Création de l'utilisateur
     add_user($username, $genre, $email, $password, $avatar_name);
-
     // Redirection de l'utilisateur vers la page du profil
     header("location:/src/views/profile.php");
   }
