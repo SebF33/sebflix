@@ -41,6 +41,10 @@ setlocale(LC_TIME, 'fr_FR.utf8', 'fra');
 
 <head>
   <title>Liste des utilisateurs</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="Description" content="Liste des utilisateurs">
 
   <link rel="stylesheet" href="/assets/css/lib/bootstrap.min.css">
   <link rel="stylesheet" href="/assets/css/design.css">
