@@ -302,10 +302,11 @@ if (isset($_SESSION["logged"]) && $_SESSION["genre"] == 2 && $result->profile !=
             </tr>";
           foreach ($director as $row) {
             if (empty($row['cachedurl'])) {
-              echo '<td class="tcasting"><figure><a href="display-results.php?type=direction&id=' . $row['actor_id'] . '"><img src="../thumbnails/placeholders/casting.png" title="' . $row['name'] . '" alt="" width="144" height="216"/></a><figcaption>' . $row['name'] . '</figcaption></figure></td>';
+              $portrait = 'placeholders/casting.png';
             } else {
-              echo '<td class="tcasting"><figure><a href="display-results.php?type=direction&id=' . $row['actor_id'] . '"><img src="../thumbnails/' . $row['cachedurl'] . '" title="' . $row['name'] . '" alt="' . $row['name'] . '" width="144" height="216"/></a><figcaption>' . $row['name'] . '</figcaption></figure></td>';
+              $portrait = $row['cachedurl'];
             }
+            echo '<td class="tcasting"><figure><a href="display-results.php?type=direction&id=' . $row['actor_id'] . '"><img src="../thumbnails/' . $portrait . '" title="' . $row['name'] . '" alt="' . $row['name'] . '" width="144" height="216"/></a><figcaption>' . $row['name'] . '</figcaption></figure></td>';
           }
         }
         echo "</tr>";
@@ -320,10 +321,16 @@ if (isset($_SESSION["logged"]) && $_SESSION["genre"] == 2 && $result->profile !=
             </tr>';
           foreach ($actors as $row) {
             if (empty($row['cachedurl'])) {
-              echo '<td class="tcasting"><figure><a href="display-results.php?type=filmography&id=' . $row['actor_id'] . '"><img src="../thumbnails/placeholders/casting.png" title="' . $row['name'] . '" alt="" width="144" height="216"/></a><figcaption>' . $row['name'] . '</figcaption></figure></td>';
+              $portrait = 'placeholders/casting.png';
             } else {
-              echo '<td class="tcasting"><figure><a href="display-results.php?type=filmography&id=' . $row['actor_id'] . '"><img src="../thumbnails/' . $row['cachedurl'] . '" title="' . $row['name'] . '" alt="' . $row['name'] . '" width="144" height="216"/></a><figcaption>' . $row['name'] . '</figcaption></figure></td>';
+              $portrait = $row['cachedurl'];
             }
+            if (!empty($row['role'])) {
+              $role = '"' . $row['role'] . '"';
+            } else {
+              $role = 'Rôle non renseigné';
+            }
+            echo '<td class="tcasting"><figure><a href="display-results.php?type=filmography&id=' . $row['actor_id'] . '"><img src="../thumbnails/' . $portrait . '" title="' . $row['name'] . '" alt="' . $row['name'] . '" width="144" height="216"/></a><figcaption>' . $row['name'] . '<br><span>' . $role . '</span></figcaption></figure></td>';
           }
         }
         echo "</tr>";

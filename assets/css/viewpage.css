@@ -481,3 +481,9 @@ td {
   max-width: 8rem;
   margin: 0 auto;
 }
+
+.tcasting figcaption span {
+  font-size: 0.8em;
+  font-weight: 500;
+  font-style: italic;
+}

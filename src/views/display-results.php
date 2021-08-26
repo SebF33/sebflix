@@ -268,14 +268,31 @@ if (isset($_GET['type']) && !empty($_GET['type']) && in_array($_GET['type'], $ty
           </a>';
           }
         }
-        // Affichage des acteurs
-        elseif (($type == 'actors' or $type == 'moviecast' or $type == 'tvshowcast') && !empty($actors)) {
+        // Affichage des actrice(s)/acteur(s)/doubleur(s)
+        elseif ($type == 'actors' && !empty($actors)) {
           foreach ($actors as $row) {
             if (empty($row['cachedurl'])) {
-              echo '<a class="gCasting" href="display-results.php?type=filmography&id=' . $row['actor_id'] . '"><figure><img src="../thumbnails/placeholders/casting.png" title="' . $row['name'] . '" alt="' . $row['name'] . '" height="288" width="192"/><figcaption>' . $row['name'] . '</figcaption></figure></a>';
+              $portrait = 'placeholders/casting.png';
             } else {
-              echo '<a class="gCasting" href="display-results.php?type=filmography&id=' . $row['actor_id'] . '"><figure><img src="../thumbnails/' . $row['cachedurl'] . '" title="' . $row['name'] . '" alt="' . $row['name'] . '" height="288" width="192"/><figcaption>' . $row['name'] . '</figcaption></figure></a>';
+              $portrait = $row['cachedurl'];
             }
+            echo '<a class="gCasting" href="display-results.php?type=filmography&id=' . $row['actor_id'] . '"><figure><img src="../thumbnails/' . $portrait . '" title="' . $row['name'] . '" alt="' . $row['name'] . '" height="288" width="192"/><figcaption>' . $row['name'] . '</figcaption></figure></a>';
+          }
+        }
+        // Affichage du casting
+        elseif (($type == 'moviecast' or $type == 'tvshowcast') && !empty($actors)) {
+          foreach ($actors as $row) {
+            if (empty($row['cachedurl'])) {
+              $portrait = 'placeholders/casting.png';
+            } else {
+              $portrait = $row['cachedurl'];
+            }
+            if (!empty($row['role'])) {
+              $role = '"' . $row['role'] . '"';
+            } else {
+              $role = 'Rôle non renseigné';
+            }
+            echo '<a class="gCasting" href="display-results.php?type=filmography&id=' . $row['actor_id'] . '"><figure><img src="../thumbnails/' . $portrait . '" title="' . $row['name'] . '" alt="' . $row['name'] . '" height="288" width="192"/><figcaption>' . $row['name'] . '<br><span>' . $role . '</span></figcaption></figure></a>';
           }
         }
         // Affichage des studios
