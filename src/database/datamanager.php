@@ -87,12 +87,13 @@ function add_movie(array $datas)
 {
   connexion($dbco);
   try {
-    $req = $dbco->prepare("INSERT INTO movie(title, synopsis, genre, classification, country, embed, catch, premiered)
-		VALUES(:title, :synopsis, :genre, :age, :country, :embed, :catch, :premiered)");
+    $req = $dbco->prepare("INSERT INTO movie(title, synopsis, genre, classification, profile, country, embed, catch, premiered)
+		VALUES(:title, :synopsis, :genre, :age, :profile, :country, :embed, :catch, :premiered)");
     $req->bindValue(':title', $datas['title'], PDO::PARAM_STR);
     $req->bindValue(':synopsis', $datas['synopsis'], PDO::PARAM_STR);
     $req->bindValue(':genre', $datas['genre'], PDO::PARAM_STR);
     $req->bindValue(':age', $datas['age'], PDO::PARAM_STR);
+    $req->bindValue(':profile', $datas['profile'], PDO::PARAM_INT);
     $req->bindValue(':country', $datas['country'], PDO::PARAM_STR);
     $req->bindValue(':embed', $datas['embed'], PDO::PARAM_STR);
     $req->bindValue(':catch', $datas['catch'], PDO::PARAM_STR);
@@ -145,7 +146,7 @@ function update_movie(array $datas, int $id, bool $set_poster, string $default_p
 
     // Mise à jour de la base de données
     $req = $dbco->prepare("UPDATE movie
-    SET title=:title, synopsis=:synopsis, genre=:genre, classification=:age, country=:country, embed=:embed, catch=:catch, premiered=:premiered
+    SET title=:title, synopsis=:synopsis, genre=:genre, classification=:age, profile=:profile, country=:country, embed=:embed, catch=:catch, premiered=:premiered
     WHERE idMovie=:id
     $sql_poster_file
     $sql_background_file;
@@ -155,6 +156,7 @@ function update_movie(array $datas, int $id, bool $set_poster, string $default_p
     $req->bindValue(':genre', $datas['genre'], PDO::PARAM_STR);
     $req->bindValue(':rating', $datas['rating'], PDO::PARAM_STR);
     $req->bindValue(':age', $datas['age'], PDO::PARAM_STR);
+    $req->bindValue(':profile', $datas['profile'], PDO::PARAM_INT);
     $req->bindValue(':country', $datas['country'], PDO::PARAM_STR);
     $req->bindValue(':embed', $datas['embed'], PDO::PARAM_STR);
     $req->bindValue(':catch', $datas['catch'], PDO::PARAM_STR);

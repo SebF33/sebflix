@@ -72,6 +72,11 @@ if (!empty($_POST["save_record"])) {
       $rating = (float)valid_data($_POST['rating']);
     }
     $age = valid_data($_POST['age']);
+    if (isset($_POST['profile'])) {
+      $profile = 2;
+    } else {
+      $profile = NULL;
+    }
     $country = valid_data($_POST['country']);
     $embed = 'https://www.youtube.com/embed/' . valid_data($_POST['embed']);
     if (empty($_POST['catch'])) {
@@ -124,6 +129,7 @@ if (!empty($_POST["save_record"])) {
       'premiered' => $premiered,
       'rating' => $rating,
       'age' => $age,
+      'profile' => $profile,
       'country' => $country,
       'embed' => $embed,
       'catch' => $catch,

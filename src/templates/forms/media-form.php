@@ -44,6 +44,7 @@ if ($action == 'copy' or $action == 'edit') {
     $rating = $rating['rating'];
   }
   $age = $result['classification'];
+  $profile = $result['profile'];
   $country = $result['country'];
   $embed = $result['embed'];
   $embed = substr($embed, 30);
@@ -53,7 +54,7 @@ if ($action == 'copy' or $action == 'edit') {
     $background = $bg['cachedurl'];
   }
 } else {
-  $catch = $embed = $premiered = $synopsis = $title = '';
+  $catch = $embed = $premiered = $profile = $synopsis = $title = '';
 }
 ?>
 
@@ -175,6 +176,11 @@ if ($action == 'copy' or $action == 'edit') {
           }
           ?>
         </select>
+      </div>
+
+      <div class="demo-form-row">
+        <label>Profil enfant : </label>
+        <input type="checkbox" name="profile" value="child" <?php echo ($profile == 2 ? 'checked' : ''); ?>>
       </div>
 
       <div class="demo-form-row">
