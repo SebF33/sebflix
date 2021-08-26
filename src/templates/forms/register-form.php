@@ -12,7 +12,7 @@ require dirname(__DIR__, 2) . '/database/upload.php';
 
 // Définition des variables et initialisation avec des valeurs vides
 $username = $genre = $email = $password = $confirm_password = "";
-$username_err = $email_err = $password_err = $confirm_password_err = "";
+$username_err = $email_err = $password_err = $confirm_password_err = $avatar_err = "";
 
 // Traitement du formulaire de données quand il est parvenu
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -197,7 +197,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       <div class="form-group">
         <label for="picture">Avatar : </label>
         <input type="hidden" name="MAX_FILE_SIZE" value="1048576"> <!-- Poids maxi : 1Mo => 1024*1024 -->
-        <input type="file" id="picture" name="picture">
+        <input type="file" id="picture" name="picture" class="form-control <?php echo (!empty($avatar_err)) ? 'is-invalid' : ''; ?>">
         <span class="invalid-feedback"><?php echo $avatar_err; ?></span>
       </div>
       <div class="form-group">
