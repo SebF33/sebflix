@@ -212,7 +212,7 @@ if ($action == 'copy' or $action == 'edit') {
       </div>
 
       <div class="demo-form-row">
-        <label for="poster">Poster : </label>
+        <label for="poster">Affiche : </label>
         <input type="hidden" name="MAX_FILE_SIZE" value="1048576"> <!-- Poids maxi : 1Mo => 1024*1024 -->
         <input id="picture-file" type="file" name="poster">
       </div>
