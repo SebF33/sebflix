@@ -1,4 +1,4 @@
-# PROJET SANS FRAMEWORK          ![avatar](/github/avatar.png)
+# PROJET SANS FRAMEWORK
 ![logo_sebflix](/github/logo_sebflix.png)
 
 **Titre : Sebflix**
@@ -30,3 +30,6 @@ Technologies :
 - GSAP
 - MariaDB
 - phpMyAdmin
+
+
+![avatar](/github/avatar.png)
