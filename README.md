@@ -1,4 +1,4 @@
-# PROJET SANS FRAMEWORK ![avatar](/github/avatar.png)
+# PROJET SANS FRAMEWORK          ![avatar](/github/avatar.png)
 ![logo_sebflix](/github/logo_sebflix.png)
 
 **Titre : Sebflix**
@@ -11,7 +11,7 @@
 Cahier des charges :
 
 
-## Liens
+## :link: Liens
 Site web : https://www.sebflix.fr
 
 Démo : https://youtu.be/9nsG9OynBxs
