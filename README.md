@@ -1,9 +1,32 @@
-# PROJECT
+# PROJET SANS FRAMEWORK
+![logo_sebflix](/github/logo_sebflix.png)
 
-Title: Sebflix
+**Titre : Sebflix**
 
-Autor: Sébastien Flouriot
+**Accroche :**
+*"Sebflix est un site culturel qui vous propose la découverte d'œuvres cinématographiques ou télévisuelles."*
 
-Description: "Sebflix is a cultural website that offers you the discovery of cinematographic or television works."
+**Auteur : Sébastien Flouriot (SebF33)**
 
-Technologies: PDO, JavaScript.
+Cahier des charges :
+
+
+## Liens
+Site web : https://www.sebflix.fr
+
+Démo : https://youtu.be/9nsG9OynBxs
+
+GitHub : https://github.com/SebF33/sebflix
+
+
+## Développement
+Description technique : Le projet est codé en PHP « sauvage ». Pas de MVC.
+
+Langages : PHP (PDO), JavaScript.
+
+Technologies :
+- jQuery
+- FlexSlider
+- GSAP
+- MariaDB
+- phpMyAdmin
