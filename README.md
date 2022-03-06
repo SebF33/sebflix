@@ -1,4 +1,4 @@
-# PROJET SANS FRAMEWORK! [avatar](/github/avatar.png)
+# PROJET SANS FRAMEWORK ![avatar](/github/avatar.png)
 ![logo_sebflix](/github/logo_sebflix.png)
 
 **Titre : Sebflix**
