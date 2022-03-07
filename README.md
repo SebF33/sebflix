@@ -24,7 +24,7 @@ Choix d'un profil pour un contenu adapté aux jeunes enfants.
 
 
 ## :computer: Développement
-**Description technique :** Le projet est codé en PHP « sauvage ». Pas de MVC.
+**Description technique :** Le projet est codé en PHP « sauvage » : Pas de MVC et peu de librairies.
 
 **Langages :** PHP (PDO), JavaScript.
 
