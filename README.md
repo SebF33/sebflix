@@ -26,11 +26,13 @@
 
 **Langages :** PHP (PDO), JavaScript.
 
+![jQuery](/github/jQuery.png) ![MySQL](/github/MySQL.png) ![phpMyAdmin](/github/phpMyAdmin.png)
+
 :toolbox: **Technologies :**
 - jQuery
 - FlexSlider
 - GSAP
-- MariaDB
+- MySQL
 - phpMyAdmin
 
 
