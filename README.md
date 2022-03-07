@@ -8,7 +8,9 @@
 
 **Auteur : Sébastien Flouriot (SebF33)**
 
-**Cahier des charges :** Possibilité à l'utilisateur de créer une liste de favoris.
+**Cahier des charges :** Fiches de film, dessin animé, série, anime, spectacle, et leur bande-annonce.
+Possibilité à l'utilisateur de créer une liste de favoris.
+Choix d'un profil pour un contenu adapté aux jeunes enfants.
 
 
 ## :link: Liens
