@@ -8,7 +8,7 @@
 
 **Auteur : Sébastien Flouriot (SebF33)**
 
-**Cahier des charges :**
+**Cahier des charges :** Possibilité à l'utilisateur de créer une liste de favoris.
 
 
 ## :link: Liens
@@ -16,7 +16,7 @@
 
 :clapper: **Démo :** https://youtu.be/9nsG9OynBxs
 
-:memo::pencil: **Dossier :** https://mega.nz/file/gTAAATZL#L9vvNfxa1MCraQVIYcm3Vpc3ShycP-jWEsBDnC9s_5U
+:memo: **Dossier :** https://mega.nz/file/gTAAATZL#L9vvNfxa1MCraQVIYcm3Vpc3ShycP-jWEsBDnC9s_5U
 
 :octocat: **GitHub :** https://github.com/SebF33/sebflix
 
