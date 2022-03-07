@@ -8,23 +8,25 @@
 
 **Auteur : Sébastien Flouriot (SebF33)**
 
-Cahier des charges :
+**Cahier des charges :**
 
 
 ## :link: Liens
-Site web : https://www.sebflix.fr
+:earth_africa: **Site web :** https://www.sebflix.fr
 
-Démo : https://youtu.be/9nsG9OynBxs
+:clapper: **Démo :** https://youtu.be/9nsG9OynBxs
 
-GitHub : https://github.com/SebF33/sebflix
+:memo::pencil: **Dossier :** https://mega.nz/file/gTAAATZL#L9vvNfxa1MCraQVIYcm3Vpc3ShycP-jWEsBDnC9s_5U
+
+:octocat: **GitHub :** https://github.com/SebF33/sebflix
 
 
 ## :computer: Développement
-Description technique : Le projet est codé en PHP « sauvage ». Pas de MVC.
+**Description technique :** Le projet est codé en PHP « sauvage ». Pas de MVC.
 
-Langages : PHP (PDO), JavaScript.
+**Langages :** PHP (PDO), JavaScript.
 
-Technologies :
+:toolbox: **Technologies :**
 - jQuery
 - FlexSlider
 - GSAP
