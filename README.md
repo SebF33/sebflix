@@ -29,14 +29,14 @@ Choix d'un profil pour un contenu adapté aux jeunes enfants.
 
 **Langages :** PHP (PDO), JavaScript.
 
-![jQuery](/github/jQuery.png) ![MySQL](/github/MySQL.png) ![phpMyAdmin](/github/phpMyAdmin.png)
+[![jQuery](/github/jQuery.png)](https://jquery.com) [![GSAP](/github/GSAP.png)](https://greensock.com/gsap) [![MySQL](/github/MySQL.png)](https://www.mysql.com/fr) [![phpMyAdmin](/github/phpMyAdmin.png)](https://www.phpmyadmin.net)
 
 :toolbox: **Technologies :**
-- jQuery
-- FlexSlider
-- GSAP
-- MySQL
-- phpMyAdmin
+- [jQuery](https://api.jquery.com)
+- [FlexSlider](https://woocommerce.com/flexslider)
+- [GSAP](https://greensock.com/docs)
+- [MySQL](https://dev.mysql.com/doc)
+- [phpMyAdmin](https://docs.phpmyadmin.net/fr/latest)
 
 
 ![avatar](/github/avatar.png)
