@@ -1,5 +1,5 @@
 # PROJET SANS FRAMEWORK
-![logo_sebflix](/github/logo_sebflix.png)
+![logo_sebflix](/.github/logo_sebflix.png)
 
 **Titre : Sebflix**
 
@@ -29,7 +29,7 @@ Choix d'un profil pour un contenu adapté aux jeunes enfants.
 
 **Langages :** PHP (PDO), JavaScript.
 
-[![jQuery](/github/jQuery.png)](https://jquery.com) [![GSAP](/github/GSAP.png)](https://greensock.com/gsap) [![MariaDB](/github/MariaDB.png)](https://mariadb.org) [![phpMyAdmin](/github/phpMyAdmin.png)](https://www.phpmyadmin.net)
+[![jQuery](/.github/jQuery.png)](https://jquery.com) [![GSAP](/.github/GSAP.png)](https://greensock.com/gsap) [![MariaDB](/.github/MariaDB.png)](https://mariadb.org) [![phpMyAdmin](/.github/phpMyAdmin.png)](https://www.phpmyadmin.net)
 
 :toolbox: **Technologies :**
 - [jQuery](https://api.jquery.com)
@@ -39,4 +39,4 @@ Choix d'un profil pour un contenu adapté aux jeunes enfants.
 - [phpMyAdmin](https://docs.phpmyadmin.net/fr/latest)
 
 
-![avatar](/github/avatar.png)
+![avatar](/.github/avatar.png)
