@@ -85,6 +85,10 @@
   overflow: auto;
 }
 
+.back_card img {
+  will-change: transform
+}
+
 .back_card.back_collection {
   display: flex;
   flex-direction: column;
